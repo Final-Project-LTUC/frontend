@@ -1,0 +1,30 @@
+
+
+
+:root {
+  --font-base: "DM Sans", sans-serif;
+
+  --primary-color: #edf2f8;
+  --secondary-color: #12646f;
+  --skyblue-color: #53b0bd;
+  --black-color: #030303;
+  --lightGray-color: #e4e4e4;
+  --gray-color: #6b7688;
+  --brown-color: #c2b394;
+  --white-color: #ffffff;
+  --offwhite-color: #ececec;
+  --lightorange-color: #FEC195;
+  --gradient-background: linear-gradient(to right, #12646f80, #43b1c0a7);
+  --red-color:#fe3d3d;
+  --orange:orange;
+
+}
+
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+  
+}
