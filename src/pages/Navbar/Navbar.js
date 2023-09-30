@@ -16,6 +16,8 @@
 
 "use client";
 
+import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ChakraLink, LinkProps } from "@chakra-ui/react";
 import {
   Box,
   Flex,
@@ -68,8 +70,53 @@ export default function Simple() {
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
+          <IconButton
+            size={"md"}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            aria-label={"Open Menu"}
+            display={{ md: "none" }}
+            onClick={isOpen ? onClose : onOpen}
+          />
+
+          <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
+            <ChakraLink as={ReactRouterLink} to="/">
+              Skilify
+            </ChakraLink>
+            <ChakraLink as={ReactRouterLink} to="/">
+              Home
+            </ChakraLink>
+            <ChakraLink as={ReactRouterLink} to="/services">
+              Services
+            </ChakraLink>
+            <ChakraLink as={ReactRouterLink} to="/catalog">
+              Catalog
+            </ChakraLink>
+            <ChakraLink as={ReactRouterLink} to="/about">
+              About us
+            </ChakraLink>
+          </HStack>
           <Flex alignItems={"center"}>
-            <Stack direction={"row"} spacing={7}>
+            <Menu>
+              <MenuButton
+                as={Button}
+                rounded={"full"}
+                variant={"link"}
+                cursor={"pointer"}
+                minW={0}
+              ></MenuButton>
+              <MenuList>
+                <MenuItem>Link 1</MenuItem>
+                <MenuItem>Link 2</MenuItem>
+                <MenuDivider />
+                <MenuItem>Link 3</MenuItem>
+              </MenuList>
+            </Menu>
+            <Stack
+              flex={{ base: 1, md: 0 }}
+              justify={"flex-end"}
+              direction={"row"}
+              spacing={6}
+            >
               <Button onClick={toggleColorMode}>
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button>
@@ -106,45 +153,6 @@ export default function Simple() {
                   <MenuItem>Logout</MenuItem>
                 </MenuList>
               </Menu>
-            </Stack>
-          </Flex>
-        </Flex>
-        <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <IconButton
-            size={"md"}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={"Open Menu"}
-            display={{ md: "none" }}
-            onClick={isOpen ? onClose : onOpen}
-          />
-
-          <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
-            {Links.map((link) => (
-              <NavLink key={link}>{link}</NavLink>
-            ))}
-          </HStack>
-          <Flex alignItems={"center"}>
-            <Menu>
-              <MenuButton
-                as={Button}
-                rounded={"full"}
-                variant={"link"}
-                cursor={"pointer"}
-                minW={0}
-              ></MenuButton>
-              <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
-                <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
-              </MenuList>
-            </Menu>
-            <Stack
-              flex={{ base: 1, md: 0 }}
-              justify={"flex-end"}
-              direction={"row"}
-              spacing={6}
-            >
               <Button
                 as={"a"}
                 fontSize={"sm"}
