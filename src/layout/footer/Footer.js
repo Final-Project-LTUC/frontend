@@ -1,14 +1,3 @@
-// import React from 'react'
-
-// function Footer() {
-//   return (
-//     <div>
-
-//     </div>
-//   )
-// }
-// export default Footer
-
 "use client";
 
 import {
@@ -66,10 +55,6 @@ export default function LargeWithAppLinksAndSocial() {
       <Container as={Stack} maxW={"6xl"} py={10}>
         <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
           <Stack align={"flex-start"}>
-            <ListHeader fontSize="50px"> SKILIFY </ListHeader>
-          </Stack>
-
-          <Stack align={"flex-start"}>
             <ListHeader> Quick Links </ListHeader>
             <Box as="a" href={"/"}>
               Home
@@ -82,6 +67,19 @@ export default function LargeWithAppLinksAndSocial() {
             </Box>
             <Box as="a" href={"/about"}>
               About Us
+            </Box>
+          </Stack>
+
+          <Stack align={"flex-start"}>
+            <ListHeader>Support</ListHeader>
+            <Box as="a" href={"#"}>
+              Help Center
+            </Box>
+            <Box as="a" href={"#"}>
+              Safety Center
+            </Box>
+            <Box as="a" href={"#"}>
+              Community Guidelines
             </Box>
           </Stack>
 

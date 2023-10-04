@@ -17,13 +17,12 @@
 "use client";
 
 import { Link as ReactRouterLink } from "react-router-dom";
-import { Link as ChakraLink, LinkProps } from "@chakra-ui/react";
+import { Link as ChakraLink } from "@chakra-ui/react";
 import {
   Box,
   Flex,
   Avatar,
   HStack,
-  Text,
   IconButton,
   Button,
   Menu,

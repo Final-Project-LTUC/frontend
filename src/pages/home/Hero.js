@@ -1,5 +1,14 @@
-import { Button, Flex, Stack, Text, VStack, useBreakpointValue } from '@chakra-ui/react'
-import React from 'react'
+import {
+  Button,
+  Flex,
+  Stack,
+  Text,
+  VStack,
+  useBreakpointValue,
+} from "@chakra-ui/react";
+import React from "react";
+import { Link as ChakraLink } from "@chakra-ui/react";
+import { Link as ReactRouterLink } from "react-router-dom";
 
 function Hero() {
   return (
@@ -31,14 +40,17 @@ function Hero() {
               eiusmod tempor
             </Text>
             <Stack direction={"row"}>
-              <Button
-                bg={"blue.400"}
-                rounded={"full"}
-                color={"white"}
-                _hover={{ bg: "blue.500" }}
-              >
-                OUR SERVICES
-              </Button>
+              <ChakraLink as={ReactRouterLink} to="/services">
+                <Button
+                  bg={"blue.400"}
+                  rounded={"full"}
+                  color={"white"}
+                  _hover={{ bg: "blue.500" }}
+                >
+                  OUR SERVICES
+                </Button>
+              </ChakraLink>
+
               <Button
                 bg={"whiteAlpha.300"}
                 rounded={"full"}
@@ -52,7 +64,7 @@ function Hero() {
         </VStack>
       </Flex>
     </div>
-  )
+  );
 }
 
-export default Hero
+export default Hero;
