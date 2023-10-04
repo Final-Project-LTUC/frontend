@@ -1,19 +1,3 @@
-// import React from 'react'
-
-// function Navbar() {
-//   return (
-//     <div>
-//       <a href="/"> Skilify </a>
-//       <a href="/"> Home </a>
-//       <a href="/services"> Services </a>
-//       <a href="/catalog"> Catalog </a>
-//       <a href="/about"> About us </a>
-//     </div>
-//   )
-// }
-
-// export default Navbar
-
 "use client";
 
 import { Link as ReactRouterLink } from "react-router-dom";
@@ -39,7 +23,7 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 
-const Links = ["Skilify", "Home", "Services", "Catalog", "About us"];
+const Links = ["Skilify", "Home", "Dashboard", "Update data", "Delete Profile","tasks"];
 
 const NavLink = (props) => {
   const { children } = props;
@@ -85,14 +69,17 @@ export default function Simple() {
             <ChakraLink as={ReactRouterLink} to="/">
               Home
             </ChakraLink>
-            <ChakraLink as={ReactRouterLink} to="/services">
-              Services
+            <ChakraLink as={ReactRouterLink} to="/dashboard">
+            Dashboard
             </ChakraLink>
-            <ChakraLink as={ReactRouterLink} to="/catalog">
-              Catalog
+            <ChakraLink as={ReactRouterLink} to="/update">
+            Update data
             </ChakraLink>
-            <ChakraLink as={ReactRouterLink} to="/about">
-              About us
+            <ChakraLink as={ReactRouterLink} to="/delete">
+            Delete Profile
+            </ChakraLink>
+            <ChakraLink as={ReactRouterLink} to="/tasks">
+            Tasks
             </ChakraLink>
           </HStack>
           <Flex alignItems={"center"}>
@@ -153,29 +140,7 @@ export default function Simple() {
                   <MenuItem>Logout</MenuItem>
                 </MenuList>
               </Menu>
-              <Button
-                as={"a"}
-                fontSize={"sm"}
-                fontWeight={400}
-                variant={"link"}
-                href={"#"}
-              >
-                Sign In
-              </Button>
-              <Button
-                as={"a"}
-                display={{ base: "none", md: "inline-flex" }}
-                fontSize={"sm"}
-                fontWeight={600}
-                color={"white"}
-                bg={"yellow.400"}
-                href={"#"}
-                _hover={{
-                  bg: "yellow.300",
-                }}
-              >
-                Sign Up
-              </Button>
+      
             </Stack>
           </Flex>
         </Flex>
