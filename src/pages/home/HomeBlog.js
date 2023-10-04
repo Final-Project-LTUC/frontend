@@ -1,4 +1,7 @@
+import { StarIcon } from "@chakra-ui/icons";
+import { Box } from "@chakra-ui/react";
 import {
+  Badge,
   Card,
   CardBody,
   HStack,
@@ -7,66 +10,59 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function HomeBlog() {
-//   const apikey = "a1c745d846403ec77b6d51ba53f85775";
-  const url =
-    "https://gnews.io/api/v4/search?q=example&apikey=a1c745d846403ec77b6d51ba53f85775"
+  const [articles, setArticles] = useState([]);
 
-  fetch(url)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-        console.log(data); // Log the entire data object
-        const articles = data.articles;
-        console.log(articles);
-     
+  useEffect(() => {
+    fetch(
+      "https://gnews.io/api/v4/search?q=example&apikey=5f126d07f131edeaa21afe56b883a280"
+      // https://gnews.io/api/v4/search?q=example&apikey=0df2ab0a9a8721edb671e7ec5af0058d //new one
+    )
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+        const fetchedArticles = data.articles;
+        console.log(fetchedArticles);
+        setArticles(fetchedArticles);
+      });
+  }, []);
 
-      for (let i = 0; i < articles.length; i++) {
-        // articles[i].title
-        console.log("Title: " + articles[i]["title"]);
-        // articles[i].description
-        console.log("Description: " + articles[i]["description"]);
-        // You can replace {property} below with any of the article properties returned by the API.
-        // articles[i].{property}
-        // console.log(articles[i]['{property}']);
-
-        // Delete this line to display all the articles returned by the request. Currently only the first article is displayed.
-        break;
-      }
-    });
   return (
-    <div>
+    <>
       <Heading as="h2" size="3xl" noOfLines={1} padding={10}>
         Blog
       </Heading>
-      <HStack spacing="4">
-        <Card
-          direction="row"
-          overflow="hidden"
-          variant="outline"
-          h="300px"
-          flex="1"
-        >
-          <Image
-            objectFit="cover"
-            maxW={{ base: "100%", sm: "300px" }}
-            src="https://th.bing.com/th/id/R.834bf54e383e9009a1b9b795434a65de?rik=B65iq4%2fkPrzEJQ&riu=http%3a%2f%2fimages.cdn2.stockunlimited.net%2fclipart%2fribbon-rosette_1562836.jpg&ehk=veOrMLBgMfPDEiYDxA3H2P%2fOjdHbt3fy2ctYUvDrwfU%3d&risl=&pid=ImgRaw&r=0"
-            alt="Experience"
-          />
 
-          <Stack>
-            <CardBody>
-              <Heading size="md">Experienced</Heading>
+      {/* <Stack spacing="4">
+        {articles.map((article, index) => (
+          <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+            <Image src={article.image} alt={article.title} />
 
-              <Text py="2"></Text>
-            </CardBody>
-          </Stack>
-        </Card>
-      </HStack>
-    </div>
+            <Box p="6">
+              <Box display="flex" alignItems="baseline">
+                <Badge borderRadius="full" px="2" colorScheme="yellow">
+                  New
+                </Badge>
+              </Box>
+
+              <Box
+                mt="1"
+                fontWeight="semibold"
+                as="h4"
+                lineHeight="tight"
+                noOfLines={3}
+              >
+                {article.title}
+              </Box>
+            </Box>
+          </Box>
+        ))}
+      </Stack> */}
+    </>
   );
 }
 
