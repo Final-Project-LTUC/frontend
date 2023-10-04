@@ -18,25 +18,28 @@
 
 ## UML digram
 
-![License](./assets/Screenshot_2023-07-31_143644.png)
-![License](./assets/Screenshot_2023-07-31_143651.png)
+
+![License](./src/assets/Screenshot_2023-07-31_143644.png)
+![License](./src//assets/Screenshot_2023-07-31_143651.png)
 
 # HandyMan Event Flowchart
 
-![uml3](./assets/API%20flowchart%20example.jpeg)
+![uml3](./src/assets/API%20flowchart%20example.jpeg)
 
 
 # Client Events Workflow
 
-![uml1](./assets/UML1)
+
+![uml1](./src/assets/UML1)
 
 # Handyman EventWorkFlow
 
-![uml2](./assets/UML2)
+![uml2](./src/assets/UML2)
 
 # Database Modeling
 
-![database modeling](./assets/database%20modeling)
+![database modeling](./src/assets/database%20modeling)
+
 
 ## Table of Contents
 
@@ -180,4 +183,5 @@ Never push to the main
 3. as a company ,I will register and add my employees and expect to have the ability to manage them .
 4. as a freelancer ,I expect to register and have the ability to control  my tasks  
 5. as a freelancer ,I expect to have the ability to change my hourly payment 
+
 6. as  a user ,I expect to have the ability to search for certain handymen genres and be able to book one of them 
