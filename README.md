@@ -16,6 +16,11 @@
 
 >In a fast-paced world where skilled handymen are in high demand, finding reliable and qualified professionals can be challenging. Skilify is a cutting-edge freelancing application designed to revolutionize the way handymen and users connect and collaborate. Our platform aims to create a seamless and efficient experience, allowing users to find the perfect handyman for their problems
 
+
+## Wire frame
+[wire frame link](https://www.figma.com/file/NKMwXFtLWTUD7QsXL60zj9/Figma-basics?type=design&node-id=1669%3A162202&mode=design&t=obHRJJNjQyjnQl28-1)
+
+
 ## UML digram
 
 ![License](./src/assets/Screenshot_2023-07-31_143644.png)
