@@ -9,7 +9,7 @@ import Aboutus from "./pages/aboutus/Aboutus";
 import Footer from "../src/layout/footer/Footer";
 import Dashboard from "./pages/dashBoard/Dashboard";
 import DashboardNavbar from './components/dashboard/DashboardNavbar'; 
-
+import Tasks from  "./pages/dashBoard/tasks/TasksPage"
 
 
 
@@ -22,7 +22,7 @@ function App() {
 
   // Define a function to conditionally render the navbar based on the current route
   const renderNavbar = () => {
-    if (location.pathname === '/dashboard') {
+    if (location.pathname === '/dashboard'||location.pathname === '/tasks') {
       return <DashboardNavbar />;
     } else {
       return <Navbar />;
@@ -38,6 +38,7 @@ function App() {
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/about" element={<Aboutus />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/tasks" element={<Tasks />} />
       </Routes>
       <Footer />
     </div>

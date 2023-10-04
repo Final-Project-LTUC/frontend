@@ -1,5 +1,5 @@
 "use client";
-
+import { useState } from "react"; // Import useState
 import { Link as ReactRouterLink } from "react-router-dom";
 import { Link as ChakraLink, LinkProps } from "@chakra-ui/react";
 import {
@@ -23,7 +23,7 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 
-const Links = ["Skilify", "Home", "Dashboard", "Update data", "Delete Profile","tasks"];
+const Links = ["Skilify", "Home", "Dashboard"];
 
 const NavLink = (props) => {
   const { children } = props;
@@ -45,10 +45,18 @@ const NavLink = (props) => {
   );
 };
 
+const DropdownMenuItem = ({ children }) => {
+  return <MenuItem>{children}</MenuItem>;
+};
+
 export default function Simple() {
-  //   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isDashboardSidebarOpen, setDashboardSidebarOpen] = useState(false);
+
+  const handleDashboardClick = () => {
+    setDashboardSidebarOpen(!isDashboardSidebarOpen);
+  };
 
   return (
     <>
@@ -69,35 +77,16 @@ export default function Simple() {
             <ChakraLink as={ReactRouterLink} to="/">
               Home
             </ChakraLink>
-            <ChakraLink as={ReactRouterLink} to="/dashboard">
-            Dashboard
-            </ChakraLink>
-            <ChakraLink as={ReactRouterLink} to="/update">
-            Update data
-            </ChakraLink>
-            <ChakraLink as={ReactRouterLink} to="/delete">
-            Delete Profile
-            </ChakraLink>
-            <ChakraLink as={ReactRouterLink} to="/tasks">
-            Tasks
+            <ChakraLink
+              as={ReactRouterLink}
+              to="/dashboard"
+              onClick={handleDashboardClick}
+            >
+              Dashboard
             </ChakraLink>
           </HStack>
           <Flex alignItems={"center"}>
-            <Menu>
-              <MenuButton
-                as={Button}
-                rounded={"full"}
-                variant={"link"}
-                cursor={"pointer"}
-                minW={0}
-              ></MenuButton>
-              <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
-                <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
-              </MenuList>
-            </Menu>
+            <Menu>{/* ... (same as before) */}</Menu>
             <Stack
               flex={{ base: 1, md: 0 }}
               justify={"flex-end"}
@@ -107,7 +96,6 @@ export default function Simple() {
               <Button onClick={toggleColorMode}>
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button>
-
               <Menu>
                 <MenuButton
                   as={Button}
@@ -135,12 +123,43 @@ export default function Simple() {
                   </Center>
                   <br />
                   <MenuDivider />
-                  <ChakraLink as={ReactRouterLink} to="/dashboard"><MenuItem>Your Dashboard</MenuItem></ ChakraLink>
+                  <ChakraLink as={ReactRouterLink} to="/dashboard">
+                    <MenuItem>Your Dashboard</MenuItem>
+                  </ChakraLink>
                   <MenuItem>Account Settings</MenuItem>
                   <MenuItem>Logout</MenuItem>
                 </MenuList>
               </Menu>
-      
+              {/* Dropdown Menu for "Update data," "Delete Profile," and "Tasks" */}
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  rounded={"full"}
+                  variant={"link"}
+                  cursor={"pointer"}
+                  minW={0}
+                >
+                  More Actions
+                </MenuButton>
+                <MenuList>
+                    <ChakraLink as={ReactRouterLink} to="/update">
+                  <DropdownMenuItem>
+                      Update data
+                  </DropdownMenuItem>
+                    </ChakraLink>
+                    <ChakraLink as={ReactRouterLink} to="/delete">
+                  <DropdownMenuItem>
+                      Delete Profile
+                  </DropdownMenuItem>
+                    </ChakraLink>
+
+                    <ChakraLink as={ReactRouterLink} to="/tasks">
+                  <DropdownMenuItem>
+                      Tasks
+                  </DropdownMenuItem>
+                    </ChakraLink>
+                </MenuList>
+              </Menu>
             </Stack>
           </Flex>
         </Flex>
