@@ -43,7 +43,7 @@ function Form({ submitAction, userType }) {
           <FormErrorMessage>Kindly Enter A Valid Email</FormErrorMessage>
         </FormControl>
       ) : null}
-      <FormControl isInvalid={!formData.isValidUsername}>
+      <FormControl isRequired={'true'} isInvalid={!formData.isValidUsername}>
         <FormLabel>Username</FormLabel>
         <Input
           onChange={(e) =>
