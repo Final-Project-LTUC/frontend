@@ -1,4 +1,5 @@
 import {
+  AspectRatio,
   Button,
   Flex,
   Stack,
@@ -18,11 +19,21 @@ function Hero() {
         h={"80vh"}
         mx={"auto"}
         backgroundImage={
+          
           "url(https://irp-cdn.multiscreensite.com/d64336ae/dms3rep/multi/desktop/handyman-2100x900.jpg)"
         }
         backgroundSize={"cover"}
         backgroundPosition={"center center"}
+        This video will have equal sides
       >
+{/* <AspectRatio  mx={"auto"} ratio={1}  backgroundSize={"cover"}
+        backgroundPosition={"center center"}>
+<iframe
+  title='naruto'
+  src='https://www.youtube.com/embed/FlwtxQQG-JU?si=2gAH0wDWlj78klYM' 
+  allowFullScreen
+/>
+</AspectRatio> */}
         <VStack
           w={"full"}
           justify={"center"}

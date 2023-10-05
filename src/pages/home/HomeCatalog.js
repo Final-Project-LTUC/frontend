@@ -13,7 +13,7 @@ function HomeCatalog() {
           bg={"blue.400"}
           rounded={"full"}
           color={"white"}
-          _hover={{ bg: "blue.500" }}
+          _hover={{ bg: "yellow.300" }}//"blue.500" 
         >
           SEE MORE
         </Button>
