@@ -1,5 +1,5 @@
-'use client'
 
+import React, { useRef } from 'react';
 import {
   Button,
   Flex,
@@ -8,9 +8,15 @@ import {
   Stack,
   Text,
   useBreakpointValue,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
 
 export default function SplitScreen() {
+  const teamMembersRef = useRef(null);
+
+  const scrollToTeamMembers = () => {
+    teamMembersRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
@@ -29,16 +35,17 @@ export default function SplitScreen() {
                 bg: 'teal.400',
                 zIndex: -1,
               }}>
-              Freelance
+              MEET
             </Text>
             <br />{' '}
             <Text color={'teal.500'} as={'span'}>
-              Design Projects
+              SKILLIFY TEAM
             </Text>{' '}
           </Heading>
           <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
-            The project board is an exclusive resource for contract work. It&apos;s
-            perfect for freelancers, agencies, and moonlighters.
+          Meet our dynamic team of full-stack wizards!  
+          From crafting pixel-perfect designs to building robust server-side solutions, 
+          our experts do it all. 
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             <Button
@@ -47,22 +54,21 @@ export default function SplitScreen() {
               color={'white'}
               _hover={{
                 bg: 'yellow.600',
-              }}>
-              Create Project
+              }}
+              onClick={scrollToTeamMembers}>
+              Meet the Team
             </Button>
-            <Button rounded={'full'}>How It Works</Button>
+            <Button rounded={'full'}>Contact Us</Button>
           </Stack>
         </Stack>
       </Flex>
-      <Flex flex={1}>
+      <Flex flex={1} ref={teamMembersRef}>
         <Image
           alt={'Login Image'}
           objectFit={'cover'}
-          src={
-            './assets/handyman.png'
-          }
+          src={'./assets/bb.png'}
         />
       </Flex>
     </Stack>
-  )
+  );
 }

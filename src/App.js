@@ -7,8 +7,8 @@ import AboutUs from './Components/AboutUS';
 import ContactUS from './Components/ContactUS';
 import Testimonials from './Components/Testimonials';
 import Blog from './Components/Blog';
-import OurVision from './Components/OurVision';
-import Trusting from './Components/Trusting';
+import Team from './Components/Team';
+import Vision from './Components/Vision';
 
 
 
@@ -21,8 +21,8 @@ function App() {
       <ColorModeScript initialColorMode="light" />
         <NavBar/>
         <Header />
-        <Trusting/>
-        <OurVision/>
+        <Team/>
+        <Vision/>
         <AboutUs/>
         <ContactUS/>
         <Testimonials/>
