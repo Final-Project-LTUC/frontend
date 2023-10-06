@@ -1,0 +1,12 @@
+@keyframes slideFromLeft {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  .profileanime {
+    animation: slideFromLeft 0.7s ease-in-out; /* Adjust the duration and timing function as needed */
+  }

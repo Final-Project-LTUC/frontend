@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
+import "./profile.css"
 import {
     Box,
     Flex,
@@ -24,7 +25,7 @@ import {
 
 function Profile() {
   return (
-    <Card>
+    <Card className="profileanime">
         <Flex >
 
       <CardHeader>
@@ -37,7 +38,7 @@ function Profile() {
           {/* Left side with a 4:8 ratio */}
           <Box style= {{ textAlign: 'left', borderRadius: '4%' }}
             flex="fill"
-            bg="blue.800" // Yellowish background color
+            bg="dark.900" // Yellowish background color
             p="4" // Add padding to the left side
           >
             <Stack divider={<StackDivider />} spacing="4">
