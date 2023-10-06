@@ -12,22 +12,22 @@ import {
 } from "@chakra-ui/react";
 
 function HomeBlog() {
-  // const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState([]);
 
-  // useEffect(() => {
-  //   fetch(
-  //     "https://gnews.io/api/v4/search?q=example&apikey=0df2ab0a9a8721edb671e7ec5af0058d"
-  //   )
-  //     .then(function (response) {
-  //       return response.json();
-  //     })
-  //     .then(function (data) {
-  //       console.log(data);
-  //       const fetchedArticles = data.articles.slice(0, 3);
-  //       console.log(fetchedArticles);
-  //       setArticles(fetchedArticles);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch(
+      "https://gnews.io/api/v4/search?q=example&apikey=0df2ab0a9a8721edb671e7ec5af0058d"
+    )
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+        const fetchedArticles = data.articles.slice(0, 3);
+        console.log(fetchedArticles);
+        setArticles(fetchedArticles);
+      });
+  }, []);
 
   return (
     <>
@@ -39,7 +39,7 @@ function HomeBlog() {
         Most Popular Articles
       </Heading>
 
-      {/* <section className="cards-wrapper">
+      <section className="cards-wrapper">
   {articles.map((article, index) => (
     <div key={index} className="card-grid-space">
       <div className="num">{index + 1}</div>
@@ -60,27 +60,11 @@ function HomeBlog() {
       </a>
     </div>
   ))}
-</section> */}
+</section>
 
 
 
-  {/* <div className="num">02</div>
-<a
-  className="card"
-  href="https://codetheweb.blog/2017/10/09/basic-types-of-html-tags/"
-  style={{
-    backgroundImage: "url('https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&resize_w=1500&url=https://codetheweb.blog/assets/img/posts/basic-types-of-html-tags/cover.jpg')",
-  }}
->
-  <div>
-    <h1>Basic types of HTML tags</h1>
-    <p>Learn about some of the most common HTML tags…</p>
-    <div className="date">9 Oct 2017</div>
-    <div className="tags">
-      <div className="tag">HTML</div>
-    </div>
-  </div>
-</a> */}
+
 
       {/* <HStack spacing="4" padding={10} maxW="auto"             justifyContent={"space-evenly"}
 >
