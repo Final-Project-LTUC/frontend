@@ -23,7 +23,7 @@ function HomeBlog() {
   //     })
   //     .then(function (data) {
   //       console.log(data);
-  //       const fetchedArticles = data.articles.slice(0, 4);
+  //       const fetchedArticles = data.articles.slice(0, 3);
   //       console.log(fetchedArticles);
   //       setArticles(fetchedArticles);
   //     });
@@ -38,26 +38,50 @@ function HomeBlog() {
       <Heading as="h2" size="2xl" noOfLines={1} padding={5}>
         Most Popular Articles
       </Heading>
-      <section class="info">
-  <img src="https://codetheweb.blog/assets/img/icon2.png"/>
-  <h1>Learn HTML &mdash; <a href="https://codetheweb.blog/" target="_blank">Code The Web</a></h1>
-</section>
-<section class="cards-wrapper">
-  <div class="card-grid-space">
-    <div class="num">01</div>
-    <a class="card" href="https://codetheweb.blog/2017/10/06/html-syntax/">
-      <div>
-        <h1>HTML Syntax</h1>
-        <p>The syntax of a language is how it works. How to actually write it. Learn HTML syntax…</p>
-        <div class="date">6 Oct 2017</div>
-        <div class="tags">
-          <div class="tag">HTML</div>
+
+      {/* <section className="cards-wrapper">
+  {articles.map((article, index) => (
+    <div key={index} className="card-grid-space">
+      <div className="num">{index + 1}</div>
+      <a
+        className="card"
+        href={article.url}
+        style={{
+          backgroundImage: `url(${article.image})`,
+        }}
+      >
+        <div>
+          <p>{article.title}</p>
+          <div className="date">{article.source.name}</div>
+          <div className="tags">
+            <div className="tag">New</div>
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
+    </div>
+  ))}
+</section> */}
+
+
+
+  {/* <div className="num">02</div>
+<a
+  className="card"
+  href="https://codetheweb.blog/2017/10/09/basic-types-of-html-tags/"
+  style={{
+    backgroundImage: "url('https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&resize_w=1500&url=https://codetheweb.blog/assets/img/posts/basic-types-of-html-tags/cover.jpg')",
+  }}
+>
+  <div>
+    <h1>Basic types of HTML tags</h1>
+    <p>Learn about some of the most common HTML tags…</p>
+    <div className="date">9 Oct 2017</div>
+    <div className="tags">
+      <div className="tag">HTML</div>
+    </div>
   </div>
-</section>
-       
+</a> */}
+
       {/* <HStack spacing="4" padding={10} maxW="auto"             justifyContent={"space-evenly"}
 >
         {articles.map((article, index) => (
