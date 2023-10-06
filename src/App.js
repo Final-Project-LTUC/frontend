@@ -1,6 +1,8 @@
 import "./App.css";
-import React from "react";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+
+import React from 'react';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+
 import Home from "./pages/home/Home";
 import Navbar from "./pages/Navbar/Navbar";
 import Services from "./pages/services/Services";
@@ -9,8 +11,13 @@ import Aboutus from "./pages/aboutus/Aboutus";
 import Footer from "../src/layout/footer/Footer";
 import Dashboard from "./pages/dashBoard/Dashboard";
 
-import DashboardNavbar from "./components/dashboard/DashboardNavbar";
-import Tasks from "./pages/dashBoard/tasks/TasksPage";
+
+import HandymanDetails from "./pages/catalog/HandymanDetails";
+import DashboardNavbar from '../src/components/dashboard/DashboardNavbar'; 
+
+
+
+import Tasks from  "./pages/dashBoard/tasks/TasksPage"
 
 import Auth from "./pages/auth/Auth";
 import LoginProvider from "./hooks/Context/LoginProvider";
@@ -33,13 +40,17 @@ function App() {
     <div className="App">
       {renderNavbar()}
       <LoginProvider>
-        <UserTypeModal />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/catalog" element={<Catalog />} />
-          <Route path="/about" element={<Aboutus />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+        <UserTypeModal/>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/services" element={<Services />} />
+         <Route path="/catalog" element={<Catalog />} />
+                <Route
+                    path="/handyman/:id"
+                    element={<HandymanDetails />}
+                />{" "}
+        <Route path="/about" element={<Aboutus />} />
+        <Route path="/dashboard" element={<Dashboard />} />
 
           <Route path="/tasks" element={<Tasks />} />
 
@@ -64,6 +75,7 @@ function App() {
       <Footer />
     </div>
   );
+
 }
 
 export default App;

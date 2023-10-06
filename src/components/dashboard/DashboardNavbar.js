@@ -50,6 +50,7 @@ const DropdownMenuItem = ({ children }) => {
 };
 
 export default function Simple() {
+
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isDashboardSidebarOpen, setDashboardSidebarOpen] = useState(false);
