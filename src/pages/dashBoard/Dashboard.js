@@ -1,6 +1,8 @@
 import React from 'react'
+
 import Profile from '../../components/dashboard/Profile'
 import TaskCard1 from '../../components/dashboard/TaskCard1'
+
 import { Flex } from '@chakra-ui/react';
 
 function Dashboard() {

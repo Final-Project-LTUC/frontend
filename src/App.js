@@ -11,8 +11,12 @@ import Aboutus from "./pages/aboutus/Aboutus";
 import Footer from "../src/layout/footer/Footer";
 import Dashboard from "./pages/dashBoard/Dashboard";
 
+
 import HandymanDetails from "./pages/catalog/HandymanDetails";
 import DashboardNavbar from '../src/components/dashboard/DashboardNavbar'; 
+
+
+
 import Tasks from  "./pages/dashBoard/tasks/TasksPage"
 
 import Auth from './pages/auth/Auth';
