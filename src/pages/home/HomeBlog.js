@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 
 function HomeBlog() {
-  const [articles, setArticles] = useState([]);
+  // const [articles, setArticles] = useState([]);
 
   // useEffect(() => {
   //   fetch(
