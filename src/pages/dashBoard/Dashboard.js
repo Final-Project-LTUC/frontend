@@ -8,7 +8,7 @@ function Dashboard() {
     <>
     <Flex width="100vw" justifyContent={'space-around'} paddingX="50px" paddingY="50px">
       <Profile />
-      <TaskCard1 />
+      <TaskCard1  />
     </Flex>
     </>
   );

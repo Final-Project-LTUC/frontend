@@ -2,6 +2,7 @@ import React from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { Link as ChakraLink, LinkProps } from "@chakra-ui/react";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
+import "./taskcard1.css";
 import {
   Box,
   Flex,
@@ -16,7 +17,6 @@ import {
   MenuItem,
   MenuDivider,
   useDisclosure,
-  
   Stack,
   Heading,
   Center,
@@ -28,7 +28,7 @@ const cost = "50 jd";
 function TaskCard1() {
   return (
     <>
-      <SimpleGrid spacing={10} column={1}>
+      <SimpleGrid spacing={10} column={1} className="cardsanime">
         <Card>
           <CardHeader>
             <Heading size="md"> Current tasks</Heading>

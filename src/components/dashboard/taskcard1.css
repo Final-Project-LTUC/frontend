@@ -1,0 +1,12 @@
+@keyframes slideFromRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.cardsanime {
+  animation: slideFromRight 0.99s ease-in-out; /* Adjust the duration and timing function as needed */
+}

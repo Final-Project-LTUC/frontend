@@ -1,90 +1,151 @@
-import React from 'react';
-import { Box, Heading, VStack,Flex } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { Box,Button, Heading, VStack,Flex } from '@chakra-ui/react';
 import TaskCard from './TaskCard';
-
+import {  ArrowRightIcon, ArrowLeftIcon } from '@chakra-ui/icons'
 function Tasks() {
   const doneTasks = [
     {
-      title: 'Task 1 (Done)',
-      description: 'Description for Task 1',
+      title: 'fix broken sink  1 ',
+      description: 'Description for fix broken sink  1',
       isDone: true,
       imageUrl: 'https://www.reicheltplumbing.com/wp-content/uploads/broken-sink-300x200.jpg',
     },
     {
-      title: 'Task 2 (Done)',
-      description: 'Description for Task 2',
+      title: 'fix broken sink  2',
+      description: 'Description for fix broken sink  2',
       isDone: true,
       imageUrl: 'https://www.reicheltplumbing.com/wp-content/uploads/broken-sink-300x200.jpg',
     },
     {
-      title: 'Task 3 (Done)',
-      description: 'Description for Task 2',
+      title: 'fix broken sink  4 ',
+      description: 'Description for fix broken sink  3',
       isDone: true,
       imageUrl: 'https://www.reicheltplumbing.com/wp-content/uploads/broken-sink-300x200.jpg',
+    },
+    {
+      title: 'fix broken sink  5 ',
+      description: 'Description for fix broken sink  4',
+      isDone: true,
+      imageUrl: 'https://www.reicheltplumbing.com/wp-content/uploads/broken-sink-300x200.jpg',
+    },
+    {
+      title: 'fix broken sink  6 ',
+      description: 'Description for fix broken sink  5',
+      isDone: true,
+      imageUrl: 'https://www.reicheltplumbing.com/wp-content/uploads/broken-sink-300x200.jpg',
+      startDate: `${Date.now}`
     },
   ];
 
   const incomingTasks = [
     {
-      title: 'Task 3 (Incoming)',
+      title: 'fix bronken sink 7 ',
       description: 'all is good',
       isDone: false,
       imageUrl: 'https://www.reicheltplumbing.com/wp-content/uploads/broken-sink-300x200.jpg',
+      startDate: Date.now(),
     },
     {
-      title: 'Task 4 (Incoming)',
-      description: 'Description for Task 4',
+      title: 'fix bronken sink 8 ',
+      description: 'Description for fix bronken sink 7',
       isDone: false,
       imageUrl: 'https://www.reicheltplumbing.com/wp-content/uploads/broken-sink-300x200.jpg',
+      startDate: Date.now(),
     },
     {
-      title: 'Task 6 (Incoming)',
-      description: 'Description for Task 4',
+      title: 'fix bronken sink 9 ',
+      description: 'Description for fix bronken sink 8',
       isDone: false,
       imageUrl: 'https://www.reicheltplumbing.com/wp-content/uploads/broken-sink-300x200.jpg',
+      startDate: Date.now(),
+    },
+    {
+      title: 'fix bronken sink 10 ',
+      description: 'Description for fix bronken sink 9',
+      isDone: false,
+      imageUrl: 'https://www.reicheltplumbing.com/wp-content/uploads/broken-sink-300x200.jpg',
+      startDate: Date.now(),
+    },
+    {
+      title: 'fix bronken sink 11 ',
+      description: 'Description for fix bronken sink 10',
+      isDone: false,
+      imageUrl: 'https://www.reicheltplumbing.com/wp-content/uploads/broken-sink-300x200.jpg',
+      startDate: Date.now(),
     },
   ];
+  
+
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const maxCards = 3;
+
+  const displayDoneTasks = doneTasks.slice(currentCardIndex, currentCardIndex + maxCards);
+  const displayIncomingTasks = incomingTasks.slice(currentCardIndex, currentCardIndex + maxCards);
+
+  const handlePrevClick = () => {
+    if (currentCardIndex > 0) {
+      setCurrentCardIndex(currentCardIndex - 1);
+    }
+  };
+
+  const handleNextClick = () => {
+    if (currentCardIndex < doneTasks.length - maxCards) {
+      setCurrentCardIndex(currentCardIndex + 1);
+    }
+  };
 
   return (
-    <Box backgroundColor={'dark'} style={{ boxShadow: '11px 4px 6px rgba(1, 1, 1, 1.1)' }}>
-    <Heading as="h1" size="lg" mb="4">
-      Tasks Basket
-    </Heading>
-  
-    {/* Done Tasks with padding */}
-    <Box padding="2" >
-      <Flex flexDirection="row" flexWrap="wrap" justifyContent="space-evenly" >
-        {doneTasks.map((task, index) => (
-          <TaskCard
-          
-            key={index}
-            title={task.title}
-            description={task.description}
-            isDone={task.isDone}
-            imageUrl={task.imageUrl}
-            onViewDetails={() => alert(`View details for ${task.title}`)}
-          />
-        ))}
-      </Flex>
+    <Box backgroundColor={'dark'} padding={4}>
+      <Heading as="h1" size="lg" mb="4">
+        Tasks Basket
+        {/* Navigation Buttons */}
+        <Flex justifyContent="space-around" mt="4">
+          <Button onClick={handlePrevClick} disabled={currentCardIndex === 0}>
+            <ArrowLeftIcon />
+          </Button>
+          <Button onClick={handleNextClick} ml="4" disabled={currentCardIndex >= doneTasks.length - maxCards}>
+            <ArrowRightIcon />
+          </Button>
+        </Flex>
+      </Heading>
+
+      {/* Incoming Tasks with padding */}
+      <Box padding={8} paddingLeft="20" paddingRight="20" backgroundColor={'dark'}>
+        <Flex flexDirection="row" flexWrap="wrap" justifyContent="space-evenly">
+          {displayIncomingTasks.map((task, index) => (
+            <TaskCard
+              key={index}
+              title={task.title}
+              description={task.description}
+              isDone={task.isDone}
+              imageUrl={task.imageUrl}
+              startDate={task.startDate}
+              onTakeTask={() => alert(`Take task: ${task.title}`)}
+              style={{
+                opacity: index === 1 ? 0 : 1, // Add opacity property for animation
+                transition: 'opacity 0.5s ease-in-out', // Add transition for opacity
+              }}
+            />
+          ))}
+        </Flex>
+      </Box>
+      {/* Done Tasks with padding */}
+      <Box paddingLeft="20" paddingRight="20" backgroundColor={'dark'}>
+        <Flex flexDirection="row" flexWrap="wrap" justifyContent="space-evenly">
+          {displayDoneTasks.map((task, index) => (
+            <TaskCard
+              key={index}
+              title={task.title}
+              description={task.description}
+              isDone={task.isDone}
+              imageUrl={task.imageUrl}
+              onViewDetails={() => alert(`View details for ${task.title}`)}
+             
+            />
+          ))}
+        </Flex>
+      </Box>
     </Box>
-  
-    {/* Incoming Tasks with padding */}
-    <Box padding="2">
-      <Flex flexDirection="row" flexWrap="wrap" justifyContent="space-evenly">
-        {incomingTasks.map((task, index) => (
-          <TaskCard
-            key={index}
-            title={task.title}
-            description={task.description}
-            isDone={task.isDone}
-            imageUrl={task.imageUrl}
-            onTakeTask={() => alert(`Take task: ${task.title}`)}
-          />
-        ))}
-      </Flex>
-    </Box>
-  </Box>
-  
   );
 }
 
