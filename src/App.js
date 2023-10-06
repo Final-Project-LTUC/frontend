@@ -1,23 +1,53 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import Home from "./pages/home/Home";
 import Navbar from "./pages/Navbar/Navbar";
 import Services from "./pages/services/Services";
 import Catalog from "./pages/catalog/Catalog";
 import Aboutus from "./pages/aboutus/Aboutus";
 import Footer from "../src/layout/footer/Footer";
+import Dashboard from "./pages/dashBoard/Dashboard";
+import DashboardNavbar from './Components/dashboard/DashboardNavbar'; 
+import Auth from './pages/auth/Auth';
+import LoginProvider from "./hooks/Context/LoginProvider";
+import UserTypeModal from "./Components/SignupSingin/UserTypeModal";
+
+
+
+
+
 
 
 function App() {
+  const location = useLocation();
+
+  // Define a function to conditionally render the navbar based on the current route
+  const renderNavbar = () => {
+    if (location.pathname === '/dashboard') {
+      return <DashboardNavbar />;
+    } else {
+      return <Navbar />;
+    }
+  };
+
   return (
     <div className="App">
-      <Navbar />
+      {renderNavbar()}
+      <LoginProvider>
+        <UserTypeModal/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/about" element={<Aboutus />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path='/handymanSignup' element={<Auth submitAction='signup' userType='handyman'/>}/>
+        <Route path='/userSignup' element={<Auth submitAction='signup' userType='user'/>}/>
+        <Route path='/handymanSingin' element={<Auth submitAction='signin' userType='handyman'/>}/>
+        <Route path='/userSignin' element={<Auth submitAction='signin' userType='user'/>}/>
       </Routes>
+      </LoginProvider>
       <Footer />
     </div>
   );
