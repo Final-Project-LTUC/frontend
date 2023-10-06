@@ -9,7 +9,7 @@ import Aboutus from "./pages/aboutus/Aboutus";
 import Footer from "../src/layout/footer/Footer";
 import Dashboard from "./pages/dashBoard/Dashboard";
 
-import DashboardNavbar from './components/dashboard/DashboardNavbar'; 
+import DashboardNavbar from './Components/dashboard/DashboardNavbar'; 
 import Tasks from  "./pages/dashBoard/tasks/TasksPage"
 
 import Auth from './pages/auth/Auth';
