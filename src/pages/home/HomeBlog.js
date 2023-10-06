@@ -12,22 +12,22 @@ import {
 } from "@chakra-ui/react";
 
 function HomeBlog() {
-  const [articles, setArticles] = useState([]);
+  // const [articles, setArticles] = useState([]);
 
-  useEffect(() => {
-    fetch(
-      "https://gnews.io/api/v4/search?q=example&apikey=0df2ab0a9a8721edb671e7ec5af0058d"
-    )
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        console.log(data);
-        const fetchedArticles = data.articles.slice(0, 3);
-        console.log(fetchedArticles);
-        setArticles(fetchedArticles);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch(
+  //     "https://gnews.io/api/v4/search?q=example&apikey=0df2ab0a9a8721edb671e7ec5af0058d"
+  //   )
+  //     .then(function (response) {
+  //       return response.json();
+  //     })
+  //     .then(function (data) {
+  //       console.log(data);
+  //       const fetchedArticles = data.articles.slice(0, 3);
+  //       console.log(fetchedArticles);
+  //       setArticles(fetchedArticles);
+  //     });
+  // }, []);
 
   return (
     <>
@@ -40,7 +40,7 @@ function HomeBlog() {
       </Heading>
 
       <section className="cards-wrapper">
-  {articles.map((article, index) => (
+  {/* {articles.map((article, index) => (
     <div key={index} className="card-grid-space">
       <div className="num">{index + 1}</div>
       <a
@@ -59,7 +59,7 @@ function HomeBlog() {
         </div>
       </a>
     </div>
-  ))}
+  ))} */}
 </section>
 
 

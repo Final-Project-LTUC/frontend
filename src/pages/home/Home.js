@@ -5,11 +5,13 @@ import HomeServices from "./HomeServices";
 import HomeCatalog from "./HomeCatalog";
 import HomeBlog from "./HomeBlog";
 import HowWeWork from "./HowWeWork";
+import Test from "./Test";
 
 export default function Home() {
   return (
     <div>
-      <Hero />
+      {/* <Hero /> */}
+      <Test />
       <TrustUs />
       <HowWeWork />
       <HomeServices />
