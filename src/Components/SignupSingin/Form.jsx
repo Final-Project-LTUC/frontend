@@ -9,12 +9,12 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React, { useContext, useEffect, useReducer, useState } from "react";
-import { LoginContext } from "../hooks/Context/LoginProvider";
+import { LoginContext } from "../../hooks/Context/LoginProvider";
 import formReducer, {
   initialState,
   checkAllValidation,
-} from "../hooks/Reducers/FormReducer";
-import { handymanExperties } from "../assets/constants";
+} from "../../hooks/Reducers/FormReducer";
+import { handymanExperties } from "../../assets/constants";
 function Form({ submitAction, userType }) {
   const [formData, dispatch] = useReducer(formReducer, initialState);
   const [disableButton, setDisabledButton] = useState(true);

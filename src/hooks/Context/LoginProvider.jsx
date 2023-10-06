@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import cookie from 'react-cookies';
 import jwt_decode from 'jwt-decode';
 import { initialState, loginReducer } from '../Reducers/LoginReducer';
@@ -7,13 +7,13 @@ export const LoginContext = React.createContext();
 
 function LoginProvider(props) {
   const [loginData, dispatch] = useReducer(loginReducer, initialState);
+  const [user,setUser]=useState({});
   function can(capability) {
     return loginData.user.capabilities?.includes(capability);
   }
 
   async function login(username, password,userType) {
     const role=userType==='user'?'user':'handymen';
-    console.log(role)
     try {
         const response=await axios.post(
             `${process.env.REACT_APP_DATABASE_URL}/signin?role=${role}`
@@ -22,11 +22,10 @@ function LoginProvider(props) {
                 headers:{Authorization:`Basic ${btoa(`${username}:${password}`)}`}
             }
             )
-            console.log(response);
+              validateToken(response.data.token);
     } catch (error) {
         console.log(error);
     }
-  
   }
   async function signup(body,userType){
     try{
@@ -41,10 +40,14 @@ function LoginProvider(props) {
     setLoginState(false, null, {});
   }
 
-  function validateToken(token) {
+  function validateToken(token,user) {
     try {
       const validUser = jwt_decode(token);
-      setLoginState(true, token, validUser);
+      console.log(validUser)
+      if(validUser){
+        setUser(user);
+        setLoginState(true, token, validUser);
+      }
     } catch (e) {
       setLoginState(false, null, {}, e);
       console.log('Token Validation Error', e);
@@ -53,10 +56,10 @@ function LoginProvider(props) {
 
   function setLoginState(loggedIn, token, user, error) {
     cookie.save('auth', token);
-    dispatch({ type: 'changeLoginStatus', payload: loggedIn });
-    dispatch({ type: 'changeToken', payload: token });
-    dispatch({ type: 'changeUser', payload: user });
-    dispatch({ type: 'changeError', payload: error });
+    dispatch({ type: 'CHANGE_LOGIN_STATUS', payload: loggedIn });
+    dispatch({ type: 'CHANGE_TOKEN', payload: token });
+    dispatch({ type: 'CHANGE_USER', payload: user });
+    dispatch({ type: 'CHANGE_ERROR', payload: error });
   }
 
   useEffect(() => {

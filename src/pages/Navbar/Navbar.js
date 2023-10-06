@@ -43,6 +43,7 @@ const Links = ["Skilify", "Home", "Services", "Catalog", "About us"];
 
 const NavLink = (props) => {
   const { children } = props;
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <Box
@@ -159,6 +160,7 @@ export default function Simple() {
                 fontWeight={400}
                 variant={"link"}
                 href={"#"}
+                onClick={onOpen}
               >
                 Sign In
               </Button>
@@ -173,6 +175,7 @@ export default function Simple() {
                 _hover={{
                   bg: "yellow.300",
                 }}
+                onClick={onOpen}
               >
                 Sign Up
               </Button>
