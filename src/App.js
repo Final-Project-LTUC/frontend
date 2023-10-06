@@ -19,24 +19,18 @@ import DashboardNavbar from '../src/components/dashboard/DashboardNavbar';
 
 import Tasks from  "./pages/dashBoard/tasks/TasksPage"
 
-import Auth from './pages/auth/Auth';
+import Auth from "./pages/auth/Auth";
 import LoginProvider from "./hooks/Context/LoginProvider";
 import UserTypeModal from "./Components/SignupSingin/UserTypeModal";
-
-
-
-
-
-
-
 
 function App() {
   const location = useLocation();
 
   // Define a function to conditionally render the navbar based on the current route
   const renderNavbar = () => {
-    if (location.pathname === '/dashboard'||location.pathname === '/tasks') {
+    if (location.pathname === "/dashboard" || location.pathname === "/tasks") {
       return <DashboardNavbar />;
+    } else if (location.pathname === "/") {
     } else {
       return <Navbar />;
     }
@@ -58,14 +52,25 @@ function App() {
         <Route path="/about" element={<Aboutus />} />
         <Route path="/dashboard" element={<Dashboard />} />
 
-        <Route path="/tasks" element={<Tasks />} />
+          <Route path="/tasks" element={<Tasks />} />
 
-        <Route path='/handymanSignup' element={<Auth submitAction='signup' userType='handyman'/>}/>
-        <Route path='/userSignup' element={<Auth submitAction='signup' userType='user'/>}/>
-        <Route path='/handymanSingin' element={<Auth submitAction='signin' userType='handyman'/>}/>
-        <Route path='/userSignin' element={<Auth submitAction='signin' userType='user'/>}/>
-
-      </Routes>
+          <Route
+            path="/handymanSignup"
+            element={<Auth submitAction="signup" userType="handyman" />}
+          />
+          <Route
+            path="/userSignup"
+            element={<Auth submitAction="signup" userType="user" />}
+          />
+          <Route
+            path="/handymanSingin"
+            element={<Auth submitAction="signin" userType="handyman" />}
+          />
+          <Route
+            path="/userSignin"
+            element={<Auth submitAction="signin" userType="user" />}
+          />
+        </Routes>
       </LoginProvider>
       <Footer />
     </div>

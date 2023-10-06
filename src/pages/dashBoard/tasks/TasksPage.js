@@ -1,5 +1,5 @@
 import React from 'react'
-import Tasks from '../../../Components/tasks/Tasks'
+import Tasks from '../../../components/tasks/Tasks'
 
 function TasksPage() {
   return (
