@@ -46,7 +46,7 @@ function Hero() {
   };
 
   useEffect(() => {
-    const intervalId = setInterval(updateImageIndex, 4000);
+    const intervalId = setInterval(updateImageIndex, 2000);
     return () => clearInterval(intervalId);
   }, []);
   return (
@@ -55,7 +55,7 @@ function Hero() {
 
 {/* ///////////////////////////// */}
 
-      <div class="hero">
+      {/* <div class="hero">
         <div class="hero__bg">
           <picture>
             <img src="https://th.bing.com/th/id/R.f7dcad3108819cd6b39bc6dbb53737a0?rik=veRlPhjbRuu75g&riu=http%3a%2f%2fded7t1cra1lh5.cloudfront.net%2fsite_banners%2f65253%2fcrop%2fhandyman_hero.jpg%3f1573857999&ehk=%2be8zD6Zajw0yRVf8DjgP5Gn%2fQmgtDMwc8DHuh%2bbHAsQ%3d&risl=&pid=ImgRaw&r=0" alt="heroimage" />
@@ -71,12 +71,12 @@ function Hero() {
           </svg>
           <h1>Skilify</h1>
         </div>
-      </div>
+      </div> */}
 
 
       {/* //////////////////////// */}
 
-      {/* <Flex
+      <Flex
         w={"100%"}
         h={"70vh"}
         mx={"auto"}
@@ -123,7 +123,7 @@ function Hero() {
             </Stack>
           </Stack>
         </VStack>
-      </Flex> */}
+      </Flex>
     </div>
   );
 }
