@@ -1,15 +1,6 @@
 import "./Blog.scss";
 import React, { useEffect, useState } from "react";
-import {
-  Badge,
-  Box,
-  Container,
-  HStack,
-  Heading,
-  Image,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
 
 function HomeBlog() {
   // const [articles, setArticles] = useState([]);
@@ -76,47 +67,6 @@ function HomeBlog() {
           </div>
         ))} */}
       </section>
-
-      {/* <HStack spacing="4" padding={10} maxW="auto"             justifyContent={"space-evenly"}
->
-        {articles.map((article, index) => (
-          <Box
-            padding={2}
-            key={index}
-            borderWidth="1px"
-            borderRadius="lg"
-            overflow="hidden"
-            direction="row"
-            variant="outline"
-            h="350px"
-            flex="1"
-            alignItems={"center"}
-            speed="1"
-            objectFit="cover"
-            maxW={{ base: "100%", sm: "300px" }}
-          >
-            <Image h="200px" src={article.image} alt={article.title} />
-
-            <Box p="6">
-              <Box display="flex" alignItems="baseline">
-                <Badge borderRadius="full" px="2" colorScheme="yellow">
-                  New
-                </Badge>
-              </Box>
-
-              <Box
-                mt="1"
-                fontWeight="semibold"
-                as="h4"
-                lineHeight="tight"
-                noOfLines={3}
-              >
-                {article.title}
-              </Box>
-            </Box>
-          </Box>
-        ))}
-      </HStack> */}
     </>
   );
 }

@@ -4,7 +4,7 @@ import Hero from "./generalHero/Hero";
 import HomeServices from "./HomeServices";
 import HomeCatalog from "./HomeCatalog";
 import HomeBlog from "./bolg/HomeBlog";
-import HowWeWork from "./HowWeWork";
+import HowWeWork from "../home/howWeWork/HowWeWork";
 import Test from "./homeHero/Test";
 
 export default function Home() {
