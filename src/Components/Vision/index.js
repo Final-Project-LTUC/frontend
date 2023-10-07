@@ -151,7 +151,7 @@ export default function OurVision() {
   return (
     <Box
       p={4}
-      bg="gray.50"
+      bg="gray.10"
       borderRadius="lg"
       boxShadow="lg"
       py={12}
