@@ -24,28 +24,40 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-
+import { useContext } from "react";
+import {LoginContext} from '../../../hooks/Context/LoginProvider'
 const Links = ["Skilify", "Home", "Services", "Catalog", "About us"];
 function Test() {
+  const [isNavFixed, setIsNavFixed] = React.useState(false);
+
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY;
+
+    if (scrollPosition > 0 && !isNavFixed) {
+      setIsNavFixed(true);
+    } else if (scrollPosition === 0 && isNavFixed) {
+      setIsNavFixed(false);
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isNavFixed]);
+
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {loginData,logout}=useContext(LoginContext);
+
   return (
     <header>
-      <div class="test">
-        <div class="heroSection">
-          <video
-            className="video"
-            src={video}
-            loop
-            autoPlay
-            muted
-            // allowFullScreen
-          >
-            {" "}
-          </video>
-
-          <div class="container">
-            <div class="logo"></div>
+      <div className={`test ${isNavFixed ? "fixed" : ""}`}>
+        <div className="heroSection">
+          <video className="video" src={video} loop autoPlay muted />
+          <div className="container">
             <nav>
               <Flex
                 h={16}
@@ -64,6 +76,7 @@ function Test() {
                   as={"nav"}
                   spacing={4}
                   display={{ base: "none", md: "flex" }}
+                  justifyContent={"space-between"}
                 >
                   <ChakraLink as={ReactRouterLink} to="/">
                     <img src={logo} alt="Logo" />
@@ -81,6 +94,7 @@ function Test() {
                     About
                   </ChakraLink>
                 </HStack>
+
                 <Flex alignItems={"center"}>
                   <Menu>
                     <MenuButton
@@ -100,6 +114,7 @@ function Test() {
                   <Stack
                     flex={{ base: 1, md: 0 }}
                     justify={"flex-end"}
+                    justifyContent={"space-between"}
                     direction={"row"}
                     spacing={6}
                   >
@@ -145,31 +160,36 @@ function Test() {
                         <MenuItem>Logout</MenuItem>
                       </MenuList>
                     </Menu>
-                    <Button
-                      as={"a"}
-                      fontSize={"sm"}
-                      fontWeight={400}
-                      variant={"link"}
-                      href={"#"}
-                      onClick={onOpen}
-                    >
-                      Sign In
-                    </Button>
-                    <Button
-                      as={"a"}
-                      display={{ base: "none", md: "inline-flex" }}
-                      fontSize={"sm"}
-                      fontWeight={600}
-                      color={"white"}
-                      bg={"yellow.400"}
-                      href={"#"}
-                      _hover={{
-                        bg: "yellow.300",
-                      }}
-                      onClick={onOpen}
-                    >
-                      Sign Up
-                    </Button>
+                    {loginData.loggedIn? 
+               <Button onClick={()=>logout()}>Logout</Button>:
+             <>
+              <Button
+                as={"a"}
+                fontSize={"sm"}
+                fontWeight={400}
+                variant={"link"}
+                href={"/signin"}
+                onClick={onOpen}
+                >
+                Sign In
+              </Button>
+              <Button
+                as={"a"}
+                display={{ base: "none", md: "inline-flex" }}
+                fontSize={"sm"}
+                fontWeight={600}
+                color={"white"}
+                bg={"teal.400"}
+                href={"/signup"}
+                _hover={{
+                  bg: "teal.300",
+                }}
+                onClick={onOpen}
+                >
+                Sign Up
+              </Button>
+              </> 
+             }
                   </Stack>
                 </Flex>
               </Flex>
@@ -188,9 +208,17 @@ function Test() {
 
           <div class="heroText">
             <h1>You can do it!</h1>
-            <p> Your Home's Trusted Handyman. From quick fixes to complete transformations, our skilled team is ready to elevate your space.</p>
-            <button class="joinNow">Join now</button>
-            <button>Know more</button>
+            <p>
+              {" "}
+              Your Home's Trusted Handyman. From quick fixes to complete
+              transformations, our skilled team is ready to elevate your space.
+            </p>
+            <ChakraLink as={ReactRouterLink} to="/services">
+              <button class="joinNow"> Services </button>
+            </ChakraLink>
+            <ChakraLink as={ReactRouterLink} to="/about">
+              <button>Know more</button>
+            </ChakraLink>
           </div>
         </div>
       </div>

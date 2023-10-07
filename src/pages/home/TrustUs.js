@@ -9,15 +9,21 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-
 function TrustUs() {
   return (
     <>
-      <Heading as="h2" size="3xl"  color={'teal'}  noOfLines={1} padding={4} paddingTop={14}>
+      <Heading
+        as="h2"
+        size="3xl"
+        // color={"teal"}
+        noOfLines={1}
+        padding={4}
+        paddingTop={14}
+      >
         Why trust us?
       </Heading>
 
-      <HStack  spacing="4" padding={8}>
+      <HStack spacing="4" padding={8}>
         <Card
           backgroundColor={"yellow.100"}
           direction="row"
@@ -26,16 +32,17 @@ function TrustUs() {
           h="225px"
           flex="1"
           alignItems={"center"}
+          color="black"
         >
-            <lottie-player
-              src="https://lottie.host/3306f311-74d9-429d-b9a0-6d753d4c0d39/RvWQlhHsvK.json"
-              background="transparent"
-              speed="1"
-              objectFit="cover"
-              maxW={{ base: "100%", sm: "300px" }}
-              loop
-              autoplay
-            ></lottie-player>
+          <lottie-player
+            src="https://lottie.host/3306f311-74d9-429d-b9a0-6d753d4c0d39/RvWQlhHsvK.json"
+            background="transparent"
+            speed="1"
+            objectFit="cover"
+            maxW={{ base: "100%", sm: "300px" }}
+            loop
+            autoplay
+          ></lottie-player>
 
           <Stack>
             <Center>
@@ -49,6 +56,7 @@ function TrustUs() {
             </Center>
           </Stack>
         </Card>
+
         <Card
           direction="row"
           overflow="hidden"
@@ -57,6 +65,7 @@ function TrustUs() {
           flex="1"
           alignItems={"center"}
           backgroundColor={"blue.100"}
+          color="black"
         >
           <lottie-player
             src="https://lottie.host/402998d5-e754-4089-a2ca-bfeca76ee523/D8VnRGEARq.json"
@@ -79,6 +88,7 @@ function TrustUs() {
             </CardBody>
           </Stack>
         </Card>
+
         <Card
           direction="row"
           overflow="hidden"
@@ -87,6 +97,7 @@ function TrustUs() {
           flex="1"
           alignItems={"center"}
           backgroundColor={"gray.200"}
+          color="black"
         >
           <lottie-player
             src="https://lottie.host/ae9c99aa-6b09-416f-bb75-cd3276cd8c4d/jWsE0GG6j1.json"

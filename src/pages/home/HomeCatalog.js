@@ -10,10 +10,10 @@ function HomeCatalog() {
       </Heading>
       <ChakraLink as={ReactRouterLink} to="/catalog">
         <Button
-          bg={"blue.400"}
+        bg={"teal.500"}
           rounded={"full"}
           color={"white"}
-          _hover={{ bg: "yellow.300" }}//"blue.500" 
+          _hover={{ bg: "teal.400" }}
         >
           SEE MORE
         </Button>
