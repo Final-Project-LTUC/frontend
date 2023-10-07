@@ -140,6 +140,7 @@ export default function Simple() {
               </Menu>
               {loginData.loggedIn? 
                <Button onClick={()=>logout()}>Logout</Button>:
+               //updated
              <>
               <Button
                 as={"a"}
