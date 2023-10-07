@@ -14,11 +14,12 @@ function HowWeWork() {
         p={2}
         color="black"
         position="relative"
+        marginLeft={8}
       >
         <div className="floating-card1">
           <a href="/services" className="data-card">
             <h3>01</h3>
-            <h4>Identify</h4>
+            <h4>Inquire</h4>
             <p>Aenean lacinia bibendum nulla sed consectetur.</p>
           </a>
         </div>
@@ -26,7 +27,7 @@ function HowWeWork() {
         <div className="floating-card2">
           <a href="/services" className="data-card">
             <h3>02</h3>
-            <h4>plan</h4>
+            <h4>Estimate</h4>
             <p>Aenean lacinia bibendum nulla sed consectetur.</p>
           </a>
         </div>

@@ -23,7 +23,7 @@
   .floating-card2,
   .floating-card3 {
     position: absolute;
-    top: 42px; 
+    top: 65px; 
     width: 20.75em; 
     left:70%; 
     transform: translateX(-50%);
@@ -45,7 +45,7 @@
     width: 100%;
     padding: 0 40px; /* Adjust the padding as needed */
     text-align: left;
-  }}
+  }
 
 .data-card {
   display: flex;
@@ -157,4 +157,5 @@
   100% {
     transform: translateX(0.125em);
   }
+}
 }
