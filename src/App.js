@@ -13,7 +13,7 @@ import Dashboard from "./pages/dashBoard/Dashboard";
 
 
 import HandymanDetails from "./pages/catalog/HandymanDetails";
-import DashboardNavbar from '../src/components/dashboard/DashboardNavbar'; 
+import DashboardNavbar from '../src/Components/dashboard/DashboardNavbar'; 
 
 
 
@@ -21,7 +21,6 @@ import Tasks from  "./pages/dashBoard/tasks/TasksPage"
 
 import Auth from "./pages/auth/Auth";
 import LoginProvider from "./hooks/Context/LoginProvider";
-import UserTypeModal from "./Components/SignupSingin/UserTypeModal";
 
 function App() {
   const location = useLocation();
@@ -50,8 +49,6 @@ function App() {
                 />{" "}
         <Route path="/about" element={<Aboutus />} />
         <Route path="/dashboard" element={<Dashboard />} />
-
-
         <Route path="/tasks" element={<Tasks />} />
         <Route path='/signup' element={<Auth submitAction='signup' />}/>
         <Route path='/signin' element={<Auth submitAction='signin' />}/>

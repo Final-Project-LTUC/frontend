@@ -1,6 +1,6 @@
 "use client";
 
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link, Link as ReactRouterLink } from "react-router-dom";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import {
   Box,
@@ -27,9 +27,7 @@ const Links = ["Skilify", "Home", "Services", "Catalog", "About us"];
 
 const NavLink = (props) => {
   const { children } = props;
-  const { isOpen, onOpen, onClose } = useDisclosure()
   const {loginData}=useContext(LoginContext);
-  console.log(loginData);
   return (
     <Box
       as="a"
@@ -142,16 +140,17 @@ export default function Simple() {
                <Button onClick={()=>logout()}>Logout</Button>:
                //updated
              <>
-              <Button
+             <ChakraLink as={ReactRouterLink} to={'/signin'}>
+             <Button
                 as={"a"}
                 fontSize={"sm"}
                 fontWeight={400}
                 variant={"link"}
-                href={"/signin"}
-                onClick={onOpen}
                 >
                 Sign In
               </Button>
+             </ChakraLink>
+              <ChakraLink as={ReactRouterLink} to={'/signup'}>
               <Button
                 as={"a"}
                 display={{ base: "none", md: "inline-flex" }}
@@ -159,14 +158,13 @@ export default function Simple() {
                 fontWeight={600}
                 color={"white"}
                 bg={"yellow.400"}
-                href={"/signup"}
                 _hover={{
                   bg: "yellow.300",
                 }}
-                onClick={onOpen}
                 >
                 Sign Up
               </Button>
+              </ChakraLink>
               </> 
              }
             </Stack>
