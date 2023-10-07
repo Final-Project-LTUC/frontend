@@ -20,10 +20,16 @@ button {
 }
 
 .test {
-  height: 80vh;
+  height: 90vh;
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  &.fixed {
+    nav {
+      background-color: #333;
+    }
+  }
 }
 
 .heroSection {
@@ -59,21 +65,31 @@ nav {
   float: right;
   margin: 6px 0;
   z-index: 2;
-}
+  background-color: transparent;
+  transition: background-color 0.3s ease;
 
-nav a {
-  color: #fff;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: small;
-  font-weight: bold;
-  margin: 0 10px;
-  padding: 5px 20px;
-  border-radius: 30px;
-}
+  a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: small;
+    font-weight: bold;
+    margin: 0 10px;
+    padding: 5px 20px;
+    border-radius: 30px;
+  }
 
-nav a:hover {
-  background: rgba(255, 255, 255, 0.2);
+  a:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  &.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+  }
 }
 
 .heroText {
@@ -82,42 +98,47 @@ nav a:hover {
   text-align: center;
   color: #fff;
   margin-top: 150px;
-}
 
-.heroText h1 {
-  font-size: 3em;
-  margin: 0;
-}
+  h1 {
+    font-size: 3em;
+    margin: 0;
+  }
 
-.heroText p {
-  font-size: 1.5em;
-}
+  p {
+    font-size: 1.5em;
+  }
 
-.heroText button {
-  color: #fff;
-  background: transparent;
-  border: solid 2px #fff;
-  padding: 10px 30px;
-  border-radius: 30px;
-  margin: 5px;
-  font-weight: bold;
-  display: inline-block;
-}
+  button {
+    color: #fff;
+    background: transparent;
+    border: solid 2px #fff;
+    padding: 10px 30px;
+    border-radius: 30px;
+    margin: 5px;
+    font-weight: bold;
+    display: inline-block;
+  }
 
-.heroText button:hover {
-  cursor: pointer;
-  background: #fff;
-  border: solid 2px #fff;
-  color: #333;
-}
+  button:hover {
+    cursor: pointer;
+    background: #fff;
+    border: solid 2px #fff;
+    color: #333;
+  }
 
-button.joinNow {
-  background: rgb(0, 206, 93);
-  border: solid 2px rgb(0, 206, 93);
-}
+  button.joinNow {
+    background:rgba(65, 145, 151, 1)
+    ;
+    border: solid 2px rgba(65, 145, 151, 1)
+    ;
+  }
 
-button.joinNow:hover {
-  color: #fff;
-  background: rgb(1, 168, 76);
-  border: solid 2px rgb(1, 168, 76);
+  button.joinNow:hover {
+    color: #fff;
+    background: rgb(4, 86, 91);
+
+    border: solid 2px  rgb(4, 86, 91);
+
+  }
+ 
 }

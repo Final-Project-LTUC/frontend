@@ -21,10 +21,10 @@ function HomeServices() {
 
       <ChakraLink as={ReactRouterLink} to="/services">
         <Button
-          bg={"blue.400"}
+         bg={"teal.500"}
           rounded={"full"}
           color={"white"}
-          _hover={{ bg: "yellow.300" }}
+          _hover={{ bg: "teal.400" }}
         >
           ALL SERVICES
         </Button>

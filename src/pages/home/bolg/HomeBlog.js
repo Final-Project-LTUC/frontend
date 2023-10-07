@@ -13,6 +13,7 @@ import {
 
 function HomeBlog() {
   // const [articles, setArticles] = useState([]);
+  // const [hoveredArticle, setHoveredArticle] = useState(null);
 
   // useEffect(() => {
   //   fetch(
@@ -23,15 +24,19 @@ function HomeBlog() {
   //     })
   //     .then(function (data) {
   //       console.log(data);
-  //       const fetchedArticles = data.articles.slice(0, 3);
+  //       const fetchedArticles = data.articles.slice(1, 4);
   //       console.log(fetchedArticles);
   //       setArticles(fetchedArticles);
   //     });
   // }, []);
 
+  // const handleCardHover = (article) => {
+  //   setHoveredArticle(article);
+  // };
+
   return (
     <>
-      <Text color={"blue.300"} paddingTop={8}>
+      <Text color={"teal.300"} paddingTop={8}>
         {" "}
         Latest News{" "}
       </Text>
@@ -39,32 +44,38 @@ function HomeBlog() {
         Most Popular Articles
       </Heading>
 
-      <section className="cards-wrapper">
-  {/* {articles.map((article, index) => (
-    <div key={index} className="card-grid-space">
-      <div className="num">{index + 1}</div>
-      <a
-        className="card"
-        href={article.url}
-        style={{
-          backgroundImage: `url(${article.image})`,
-        }}
-      >
-        <div>
-          <p>{article.title}</p>
-          <div className="date">{article.source.name}</div>
-          <div className="tags">
-            <div className="tag">New</div>
+      {/* <section className="cards-wrapper">
+        {articles.map((article, index) => (
+          <div
+            key={index}
+            className="card-grid-space"
+            onMouseEnter={() => handleCardHover(article)}
+            onMouseLeave={() => setHoveredArticle(null)}
+          >
+            <div className="num">{index + 1}</div>
+            <a
+              className="card"
+              href={article.url}
+              style={{
+                backgroundImage: `url(${article.image})`,
+              }}
+            >
+              <div>
+                <p>{article.title}</p>
+                <div className="date">{article.source.name}</div>
+                <div className="tags">
+                  <div className="tag">New</div>
+                </div>
+              </div>
+              {hoveredArticle === article && (
+                <div className="description">
+                  <p>{article.description}</p>
+                </div>
+              )}
+            </a>
           </div>
-        </div>
-      </a>
-    </div>
-  ))} */}
-</section>
-
-
-
-
+        ))}
+      </section> */}
 
       {/* <HStack spacing="4" padding={10} maxW="auto"             justifyContent={"space-evenly"}
 >
