@@ -38,9 +38,8 @@ function App() {
 
   return (
     <div className="App">
-      {renderNavbar()}
       <LoginProvider>
-        <UserTypeModal/>
+      {renderNavbar()}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
@@ -52,25 +51,12 @@ function App() {
         <Route path="/about" element={<Aboutus />} />
         <Route path="/dashboard" element={<Dashboard />} />
 
-          <Route path="/tasks" element={<Tasks />} />
 
-          <Route
-            path="/handymanSignup"
-            element={<Auth submitAction="signup" userType="handyman" />}
-          />
-          <Route
-            path="/userSignup"
-            element={<Auth submitAction="signup" userType="user" />}
-          />
-          <Route
-            path="/handymanSingin"
-            element={<Auth submitAction="signin" userType="handyman" />}
-          />
-          <Route
-            path="/userSignin"
-            element={<Auth submitAction="signin" userType="user" />}
-          />
-        </Routes>
+        <Route path="/tasks" element={<Tasks />} />
+        <Route path='/signup' element={<Auth submitAction='signup' />}/>
+        <Route path='/signin' element={<Auth submitAction='signin' />}/>
+      </Routes>
+
       </LoginProvider>
       <Footer />
     </div>

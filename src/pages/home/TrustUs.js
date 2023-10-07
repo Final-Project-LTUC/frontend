@@ -9,14 +9,15 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
+
 function TrustUs() {
   return (
     <>
-      <Heading as="h2" size="3xl" noOfLines={1} padding={4} paddingTop={14}>
+      <Heading as="h2" size="3xl"  color={'teal'}  noOfLines={1} padding={4} paddingTop={14}>
         Why trust us?
       </Heading>
 
-      <HStack spacing="4" padding={8}>
+      <HStack  spacing="4" padding={8}>
         <Card
           backgroundColor={"yellow.100"}
           direction="row"
@@ -26,15 +27,15 @@ function TrustUs() {
           flex="1"
           alignItems={"center"}
         >
-          <lottie-player
-            src="https://lottie.host/3306f311-74d9-429d-b9a0-6d753d4c0d39/RvWQlhHsvK.json"
-            background="transparent"
-            speed="1"
-            objectFit="cover"
-            maxW={{ base: "100%", sm: "300px" }}
-            loop
-            autoplay
-          ></lottie-player>
+            <lottie-player
+              src="https://lottie.host/3306f311-74d9-429d-b9a0-6d753d4c0d39/RvWQlhHsvK.json"
+              background="transparent"
+              speed="1"
+              objectFit="cover"
+              maxW={{ base: "100%", sm: "300px" }}
+              loop
+              autoplay
+            ></lottie-player>
 
           <Stack>
             <Center>
