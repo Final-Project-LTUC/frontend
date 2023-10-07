@@ -1,12 +1,13 @@
 import {
+  Box,
   Button,
   Flex,
   FormControl,
   FormErrorMessage,
-  FormHelperText,
   FormLabel,
+  Heading,
   Input,
-  Text,
+  useToast
 } from "@chakra-ui/react";
 import React, { useContext, useEffect, useReducer, useState } from "react";
 import { LoginContext } from "../../hooks/Context/LoginProvider";
@@ -14,22 +15,75 @@ import formReducer, {
   initialState,
   checkAllValidation,
 } from "../../hooks/Reducers/FormReducer";
-import { handymanExperties } from "../../assets/constants";
-function Form({ submitAction, userType }) {
+import "../../pages/auth/auth.scss";
+import { useNavigate } from "react-router-dom";
+function Form({ submitAction, userType,setShowPages,showPages }) {
   const [formData, dispatch] = useReducer(formReducer, initialState);
   const [disableButton, setDisabledButton] = useState(true);
   const loginContext = useContext(LoginContext);
-  function handleSubmit(e) {
+  const toast  = useToast();
+  const navigate = useNavigate();
+  async function handleSubmit(e) {
     e.preventDefault();
-    submitAction === "signup"
-      ? loginContext.signup(formData, userType)
-      : loginContext.login(formData.username, formData.password, userType);
+    try{
+      const response=submitAction==='signup'?
+      await loginContext.signup(formData,userType):
+      await loginContext.login(formData.username,formData.password,userType);
+      if(userType==='handyman'&&submitAction==='signup'){
+        setShowPages({...showPages,showExpertiesPage:true,showSecondPage:false});
+        toast({
+          title: 'Welcome To Skillify ',
+          description: "We've created your account for you.",
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        });
+        setTimeout(()=>
+        navigate('/')
+        ,1500)
+      }else  if(submitAction==='signup'&&response.status===200&&userType==='user'){
+        toast({
+          title: 'Welcome To Skillify ',
+          description: "We've created your account for you.",
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        });
+        setTimeout(()=>
+        navigate('/')
+        ,1500)
+
+      }else if (submitAction==='signin'&&response.status===200){
+        toast({
+          title: `Welcome Back ${response.data.username}`,
+          description: "Have A good day",
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        });
+        setTimeout(()=>
+        navigate('/')
+        ,1500)
+      } else throw new Error(response.response.data.message);
+      }
+        catch(e){
+          toast({
+            title: `Something Went Wrong`,
+            description: e.message,
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          })
+    }
   }
   useEffect(() => {
     setDisabledButton(!checkAllValidation(formData));
   }, [formData]);
   return (
-    <Flex direction="column" w={"90%"}>
+    <Flex  w={'100%'} height={'calc(100vh - 100px)'} alignItems={'center'} justifyContent={'space-around'} >
+      <Flex w={'90%'} justifyContent={'space-between'} alignItems={'center'} borderRadius={'15px'} height={'95%'} className="secondPageForm">
+      <Flex direction="column" ml={'1em'} w={"50%"} h={'80%'} justifyContent={'center'} gap={'15px'} alignItems={'flex-start'} >
+      <Heading>{submitAction==='signup'?"Welcome To Skilify,Lets Sign you Up ":"Welcome Back"}</Heading>
       {submitAction === "signup" ? (
         <FormControl isInvalid={!formData.isValidEmail}>
           <FormLabel>Email address</FormLabel>
@@ -49,6 +103,7 @@ function Form({ submitAction, userType }) {
           onChange={(e) =>
             dispatch({ type: "CHANGE_USERNAME", payload: e.target.value })
           }
+          value={formData.username}
           type="text"
         />
         <FormErrorMessage>This Username Is Invalid </FormErrorMessage>
@@ -60,6 +115,7 @@ function Form({ submitAction, userType }) {
             onChange={(e) =>
               dispatch({ type: "CHANGE_NAME", payload: e.target.value })
             }
+            value={formData.name}
             type="text"
           />
         </FormControl>
@@ -71,27 +127,15 @@ function Form({ submitAction, userType }) {
             dispatch({ type: "CHANGE_PASSWORD", payload: e.target.value })
           }
           type="password"
+          value={formData.password}
         />
         <FormErrorMessage>
           Password Must Be At least 8 letters and contains at least on symbo @!
         </FormErrorMessage>
       </FormControl>
-      {submitAction==='signup'&&userType==='handyman'?
-      <Flex direction={'column'} alignItems={'center'} h={'280px'} justifyContent={'center'}>
-      <Text fontSize='4xl'>Tell Us What You Are Good At</Text>
-      <Flex w={'100%'} h={'200px'} wrap={'wrap'} justifyContent={'space-between'} alignItems={'flex-start'}>
-      {handymanExperties.map(experty=>{
-        return(
-          <Button
-           w={'180px'} colorScheme={formData.experties.includes(experty.name)?'whatsapp':'whatsapp'} variant={formData.experties.includes(experty.name)?'solid':'outline'} h={'40px'} key={experty.name}
-           onClick={(e)=>dispatch({type:'CHANGE_EXPERTIES',payload:experty.name})}
-           >{experty.name}</Button>
-          )
-        })}
-      </Flex>
-        </Flex>
-      :null}
       <Button
+        w={'180px'}
+        height={'45px'}
         onClick={(e) => handleSubmit(e)}
         mt={4}
         colorScheme="teal"
@@ -100,6 +144,13 @@ function Form({ submitAction, userType }) {
       >
         {submitAction === "signup" ? "Signup" : "Signin"}
       </Button>
+      </Flex>
+      <Box w={'45%'} h={'100%'} borderTopRightRadius={'15px'} borderBottomRightRadius={'15px'} bgSize={'cover'} bgRepeat={'no-repeat'} bgImage={'url(https://images.unsplash.com/photo-1516880711640-ef7db81be3e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80)'} >
+
+      </Box>
+      </Flex>
+   
+     
     </Flex>
   );
 }

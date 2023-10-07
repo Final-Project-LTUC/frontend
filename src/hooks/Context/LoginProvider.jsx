@@ -7,7 +7,6 @@ export const LoginContext = React.createContext();
 
 function LoginProvider(props) {
   const [loginData, dispatch] = useReducer(loginReducer, initialState);
-  const [user,setUser]=useState({});
   function can(capability) {
     return loginData.user.capabilities?.includes(capability);
   }
@@ -23,16 +22,26 @@ function LoginProvider(props) {
             }
             )
               validateToken(response.data.token);
+              return response;
     } catch (error) {
-        console.log(error);
+          return error;
     }
   }
   async function signup(body,userType){
     try{
         const response=await axios.post(`${process.env.REACT_APP_DATABASE_URL}/signup${userType}`,body);
-        console.log(response);
+          login(body.username,body.password);
+        return response;
     }catch(error){
-        console.log(error);
+        return error;
+    }
+  }
+  async function updateData(body,userType){
+    try {
+      const response=await axios.post(`${process.env.REACT_APP_DATABASE_URL}//dashupdate`,body)
+      return response
+    } catch (error) {
+      return error;
     }
   }
 
@@ -40,15 +49,12 @@ function LoginProvider(props) {
     setLoginState(false, null, {});
   }
 
-  function validateToken(token,user) {
+  function validateToken(token) {
     try {
       const validUser = jwt_decode(token);
-      console.log(validUser)
-      if(validUser){
-        setUser(user);
         setLoginState(true, token, validUser);
-      }
     } catch (e) {
+      console.log()
       setLoginState(false, null, {}, e);
       console.log('Token Validation Error', e);
     }
@@ -64,13 +70,13 @@ function LoginProvider(props) {
 
   useEffect(() => {
     const qs = new URLSearchParams(window.location.search);
-    const cookieToken = cookie.load('auth');
+    const cookieToken = cookie.load('auth');  
     const token = qs.get('token') || cookieToken || null;
-    validateToken(token);
+    validateToken(token );
   }, []);
 
   return (
-    <LoginContext.Provider value={{ can, login, logout, loginData, dispatch,signup }}>
+    <LoginContext.Provider value={{ can, login, logout, dispatch,signup,updateData,loginData }}>
       {props.children}
     </LoginContext.Provider>
   );

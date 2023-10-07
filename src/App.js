@@ -14,7 +14,6 @@ import Tasks from  "./pages/dashBoard/tasks/TasksPage"
 
 import Auth from './pages/auth/Auth';
 import LoginProvider from "./hooks/Context/LoginProvider";
-import UserTypeModal from "./Components/SignupSingin/UserTypeModal";
 
 
 
@@ -37,9 +36,8 @@ function App() {
 
   return (
     <div className="App">
-      {renderNavbar()}
       <LoginProvider>
-        <UserTypeModal/>
+      {renderNavbar()}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
@@ -48,12 +46,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
 
         <Route path="/tasks" element={<Tasks />} />
-
-        <Route path='/handymanSignup' element={<Auth submitAction='signup' userType='handyman'/>}/>
-        <Route path='/userSignup' element={<Auth submitAction='signup' userType='user'/>}/>
-        <Route path='/handymanSingin' element={<Auth submitAction='signin' userType='handyman'/>}/>
-        <Route path='/userSignin' element={<Auth submitAction='signin' userType='user'/>}/>
-
+        <Route path='/signup' element={<Auth submitAction='signup' />}/>
+        <Route path='/signin' element={<Auth submitAction='signin' />}/>
       </Routes>
       </LoginProvider>
       <Footer />

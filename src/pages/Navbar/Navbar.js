@@ -21,13 +21,15 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-
+import { useContext } from "react";
+import {LoginContext} from '../../hooks/Context/LoginProvider'
 const Links = ["Skilify", "Home", "Services", "Catalog", "About us"];
 
 const NavLink = (props) => {
   const { children } = props;
   const { isOpen, onOpen, onClose } = useDisclosure()
-
+  const {loginData}=useContext(LoginContext);
+  console.log(loginData);
   return (
     <Box
       as="a"
@@ -46,10 +48,9 @@ const NavLink = (props) => {
 };
 
 export default function Simple() {
-  //   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const {loginData,logout}=useContext(LoginContext);
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
@@ -137,14 +138,17 @@ export default function Simple() {
                   <MenuItem>Logout</MenuItem>
                 </MenuList>
               </Menu>
+              {loginData.loggedIn? 
+               <Button onClick={()=>logout()}>Logout</Button>:
+             <>
               <Button
                 as={"a"}
                 fontSize={"sm"}
                 fontWeight={400}
                 variant={"link"}
-                href={"#"}
+                href={"/signin"}
                 onClick={onOpen}
-              >
+                >
                 Sign In
               </Button>
               <Button
@@ -154,14 +158,16 @@ export default function Simple() {
                 fontWeight={600}
                 color={"white"}
                 bg={"yellow.400"}
-                href={"#"}
+                href={"/signup"}
                 _hover={{
                   bg: "yellow.300",
                 }}
                 onClick={onOpen}
-              >
+                >
                 Sign Up
               </Button>
+              </> 
+             }
             </Stack>
           </Flex>
         </Flex>

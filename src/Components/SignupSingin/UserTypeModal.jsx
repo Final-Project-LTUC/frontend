@@ -29,12 +29,12 @@ function UserTypeModal({ submitAction = "Signin" }) {
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>
-      <Modal  size={"5xl"} isOpen={isOpen} onClose={onClose}>
+      <Modal  size={"full"} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
           <ModalBody m={"0"} p={"0"}>
-            <Flex w={"100%"} h={"550px"}>
+            <Flex w={"100%"} h={"100vh"}>
               <Flex
                 w={"50%"}
                 h={"100%"}
