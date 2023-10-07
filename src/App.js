@@ -31,6 +31,7 @@ function App() {
     if (location.pathname === "/dashboard" || location.pathname === "/tasks") {
       return <DashboardNavbar />;
     } else if (location.pathname === "/") {
+      
     } else {
       return <Navbar />;
     }

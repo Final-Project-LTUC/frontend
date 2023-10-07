@@ -44,8 +44,8 @@ function HomeBlog() {
         Most Popular Articles
       </Heading>
 
-      {/* <section className="cards-wrapper">
-        {articles.map((article, index) => (
+      <section className="cards-wrapper">
+        {/* {articles.map((article, index) => (
           <div
             key={index}
             className="card-grid-space"
@@ -74,8 +74,8 @@ function HomeBlog() {
               )}
             </a>
           </div>
-        ))}
-      </section> */}
+        ))} */}
+      </section>
 
       {/* <HStack spacing="4" padding={10} maxW="auto"             justifyContent={"space-evenly"}
 >

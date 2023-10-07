@@ -6,10 +6,7 @@ import { Link as ReactRouterLink } from "react-router-dom";
 function HowWeWork() {
   return (
     <div >
-        <Container>
-
-            
-        </Container>
+       
       <Box bg="gray.200" w="60%" h="500px" p={2} color="black" >
         <br />
         <br />

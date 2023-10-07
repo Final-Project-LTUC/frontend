@@ -24,7 +24,8 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-
+import { useContext } from "react";
+import {LoginContext} from '../../../hooks/Context/LoginProvider'
 const Links = ["Skilify", "Home", "Services", "Catalog", "About us"];
 function Test() {
   const [isNavFixed, setIsNavFixed] = React.useState(false);
@@ -49,6 +50,8 @@ function Test() {
 
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {loginData,logout}=useContext(LoginContext);
+
   return (
     <header>
       <div className={`test ${isNavFixed ? "fixed" : ""}`}>
@@ -157,29 +160,36 @@ function Test() {
                         <MenuItem>Logout</MenuItem>
                       </MenuList>
                     </Menu>
-                    <Button
-                      as={"a"}
-                      fontSize={"sm"}
-                      fontWeight={400}
-                      variant={"link"}
-                      href={"#"}
-                      onClick={onOpen}
-                    >
-                      Sign In
-                    </Button>
-                    <Button
-                      as={"a"}
-                      display={{ base: "none", md: "inline-flex" }}
-                      fontSize={"sm"}
-                      fontWeight={600}
-                      color={"white"}
-                      bg={"teal.500"}
-                      href={"#"}
-                      _hover={{ bg: "teal.400" }}
-                      onClick={onOpen}
-                    >
-                      Sign Up
-                    </Button>
+                    {loginData.loggedIn? 
+               <Button onClick={()=>logout()}>Logout</Button>:
+             <>
+              <Button
+                as={"a"}
+                fontSize={"sm"}
+                fontWeight={400}
+                variant={"link"}
+                href={"/signin"}
+                onClick={onOpen}
+                >
+                Sign In
+              </Button>
+              <Button
+                as={"a"}
+                display={{ base: "none", md: "inline-flex" }}
+                fontSize={"sm"}
+                fontWeight={600}
+                color={"white"}
+                bg={"teal.400"}
+                href={"/signup"}
+                _hover={{
+                  bg: "teal.300",
+                }}
+                onClick={onOpen}
+                >
+                Sign Up
+              </Button>
+              </> 
+             }
                   </Stack>
                 </Flex>
               </Flex>
