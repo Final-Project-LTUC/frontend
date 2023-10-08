@@ -3,6 +3,7 @@ import React from "react";
 import "./Hero.scss";
 import video from "../assets/video.mp4";
 import logo from "../assets/logo.png";
+// import Navbar from '../../Navbar/Navbar'
 
 import { NavLink, Link as ReactRouterLink } from "react-router-dom";
 import { Link as ChakraLink } from "@chakra-ui/react";
@@ -203,6 +204,8 @@ function Hero() {
                   </Stack>
                 </Box>
               ) : null}
+
+              {/* <Navbar />  */}
             </nav>
           </div>
 
