@@ -15,7 +15,8 @@ button {
 }
 
 .container {
-  max-width: 1000px;
+  width: 90%;
+  max-width: 2000px;
   margin: auto;
 }
 
@@ -27,8 +28,28 @@ button {
 
   &.fixed {
     nav {
-      background-color: #333;
-    }
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 90%;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      align-items:center;
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 15px 15px rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      padding: 10px;
+      letter-spacing: 1px;
+      text-decoration: none;
+      overflow: hidden;
+      color: black;
+      font-weight: 400px;
+      z-index: 1;
+      transition: 0.5s;
+      backdrop-filter: blur(15px);    }
   }
 }
 
@@ -129,7 +150,7 @@ nav {
   button.joinNow {
     background:rgba(65, 145, 151, 1)
     ;
-    border: solid 2px #419197
+    border: solid 2px rgb(65, 145, 151)
     ;
   }
 

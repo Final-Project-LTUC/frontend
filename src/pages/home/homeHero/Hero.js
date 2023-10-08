@@ -74,14 +74,17 @@ function Hero() {
                 />
 
                 <HStack
-                  as={"nav"}
+                  // as={"nav"}
                   spacing={4}
                   display={{ base: "none", md: "flex" }}
                   justifyContent={"space-between"}
                 >
+                  <div className="logo"> 
+
                   <ChakraLink as={ReactRouterLink} to="/">
                     <img src={logo} alt="Logo" />
                   </ChakraLink>
+                  </div>
                   <ChakraLink as={ReactRouterLink} to="/">
                     Home
                   </ChakraLink>
@@ -94,7 +97,7 @@ function Hero() {
                   <ChakraLink as={ReactRouterLink} to="/about">
                     About
                   </ChakraLink>
-                </HStack>
+             
 
                 <Flex alignItems={"center"}>
                   <Menu>
@@ -193,6 +196,7 @@ function Hero() {
              }
                   </Stack>
                 </Flex>
+              </HStack>
               </Flex>
 
               {isOpen ? (
@@ -204,7 +208,6 @@ function Hero() {
                   </Stack>
                 </Box>
               ) : null}
-
               {/* <Navbar />  */}
             </nav>
           </div>

@@ -15,7 +15,6 @@ function TrustUs() {
       <Heading
         as="h2"
         size="3xl"
-        // color={"teal"}
         noOfLines={1}
         padding={4}
         paddingTop={10}
@@ -29,9 +28,9 @@ function TrustUs() {
           direction="row"
           overflow="hidden"
           variant="outline"
-          h="225px"
+          h={{ base: "auto", sm: "225px" }}
           flex="1"
-          alignItems={"center"}
+          alignItems={{ base: "flex-start", sm: "center" }}
           color="black"
         >
           <lottie-player
@@ -39,12 +38,12 @@ function TrustUs() {
             background="transparent"
             speed="1"
             objectFit="cover"
-            maxW={{ base: "100%", sm: "300px" }}
+            boxSize={{ base: "100%", sm: "150px" }}
             loop
             autoplay
           ></lottie-player>
 
-          <Stack>
+          <Stack maxW={{ base: "100%", sm: "300px" }}>
             <Center>
               <CardBody>
                 <Heading size="md">Experienced</Heading>
@@ -61,9 +60,9 @@ function TrustUs() {
           direction="row"
           overflow="hidden"
           variant="outline"
-          h="225px"
+          h={{ base: "auto", sm: "225px" }}
           flex="1"
-          alignItems={"center"}
+          alignItems={{ base: "flex-start", sm: "center" }}
           backgroundColor={"blue.100"}
           color="black"
         >
@@ -72,12 +71,12 @@ function TrustUs() {
             background="transparent"
             speed="1"
             objectFit="cover"
-            maxW={{ base: "100%", sm: "300px" }}
+            boxSize={{ base: "100%", sm: "150px" }}
             loop
             autoplay
           ></lottie-player>
 
-          <Stack>
+          <Stack maxW={{ base: "100%", sm: "300px" }}>
             <CardBody>
               <Heading size="md">Trustworthy</Heading>
 
@@ -93,9 +92,9 @@ function TrustUs() {
           direction="row"
           overflow="hidden"
           variant="outline"
-          h="225px"
+          h={{ base: "auto", sm: "225px" }}
           flex="1"
-          alignItems={"center"}
+          alignItems={{ base: "flex-start", sm: "center" }}
           backgroundColor={"gray.200"}
           color="black"
         >
@@ -104,12 +103,12 @@ function TrustUs() {
             background="transparent"
             speed="1"
             objectFit="cover"
-            maxW={{ base: "100%", sm: "300px" }}
+            boxSize={{ base: "100%", sm: "150px" }}
             loop
             autoplay
           ></lottie-player>
 
-          <Stack>
+          <Stack maxW={{ base: "100%", sm: "300px" }}>
             <CardBody>
               <Heading size="md">Reliable</Heading>
 
