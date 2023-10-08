@@ -25,9 +25,14 @@ button {
   width: 100%;
   display: flex;
   flex-direction: column;
+justify-content: center;
 
+
+padding-left: 20px;
   &.fixed {
     nav {
+      overflow: hidden;
+
       position: fixed;
       top: 0;
       left: 0;
@@ -49,7 +54,9 @@ button {
       font-weight: 400px;
       z-index: 1;
       transition: 0.5s;
-      backdrop-filter: blur(15px);    }
+      backdrop-filter: blur(15px);
+
+    }
   }
 }
 

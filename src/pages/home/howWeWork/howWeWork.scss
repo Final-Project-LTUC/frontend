@@ -23,7 +23,7 @@
   .floating-card2,
   .floating-card3 {
     position: absolute;
-    top:86px; 
+    top: 65px; 
     width: 20.75em; 
     left:70%; 
     transform: translateX(-50%);
@@ -33,10 +33,12 @@
 
   .floating-card2 {
     left: 100%;
+
   }
 
   .floating-card3 {
     left: 130%;
+
   }
 
   .content {

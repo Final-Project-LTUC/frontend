@@ -8,7 +8,7 @@ function HowWeWork() {
   return (
     <div className="howWeWork">
       <Box
-        rounded={5}
+      rounded={5}
         bg="gray.200"
         w="60%"
         h="500px"
