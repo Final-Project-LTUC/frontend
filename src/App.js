@@ -4,16 +4,16 @@ import React from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 
 import Home from "./pages/home/Home";
-import Navbar from "./pages/Navbar/Navbar";
+import Navbar from "./layout/header/Navbar/Navbar";
 import Services from "./pages/services/Services";
 import Catalog from "./pages/catalog/Catalog";
-import AboutUs from './Components/ABOUTUS';
+import AboutUs from './pages/aboutUs/ABOUTUS';
 import Footer from "../src/layout/footer/Footer";
 import Dashboard from "./pages/dashBoard/Dashboard";
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 
 import HandymanDetails from "./pages/catalog/HandymanDetails";
-import DashboardNavbar from '../src/components/dashboard/DashboardNavbar'; 
+import DashboardNavbar from './Components/dashboard/DashboardNavbar'; 
 
 
 
@@ -21,7 +21,6 @@ import Tasks from  "./pages/dashBoard/tasks/TasksPage"
 
 import Auth from "./pages/auth/Auth";
 import LoginProvider from "./hooks/Context/LoginProvider";
-import UserTypeModal from "./Components/SignupSingin/UserTypeModal";
 
 function App() {
   const location = useLocation();
@@ -55,8 +54,6 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
                 
         <Route path="/dashboard" element={<Dashboard />} />
-
-
         <Route path="/tasks" element={<Tasks />} />
         <Route path='/signup' element={<Auth submitAction='signup' />}/>
         <Route path='/signin' element={<Auth submitAction='signin' />}/>
