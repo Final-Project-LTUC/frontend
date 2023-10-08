@@ -1,17 +1,16 @@
 import React from "react";
 import TrustUs from "./TrustUs";
-import Hero from "./generalHero/Hero";
 import HomeServices from "./HomeServices";
 import HomeCatalog from "./HomeCatalog";
 import HomeBlog from "./bolg/HomeBlog";
 import HowWeWork from "../home/howWeWork/HowWeWork";
-import Test from "./homeHero/Test";
+import Hero from "./homeHero/Hero";
+// import './Home.scss'
 
 export default function Home() {
   return (
-    <div>
-      {/* <Hero /> */}
-      <Test />
+    <div className="home-container">
+      <Hero />
       <TrustUs />
       <HowWeWork />
       <HomeServices />
