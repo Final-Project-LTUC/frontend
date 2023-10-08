@@ -157,10 +157,10 @@ export default function Simple() {
                 fontSize={"sm"}
                 fontWeight={600}
                 color={"white"}
-                bg={"yellow.400"}
+                bg={"teal.400"}
                 href={"/signup"}
                 _hover={{
-                  bg: "yellow.300",
+                  bg: "teal.300",
                 }}
                 onClick={onOpen}
                 >

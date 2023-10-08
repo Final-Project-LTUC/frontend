@@ -10,8 +10,7 @@
 - Laith Abdullah Saleem 😎
 - Mohammed Abdeen 😁
 - Alaa Nsirat 🤩
-- Bashar Alirani 😈
-🤔
+- Bashar Alirani 🤔
 ## Description
 
 >In a fast-paced world where skilled handymen are in high demand, finding reliable and qualified professionals can be challenging. Skilify is a cutting-edge freelancing application designed to revolutionize the way handymen and users connect and collaborate. Our platform aims to create a seamless and efficient experience, allowing users to find the perfect handyman for their problems

@@ -7,10 +7,10 @@ import Home from "./pages/home/Home";
 import Navbar from "./pages/Navbar/Navbar";
 import Services from "./pages/services/Services";
 import Catalog from "./pages/catalog/Catalog";
-import Aboutus from "./pages/aboutus/Aboutus";
+import AboutUs from './Components/ABOUTUS';
 import Footer from "../src/layout/footer/Footer";
 import Dashboard from "./pages/dashBoard/Dashboard";
-
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 
 import HandymanDetails from "./pages/catalog/HandymanDetails";
 import DashboardNavbar from '../src/components/dashboard/DashboardNavbar'; 
@@ -49,7 +49,11 @@ function App() {
                     path="/handyman/:id"
                     element={<HandymanDetails />}
                 />{" "}
-        <Route path="/about" element={<Aboutus />} />
+            
+           
+
+        <Route path="/about" element={<AboutUs />} />
+                
         <Route path="/dashboard" element={<Dashboard />} />
 
 
