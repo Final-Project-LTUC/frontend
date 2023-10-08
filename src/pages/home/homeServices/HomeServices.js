@@ -27,19 +27,19 @@ function HomeServices() {
 
 
    
-      <Heading as="h2" size="3xl" noOfLines={1} padding={10}>
+      <Heading as="h2" size="3xl" noOfLines={1} paddingTop={10}>
         Services
       </Heading>
 
       <Flex
-        w={"120%"}
+        w={"100%"}
         h={"100%"}
         flexDirection={"column"}
         alignItems={"flex-start"}
         gap={"50px"}
       >
         <Flex
-          w={"90%"}
+          w={"100%"}
           h={"100%"}
           flexDirection={"column"}
           justifyContent={"space-around"}
@@ -65,6 +65,7 @@ function HomeServices() {
         </Flex>
       </Flex>
 
+<br/> 
       <ChakraLink as={ReactRouterLink} to="/services">
         <Button
           bg={"teal.500"}

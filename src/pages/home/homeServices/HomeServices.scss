@@ -29,7 +29,7 @@ body {
 
 .hero-section1 {
   align-items: flex-start;
-  background-image: linear-gradient(15deg, #0f4667 0%, #2a6973 150%);
+  // background-image: linear-gradient(15deg, #419197 0%, #2a6973 150%); 
   display: flex;
   min-height: 100%;
   justify-content: center;
@@ -97,18 +97,22 @@ body {
   padding: var(--spacing-l);
   position: absolute;
   top: 0;
+  max-width:min-content;
 }
 
 .card__category1 {
   color: var(--text-light);
-  font-size: 0.9rem;
+  font-size: 1.3rem;
   margin-bottom: var(--spacing-s);
   text-transform: uppercase;
+  display: flex;
+   align-items: flex-start;
+  // alignItems: ;
 }
 
 .card__heading1 {
   color: var(--text-lighter);
-  font-size: 1.9rem;
+  font-size: 2.3rem;
   text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
   line-height: 1.4;
   word-spacing: 100vw;
