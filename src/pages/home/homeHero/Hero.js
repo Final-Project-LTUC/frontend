@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import "./Test.scss";
+import "./Hero.scss";
 import video from "../assets/video.mp4";
 import logo from "../assets/logo.png";
 
@@ -27,7 +27,7 @@ import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useContext } from "react";
 import {LoginContext} from '../../../hooks/Context/LoginProvider'
 const Links = ["Skilify", "Home", "Services", "Catalog", "About us"];
-function Test() {
+function Hero() {
   const [isNavFixed, setIsNavFixed] = React.useState(false);
 
   const handleScroll = () => {
@@ -226,4 +226,4 @@ function Test() {
   );
 }
 
-export default Test;
+export default Hero;
