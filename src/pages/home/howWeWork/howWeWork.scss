@@ -27,6 +27,8 @@
     width: 20.75em; 
     left:70%; 
     transform: translateX(-50%);
+    z-index: 2; 
+
   }
 
   .floating-card2 {
@@ -43,8 +45,10 @@
     left: 0;
     transform: translateY(-50%);
     width: 100%;
-    padding: 0 40px; /* Adjust the padding as needed */
+    padding: 0 40px; 
     text-align: left;
+    z-index: 1; 
+
   }
 
 .data-card {
