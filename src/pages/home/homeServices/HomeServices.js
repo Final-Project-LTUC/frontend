@@ -19,6 +19,11 @@ function HomeServices() {
     } catch (e) {}
   }, []);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+
   const displayedServices = handymanExperties.slice(0, 6);
 
   return (
@@ -66,7 +71,7 @@ function HomeServices() {
       </Flex>
 
 <br/> 
-      <ChakraLink as={ReactRouterLink} to="/services">
+      <ChakraLink as={ReactRouterLink} to="/services" onClick={scrollToTop}>
         <Button
           bg={"teal.500"}
           rounded={"full"}
