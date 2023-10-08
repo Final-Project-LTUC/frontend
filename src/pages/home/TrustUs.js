@@ -17,7 +17,8 @@ function TrustUs() {
         size="3xl"
         // color={"teal"}
         noOfLines={1}
-        // padding={4}
+        padding={4}
+        paddingTop={10}
       >
         Why trust us?
       </Heading>
