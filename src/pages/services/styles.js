@@ -6,7 +6,7 @@ export const serviceCard={
     borderTopLeftRadius:'10px',
     borderBottomLeftRadius:'10px',
     width:'100%',
-    height:'400px',
+    height:'400px ',
     justifyContent:'space-between',
     alignItems:'center'
     
