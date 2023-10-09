@@ -162,8 +162,12 @@ function Hero() {
                         <ChakraLink as={ReactRouterLink} to="/dashboard">
                           <MenuItem>Your Dashboard</MenuItem>
                         </ChakraLink>
+                        
                         <MenuItem>Account Settings</MenuItem>
+                        <ChakraLink as={ReactRouterLink} to="/dashboard">
                         <MenuItem>Logout</MenuItem>
+                        </ChakraLink>
+
                       </MenuList>
                     </Menu>
                     {loginData.loggedIn? 

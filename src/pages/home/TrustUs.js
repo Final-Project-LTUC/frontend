@@ -41,7 +41,7 @@ function TrustUs() {
             objectFit="cover"
             maxW={{ base: "100%", sm: "300px" }}
             loop
-            autoplay
+            autoPlay
           ></lottie-player>
 
           <Stack>
@@ -74,7 +74,7 @@ function TrustUs() {
             objectFit="cover"
             maxW={{ base: "100%", sm: "300px" }}
             loop
-            autoplay
+            autoPlay
           ></lottie-player>
 
           <Stack>
@@ -106,7 +106,7 @@ function TrustUs() {
             objectFit="cover"
             maxW={{ base: "100%", sm: "300px" }}
             loop
-            autoplay
+            autoPlay
           ></lottie-player>
 
           <Stack>
