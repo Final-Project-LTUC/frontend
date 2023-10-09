@@ -52,6 +52,7 @@ function Hero() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {loginData,logout}=useContext(LoginContext);
+  console.log(loginData)
   const mar = 80;
   return (
     <header>
@@ -98,24 +99,13 @@ function Hero() {
                   <ChakraLink as={ReactRouterLink} to="/about">
                     About
                   </ChakraLink>
+
+                
+                  
              
 
                 <Flex alignItems={"center"}>
-                  <Menu>
-                    <MenuButton
-                      as={Button}
-                      rounded={"full"}
-                      variant={"link"}
-                      cursor={"pointer"}
-                      minW={0}
-                    ></MenuButton>
-                    <MenuList>
-                      <MenuItem>Link 1</MenuItem>
-                      <MenuItem>Link 2</MenuItem>
-                      <MenuDivider />
-                      <MenuItem>Link 3</MenuItem>
-                    </MenuList>
-                  </Menu>
+            
                   <Stack
                     flex={{ base: 1, md: 0 }}
                     justify={"flex-end"}
@@ -126,7 +116,8 @@ function Hero() {
                   >
                     <Button onClick={toggleColorMode}>
                       {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-                    </Button>
+                    </Button> 
+                     {loginData.loggedIn? 
 
                     <Menu>
                       <MenuButton
@@ -170,7 +161,12 @@ function Hero() {
 
                       </MenuList>
                     </Menu>
+                   :null} 
+
+
+
                     {loginData.loggedIn? 
+                    
                <Button onClick={()=>logout()}>Logout</Button>:
              <>
               <Button
@@ -202,6 +198,7 @@ function Hero() {
              }
                   </Stack>
                 </Flex>
+                
               </HStack>
               </Flex>
 

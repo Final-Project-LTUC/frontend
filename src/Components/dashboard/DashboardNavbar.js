@@ -144,7 +144,7 @@ export default function Simple() {
                 </MenuButton>
                 <MenuList>
                     <ChakraLink as={ReactRouterLink} to="/update">
-                  <DropdownMenuItem>
+                  <DropdownMenuItem >
                       Update data
                   </DropdownMenuItem>
                     </ChakraLink>

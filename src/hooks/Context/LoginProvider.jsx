@@ -8,8 +8,9 @@ export const LoginContext = React.createContext();
 function LoginProvider(props) {
   const [loginData, dispatch] = useReducer(loginReducer, initialState);
   function can(capability) {
-    return loginData.user.capabilities?.includes(capability);
+    return loginData.user.capabilities?.includes(capability)&& loginData.token;
   }
+
 
   async function login(username, password,userType) {
     const role=userType==='user'?'user':'handymen';
