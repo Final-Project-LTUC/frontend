@@ -166,11 +166,8 @@ function Hero() {
 
 
                     {loginData.loggedIn? 
-                    
-               <Button onClick={()=>logout()}>Logout</Button>:
+                    null:
              <>
-                            null:
-                   <>
               <Button
                 as={"a"}
                 fontSize={"sm"}
