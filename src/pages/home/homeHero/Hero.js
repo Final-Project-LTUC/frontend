@@ -52,6 +52,7 @@ function Hero() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {loginData,logout}=useContext(LoginContext);
+  console.log(loginData)
   const mar = 80;
   return (
     <header>
