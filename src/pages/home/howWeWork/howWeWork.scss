@@ -18,7 +18,7 @@
 
 .howWeWork {
   width: auto;
-
+  position: relative; 
   .floating-card1,
   .floating-card2,
   .floating-card3 {
@@ -32,11 +32,13 @@
   }
 
   .floating-card2 {
-    left: 100%;
+    left: 95%;
+
   }
 
   .floating-card3 {
-    left: 130%;
+    left: 120%;
+
   }
 
   .content {
