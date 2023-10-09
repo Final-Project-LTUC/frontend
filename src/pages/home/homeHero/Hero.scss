@@ -28,9 +28,8 @@ button {
 justify-content: center;
 
   &.fixed {
+    
     nav {
-      overflow: hidden;
-
       position: fixed;
       top: 0;
       left: 0;
@@ -38,10 +37,8 @@ justify-content: center;
       height: auto;
       display: flex;
       justify-content: center;
-      align-items:center;
+      align-items: center;
       background: rgba(88, 205, 238, 0.029);
-      // background: rgba(88, 205, 238, 0.4);
-
       box-shadow: 0 15px 15px rgba(0, 0, 0, 0.3);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -52,10 +49,9 @@ justify-content: center;
       overflow: hidden;
       color: black;
       font-weight: 400px;
-      z-index: 1;
+      z-index: 1000; // Set a higher z-index
       transition: 0.5s;
       backdrop-filter: blur(15px);
-
     }
   }
 }
