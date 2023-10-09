@@ -137,9 +137,8 @@ export default function Simple() {
                 </MenuList>
               </Menu>
               {loginData.loggedIn? 
-               <Button onClick={()=>logout()}>Logout</Button>:
-               //updated
-             <>
+                  null:
+                <>
              <ChakraLink as={ReactRouterLink} to={'/signin'}>
              <Button
                 as={"a"}

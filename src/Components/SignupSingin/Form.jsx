@@ -29,7 +29,7 @@ function Form({ submitAction, userType,setShowPages,showPages }) {
       const response=submitAction==='signup'?
       await loginContext.signup(formData,userType):
       await loginContext.login(formData.username,formData.password,userType);
-      if(userType==='handyman'&&submitAction==='signup'){
+      if(userType==='handyman'&&submitAction==='signup'&&response.status===200){
         setShowPages({...showPages,showExpertiesPage:true,showSecondPage:false});
         toast({
           title: 'Welcome To Skillify ',
@@ -38,9 +38,6 @@ function Form({ submitAction, userType,setShowPages,showPages }) {
           duration: 5000,
           isClosable: true,
         });
-        setTimeout(()=>
-        navigate('/')
-        ,1500)
       }else  if(submitAction==='signup'&&response.status===200&&userType==='user'){
         toast({
           title: 'Welcome To Skillify ',
@@ -82,8 +79,8 @@ function Form({ submitAction, userType,setShowPages,showPages }) {
   return (
     <Flex  w={'100%'} height={'calc(100vh - 100px)'} alignItems={'center'} justifyContent={'space-around'} >
       <Flex w={'90%'} justifyContent={'space-between'} alignItems={'center'} borderRadius={'15px'} height={'95%'} className="secondPageForm">
-      <Flex direction="column" ml={'1em'} w={"50%"} h={'80%'} justifyContent={'center'} gap={'15px'} alignItems={'flex-start'} >
-      <Heading>{submitAction==='signup'?"Welcome To Skilify,Lets Sign you Up ":"Welcome Back"}</Heading>
+      <Flex direction="column" ml={'1em'} w={"45%"} h={'80%'} justifyContent={'center'} gap={'15px'} alignItems={'flex-start'} >
+      <Heading alignSelf={'center'}>{submitAction==='signup'?"Welcome To Skilify":"Welcome Back"}</Heading>
       {submitAction === "signup" ? (
         <FormControl isInvalid={!formData.isValidEmail}>
           <FormLabel>Email address</FormLabel>
@@ -145,7 +142,7 @@ function Form({ submitAction, userType,setShowPages,showPages }) {
         {submitAction === "signup" ? "Signup" : "Signin"}
       </Button>
       </Flex>
-      <Box w={'45%'} h={'100%'} borderTopRightRadius={'15px'} borderBottomRightRadius={'15px'} bgSize={'cover'} bgRepeat={'no-repeat'} bgImage={'url(https://images.unsplash.com/photo-1516880711640-ef7db81be3e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80)'} >
+      <Box w={'50%'} h={'100%'} borderTopRightRadius={'15px'} borderBottomRightRadius={'15px'} bgSize={'cover'} bgRepeat={'no-repeat'} bgImage={'url(https://images.unsplash.com/photo-1516880711640-ef7db81be3e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80)'} >
 
       </Box>
       </Flex>

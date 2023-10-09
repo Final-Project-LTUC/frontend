@@ -48,9 +48,6 @@ function App() {
                     path="/handyman/:id"
                     element={<HandymanDetails />}
                 />{" "}
-            
-           
-
         <Route path="/about" element={<AboutUs />} />
                 
         <Route path="/dashboard" element={<Dashboard />} />

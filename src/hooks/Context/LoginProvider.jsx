@@ -38,7 +38,7 @@ function LoginProvider(props) {
   }
   async function updateData(body,userType){
     try {
-      const response=await axios.post(`${process.env.REACT_APP_DATABASE_URL}//dashupdate`,body)
+      const response=await axios.post(`${process.env.REACT_APP_DATABASE_URL}/dashupdate`,body);
       return response
     } catch (error) {
       return error;

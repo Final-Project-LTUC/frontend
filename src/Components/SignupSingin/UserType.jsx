@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useRef,useEffect } from "react";
 import {
   Box,
   Button,
@@ -16,7 +16,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHammer, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
+import {motion} from 'framer-motion'
 function UserType({submitAction,setUerType,setShowPages,showPages}) {
+  const [isChecked1, setIsChecked1] = useState(false);
+  const [isChecked2, setIsChecked2] = useState(false);
+  const handleCheckboxClick1 = () => {
+    setIsChecked1(true);
+    setIsChecked2(false);
+  };
+
+  const handleCheckboxClick2 = () => {
+    setIsChecked1(false);
+    setIsChecked2(true);
+  };
 
   return (
     <Flex
@@ -32,7 +44,7 @@ function UserType({submitAction,setUerType,setShowPages,showPages}) {
     <Flex w={'100%'} height={'70%'}  justifyContent={'space-around'} alignItems={'center'}>
    <Flex
       cursor={"pointer"}
-      h={"35%"}
+      h={"45%"}
       w={"50%"}
       flexDirection={"column"}
       justifyContent={"space-between"}
@@ -42,17 +54,32 @@ function UserType({submitAction,setUerType,setShowPages,showPages}) {
       <Heading as={"h4"} fontSize={"lg"}>
       {submitAction==='signup'?"I'm a client looking for handymen":'Sign In as a client'}
       </Heading>
-      <Checkbox
-        name="submitAction"
-        value={"user"}
-        colorScheme="teal"
-        onChange={(e) => setUerType(e.target.value)}
-      ></Checkbox>
+      <motion.div
+        className="checkbox-container"
+        whileTap={{ scale: 0.9 }} 
+        transition={{ duration: 0.4 }}
+      >
+        <motion.div
+          className={`checkbox-circle ${isChecked1 ? "active" : ""}`}
+          onClick={()=>{
+            handleCheckboxClick1();
+            setUerType('user');
+          }}
+          whileHover={{ scale: 1.1 }}
+        />
+        <input
+          type="checkbox"
+          checked={isChecked1}
+          onChange={() => {}}
+          style={{ display: "none" }} 
+        />
+      </motion.div>
+
     </Flex>
     <Flex
       cursor={"pointer"}
-      h={"35%"}
-      w={"50%"}
+      h={"45%"}
+       w={"50%"}
       flexDirection={"column"}
       justifyContent={"space-between"}
       alignItems={"center"}
@@ -61,13 +88,26 @@ function UserType({submitAction,setUerType,setShowPages,showPages}) {
       <Heading as={"h4"} fontSize={"lg"}>
         {submitAction==='signup'?"I'm a handyman looking for work":'Sign In as a handyman'}
       </Heading>
-      <Checkbox
-        name="submitAction"
-        size={"lg"}
-        value={"handyman"}
-        colorScheme="teal"
-        onChange={(e) => setUerType(e.target.value)}
-      ></Checkbox>
+      <motion.div
+        className="checkbox-container"
+        whileTap={{ scale: 0.9 }} 
+        transition={{ duration: 0.4 }}
+      >
+        <motion.div
+          className={`checkbox-circle ${isChecked2 ? "active" : ""}`}
+          onClick={()=>{
+            handleCheckboxClick2();
+            setUerType('handyman')
+          }}
+          whileHover={{ scale: 1.1 }} 
+        />
+        <input
+          type="checkbox"
+          checked={isChecked2}
+          onChange={() => {}}
+          style={{ display: "none" }} 
+        />
+      </motion.div>
     </Flex>
     </Flex>
       <Button
