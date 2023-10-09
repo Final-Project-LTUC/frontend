@@ -128,7 +128,7 @@ export default function Simple() {
                     <MenuItem>Your Dashboard</MenuItem>
                   </ChakraLink>
                   <MenuItem>Account Settings</MenuItem>
-                  <MenuItem>Logout</MenuItem>
+                  <MenuItem> onCliLogout</MenuItem>
                 </MenuList>
               </Menu>
               {/* Dropdown Menu for "Update data," "Delete Profile," and "Tasks" */}

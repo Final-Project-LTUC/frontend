@@ -9,6 +9,7 @@ export const serviceCard={
     height:'400px',
     justifyContent:'space-between',
     alignItems:'center'
+    
 };
 export const imageStyle={
     width:'40%',

@@ -1,13 +1,12 @@
 import {Heading, Flex, Box, Text, Button } from '@chakra-ui/react'
-import axios from 'axios';
 import React, { useEffect } from "react";
 import {handymanExperties} from '../../assets/constants'
 import './services.scss';
-import {imageStyle, serviceCard,descriptionStyle,solidButtonStyle, ghostButtonSyle, cardAnimation,slideIn } from './styles';
+import {imageStyle, serviceCard,descriptionStyle,solidButtonStyle, ghostButtonSyle} from './styles';
 import { motion } from 'framer-motion';
 const ServiecesCard=({service})=>{
 const {imgUrl,name,description}=service;
-const MotionFlex=motion(Flex)
+const MotionFlex=motion(Flex);
 return (
 <MotionFlex 
 sx={serviceCard}>

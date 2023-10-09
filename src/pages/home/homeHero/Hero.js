@@ -169,6 +169,8 @@ function Hero() {
                     
                <Button onClick={()=>logout()}>Logout</Button>:
              <>
+                            null:
+                   <>
               <Button
                 as={"a"}
                 fontSize={"sm"}
