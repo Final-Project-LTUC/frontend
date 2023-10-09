@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
+import { Link as ChakraLink, LinkProps } from "@chakra-ui/react";
+import { Link as ReactRouterLink } from "react-router-dom";
 import {
   Box,
   FormControl,
   FormLabel,
   Input,
   Button,
+  Select,
 } from '@chakra-ui/react';
 import axios from 'axios';
 
@@ -28,6 +31,27 @@ async function gettingProfile(token) {
     return null;
   }
 }
+async function updateProfile(token, input) {
+  try {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    const response = await axios.put('http://localhost:5000/dashupdate', input, {
+      headers: headers,
+    });
+
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      console.error('Failed to fetch data');
+      return null;
+    }
+  } catch (error) {
+    console.error('An error occurred:', error);
+    return null;
+  }
+}
+
 
 function UpdateForm({ token }) {
   const [oldData, setOldData] = useState(null);
@@ -41,22 +65,22 @@ function UpdateForm({ token }) {
 
     fetchData();
   }, [token]);
-  console.log(oldData)
+  // console.log(oldData)
 
 
   const [formData, setFormData] = useState({
-    username: '',
+    
     phoneNumber: '',
     firstName: '',
-    password: '',
+  
     lastName: '',
     age: '',
-    email: '',
-    yearsOfExperience: 1,
+   
+    yearsOfExperience: "",
     hourlyRate: '',
     alt: '',
     inquiryPrice: '',
-    long: '',
+ 
     rating: 5,
     description: '',
     languages: 'Arabic',
@@ -64,11 +88,13 @@ function UpdateForm({ token }) {
   });
  
  
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Send the formData to your backend API for updating the model
-    // You can use Axios or fetch for making API requests
-    // Example: axios.put('/updateModel', formData);
+    console.log(token);
+    console.log(formData);
+    const result = await updateProfile(token, formData);
+    
+    console.log(result);
   };
 
   const handleChange = (e) => {
@@ -79,17 +105,30 @@ function UpdateForm({ token }) {
     });
   };
 
+
   return (
     <Box p={4}>
       <form onSubmit={handleSubmit}>
         <FormControl>
-          <FormLabel>Username</FormLabel>
+          <FormLabel>firstName</FormLabel>
           <Input
-            placeholder={oldData ? oldData.username : 'username'}
+            placeholder={oldData ? oldData.firstName : 'firstName'}
            
             type="text"
-            name="username"
-            value={formData.username}
+            name="firstName"
+            value={formData.firstName}
+            onChange={handleChange}
+            required
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Last lastName</FormLabel>
+          <Input
+            placeholder={oldData ? oldData.lastName : 'lastName'}
+           
+            type="text"
+            name="lastName"
+            value={formData.lastName}
             onChange={handleChange}
             required
           />
@@ -98,6 +137,7 @@ function UpdateForm({ token }) {
         <FormControl>
           <FormLabel>Phone Number</FormLabel>
           <Input
+            placeholder={oldData && oldData.phoneNumber ? oldData.phoneNumber : 'phone'}
             type="tel"
             name="phoneNumber"
             value={formData.phoneNumber}
@@ -108,9 +148,10 @@ function UpdateForm({ token }) {
         <FormControl>
           <FormLabel>age</FormLabel>
           <Input
-            type="tel"
-            name="phoneNumber"
-            value={formData.phoneNumber}
+          placeholder={oldData && oldData.age  ? oldData.age : 'age'}
+            type="int"
+            name="age"
+            value={formData.age}
             onChange={handleChange}
             required
           />
@@ -118,19 +159,21 @@ function UpdateForm({ token }) {
         <FormControl>
           <FormLabel>Years of experince</FormLabel>
           <Input
-            type="tel"
-            name="phoneNumber"
-            value={formData.phoneNumber}
+          placeholder={oldData && oldData.yearsOfExperience ? oldData.yearsOfExperience : 'Years of experince'}
+            type="int"
+            name="yearsOfExperience"
+            value={formData.yearsOfExperience}
             onChange={handleChange}
-            required
+            
           />
         </FormControl>
         <FormControl>
           <FormLabel>Hourly rate</FormLabel>
           <Input
-            type="tel"
-            name="phoneNumber"
-            value={formData.phoneNumber}
+          placeholder={oldData && oldData.hourlyRate ? oldData.hourlyRate : 'Hourly rate'}
+            type="int"
+            name="hourlyRate"
+            value={formData.hourlyRate}
             onChange={handleChange}
             required
           />
@@ -138,9 +181,10 @@ function UpdateForm({ token }) {
         <FormControl>
           <FormLabel>location</FormLabel>
           <Input
-            type="tel"
-            name="phoneNumber"
-            value={formData.phoneNumber}
+          placeholder={oldData ? "amman" : 'amman'}
+            type="text"
+            name="location"
+            value={formData.location}
             onChange={handleChange}
             required
           />
@@ -148,9 +192,10 @@ function UpdateForm({ token }) {
         <FormControl>
           <FormLabel>Inquiry price</FormLabel>
           <Input
-            type="tel"
-            name="phoneNumber"
-            value={formData.phoneNumber}
+          placeholder={oldData && oldData.inquiryPrice ? oldData.inquiryPrice : 'inquiryPrice'}
+            type="int"
+            name="inquiryPrice"
+            value={formData.inquiryPrice}
             onChange={handleChange}
             required
           />
@@ -159,9 +204,10 @@ function UpdateForm({ token }) {
         <FormControl>
           <FormLabel>Biography</FormLabel>
           <Input
-            type="tel"
-            name="phoneNumber"
-            value={formData.phoneNumber}
+          placeholder={oldData && oldData.description ? oldData.description : 'Biography'}
+            type="text"
+            name="description"
+            value={formData.description}
             onChange={handleChange}
             required
           />
@@ -169,23 +215,33 @@ function UpdateForm({ token }) {
         </FormControl>
         <FormControl>
           <FormLabel>Languages</FormLabel>
-          <Input
-            type="tel"
-            name="phoneNumber"
-            value={formData.phoneNumber}
+          {/* Use the Select component for the language list */}
+          <Select
+            name="languages"
+            value={formData.languages}
             onChange={handleChange}
             required
-          />
-
+          >
+            {/* Define the language options */}
+            <option value="Arabic">Arabic</option>
+            <option value="English">English</option>
+            <option value="Spanish">Spanish</option>
+            {/* Add more languages as needed */}
+          </Select>
         </FormControl>
   
   
 
+          <div onClick={handleSubmit} >
+
+
+        <ChakraLink as={ReactRouterLink} to="/dashboard" >
         
-        
-        <Button type="submit" colorScheme="teal" mt={4}>
+        <Button type="submit" colorScheme="teal" mt={4} >
           Update
         </Button>
+        </ChakraLink>
+          </div>
       </form>
     </Box>
   );

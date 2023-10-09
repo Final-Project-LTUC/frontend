@@ -28,21 +28,22 @@ import {
 const cost = "50 jd";
 
 function TaskCard1() {
+
   const [showCurrentTask, setShowCurrentTask] = useState(false);
 
 
   const paymentStatuses = [true, true, true]; // fetch it from the api
   const arrivedOnTime = true; //// button pressed when arriving 
 
-  
+
 
   const handleViewCurrentTask = () => {
-    setShowCurrentTask(true);
+    setShowCurrentTask(showCurrentTask?false:true);
   };
 
   return (
     <>
-      <SimpleGrid spacing={10} column={1} className="cardsanime">
+      <SimpleGrid spacing={10} column={1} className="cardsanime" padding={"20"}>
         <Card>
           <CardHeader>
             <Heading size="md"> Current tasks</Heading>
