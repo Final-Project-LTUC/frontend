@@ -40,7 +40,7 @@ function Services() {
             <ServiecesCard key={service.name} service={service} />
           );
         })
-      };
+      }
       </Flex>
  
     </Flex>

@@ -3,6 +3,7 @@ import React from "react";
 import "./Hero.scss";
 import video from "../assets/video.mp4";
 import logo from "../assets/logo.png";
+// import Navbar from '../../Navbar/Navbar'
 
 import { NavLink, Link as ReactRouterLink } from "react-router-dom";
 import { Link as ChakraLink } from "@chakra-ui/react";
@@ -51,14 +52,16 @@ function Hero() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {loginData,logout}=useContext(LoginContext);
-
+  console.log(loginData)
+  const mar = 80;
   return (
     <header>
       <div className={`test ${isNavFixed ? "fixed" : ""}`}>
         <div className="heroSection">
           <video className="video" src={video} loop autoPlay muted />
           <div className="container">
-            <nav>
+            
+            <nav style={{marginLeft: mar}}>
               <Flex
                 h={16}
                 alignItems={"center"}
@@ -73,14 +76,17 @@ function Hero() {
                 />
 
                 <HStack
-                  as={"nav"}
+                  // as={"nav"}
                   spacing={4}
                   display={{ base: "none", md: "flex" }}
                   justifyContent={"space-between"}
                 >
+                  <div className="logo"> 
+
                   <ChakraLink as={ReactRouterLink} to="/">
                     <img src={logo} alt="Logo" />
                   </ChakraLink>
+                  </div>
                   <ChakraLink as={ReactRouterLink} to="/">
                     Home
                   </ChakraLink>
@@ -93,34 +99,25 @@ function Hero() {
                   <ChakraLink as={ReactRouterLink} to="/about">
                     About
                   </ChakraLink>
-                </HStack>
+
+                
+                  
+             
 
                 <Flex alignItems={"center"}>
-                  <Menu>
-                    <MenuButton
-                      as={Button}
-                      rounded={"full"}
-                      variant={"link"}
-                      cursor={"pointer"}
-                      minW={0}
-                    ></MenuButton>
-                    <MenuList>
-                      <MenuItem>Link 1</MenuItem>
-                      <MenuItem>Link 2</MenuItem>
-                      <MenuDivider />
-                      <MenuItem>Link 3</MenuItem>
-                    </MenuList>
-                  </Menu>
+            
                   <Stack
                     flex={{ base: 1, md: 0 }}
                     justify={"flex-end"}
+                    alignItems={"center"}
                     justifyContent={"space-between"}
                     direction={"row"}
                     spacing={6}
                   >
                     <Button onClick={toggleColorMode}>
                       {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-                    </Button>
+                    </Button> 
+                     {loginData.loggedIn? 
 
                     <Menu>
                       <MenuButton
@@ -156,11 +153,22 @@ function Hero() {
                         <ChakraLink as={ReactRouterLink} to="/dashboard">
                           <MenuItem>Your Dashboard</MenuItem>
                         </ChakraLink>
+                        
                         <MenuItem>Account Settings</MenuItem>
+                        <ChakraLink as={ReactRouterLink} to="/dashboard">
                         <MenuItem>Logout</MenuItem>
+                        </ChakraLink>
+
                       </MenuList>
                     </Menu>
+                   :null} 
+
+
+
                     {loginData.loggedIn? 
+                    
+               <Button onClick={()=>logout()}>Logout</Button>:
+             <>
                             null:
                    <>
               <Button
@@ -192,6 +200,8 @@ function Hero() {
              }
                   </Stack>
                 </Flex>
+                
+              </HStack>
               </Flex>
 
               {isOpen ? (
@@ -203,6 +213,7 @@ function Hero() {
                   </Stack>
                 </Box>
               ) : null}
+              {/* <Navbar />  */}
             </nav>
           </div>
 

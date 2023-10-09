@@ -15,19 +15,43 @@ button {
 }
 
 .container {
-  max-width: 1000px;
+  width: 90%;
+  max-width: 2000px;
   margin: auto;
 }
 
 .test {
-  height: 90vh;
-  width: 100%;
+  height: 100vh;
+  width: auto;
   display: flex;
   flex-direction: column;
+justify-content: center;
 
   &.fixed {
+    
     nav {
-      background-color: #333;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 90%;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(254, 251, 251, 0.362);
+      box-shadow: 0 15px 15px rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      padding: 10px;
+      letter-spacing: 1px;
+      text-decoration: none;
+      overflow: hidden;
+      color: black;
+      font-weight: 400px;
+      z-index: 1000; // Set a higher z-index
+      transition: 0.5s;
+      backdrop-filter: blur(15px);
     }
   }
 }
@@ -49,8 +73,11 @@ button {
 }
 
 header {
-  position: relative;
-  z-index: 2;
+  // position: absolute;
+  width: 100%;
+  height: 100%;
+background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
   overflow: hidden;
 }
 
@@ -98,14 +125,33 @@ nav {
   text-align: center;
   color: #fff;
   margin-top: 150px;
-
+  
+ 
   h1 {
-    font-size: 3em;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 5em;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     margin: 0;
+    margin-left:50px;
+    margin-top:50vh; 
+
   }
 
   p {
-    font-size: 1.5em;
+   
+    gap: 6vw;
+    margin-left:50px;
+    font-size: 1.7em;
+    letter-spacing: 3px;
+    line-height: 2;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    max-width: 30%;
+    text-align: start;
+    column-gap: 20%;
+    margin-top:4vh; 
   }
 
   button {
@@ -117,19 +163,20 @@ nav {
     margin: 5px;
     font-weight: bold;
     display: inline-block;
-  }
+}
 
   button:hover {
     cursor: pointer;
     background: #fff;
     border: solid 2px #fff;
     color: #333;
+
   }
 
   button.joinNow {
     background:rgba(65, 145, 151, 1)
     ;
-    border: solid 2px rgba(65, 145, 151, 1)
+    border: solid 2px rgb(65, 145, 151)
     ;
   }
 

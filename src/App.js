@@ -11,7 +11,7 @@ import AboutUs from './pages/aboutUs/ABOUTUS';
 import Footer from "../src/layout/footer/Footer";
 import Dashboard from "./pages/dashBoard/Dashboard";
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
-
+import UpdateForm from "./pages/dashBoard/update/Update";
 import HandymanDetails from "./pages/catalog/HandymanDetails";
 import DashboardNavbar from './Components/dashboard/DashboardNavbar'; 
 
@@ -49,7 +49,7 @@ function App() {
                     element={<HandymanDetails />}
                 />{" "}
         <Route path="/about" element={<AboutUs />} />
-                
+        <Route path="/update" element={<UpdateForm />} />        
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/tasks" element={<Tasks />} />
         <Route path='/signup' element={<Auth submitAction='signup' />}/>
