@@ -10,7 +10,7 @@ const MotionFlex=motion(Flex);
 return (
 <MotionFlex 
 sx={serviceCard}>
-  <Box sx={imageStyle} flexDirection={'column'} backgroundImage={`url(${imgUrl})`}></Box>
+  <Box sx={imageStyle} flexDirection={'column'} backgroundImage={`url(${imgUrl})`}></Box>s
   <Flex sx={descriptionStyle}>
   <Heading>{name}</Heading>
   <Text>{description}</Text>
