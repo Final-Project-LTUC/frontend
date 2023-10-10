@@ -130,12 +130,7 @@ function Hero() {
                         <MenuItem>Logout</MenuItem>
                         </ChakraLink>                      </MenuList>
                     </Menu>
-                   :null} 
-
-
-
-                    {loginData.loggedIn? 
-                    null:
+                   :null}                    {loginData.loggedIn?               <Button onClick={()=>logout()}>Logout</Button>:
              <>
               <Button
                 as={"a"}
@@ -195,6 +190,4 @@ function Hero() {
       </div>
     </header>
   );
-}
-
-export default Hero;
+}export default Hero;

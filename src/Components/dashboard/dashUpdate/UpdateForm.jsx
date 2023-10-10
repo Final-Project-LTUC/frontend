@@ -118,7 +118,7 @@ function UpdateForm({ token }) {
             name="firstName"
             value={formData.firstName}
             onChange={handleChange}
-            required
+            // required
           />
         </FormControl>
         <FormControl>
@@ -130,7 +130,7 @@ function UpdateForm({ token }) {
             name="lastName"
             value={formData.lastName}
             onChange={handleChange}
-            required
+            // required
           />
         </FormControl>
 
@@ -142,7 +142,7 @@ function UpdateForm({ token }) {
             name="phoneNumber"
             value={formData.phoneNumber}
             onChange={handleChange}
-            required
+            // required
           />
         </FormControl>
         <FormControl>
@@ -153,7 +153,7 @@ function UpdateForm({ token }) {
             name="age"
             value={formData.age}
             onChange={handleChange}
-            required
+            // required
           />
         </FormControl>
         <FormControl>
@@ -175,7 +175,7 @@ function UpdateForm({ token }) {
             name="hourlyRate"
             value={formData.hourlyRate}
             onChange={handleChange}
-            required
+            // required
           />
         </FormControl>
         <FormControl>
@@ -186,7 +186,7 @@ function UpdateForm({ token }) {
             name="location"
             value={formData.location}
             onChange={handleChange}
-            required
+            // required
           />
         </FormControl>
         <FormControl>
@@ -197,7 +197,7 @@ function UpdateForm({ token }) {
             name="inquiryPrice"
             value={formData.inquiryPrice}
             onChange={handleChange}
-            required
+            // required
           />
           
         </FormControl>
@@ -209,7 +209,7 @@ function UpdateForm({ token }) {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            required
+            // required
           />
 
         </FormControl>
@@ -220,7 +220,7 @@ function UpdateForm({ token }) {
             name="languages"
             value={formData.languages}
             onChange={handleChange}
-            required
+            // required
           >
             {/* Define the language options */}
             <option value="Arabic">Arabic</option>

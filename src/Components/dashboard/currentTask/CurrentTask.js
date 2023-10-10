@@ -1,6 +1,6 @@
 import React from 'react';
 import './CurrentTask.scss'; // Import your CSS file for styling
-
+import PaymentStepper from './paymentStages/PaymentStepper';
 function CurrentTask({ arrivedOnTime, paymentStatuses }) {
   const paymentLabels = ['Payment 1', 'Payment 2', 'Payment 3']; // Labels for the payments
 
@@ -22,15 +22,10 @@ function CurrentTask({ arrivedOnTime, paymentStatuses }) {
           <button className="task-button">Details</button>
           <button className="task-button">Review of handyman</button>
         </div>
-        <div className="payment-status">
-          {/* Payment Status */}
-          {paymentLabels.map((label, index) => (
-            <div key={index} className={`payment-status-item ${paymentStatuses[index] ? 'completed' : 'pending'}`}>
-              {label}
-            </div>
-          ))}
-        </div>
       </div>
+        <div className="payment-status">
+        <PaymentStepper />
+        </div>
     </div>
   );
 }

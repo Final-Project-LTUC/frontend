@@ -17,7 +17,7 @@ whileInView={{ x: 0,opacity:1,y:0 }}
 transition={{
   type: "ease",
   duration:.8,
-  damping:20
+  damping:1
 }}      
 //update now can you seeeeeeeeeeeeeeeeeeeeeeeeeeeeee lieth
 >
