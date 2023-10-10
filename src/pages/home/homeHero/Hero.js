@@ -155,7 +155,8 @@ function Hero() {
                         </ChakraLink>
                         
                         <MenuItem>Account Settings</MenuItem>
-                        <ChakraLink as={ReactRouterLink} to="/dashboard">
+
+                        <ChakraLink as={ReactRouterLink} onClick={()=>logout()} to="/">
                         <MenuItem>Logout</MenuItem>
                         </ChakraLink>
 
@@ -166,8 +167,9 @@ function Hero() {
 
 
                     {loginData.loggedIn? 
-                    
-               <Button onClick={()=>logout()}>Logout</Button>:
+                    <></>
+              ////  <Button onClick={()=>logout()}>Logout</Button>
+               :
              <>
               <Button
                 as={"a"}
