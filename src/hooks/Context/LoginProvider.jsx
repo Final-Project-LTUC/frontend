@@ -13,7 +13,7 @@ function LoginProvider(props) {
 
 
   async function login(username, password,userType) {
-    const role=userType==='user'?'user':'handymen';
+    const role=userType==='user'?'user':'handyman'; // fix this abdeen it is only working for the second condition
     try {
         const response=await axios.post(
             `${process.env.REACT_APP_DATABASE_URL}/signin?role=${role}`

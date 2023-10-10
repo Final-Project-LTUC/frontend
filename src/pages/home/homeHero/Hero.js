@@ -3,8 +3,9 @@ import React from "react";
 import "./Hero.scss";
 import video from "../assets/video.mp4";
 import logo from "../assets/logo.png";
+// import Navbar from '../../Navbar/Navbar'
+
 import { NavLink, Link as ReactRouterLink } from "react-router-dom";
-// import Navbar from '../../Navbar/Navbar'import { NavLink, Link as ReactRouterLink } from "react-router-dom";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import {
   Box,
@@ -28,17 +29,27 @@ import { useContext } from "react";
 import {LoginContext} from '../../../hooks/Context/LoginProvider'
 const Links = ["Skilify", "Home", "Services", "Catalog", "About us"];
 function Hero() {
-  const [isNavFixed, setIsNavFixed] = React.useState(false);  const handleScroll = () => {
-    const scrollPosition = window.scrollY;    if (scrollPosition > 0 && !isNavFixed) {
+  const [isNavFixed, setIsNavFixed] = React.useState(false);
+
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY;
+
+    if (scrollPosition > 0 && !isNavFixed) {
       setIsNavFixed(true);
     } else if (scrollPosition === 0 && isNavFixed) {
       setIsNavFixed(false);
     }
-  };  React.useEffect(() => {
-    window.addEventListener("scroll", handleScroll);    return () => {
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isNavFixed]);  const { colorMode, toggleColorMode } = useColorMode();
+  }, [isNavFixed]);
+
+  const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {loginData,logout}=useContext(LoginContext);
   console.log(loginData)
@@ -48,7 +59,9 @@ function Hero() {
       <div className={`test ${isNavFixed ? "fixed" : ""}`}>
         <div className="heroSection">
           <video className="video" src={video} loop autoPlay muted />
-          <div className="container">            <nav style={{marginLeft: mar}}>
+          <div className="container">
+            
+            <nav style={{marginLeft: mar}}>
               <Flex
                 h={16}
                 alignItems={"center"}
@@ -60,13 +73,17 @@ function Hero() {
                   aria-label={"Open Menu"}
                   display={{ md: "none" }}
                   onClick={isOpen ? onClose : onOpen}
-                />                <HStack
+                />
+
+                <HStack
                   // as={"nav"}
                   spacing={4}
                   display={{ base: "none", md: "flex" }}
                   justifyContent={"space-between"}
                 >
-                  <div className="logo">                  <ChakraLink as={ReactRouterLink} to="/">
+                  <div className="logo"> 
+
+                  <ChakraLink as={ReactRouterLink} to="/">
                     <img src={logo} alt="Logo" />
                   </ChakraLink>
                   </div>
@@ -81,7 +98,15 @@ function Hero() {
                   </ChakraLink>
                   <ChakraLink as={ReactRouterLink} to="/about">
                     About
-                  </ChakraLink>                <Flex alignItems={"center"}>                  <Stack
+                  </ChakraLink>
+
+                
+                  
+             
+
+                <Flex alignItems={"center"}>
+            
+                  <Stack
                     flex={{ base: 1, md: 0 }}
                     justify={"flex-end"}
                     alignItems={"center"}
@@ -91,8 +116,10 @@ function Hero() {
                   >
                     <Button onClick={toggleColorMode}>
                       {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-                    </Button>
-                     {loginData.loggedIn?                    <Menu>
+                    </Button> 
+                     {loginData.loggedIn? 
+
+                    <Menu>
                       <MenuButton
                         as={Button}
                         rounded={"full"}
@@ -125,12 +152,22 @@ function Hero() {
                         <MenuDivider />
                         <ChakraLink as={ReactRouterLink} to="/dashboard">
                           <MenuItem>Your Dashboard</MenuItem>
-                        </ChakraLink>                        <MenuItem>Account Settings</MenuItem>
+                        </ChakraLink>
+                        
+                        <MenuItem>Account Settings</MenuItem>
                         <ChakraLink as={ReactRouterLink} to="/dashboard">
                         <MenuItem>Logout</MenuItem>
-                        </ChakraLink>                      </MenuList>
+                        </ChakraLink>
+
+                      </MenuList>
                     </Menu>
-                   :null}                    {loginData.loggedIn?               <Button onClick={()=>logout()}>Logout</Button>:
+                   :null} 
+
+
+
+                    {loginData.loggedIn? 
+                    
+               <Button onClick={()=>logout()}>Logout</Button>:
              <>
               <Button
                 as={"a"}
@@ -157,11 +194,15 @@ function Hero() {
                 >
                 Sign Up
               </Button>
-              </>
+              </> 
              }
                   </Stack>
-                </Flex>              </HStack>
-              </Flex>              {isOpen ? (
+                </Flex>
+                
+              </HStack>
+              </Flex>
+
+              {isOpen ? (
                 <Box pb={4} display={{ md: "none" }}>
                   <Stack as={"nav"} spacing={4}>
                     {Links.map((link) => (
@@ -172,7 +213,9 @@ function Hero() {
               ) : null}
               {/* <Navbar />  */}
             </nav>
-          </div>          <div class="heroText">
+          </div>
+
+          <div class="heroText">
             <h1>You can do it!</h1>
             <p>
               {" "}
@@ -190,4 +233,6 @@ function Hero() {
       </div>
     </header>
   );
-}export default Hero;
+}
+
+export default Hero;

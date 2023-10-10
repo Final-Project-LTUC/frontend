@@ -9,6 +9,7 @@ import {
   Input,
   useToast
 } from "@chakra-ui/react";
+
 import React, { useContext, useEffect, useReducer, useState } from "react";
 import { LoginContext } from "../../hooks/Context/LoginProvider";
 import formReducer, {
@@ -17,6 +18,12 @@ import formReducer, {
 } from "../../hooks/Reducers/FormReducer";
 import "../../pages/auth/auth.scss";
 import { useNavigate } from "react-router-dom";
+
+
+
+// import {socket} from "../../../src/utlilites/socket/sockets"
+
+
 function Form({ submitAction, userType,setShowPages,showPages }) {
   const [formData, dispatch] = useReducer(formReducer, initialState);
   const [disableButton, setDisabledButton] = useState(true);
@@ -39,6 +46,12 @@ function Form({ submitAction, userType,setShowPages,showPages }) {
           isClosable: true,
         });
       }else  if(submitAction==='signup'&&response.status===200&&userType==='user'){
+       
+        // let userId = response.data.id+response.data.username;
+        //   console.log(userId)
+        //  socket.emit("signIn", { userId });
+        // console.log("respnese userId",userId)
+
         toast({
           title: 'Welcome To Skillify ',
           description: "We've created your account for you.",
