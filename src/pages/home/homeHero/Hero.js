@@ -168,7 +168,7 @@ function Hero() {
 
                     {loginData.loggedIn? 
                     <></>
-              //  <Button onClick={()=>logout()}>Logout</Button>
+              ////  <Button onClick={()=>logout()}>Logout</Button>
                :
              <>
               <Button
