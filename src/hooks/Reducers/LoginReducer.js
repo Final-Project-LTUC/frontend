@@ -1,5 +1,5 @@
 export let initialState = {
-    loggedIn: true,
+    loggedIn: false,
     user: { capabilities: [] },
     token:'',
     error: null,

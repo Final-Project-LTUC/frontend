@@ -166,7 +166,8 @@ function Hero() {
 
 
                     {loginData.loggedIn? 
-                    null:
+                    
+               <Button onClick={()=>logout()}>Logout</Button>:
              <>
               <Button
                 as={"a"}
