@@ -37,11 +37,24 @@ function LoginProvider(props) {
         return error;
     }
   }
-  async function updateData(body,userType){
+  async function updateData(body,token){
+    console.log(token)
     try {
-      const response=await axios.post(`${process.env.REACT_APP_DATABASE_URL}/dashupdate`,body);
-      return response
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+      const response = await axios.put(`${process.env.REACT_APP_DATABASE_URL}/dashupdate`, body, {
+        headers: headers,
+      });
+  
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        console.error('Failed to fetch data');
+        return response;
+      }
     } catch (error) {
+      console.error('An error occurred:', error);
       return error;
     }
   }

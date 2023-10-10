@@ -62,4 +62,101 @@ export const handymanExperties = [
   {
     name: "Window Installation",
     description: "Upgrade your windows with our professional installation services. We offer",
-  }]
+  },
+  {
+    name: "HVAC Services",
+    description: "Keep your indoor environment comfortable with our heating, ventilation, and air conditioning services.",
+    imgUrl: "https://example.com/hvac.jpg",
+  },
+  {
+    name: "Deck Construction",
+    description: "Enhance your outdoor living space with our professional deck construction services.",
+    imgUrl: "https://example.com/deck.jpg",
+  },
+  {
+    name: "Bathroom Remodeling",
+    description: "Upgrade your bathroom with our expert remodeling services. Create a modern and functional space.",
+    imgUrl: "https://example.com/bathroom.jpg",
+  },
+  {
+    name: "Pest Control",
+    description: "Get rid of unwanted pests with our effective pest control solutions. Protect your property today.",
+    imgUrl: "https://example.com/pest-control.jpg",
+  },
+  {
+    name: "Garage Door Repair",
+    description: "Ensure the security of your garage with our garage door repair and maintenance services.",
+    imgUrl: "https://example.com/garage-door.jpg",
+  },
+  {
+    name: "Flooring Installation",
+    description: "Upgrade your floors with our professional flooring installation services. Choose from a variety of materials.",
+    imgUrl: "https://example.com/flooring.jpg",
+  },
+  {
+    name: "Exterior Painting",
+    description: "Revitalize the exterior of your property with our top-notch exterior painting services.",
+    imgUrl: "https://example.com/exterior-painting.jpg",
+  },
+  {
+    name: "Kitchen Remodeling",
+    description: "Transform your kitchen into a modern and functional space with our kitchen remodeling services.",
+    imgUrl: "https://example.com/kitchen.jpg",
+  },
+  {
+    name: "Appliance Repair",
+    description: "Get your appliances back in working order with our reliable appliance repair services.",
+    imgUrl: "https://example.com/appliance-repair.jpg",
+  },
+  {
+    name: "Roof Installation",
+    description: "Install a new roof or replace your existing one with our professional roof installation services.",
+    imgUrl: "https://example.com/roof-installation.jpg",
+  },
+  {
+    name: "Home Security",
+    description: "Protect your home with our comprehensive home security system installations.",
+    imgUrl: "https://example.com/home-security.jpg",
+  },
+  {
+    name: "Fencing",
+    description: "Enhance the security and privacy of your property with our expert fencing solutions.",
+    imgUrl: "https://example.com/fencing.jpg",
+  },
+  {
+    name: "Interior Design",
+    description: "Elevate your interiors with our interior design services. Create a stylish and functional living space.",
+    imgUrl: "https://example.com/interior-design.jpg",
+  },
+  {
+    name: "Driveway Paving",
+    description: "Improve the curb appeal of your property with our professional driveway paving services.",
+    imgUrl: "https://example.com/driveway-paving.jpg",
+  },
+  {
+    name: "Tree Removal",
+    description: "Remove unwanted or hazardous trees from your property with our tree removal services.",
+    imgUrl: "https://example.com/tree-removal.jpg",
+  },
+  {
+    name: "Basement Waterproofing",
+    description: "Keep your basement dry and protected with our basement waterproofing solutions.",
+    imgUrl: "https://example.com/basement-waterproofing.jpg",
+  },
+  {
+    name: "Gutter Cleaning",
+    description: "Ensure proper water drainage from your roof with our gutter cleaning services.",
+    imgUrl: "https://example.com/gutter-cleaning.jpg",
+  },
+  {
+    name: "Siding Installation",
+    description: "Upgrade your home's exterior with our expert siding installation services.",
+    imgUrl: "https://example.com/siding-installation.jpg",
+  },
+  {
+    name: "Home Inspection",
+    description: "Get a comprehensive assessment of your property with our professional home inspection services.",
+    imgUrl: "https://example.com/home-inspection.jpg",
+  },
+
+]

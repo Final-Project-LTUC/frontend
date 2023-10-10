@@ -50,7 +50,7 @@ async function updateProfile(token, input) {
     console.error('An error occurred:', error);
     return null;
   }
-}
+};
 
 
 function UpdateForm({ token }) {
