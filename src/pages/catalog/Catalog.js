@@ -37,8 +37,10 @@ function Catalog() {
 
     return (
         <Box p={5}>
-            <Heading mb={5}>Finished Tasks</Heading>
-            <SimpleGrid columns={3} spacing={10}>
+            <Heading mb={5} textAlign="center" fontSize="2xl">
+                Finished Tasks
+            </Heading>
+            <SimpleGrid columns={3} spacing={6} justifyContent="center">
                 {tasks.map((task) => (
                     <TaskCard key={task.id} task={task} />
                 ))}
