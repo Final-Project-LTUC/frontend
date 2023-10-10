@@ -8,8 +8,7 @@ import Testimonials from '../../Components/AboutUS/Testimonials';
 import Blog from '../../Components/AboutUS/Blog';
 import Team from '../../Components/AboutUS/Team';
 import Vision from '../../Components/AboutUS/Vision';
-
-
+import Location from '../../Components/AboutUS/Location';
 
 
 
@@ -26,6 +25,7 @@ function App() {
         <ContactUS/>
         <Testimonials/>
         <Blog/>
+        <Location/>
         {/* <Footer/> */}
       </ChakraProvider>
     </>
