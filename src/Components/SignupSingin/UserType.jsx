@@ -20,12 +20,15 @@ import {motion} from 'framer-motion'
 function UserType({submitAction,setUerType,setShowPages,showPages}) {
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
-  const handleCheckboxClick1 = () => {
+  
+  
+  const handleCheckboxClick1 = () => { // user
     setIsChecked1(true);
     setIsChecked2(false);
+
   };
 
-  const handleCheckboxClick2 = () => {
+  const handleCheckboxClick2 = () => { // handyman
     setIsChecked1(false);
     setIsChecked2(true);
   };

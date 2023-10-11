@@ -18,7 +18,7 @@ import formReducer, {
 } from "../../hooks/Reducers/FormReducer";
 import "../../pages/auth/auth.scss";
 import { useNavigate } from "react-router-dom";
-
+import Type from "./UserType"
 
 
 import io from 'socket.io-client';
