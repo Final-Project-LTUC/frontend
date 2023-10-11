@@ -20,7 +20,7 @@ function LoginProvider(props) {
   // useeffect to load when you have tokken in the cockies
 
   async function login(username, password,userType) {
-    const role=userType==='user'?'user':'user'; // fix this abdeen it is only working for the second condition
+    const role=userType==='user'?'user':'handyman'; // fix this abdeen it is only working for the second condition
     try {
         const response=await axios.post(
             `${process.env.REACT_APP_DATABASE_URL}/signin?role=${role}`

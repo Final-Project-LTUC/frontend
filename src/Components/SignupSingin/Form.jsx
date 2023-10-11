@@ -21,7 +21,7 @@ import { useNavigate } from "react-router-dom";
 import Type from "./UserType"
 
 
-import io from 'socket.io-client';
+
 
 
 // Create and export the socket connection
