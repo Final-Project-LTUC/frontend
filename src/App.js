@@ -22,8 +22,15 @@ import Tasks from  "./pages/dashBoard/tasks/TasksPage"
 import Auth from "./pages/auth/Auth";
 import LoginProvider from "./hooks/Context/LoginProvider";
 
+
+
+
+
+// Create and export the socket connection
+
 function App() {
-  const location = useLocation();
+  const location = useLocation(); 
+
 
   // Define a function to conditionally render the navbar based on the current route
   const renderNavbar = () => {

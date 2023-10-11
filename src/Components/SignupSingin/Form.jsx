@@ -21,7 +21,12 @@ import { useNavigate } from "react-router-dom";
 
 
 
-// import {socket} from "../../../src/utlilites/socket/sockets"
+import io from 'socket.io-client';
+
+
+// Create and export the socket connection
+
+
 
 
 function Form({ submitAction, userType,setShowPages,showPages }) {
@@ -31,12 +36,24 @@ function Form({ submitAction, userType,setShowPages,showPages }) {
   const toast  = useToast();
   const navigate = useNavigate();
   async function handleSubmit(e) {
+
     e.preventDefault();
+    
     try{
+      // const socket = io.connect('http://localhost:5000');
+      
+      
       const response=submitAction==='signup'?
       await loginContext.signup(formData,userType):
       await loginContext.login(formData.username,formData.password,userType);
+    
+
+     
       if(userType==='handyman'&&submitAction==='signup'&&response.status===200){
+      //   let userId = response.data.id;
+      //   console.log(userId)
+      //  socket.emit("signIn", { userId });
+      // console.log("respnese userId",userId)
         setShowPages({...showPages,showExpertiesPage:true,showSecondPage:false});
         toast({
           title: 'Welcome To Skillify ',
