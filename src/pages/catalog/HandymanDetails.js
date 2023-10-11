@@ -8,8 +8,11 @@ import {
     ListIcon,
     Text,
     Image,
+    Center,
+    Badge,
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
+
 function HandymanDetails() {
     const { id } = useParams();
 
@@ -17,6 +20,7 @@ function HandymanDetails() {
         {
             id: "1",
             name: "John Doe",
+            profilePic: "path_to_profile_pic1.jpg",
             tasks: [
                 { description: "Walk the Dog", rating: 5 },
                 { description: "Clean the House", rating: 4 },
@@ -25,6 +29,7 @@ function HandymanDetails() {
         {
             id: "2",
             name: "Jane Smith",
+            profilePic: "path_to_profile_pic2.jpg",
             tasks: [
                 { description: "Fix the Door", rating: 4.5 },
                 { description: "Mow the Lawn", rating: 4.2 },
@@ -42,15 +47,20 @@ function HandymanDetails() {
 
     return (
         <Box p={5} shadow="md" borderWidth="1px" borderRadius="lg">
-            <Heading size="lg" mb={4}>
+            <Center>
+                <Image
+                    borderRadius="full"
+                    boxSize="150px"
+                    src={handyman.profilePic}
+                    mb={5}
+                />
+            </Center>
+            <Heading size="lg" mb={2} textAlign="center">
                 {handyman.name}
             </Heading>
-            <Image
-                borderRadius="full"
-                boxSize="150px"
-                src={handyman.profilePic}
-                mb={5}
-            />
+            <Box textAlign="center" mb={4}>
+                <Badge colorScheme="green">Handyman</Badge>
+            </Box>
             <Heading size="md" mb={3}>
                 Tasks:
             </Heading>
@@ -66,7 +76,9 @@ function HandymanDetails() {
                         <Text>{task.description}</Text>
                         <Box display="flex" alignItems="center" mt={2}>
                             <ListIcon as={StarIcon} color="yellow.400" />
-                            <Text>Rating: {task.rating}</Text>
+                            <Text fontSize="lg" fontWeight="bold">
+                                Rating: {task.rating}
+                            </Text>
                         </Box>
                     </ListItem>
                 ))}
@@ -74,4 +86,5 @@ function HandymanDetails() {
         </Box>
     );
 }
+
 export default HandymanDetails;
