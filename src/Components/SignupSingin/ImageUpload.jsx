@@ -109,9 +109,8 @@ import formReducer, { initialState } from "../../hooks/Reducers/FormReducer";
   });
   
   
-  export default function ImageUpload() {
+  export default function ImageUpload({setSelectedImg}) {
     const controls = useAnimation();
-    const [formData,dispatch]=useReducer(formReducer,initialState)
     const startAnimation = () => {
       controls.start("hover");
   }
@@ -122,12 +121,15 @@ import formReducer, { initialState } from "../../hooks/Reducers/FormReducer";
     const handleDrop = (e) => {
       e.preventDefault();
       const droppedImage = e.dataTransfer.files[0];
-  
       if (droppedImage) {
-        dispatch({type:'CHANGE_image',payload:droppedImage});
+        setSelectedImg(droppedImage)
       };
 
     };
+    const handleClick=(e)=>{
+      const image = e.target.files[0];
+      setSelectedImg(image);
+    }
     return (
       <Container my="3">
         <AspectRatio width="100%" ratio={1}>
@@ -199,7 +201,8 @@ import formReducer, { initialState } from "../../hooks/Reducers/FormReducer";
           accept="image/*"
           onDragEnter={startAnimation}
           onDragLeave={stopAnimation}
-          onDrop={handleDrop} 
+          onDrop={handleDrop}
+          onChange={handleClick}
           name="image"
         />
             </Box>

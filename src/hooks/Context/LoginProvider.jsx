@@ -20,10 +20,9 @@ function LoginProvider(props) {
   // useeffect to load when you have tokken in the cockies
 
   async function login(username, password,userType) {
-    const role=userType==='user'?'user':'user'; // fix this abdeen it is only working for the second condition
     try {
         const response=await axios.post(
-            `${process.env.REACT_APP_DATABASE_URL}/signin?role=${role}`
+            `${process.env.REACT_APP_DATABASE_URL}/signin?role=${userType}`
             ,{},
             {
                 headers:{Authorization:`Basic ${btoa(`${username}:${password}`)}`}
@@ -46,14 +45,13 @@ function LoginProvider(props) {
   async function signup(body,userType){
     try{
         const response=await axios.post(`${process.env.REACT_APP_DATABASE_URL}/signup${userType}`,body);
-          login(body.username,body.password);
+          login(body.username,body.password,userType);
         return response;
     }catch(error){
         return error;
     }
   }
   async function updateData(body,token){
-    console.log(token)
     try {
       const headers = {
         Authorization: `Bearer ${token}`,

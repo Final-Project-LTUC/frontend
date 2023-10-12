@@ -42,19 +42,18 @@ function Form({ submitAction, userType,setShowPages,showPages }) {
     
     try{
       // const socket = io.connect('http://localhost:5000');
-      
-      
+      console.log(userType,'foooooooooooooorm')
+      console.log(submitAction);
       const response=submitAction==='signup'?
       await loginContext.signup(formData,userType):
       await loginContext.login(formData.username,formData.password,userType);
     
-
-     
-      if(userType==='handyman'&&submitAction==='signup'&&response.status===200){
+      if(userType==='handymen'&&submitAction==='signup'&&response.status===200){
       //   let userId = response.data.id;
       //   console.log(userId)
       //  socket.emit("signIn", { userId });
       // console.log("respnese userId",userId)
+      console.log('well done ')
         setShowPages({...showPages,showExpertiesPage:true,showSecondPage:false});
         toast({
           title: 'Welcome To Skillify ',
