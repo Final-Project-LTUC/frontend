@@ -20,6 +20,7 @@ import formReducer, {
 import "../../pages/auth/auth.scss";
 import { useNavigate } from "react-router-dom";
 import Type from "./UserType"
+// import FormTest from "./FormTest/FormTest";
 
 
 
@@ -179,7 +180,7 @@ function Form({ submitAction, userType,setShowPages,showPages }) {
       </Box>
       </Flex>
    
-     
+     {/* <FormTest /> */}
     </Flex>
   );
 }
