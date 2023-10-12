@@ -15,10 +15,10 @@ sx={serviceCard}
 initial={{x:`${index%2===0?'50%':'-50%'}`,opacity:0}}
 whileInView={{ x: 0,opacity:1,y:0 }}
 transition={{
-  type: "ease",
+  type: "ease", 
   duration:.8,
-  damping:1
-}}      
+  damping:20
+}}
 //update now can you seeeeeeeeeeeeeeeeeeeeeeeeeeeeee lieth
 >
   <Box sx={imageStyle} flexDirection={'column'} backgroundImage={`url(${imgUrl})`}></Box>

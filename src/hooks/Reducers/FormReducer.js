@@ -6,11 +6,11 @@ password:'',
 userType:'',
 experties:[],
 name:'',
+image:null,
 isValidEmail:true,
 isValidPassword:true,
  isValidUsername:true,
 isValidPhoneNum:true,
-
 };
 const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
@@ -38,6 +38,8 @@ switch(action.type){
         }
     case 'CHANGE_NAME':return {...state,name:action.payload};
     case 'CHANGE_PHONENUM':return {...state,phoneNum:action.payload,isValidPhoneNum:mobileNumberPattern.test(action.payload)};
+    case 'CHANGE_image':return {...state,image:action.payload};
+
     default: return state;
 }
 }
