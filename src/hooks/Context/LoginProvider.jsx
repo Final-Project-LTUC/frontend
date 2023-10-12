@@ -11,7 +11,7 @@ function LoginProvider(props) {
   //   console.log(token1,"tokken cookie")
   //  }
   //  )
-  const socketI = io('http://localhost:5000', { autoConnect: false });
+  const socketI = io('https://backend-n1je.onrender.com', { autoConnect: false });
   const [socket,setSocket] = useState(socketI)
   const [loginData, dispatch] = useReducer(loginReducer, initialState);
   function can(capability) {
@@ -20,7 +20,7 @@ function LoginProvider(props) {
   // useeffect to load when you have tokken in the cockies
 
   async function login(username, password,userType) {
-    const role=userType==='user'?'user':'user'; // fix this abdeen it is only working for the second condition
+    const role=userType==='user'?'user':'handyman'; // fix this abdeen it is only working for the second condition
     try {
         const response=await axios.post(
             `${process.env.REACT_APP_DATABASE_URL}/signin?role=${role}`
@@ -53,8 +53,10 @@ function LoginProvider(props) {
     }
   }
   async function updateData(body,token){
-    console.log(token)
+    
     try {
+      console.log(token)
+      // validateToken(token)
       const headers = {
         Authorization: `Bearer ${token}`,
       };

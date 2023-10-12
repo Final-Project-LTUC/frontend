@@ -22,7 +22,7 @@ import { useNavigate } from "react-router-dom";
 import Type from "./UserType"
 
 
-import io from 'socket.io-client';
+
 
 
 // Create and export the socket connection
@@ -41,7 +41,7 @@ function Form({ submitAction, userType,setShowPages,showPages }) {
     e.preventDefault();
     
     try{
-      // const socket = io.connect('http://localhost:5000');
+      // const socket = io.connect('https://backend-n1je.onrender.com');
       
       
       const response=submitAction==='signup'?
