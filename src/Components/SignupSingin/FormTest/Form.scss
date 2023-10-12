@@ -71,6 +71,7 @@
     margin: auto;
     display: flex;
     .image-holder {
+      height:100%;
       width: 50%;
     }
     form {
@@ -82,7 +83,7 @@
     h3 {
       text-transform: uppercase;
       font-size: 25px;
-      font-family: "Poppins-SemiBold";
+      font-family: "Poppins";
       text-align: center;
       margin-bottom: 28px;
     }
@@ -117,22 +118,22 @@
     &::-webkit-input-placeholder {
       font-size: 13px;
       color: #333;
-      font-family: "Poppins-Regular";
+      font-family: "Poppins";
     }
     &::-moz-placeholder {
       font-size: 13px;
       color: #333;
-      font-family: "Poppins-Regular";
+      font-family: "Poppins";
     }
     &:-ms-input-placeholder {
       font-size: 13px;
       color: #333;
-      font-family: "Poppins-Regular";
+      font-family: "Poppins";
     }
     &:-moz-placeholder {
       font-size: 13px;
       color: #333;
-      font-family: "Poppins-Regular";
+      font-family: "Poppins";
     }
   }
   select {
@@ -172,8 +173,13 @@
     &:focus,
     &:active {
       i {
-        -webkit-animation-name: hvr-icon-wobble-horizontal;
-        animation-name: hvr-icon-wobble-horizontal;
+        -webkit-animation-name:   url('https://example.com/path/to/Material-Design-Iconic-Font.woff2?v=2.2.0') format('woff2'),
+        url('https://example.com/path/to/Material-Design-Iconic-Font.woff?v=2.2.0') format('woff'),
+        url('https://example.com/path/to/Material-Design-Iconic-Font.ttf?v=2.2.0') format('truetype');
+        ;
+        animation-name: url('https://example.com/path/to/Material-Design-Iconic-Font.woff2?v=2.2.0') format('woff2'),
+        url('https://example.com/path/to/Material-Design-Iconic-Font.woff?v=2.2.0') format('woff'),
+        url('https://example.com/path/to/Material-Design-Iconic-Font.ttf?v=2.2.0') format('truetype');
         -webkit-animation-duration: 1s;
         animation-duration: 1s;
         -webkit-animation-timing-function: ease-in-out;

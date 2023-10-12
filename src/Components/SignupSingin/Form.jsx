@@ -20,7 +20,7 @@ import formReducer, {
 import "../../pages/auth/auth.scss";
 import { useNavigate } from "react-router-dom";
 import Type from "./UserType"
-import FormTest from "./FormTest/FormTest";
+// import FormTest from "./FormTest/FormTest";
 
 
 
@@ -110,78 +110,78 @@ function Form({ submitAction, userType,setShowPages,showPages }) {
     setDisabledButton(!checkAllValidation(formData));
   }, [formData]);
   return (
-    // <Flex  w={'100%'} height={'calc(100vh - 100px)'} alignItems={'center'} justifyContent={'space-around'} >
-    //   <Flex w={'95%'} justifyContent={'space-between'} alignItems={'center'} borderRadius={'15px'} height={'95%'} className="secondPageForm">
-    //   <Flex direction="column" ml={'1em'} w={"45%"} h={'80%'} justifyContent={'center'} gap={'15px'} alignItems={'flex-start'} >
-    //   <Heading alignSelf={'center'}>{submitAction==='signup'?"Welcome To Skilify":"Welcome Back"}</Heading>
-    //   {submitAction === "signup" ? (
-    //     <FormControl isInvalid={!formData.isValidEmail}>
-    //       <FormLabel>Email address</FormLabel>
-    //       <Input
-    //         value={formData.email}
-    //         onChange={(e) =>
-    //           dispatch({ type: "CHANGE_EMAIL", payload: e.target.value })
-    //         }
-    //         type="email"
-    //       />
-    //       <FormErrorMessage>Kindly Enter A Valid Email</FormErrorMessage>
-    //     </FormControl>
-    //   ) : null}
-    //   <FormControl isRequired={'true'} isInvalid={!formData.isValidUsername}>
-    //     <FormLabel>Username</FormLabel>
-    //     <Input
-    //       onChange={(e) =>
-    //         dispatch({ type: "CHANGE_USERNAME", payload: e.target.value })
-    //       }
-    //       value={formData.username}
-    //       type="text"
-    //     />
-    //     <FormErrorMessage>This Username Is Invalid </FormErrorMessage>
-    //   </FormControl>
-    //   {submitAction === "signup" ? (
-    //     <FormControl>
-    //       <FormLabel>Full Name</FormLabel>
-    //       <Input
-    //         onChange={(e) =>
-    //           dispatch({ type: "CHANGE_NAME", payload: e.target.value })
-    //         }
-    //         value={formData.name}
-    //         type="text"
-    //       />
-    //     </FormControl>
-    //   ) : null}
-    //   <FormControl isInvalid={!formData.isValidPassword}>
-    //     <FormLabel>Password</FormLabel>
-    //     <Input
-    //       onChange={(e) =>
-    //         dispatch({ type: "CHANGE_PASSWORD", payload: e.target.value })
-    //       }
-    //       type="password"
-    //       value={formData.password}
-    //     />
-    //     <FormErrorMessage>
-    //       Password Must Be At least 8 letters and contains at least on symbo @!
-    //     </FormErrorMessage>
-    //   </FormControl>
-    //   <Button
-    //     w={'180px'}
-    //     height={'45px'}
-    //     onClick={(e) => handleSubmit(e)}
-    //     mt={4}
-    //     colorScheme="teal"
-    //     type="submit"
-    //     isDisabled={disableButton}
-    //   >
-    //     {submitAction === "signup" ? "Signup" : "Signin"}
-    //   </Button>
-    //   </Flex>
-    //   <Box w={'50%'} h={'100%'} borderTopRightRadius={'15px'} borderBottomRightRadius={'15px'} bgSize={'cover'} bgRepeat={'no-repeat'} bgImage={'url(https://images.unsplash.com/photo-1516880711640-ef7db81be3e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80)'} >
+    <Flex  w={'100%'} height={'calc(100vh - 100px)'} alignItems={'center'} justifyContent={'space-around'} >
+      <Flex w={'95%'} justifyContent={'space-between'} alignItems={'center'} borderRadius={'15px'} height={'95%'} className="secondPageForm">
+      <Flex direction="column" ml={'1em'} w={"45%"} h={'80%'} justifyContent={'center'} gap={'15px'} alignItems={'flex-start'} >
+      <Heading alignSelf={'center'}>{submitAction==='signup'?"Welcome To Skilify":"Welcome Back"}</Heading>
+      {submitAction === "signup" ? (
+        <FormControl isInvalid={!formData.isValidEmail}>
+          <FormLabel>Email address</FormLabel>
+          <Input
+            value={formData.email}
+            onChange={(e) =>
+              dispatch({ type: "CHANGE_EMAIL", payload: e.target.value })
+            }
+            type="email"
+          />
+          <FormErrorMessage>Kindly Enter A Valid Email</FormErrorMessage>
+        </FormControl>
+      ) : null}
+      <FormControl isRequired={'true'} isInvalid={!formData.isValidUsername}>
+        <FormLabel>Username</FormLabel>
+        <Input
+          onChange={(e) =>
+            dispatch({ type: "CHANGE_USERNAME", payload: e.target.value })
+          }
+          value={formData.username}
+          type="text"
+        />
+        <FormErrorMessage>This Username Is Invalid </FormErrorMessage>
+      </FormControl>
+      {submitAction === "signup" ? (
+        <FormControl>
+          <FormLabel>Full Name</FormLabel>
+          <Input
+            onChange={(e) =>
+              dispatch({ type: "CHANGE_NAME", payload: e.target.value })
+            }
+            value={formData.name}
+            type="text"
+          />
+        </FormControl>
+      ) : null}
+      <FormControl isInvalid={!formData.isValidPassword}>
+        <FormLabel>Password</FormLabel>
+        <Input
+          onChange={(e) =>
+            dispatch({ type: "CHANGE_PASSWORD", payload: e.target.value })
+          }
+          type="password"
+          value={formData.password}
+        />
+        <FormErrorMessage>
+          Password Must Be At least 8 letters and contains at least on symbo @!
+        </FormErrorMessage>
+      </FormControl>
+      <Button
+        w={'180px'}
+        height={'45px'}
+        onClick={(e) => handleSubmit(e)}
+        mt={4}
+        colorScheme="teal"
+        type="submit"
+        isDisabled={disableButton}
+      >
+        {submitAction === "signup" ? "Signup" : "Signin"}
+      </Button>
+      </Flex>
+      <Box w={'50%'} h={'100%'} borderTopRightRadius={'15px'} borderBottomRightRadius={'15px'} bgSize={'cover'} bgRepeat={'no-repeat'} bgImage={'url(https://images.unsplash.com/photo-1516880711640-ef7db81be3e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80)'} >
 
-    //   </Box>
-    //   </Flex>
+      </Box>
+      </Flex>
    
-     <FormTest />
-    // </Flex>
+     {/* <FormTest /> */}
+    </Flex>
   );
 }
 

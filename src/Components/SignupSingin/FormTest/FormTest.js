@@ -8,13 +8,13 @@ const FormTest = () => {
         className="wrapper"
         style={{
           backgroundImage:
-            "url('https://th.bing.com/th/id/OIP.1YM53mG10H_U25iPjop83QHaEo?pid=ImgDet&rs=1')",
+            "url('https://thumbs.dreamstime.com/b/wooden-workshop-table-tools-workbench-different-background-52337744.jpg')",
         }}
       >
         <div className="inner">
           <div className="image-holder">
             <img
-              src="https://th.bing.com/th/id/OIP.1YM53mG10H_U25iPjop83QHaEo?pid=ImgDet&rs=1"
+              src="https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX13755760.jpg"
               alt=""
             />
           </div>

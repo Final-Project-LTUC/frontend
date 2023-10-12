@@ -11,8 +11,6 @@ import { handymanExperties } from "../../../assets/constants";
 import "./HomeServices.scss";
 
 function HomeServices() {
-
-
   useEffect(() => {
     try {
       // const response=await axios.get('')
@@ -23,15 +21,11 @@ function HomeServices() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-
   const displayedServices = handymanExperties.slice(0, 6);
 
   return (
     // <div style={{ width: "100%" }}>
-      <Box width={"fill"}> 
-
-
-   
+    <Box width={"fill"}>
       <Heading as="h2" size="3xl" noOfLines={1} paddingTop={10}>
         Services
       </Heading>
@@ -70,7 +64,7 @@ function HomeServices() {
         </Flex>
       </Flex>
 
-<br/> 
+      <br />
       <ChakraLink as={ReactRouterLink} to="/services" onClick={scrollToTop}>
         <Button
           bg={"teal.500"}
@@ -81,7 +75,7 @@ function HomeServices() {
           ALL SERVICES
         </Button>
       </ChakraLink>
-    {/* </div> */}
+      {/* </div> */}
     </Box>
   );
 }
