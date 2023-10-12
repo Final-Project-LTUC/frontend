@@ -7,6 +7,7 @@ import {
   FormLabel,
   Heading,
   Input,
+  Text,
   useToast
 } from "@chakra-ui/react";
 
@@ -103,12 +104,13 @@ function Form({ submitAction, userType,setShowPages,showPages }) {
           })
     }
   }
+
   useEffect(() => {
     setDisabledButton(!checkAllValidation(formData));
   }, [formData]);
   return (
     <Flex  w={'100%'} height={'calc(100vh - 100px)'} alignItems={'center'} justifyContent={'space-around'} >
-      <Flex w={'90%'} justifyContent={'space-between'} alignItems={'center'} borderRadius={'15px'} height={'95%'} className="secondPageForm">
+      <Flex w={'95%'} justifyContent={'space-between'} alignItems={'center'} borderRadius={'15px'} height={'95%'} className="secondPageForm">
       <Flex direction="column" ml={'1em'} w={"45%"} h={'80%'} justifyContent={'center'} gap={'15px'} alignItems={'flex-start'} >
       <Heading alignSelf={'center'}>{submitAction==='signup'?"Welcome To Skilify":"Welcome Back"}</Heading>
       {submitAction === "signup" ? (
