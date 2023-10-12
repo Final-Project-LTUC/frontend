@@ -53,8 +53,10 @@ function LoginProvider(props) {
     }
   }
   async function updateData(body,token){
-    console.log(token)
+    
     try {
+      console.log(token)
+      // validateToken(token)
       const headers = {
         Authorization: `Bearer ${token}`,
       };
