@@ -18,7 +18,7 @@ transition={{
   type: "ease", 
   duration:.8,
   damping:20
-}}      
+}}
 //update now can you seeeeeeeeeeeeeeeeeeeeeeeeeeeeee lieth
 >
   <Box sx={imageStyle} flexDirection={'column'} backgroundImage={`url(${imgUrl})`}></Box>
