@@ -3,17 +3,24 @@ import cookie from 'react-cookies';
 import jwt_decode from 'jwt-decode';
 import { initialState, loginReducer } from '../Reducers/LoginReducer';
 import axios from 'axios';//    
+import io from 'socket.io-client';
 export const LoginContext = React.createContext();
-
 function LoginProvider(props) {
+  //  useEffect(()=>{
+  //   let token1 =cookie.load('auth'); 
+  //   console.log(token1,"tokken cookie")
+  //  }
+  //  )
+  const socketI = io('http://localhost:5000', { autoConnect: false });
+  const [socket,setSocket] = useState(socketI)
   const [loginData, dispatch] = useReducer(loginReducer, initialState);
   function can(capability) {
     return loginData.user.capabilities?.includes(capability)&& loginData.token;
   }
-
+  // useeffect to load when you have tokken in the cockies
 
   async function login(username, password,userType) {
-    const role=userType==='user'?'user':'handymen';
+    const role=userType==='user'?'user':'user'; // fix this abdeen it is only working for the second condition
     try {
         const response=await axios.post(
             `${process.env.REACT_APP_DATABASE_URL}/signin?role=${role}`
@@ -22,7 +29,15 @@ function LoginProvider(props) {
                 headers:{Authorization:`Basic ${btoa(`${username}:${password}`)}`}
             }
             )
-              validateToken(response.data.token);
+            
+             socket.connect()
+              // validateToken(response.data.token);
+              setLoginState(true, response.data.token, response.data);
+              console.log("valid user", response.data.token)
+              let userId = response.data.id;
+              console.log(userId)
+              socket.emit("signIn", { userId });
+              
               return response;
     } catch (error) {
           return error;
@@ -60,13 +75,23 @@ function LoginProvider(props) {
   }
 
   function logout() {
+    console.log("loged out ")
+
+
+    socket.emit("signOut", {userId:loginData.user.id} );
     setLoginState(false, null, {});
+    
   }
 
   function validateToken(token) {
     try {
       const validUser = jwt_decode(token);
-        setLoginState(true, token, validUser);
+      // setLoginState(false, null, {});
+      setLoginState(true, token,validUser);
+      socket.connect()
+      socket.emit("signIn", { userId:validUser.id });
+
+        console.log("valid user", validUser)
     } catch (e) {
       console.log()
       setLoginState(false, null, {}, e);
@@ -79,7 +104,7 @@ function LoginProvider(props) {
     dispatch({ type: 'CHANGE_LOGIN_STATUS', payload: loggedIn });
     dispatch({ type: 'CHANGE_TOKEN', payload: token });
     dispatch({ type: 'CHANGE_USER', payload: user });
-    dispatch({ type: 'CHANGE_ERROR', payload: error });
+    // dispatch({ type: 'CHANGE_ERROR', payload: error });
   }
 
   useEffect(() => {
@@ -90,7 +115,7 @@ function LoginProvider(props) {
   }, []);
 
   return (
-    <LoginContext.Provider value={{ can, login, logout, dispatch,signup,updateData,loginData }}>
+    <LoginContext.Provider value={{ socket,can, login, logout, dispatch,signup,updateData,loginData }}>
       {props.children}
     </LoginContext.Provider>
   );
