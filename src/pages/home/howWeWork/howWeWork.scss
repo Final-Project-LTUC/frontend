@@ -32,12 +32,12 @@
   }
 
   .floating-card2 {
-    left: 95%;
+    left: 100%;
 
   }
 
   .floating-card3 {
-    left: 120%;
+    left: 130%;
 
   }
 
@@ -61,7 +61,7 @@
   overflow: hidden;
   border-radius: 0.5em;
   text-decoration: none;
-  background: white;
+  background: #419197;
   margin: 1em;
   padding: 2.75em 2.5em;
   box-shadow: 0 1.5em 2.5em -0.5em rgba(#000000, 0.1);
@@ -74,18 +74,18 @@
   }
 
   h3 {
-    color: #2e3c40;
+    color: white;
     font-size: 3.5em;
     font-weight: 600;
     line-height: 1;
     padding-bottom: 0.5em;
     margin: 0 0 0.142857143em;
-    border-bottom: 2px solid #419197;
+    border-bottom: 2px solid black;
     transition: color 0.45s ease, border 0.45s ease;
   }
 
   h4 {
-    color: #627084;
+    color: white;
     text-transform: uppercase;
     font-size: 1.125em;
     font-weight: 700;
@@ -97,7 +97,7 @@
 
   p {
     opacity: 0;
-    color: #ffffff;
+    color: #000000;
     font-weight: 600;
     line-height: 1.8;
     margin: 0 0 1.25em;
@@ -125,16 +125,16 @@
   }
 
   &:hover {
-    background: #419197;
+    background: white;
     transform: scale(1.02);
 
     h3 {
-      color: #ffffff;
+      color: black;
       border-bottom-color: #76999b;
     }
 
     h4 {
-      color: #ffffff;
+      color: #000000;
     }
 
     p {
@@ -143,13 +143,13 @@
     }
 
     .link-text {
-      color: #ffffff;
+      color: #000000;
 
       svg {
         animation: point 1.25s infinite alternate;
 
         path {
-          fill: #ffffff;
+          fill: #000000;
         }
       }
     }
