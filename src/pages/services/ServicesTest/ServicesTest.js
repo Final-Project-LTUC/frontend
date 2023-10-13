@@ -1,71 +1,189 @@
-import React from "react";
-import { handymanExperties } from "../../../assets/constants";
+import {
+  Box,
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+  VStack,
+  Select,
+  Flex,
+} from "@chakra-ui/react";
+import React, { useState,useEffect } from "react";
+import FilterSidebar from "../../../Components/ServicesPage/FilterSideBar";
+import axios from "axios"
+import Handymen from "../../../Components/ServicesPage/Handymen";
+ function Services() {
+  const [handyData, setHandyData] = useState(null); // Initialize handyData state
 
-import "./ServicesTest.css"; // Import the CSS file for styling
-import { Heading } from "@chakra-ui/react";
 
-const ServicesTest = ({ hue }) => {
-  console.log("handymanExperties:", handymanExperties); // Add this line to check if handymanExperties is defined
+  async function getData (){
+  try {
+    const response = await axios.get('https://backend-n1je.onrender.com/handymen');
+    return response.data
 
-  const cardData = handymanExperties.map((item) => ({
-    imageUrl: item.imgUrl,
-    caption: item.name,
-    description: item.description,
-  }));
+  } catch (error) {
+        console.error("Error fetching data:", error);
+    //     // Handle the error
+    //   }
+    // ...
+  }
+}
+
+
+  const categories = [
+    {
+      id: 1,
+      name: "Carpentry",
+    },
+    {
+      id: 2,
+      name: "Plumbing",
+    },
+    {
+      id: 3,
+      name: "Electrical Work",
+    },
+    {
+      id: 4,
+      name: "Painting",
+    },
+    {
+      id: 5,
+      name: "Tiling",
+    },
+    {
+      id: 6,
+      name: "Landscaping",
+    },
+    {
+      id: 7,
+      name: "Drywall Installation",
+    },
+    {
+      id: 8,
+      name: "Furniture Assembly",
+    },
+    {
+      id: 9,
+      name: "Roofing Repairs",
+    },
+    {
+        id: 10,
+        name: "Gutter Cleaning",
+      
+    },
+    {
+        id: 11,
+        name: "General Repairs",
+     
+    },
+    {
+        id: 12,
+        name: "Flooring Installation",
+
+    },
+    {
+        id: 13,
+        name: "Window Installation",
+      
+    },
+    {
+        id: 14,
+        name: "Deck Repair",
+
+    },
+    {
+        id: 15,
+        name: "Fence Installation",
+
+    },
+    {
+        id: 16,
+        name: "Pressure Washing",
+
+    },
+    {
+        id: 17,
+        name: "Appliance Repair",
+
+    },
+    {
+        id: 18,
+        name: "HVAC Maintenance",
+
+    },
+    {
+        id: 19,
+        name: "Locksmith Services",
+
+    },
+    {
+        id: 20,
+        name: "Garage Door Repair",
+
+    }
+]
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const handleLocationChange = (location) => {
+    setSelectedLocation(location);
+  };
+
+  const handleCategoryChange = (categoryName) => {
+    setSelectedCategory(categoryName);
+
+    // Find the ID corresponding to the selected category name
+    const selectedCategoryObject = categories.find((category) => category.name === categoryName);
+
+    if (selectedCategoryObject) {
+      setSelectedCategory(selectedCategoryObject.id);
+    } else {
+      // Handle the case where the category is not found
+      setSelectedCategory(""); // You can set a default value or an error message as needed.
+    }
+  };
+
+  console.log("usestate",selectedLocation,selectedCategory)
+  useEffect( ()=>{
+  
+      
+      async function fetchData() {
+        const data = await getData();
+        setHandyData(data); // Set the handyData state with the fetched data
+        console.log("handydata  ",handyData )
+      }
+  
+      fetchData(); // Call the fetchData function when the component mounts
+   
+  
+   },[selectedCategory]);
+
+
+
 
   return (
-    <>
-      <Heading as="h2" size="3xl" noOfLines={1} paddingTop={10}>
-        Services
-      </Heading>
-      <div className="serCards">
-        {cardData.map((card, index) => (
-          <div
-            key={index}
-            className="flip-card-container"
-            style={{ "--hue": hue }}
-          >
-            <div className="flip-card">
-              <div className="card-front">
-                <figure>
-                  <div className="img-bg"></div>
-                  <img src={card.imageUrl} alt={card.caption} />
-                  <figcaption>{card.caption}</figcaption>
-                </figure>
-                <p
-                  style={{
-                    color: "white",
-                    letterSpacing: "2px",
-                    fontSize: "14px",
-                    maxWidth: "320px",
-                    fontFamily: "cursive",
-                  }}
-                >
-                  {card.description}
-                </p>
-              </div>
+    <Box p={4} bgColor="white.100" width={"100%"} height={"100%"}>
+<Flex justifyContent="flex-start" flexDirection="row">
+    <Box p={4} bgColor="white.100" width={"30%"} height={"220"}>
 
-              <div className="card-back">
-                <figure>
-                  <div className="img-bg"></div>
-                  <img src={card.imageUrl} alt={card.caption} />
-                </figure>
-                <button style={{ padding: "15px" }}>See All</button>
-                <div className="design-container">
-                  {[1, 2, 3, 4, 5, 6, 7, 8].map((design) => (
-                    <span
-                      key={design}
-                      className={`design design--${design}`}
-                    ></span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </>
+
+        <FilterSidebar
+        selectedLocation={selectedLocation}
+        selectedCategory={selectedCategory}
+        onLocationChange={handleLocationChange}
+        onCategoryChange={handleCategoryChange}
+        />
+
+
+    </Box>
+    <Box>
+
+      <Handymen handyData ={handyData}/>
+    </Box>
+        </Flex>
+    </Box>
   );
-};
+}
 
-export default ServicesTest;
+export default Services;
