@@ -31,7 +31,7 @@ function Profile({token}) {
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      const response = await axios.get('http://localhost:5000/dashboard', {
+      const response = await axios.get('https://backend-n1je.onrender.com/dashboard', {
         headers: headers,
       });
   

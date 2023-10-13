@@ -11,7 +11,7 @@ function LoginProvider(props) {
   //   console.log(token1,"tokken cookie")
   //  }
   //  )
-  const socketI = io('http://localhost:5000', { autoConnect: false });
+  const socketI = io('https://backend-n1je.onrender.com', { autoConnect: false });
   const [socket,setSocket] = useState(socketI)
   const [loginData, dispatch] = useReducer(loginReducer, initialState);
   function can(capability) {
@@ -53,6 +53,8 @@ function LoginProvider(props) {
   }
   async function updateData(body,token){
     try {
+      console.log(token)
+      // validateToken(token)
       const headers = {
         Authorization: `Bearer ${token}`,
       };
