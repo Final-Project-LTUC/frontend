@@ -120,7 +120,33 @@
 
 
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -462,32 +488,147 @@
 
 
 
-import React from 'react';
+// import React from 'react';
+// import {
+//   Box,
+//   chakra,
+//   Container,
+//   SimpleGrid,
+//   Stack,
+//   Text,
+//   VisuallyHidden,
+//   Input,
+//   IconButton,
+//   useColorModeValue,
+//   Flex,
+// } from '@chakra-ui/react';
+// import { BiMailSend } from 'react-icons/bi';
+// import { IoLocationOutline, IoMailOutline, IoCallOutline } from 'react-icons/io5';
+
+// // Import your logo from the assets folder
+// import YourLogo from './assets/logo-a-BqCGck--transformed-removebg-preview.png';
+
+// const Logo = (props) => {
+//   return (
+//     <img src={YourLogo} alt="Your Logo" {...props} />
+//   );
+// };
+
+
+// const ListHeader = ({ children }) => {
+//   return (
+//     <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
+//       {children}
+//     </Text>
+//   );
+// };
+
+// export default function LargeWithNewsletter() {
+//   return (
+//     <Box
+//       bg="teal.500"
+//       color="white"
+//     >
+//       <Container as={Stack} maxW={'6xl'} py={10}>
+//         <SimpleGrid
+//           templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 2fr' }}
+//           spacing={8}
+//         >
+//           <Stack spacing={6}>
+//             <Box>
+//               <Logo width="100px" height="100px" />
+//             </Box>
+//             <Text fontSize="lg" textAlign="center">
+//               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+//             </Text>
+//           </Stack>
+//           <Stack align={'flex-start'}>
+//             <ListHeader>Company</ListHeader>
+//             <Box as="a" href={'#'}>
+//               About us
+//             </Box>
+//             <Box as="a" href={'#'}>
+//               Blog
+//             </Box>
+//             <Box as="a" href={'#'}>
+//               Contact us
+//             </Box>
+//             <Box as="a" href={'#'}>
+//               Pricing
+//             </Box>
+//             <Box as="a" href={'#'}>
+//               Testimonials
+//             </Box>
+//           </Stack>
+//           <Stack align={'flex-start'}>
+//             <ListHeader>Support</ListHeader>
+//             <Box as="a" href={'#'}>
+//               Help Center
+//             </Box>
+//             <Box as="a" href={'#'}>
+//               Terms of Service
+//             </Box>
+//             <Box as="a" href={'#'}>
+//               Legal
+//             </Box>
+//             <Box as="a" href={'#'}>
+//               Privacy Policy
+//             </Box>
+//             <Box as="a" href={'#'}>
+//               Status
+//             </Box>
+//           </Stack>
+//           <Stack align={'flex-start'}>
+//             <ListHeader>Stay up to date</ListHeader>
+//             <Stack direction={'row'}>
+//               <Input
+//                 placeholder={'Your email address'}
+//                 bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
+//                 border={0}
+//                 _focus={{
+//                   bg: 'whiteAlpha.300',
+//                 }}
+//               />
+//               <IconButton
+//                 bg={useColorModeValue('green.400', 'green.800')}
+//                 color={useColorModeValue('white', 'gray.800')}
+//                 _hover={{
+//                   bg: 'green.600',
+//                 }}
+//                 aria-label="Subscribe"
+//                 icon={<BiMailSend />}
+//               />
+//             </Stack>
+//           </Stack>
+//         </SimpleGrid>
+//       </Container>
+//       <center>
+//         <Box bg="#D6E4E5" p={4} color="teal">
+//           <Text fontSize={'sm'}>© 2023 Skillify. All rights reserved</Text>
+//         </Box>
+//       </center>
+//     </Box>
+//   );
+// }
+
+
+
+
+
+
 import {
   Box,
-  chakra,
   Container,
   SimpleGrid,
   Stack,
   Text,
-  VisuallyHidden,
   Input,
   IconButton,
   useColorModeValue,
   Flex,
+  Image,
 } from '@chakra-ui/react';
 import { BiMailSend } from 'react-icons/bi';
-import { IoLocationOutline, IoMailOutline, IoCallOutline } from 'react-icons/io5';
-
-// Import your logo from the assets folder
-import YourLogo from '../assets/logo-a-BqCGck--transformed-removebg-preview.png';
-
-const Logo = (props) => {
-  return (
-    <img src={YourLogo} alt="Your Logo" {...props} />
-  );
-};
-
 
 const ListHeader = ({ children }) => {
   return (
@@ -499,24 +640,17 @@ const ListHeader = ({ children }) => {
 
 export default function LargeWithNewsletter() {
   return (
-    <Box
-      bg="teal.500"
-      color="white"
-    >
-      <Container as={Stack} maxW={'6xl'} py={10}>
+    <Box bg="teal.500" color="white">
+      <Container maxW={'6xl'} py={10}>
+        
         <SimpleGrid
           templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 2fr' }}
           spacing={8}
         >
-          <Stack spacing={6}>
-            <Box>
-              <Logo width="100px" height="100px" />
-            </Box>
-            <Text fontSize="lg" textAlign="center">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </Text>
-          </Stack>
-          <Stack align={'flex-start'}>
+          {/* Add your logo to the left of the grid with a responsive size in rem units */}
+          <Image src="/assets/logo.png" alt="Your Logo" boxSize="15rem" />
+
+          <Stack spacing={2} align={'flex-start'}>
             <ListHeader>Company</ListHeader>
             <Box as="a" href={'#'}>
               About us
@@ -557,7 +691,7 @@ export default function LargeWithNewsletter() {
             <Stack direction={'row'}>
               <Input
                 placeholder={'Your email address'}
-                bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
+                bg={useColorModeValue('blackAlpha.600', 'whiteAlpha.500')}
                 border={0}
                 _focus={{
                   bg: 'whiteAlpha.300',
@@ -567,7 +701,7 @@ export default function LargeWithNewsletter() {
                 bg={useColorModeValue('green.400', 'green.800')}
                 color={useColorModeValue('white', 'gray.800')}
                 _hover={{
-                  bg: 'green.600',
+                  bg: 'green.800',
                 }}
                 aria-label="Subscribe"
                 icon={<BiMailSend />}
@@ -576,6 +710,8 @@ export default function LargeWithNewsletter() {
           </Stack>
         </SimpleGrid>
       </Container>
+
+      {/* Teal-colored footer with copyright text */}
       <center>
         <Box bg="#D6E4E5" p={4} color="teal">
           <Text fontSize={'sm'}>© 2023 Skillify. All rights reserved</Text>
@@ -584,3 +720,9 @@ export default function LargeWithNewsletter() {
     </Box>
   );
 }
+
+
+
+
+
+
