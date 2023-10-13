@@ -11,10 +11,12 @@ import {
 import React, { useState,useEffect } from "react";
 import FilterSidebar from "../../../Components/ServicesPage/FilterSideBar";
 import axios from "axios"
-import Handymen from "../../../Components/ServicesPage/Handymen";
+import Handymen from "../../../Components/ServicesPage/Handymen"; 
+import categories from "./constant"
  function Services() {
   const [handyData, setHandyData] = useState(null); // Initialize handyData state
-
+  const [expertydata, setExpertyData] = useState(null); // Initialize handyData state
+  const [newDatacat,setNewData] = useState(null);
 
   async function getData (){
   try {
@@ -28,105 +30,40 @@ import Handymen from "../../../Components/ServicesPage/Handymen";
     // ...
   }
 }
+  async function getDataExperty (id){
+  try {
+    const response = await axios.get(`https://backend-n1je.onrender.com/handymen/genre/${id}`);
+    return response.data
+
+  } catch (error) {
+        console.error("Error fetching data:", error);
+    //     // Handle the error
+    //   }
+    // ...
+  }
+}
 
 
-  const categories = [
-    {
-      id: 1,
-      name: "Carpentry",
-    },
-    {
-      id: 2,
-      name: "Plumbing",
-    },
-    {
-      id: 3,
-      name: "Electrical Work",
-    },
-    {
-      id: 4,
-      name: "Painting",
-    },
-    {
-      id: 5,
-      name: "Tiling",
-    },
-    {
-      id: 6,
-      name: "Landscaping",
-    },
-    {
-      id: 7,
-      name: "Drywall Installation",
-    },
-    {
-      id: 8,
-      name: "Furniture Assembly",
-    },
-    {
-      id: 9,
-      name: "Roofing Repairs",
-    },
-    {
-        id: 10,
-        name: "Gutter Cleaning",
-      
-    },
-    {
-        id: 11,
-        name: "General Repairs",
-     
-    },
-    {
-        id: 12,
-        name: "Flooring Installation",
 
-    },
-    {
-        id: 13,
-        name: "Window Installation",
-      
-    },
-    {
-        id: 14,
-        name: "Deck Repair",
 
-    },
-    {
-        id: 15,
-        name: "Fence Installation",
+const [selectedLocation, setSelectedLocation] = useState("");
+const [selectedCategory, setSelectedCategory] = useState("");
 
-    },
-    {
-        id: 16,
-        name: "Pressure Washing",
+function findMatchingIds(apiResponse, arrayOfObjects) {
+  // Extract all IDs from the API response
+  const apiIds = apiResponse.map((item) => item.HandymanId);
 
-    },
-    {
-        id: 17,
-        name: "Appliance Repair",
+  // Find matching objects in the array of objects
+  const matchingObjects = arrayOfObjects.filter((obj) => apiIds.includes(obj.id));
 
-    },
-    {
-        id: 18,
-        name: "HVAC Maintenance",
+  return matchingObjects;
+}
 
-    },
-    {
-        id: 19,
-        name: "Locksmith Services",
 
-    },
-    {
-        id: 20,
-        name: "Garage Door Repair",
 
-    }
-]
-  const [selectedLocation, setSelectedLocation] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
 
-  const handleLocationChange = (location) => {
+
+const handleLocationChange = (location) => {
     setSelectedLocation(location);
   };
 
@@ -150,8 +87,15 @@ import Handymen from "../../../Components/ServicesPage/Handymen";
       
       async function fetchData() {
         const data = await getData();
-        setHandyData(data); // Set the handyData state with the fetched data
-        console.log("handydata  ",handyData )
+        setHandyData(data);
+        const expertyID = await getDataExperty(selectedCategory);
+        console.log("handydata  ", expertyID);
+    if(expertyID){
+      const newData = await findMatchingIds(expertyID, handyData) 
+      setNewData(newData)
+    } 
+       
+       
       }
   
       fetchData(); // Call the fetchData function when the component mounts
@@ -179,7 +123,7 @@ import Handymen from "../../../Components/ServicesPage/Handymen";
     </Box>
     <Box>
 
-      <Handymen handyData ={handyData}/>
+      <Handymen handyData ={newDatacat?newDatacat:handyData}/>
     </Box>
         </Flex>
     </Box>

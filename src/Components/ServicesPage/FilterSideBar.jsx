@@ -79,7 +79,7 @@ function FilterSidebar({
             menuProps={{ style: { maxHeight: '30' } }} // Adjust the 'maxHeight' as needed
           >
             
-            <option value="" >Select a category</option>
+            <option value="" >{categories[selectedCategory-1]?categories[selectedCategory-1]:"Select a catgory"}</option>
             {categories.map((category) => (
               <option key={category} value={category} >
                 {category}
