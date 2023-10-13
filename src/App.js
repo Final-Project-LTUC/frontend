@@ -8,7 +8,7 @@ import Navbar from "./layout/header/Navbar/Navbar";
 import Services from "./pages/services/Services";
 import Catalog from "./pages/catalog/Catalog";
 import AboutUs from './pages/aboutUs/ABOUTUS';
-import Footer from "../src/layout/footer/Footer";
+import Footer from "./layout/footer/Footer";
 import Dashboard from "./pages/dashBoard/Dashboard";
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import UpdateForm from "./pages/dashBoard/update/Update";
@@ -21,6 +21,7 @@ import Tasks from  "./pages/dashBoard/tasks/TasksPage"
 
 import Auth from "./pages/auth/Auth";
 import LoginProvider from "./hooks/Context/LoginProvider";
+import ServicesTest from "./pages/services/ServicesTest/ServicesTest";
 
 
 
@@ -49,7 +50,9 @@ function App() {
       {renderNavbar()}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/services" element={<Services />} />
+        {/* <Route path="/services" element={<Services />} /> */}
+        <Route path="/services" element={<ServicesTest  hue="220" />} />
+
          <Route path="/catalog" element={<Catalog />} />
                 <Route
                     path="/handyman/:id"
