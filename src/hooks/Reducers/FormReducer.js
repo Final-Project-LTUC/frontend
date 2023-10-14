@@ -6,6 +6,9 @@ export const initialState = {
   experties: [],
   firstName: "",
   lastName:'',
+  age:0,
+  hourlyRate:0,
+  inquiryPrice:0,
   image: null,
   lat: 0,
   long: 0,
@@ -72,9 +75,14 @@ export default function formReducer(state, action) {
         const newState={...state,languages:[]};
         return newState;
       }
+      case "CHANGE_HOURLYRATE":return {...state,hourlyRate:action.payload};
+      case 'CHANGE_INQUIRY':return {...state,inquiryPrice:action.payload};
+      case 'CHANGE_AGE':return {...state,age:action.payload};
+      case 'CHANGE_FIRSTNAME':return {...state,firstName:action.payload};
+      case 'CHANGE_LASTNAME':return {...state,lastName:action.payload};
     case "CHANGE_LANGUAGES": {
         let newLanguages=state.languages;
-        if(newLanguages.includes(action.payload)){
+        if(newLanguages?.includes(action.payload)){
           newLanguages=newLanguages.filter(e=>e!==action.payload);
           return {...state,languages:newLanguages}
         }else {
@@ -82,6 +90,7 @@ export default function formReducer(state, action) {
           return{...state,languages:newLanguages};
         }
       }
+      case 'ADD_LANGUAGES':return {...state,languages:[]};
     case "CHANGE_EXPERTIES": {
       let newArray = state.experties;
       if (newArray.includes(action.payload)) {
@@ -92,7 +101,7 @@ export default function formReducer(state, action) {
         return { ...state, experties: newArray };
       }
     }
-
+    case 'CHANGE_ALL':return{...action.payload}
     default:
       return state;
   }

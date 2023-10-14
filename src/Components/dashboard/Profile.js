@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardHeader, CardBody } from "@chakra-ui/react";
+import { Link } from '@chakra-ui/react'
 import "./profile.css"
 import {
     Box,
@@ -10,180 +11,145 @@ import {
     Heading,
   } from "@chakra-ui/react";
 import axios from "axios";
-
-
-function Profile({token}) {
-   console.log(token)
-   async function gettingProfile(token) {
-    try {
-      const headers = {
-        Authorization: `Bearer ${token}`,
-      };
-      const response = await axios.get(`${`${process.env.REACT_APP_DATABASE_URL}`}/dashboard`, {
-        headers: headers,
-      });
-  
-      if (response.status === 200) {
-        return response.data;
-      } else {
-        console.error('Failed to fetch data');
-        return null;
-      }
-    } catch (error) {
-      console.error('An error occurred:', error);
-      return null;
-    }
-  }
-  const [oldData, setOldData] = useState(null);
-  useEffect(() => {
-    // Fetch profile data and update the state
-    async function fetchData() {
-      const profileData = await gettingProfile(token);
-      setOldData(profileData);
-    }
-
-    fetchData();
-  }, [token]);
-  console.log(oldData)
-
-
-
-
+const UpdateLink=({setShowUpdateForm})=><Link colorScheme="teal" onClick={()=>setShowUpdateForm(true)} fontSize={'lg'} fontWeight={'semibold'} textAlign={'center'} display={'block'} to={'/dashUpdate'}>Update</Link>
+function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks}) {
   return (
-    <Card className="profileanime" width={"45%"} >
-        <Flex >
-
+    <Card 
+    position={`${showUpdateForm||showTasks?'absolute':'relative'}`}
+    transform={`translateX(${showUpdateForm||showTasks?'-200%':'0'})`}
+    className="profileanime" width={"75%"} >
+        <Flex w={'100%'}>
       <CardHeader>
-        <Heading size="md">Your Profile</Heading>
+        <Heading size="xl">Your Profile</Heading>
       </CardHeader>
         </Flex>
-
-      <CardBody>
-        <Flex>
-          {/* Left side with a 4:8 ratio */}
+      <CardBody w={'100%'}>
+        <Flex w={'100%'}>
           <Box style= {{ textAlign: 'left', borderRadius: '4%' }}
             flex="fill"
-            bg="dark.900" // Yellowish background color
-            p="4" // Add padding to the left side
+            bg="dark.900" 
+            p="4" 
+            w={'100%'}
           >
-            <Stack divider={<StackDivider />} spacing="4">
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
+            <Stack  divider={<StackDivider />} spacing="4">
+              <Flex  w={'100%'}>
+                <Box  w={'100%'}>
+                <Heading size="md" textTransform="uppercase">
                   userName
                 </Heading>
-                <Text pt="2" fontSize="sm">
-                  {oldData&&oldData.username?oldData.username:"username"}
+                <Text pt="2" fontSize='md'>
+                  {profileData.username?profileData.username:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
                 </Text>
-              </Box>
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  first Name
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  {oldData&&oldData.firstName?oldData.firstName:"loading..."}
-                </Text>
-              </Box>
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  last Name
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  {oldData&&oldData.lastName?oldData.lastName:"loading..."}
-                </Text>
-              </Box>
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  age
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  {oldData&&oldData.age?oldData.age:"age"}
-                </Text>
-              </Box>
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
+                </Box>
+                <Box w={'100%'}>
+                <Heading size="md" textTransform="uppercase">
                 email
                 </Heading>
-                <Text pt="2" fontSize="sm">
-                  {oldData&&oldData.email?oldData.email:"loading"}
+                <Text pt="2" fontSize="md">
+                  {profileData.email?profileData.email:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
                 </Text>
               </Box>
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
+              </Flex>
+              <Flex w={'100%'}>
+                <Box w={'100%'} >
+                <Heading size="md" textTransform="uppercase">
+                  first Name
+                </Heading>
+                <Text pt="2" fontSize="md">
+                  {profileData.firstName?profileData.firstName:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
+                </Text>
+                </Box>
+                <Box w={'100%'}>
+                <Heading size="md" textTransform="uppercase">
+                  Last Name
+                </Heading>
+                <Text pt="2" fontSize="md">
+                  {profileData.lastName?profileData.lastName:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
+                </Text>
+                </Box>
+              </Flex>
+              <Flex w={'100%'}>
+                <Box w={'100%'}>
+                <Heading size="md" textTransform="uppercase">
+                  age
+                </Heading>
+                <Text pt="2" fontSize="md">
+                  {profileData.age?profileData.age:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
+                </Text>
+                </Box>
+                <Box w={'100%'}>
+                <Heading size="md" textTransform="uppercase">
                 languages
                 </Heading>
-                <Text pt="2" fontSize="sm">
-                  {oldData&&oldData.languages?oldData.languages:"loading..."}
+                <Text pt="2" fontSize="md">
+                  {profileData.languages?profileData.languages:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
                 </Text>
               </Box>
-              
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
+              </Flex>
+              <Flex w='100%'>
+                <Box w={'100%'}>
+                <Heading size="md" textTransform="uppercase">
                 phone Number
                 </Heading>
-                <Text pt="2" fontSize="sm">
-                  0062{oldData&&oldData.phoneNumber?oldData.phoneNumber:"loading..."}
+                <Text pt="2" fontSize="md">
+                  00962 {profileData.phoneNumber?profileData.phoneNumber:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
                 </Text>
-              </Box>
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                created At
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  {oldData&&oldData.createdAt?oldData.createdAt:"loading..."}
-                </Text>
-              </Box>
-              
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  Hourly rate
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                {oldData&&oldData.hourlyRate?oldData.hourlyRate:"hourlyRate"} JOD
-                </Text>
-              </Box>
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                 inquiry Price
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                {oldData&&oldData.inquiryPrice?oldData.inquiryPrice:"loading..."} JOD
-                </Text>
-              </Box>
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                 Biography
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                {oldData&&oldData.description?oldData.description:"description"}
-                </Text>
-              </Box>
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
+                </Box>
+                <Box w={'100%'}>
+                <Heading size="md" textTransform="uppercase">
                  Rating
                 </Heading>
-                <Text pt="2" fontSize="sm">
-                {oldData&&oldData.rating?oldData.rating:"rating"}
+                <Text pt="2" fontSize="md">
+                {profileData.rating?profileData.rating:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
                 </Text>
               </Box>
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                 Singed in as
+              </Flex>
+              <Flex w={'100%'}>
+              <Box w={'100%'}>
+                <Heading size="md" textTransform="uppercase">
+                  Hourly rate
                 </Heading>
-                <Text pt="2" fontSize="sm">
-                {oldData&&oldData.role?oldData.role:"role"}
+                <Text pt="2" fontSize="md">
+                {profileData.hourlyRate?profileData.hourlyRate+' JOD':<UpdateLink setShowUpdateForm={setShowUpdateForm}/>} 
+                </Text>
+                </Box>
+                <Box w={'100%'}>
+                <Heading size="md" textTransform="uppercase">
+                 inquiry Price
+                </Heading>
+                <Text pt="2" fontSize="md">
+                {profileData.inquiryPrice?profileData.inquiryPrice+' JOD ':<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
                 </Text>
               </Box>
+              </Flex>
+              <Flex w={'100%'}>
+              <Box w={'100%'}>
+                <Heading size="md" textTransform="uppercase">
+                 Biography
+                </Heading>
+                <Text pt="2" fontSize="md">
+                {profileData.description?profileData.description:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
+                </Text>
+              </Box>
+              <Box w={'100%'}>
+                <Heading size="md" textTransform="uppercase">
+                created At
+                </Heading>
+                <Text pt="2" fontSize="md">
+                  {profileData.createdAt?profileData.createdAt:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
+                </Text>
+              </Box>
+                </Flex>
               <Box>
-                <Heading size="xs" textTransform="uppercase">
+                <Heading size="md" textTransform="uppercase">
                   experties
                 </Heading>
-                <Text pt="2" fontSize="sm">
+                <Text pt="2" fontSize="md">
                   experties from the back end can be updated
                 </Text>
               </Box>
             </Stack>
           </Box>
-
           {/* Right side */}
           <Box flex="8">
             {/* Content for the right side */}

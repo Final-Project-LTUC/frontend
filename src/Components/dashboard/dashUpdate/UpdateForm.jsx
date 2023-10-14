@@ -1,250 +1,265 @@
-import { useState, useEffect } from 'react';
-import { Link as ChakraLink, LinkProps } from "@chakra-ui/react";
+import { useState, useEffect } from "react";
+import { Link as ChakraLink } from "@chakra-ui/react";
 import { Link as ReactRouterLink } from "react-router-dom";
 import {
-  Box,
   FormControl,
   FormLabel,
   Input,
   Button,
-  Select,
-} from '@chakra-ui/react';
-import axios from 'axios';
+  Flex,
+  Text,
+} from "@chakra-ui/react";
+import categories from "../../../pages/services/ServicesTest/constant";
 
-async function gettingProfile(token) {
-  try {
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-    const response = await axios.get(`${process.env.REACT_APP_DATABASE_URL}/dashboard`, {
-      headers: headers,
-    });
-
-    if (response.status === 200) {
-      return response.data;
-    } else {
-      console.error('Failed to fetch data');
-      return null;
-    }
-  } catch (error) {
-    console.error('An error occurred:', error);
-    return null;
-  }
-}
-//fjdsklafksajfkldjsakfjsdkljfkljl
-async function updateProfile(token, input) {
-  try {
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-    const response = await axios.put(`${process.env.REACT_APP_DATABASE_URL}/dashupdate`, input, {
-      headers: headers,
-    });
-
-    if (response.status === 200) {
-      return response.data;
-    } else {
-      console.error('Failed to fetch data');
-      return null;
-    }
-  } catch (error) {
-    console.error('An error occurred:', error);
-    return null;
-  }
-};
-
-
-function UpdateForm({ token }) {
-  const [oldData, setOldData] = useState(null);
-
-  useEffect(() => {
-    // Fetch profile data and update the state
-    async function fetchData() {
-      const profileData = await gettingProfile(token);
-      setOldData(profileData);
-    }
-
-    fetchData();
-  }, [token]);
-  // console.log(oldData)
-
-
-  const [formData, setFormData] = useState({
-    
-    phoneNumber: '',
-    firstName: '',
-  
-    lastName: '',
-    age: '',
-   
-    yearsOfExperience: "",
-    hourlyRate: '',
-    alt: '',
-    inquiryPrice: '',
- 
-    rating: 5,
-    description: '',
-    languages: 'Arabic',
-    role: 'handyman',
-  });
- 
- 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(token);
-    console.log(formData);
-    const result = await updateProfile(token, formData);
-    
-    console.log(result);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-
+function UpdateForm({
+  profileData,
+  showUpdateForm,
+  setShowUpdateForm,
+  handleUpdate,
+  updatedData,
+  setUpdatedData,
+}) {
   return (
-    <Box p={4}>
-      <form onSubmit={handleSubmit}>
-        <FormControl>
+    <Flex
+      position={`${showUpdateForm ? "relative" : "absolute"}`}
+      transform={`translateX(${showUpdateForm ? "0" : "-200%"})`}
+      transition={'all .7s ease-in-out'}
+      p={4}
+      w={"75%"}
+      h={"100vh"}
+      flexDirection={"column"}
+      justifyContent={"space-between"}
+    >
+      <Flex justifyContent={"space-between"} w={"100%"}>
+        <FormControl w={"40%"}>
           <FormLabel>firstName</FormLabel>
           <Input
-            placeholder={oldData ? oldData.firstName : 'firstName'}
-           
+            placeholder={profileData.firstName || "firstName"}
             type="text"
             name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            // required
+            w={"100%"}
+            value={updatedData.firstName}
+            onChange={(e) =>
+              setUpdatedData({
+                type: "CHANGE_FIRSTNAME",
+                payload: e.target.value,
+              })
+            }
           />
         </FormControl>
-        <FormControl>
+        <FormControl w={"40%"}>
           <FormLabel>Last lastName</FormLabel>
           <Input
-            placeholder={oldData ? oldData.lastName : 'lastName'}
-           
+            placeholder={profileData.lastName || "lastName"}
             type="text"
             name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            // required
+            value={updatedData.lastName}
+            onChange={(e) =>
+              setUpdatedData({
+                type: "CHANGE_LASTNAME",
+                payload: e.target.value,
+              })
+            }
           />
         </FormControl>
-
-        <FormControl>
+      </Flex>
+      <Flex w={"100%"} justifyContent={"space-between"}>
+        <FormControl w={"40%"}>
           <FormLabel>Phone Number</FormLabel>
           <Input
-            placeholder={oldData && oldData.phoneNumber ? oldData.phoneNumber : 'phone'}
+            placeholder={profileData.phoneNumber || "phone Number"}
             type="tel"
             name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            // required
+            value={updatedData.phoneNumber}
+            onChange={(e) =>
+              setUpdatedData({
+                type: "CHANGE_NUMBER",
+                payload: e.target.value,
+              })
+            }
           />
         </FormControl>
-        <FormControl>
-          <FormLabel>age</FormLabel>
+        <FormControl w={"40%"}>
+          <FormLabel>Age</FormLabel>
           <Input
-          placeholder={oldData && oldData.age  ? oldData.age : 'age'}
+            placeholder={profileData.age || "Age"}
             type="int"
             name="age"
-            value={formData.age}
-            onChange={handleChange}
+            value={updatedData.age}
+            onChange={(e) =>
+              setUpdatedData({ type: "CHANGE_AGE", payload: e.target.value })
+            }
+
             // required
           />
         </FormControl>
-        <FormControl>
-          <FormLabel>Years of experince</FormLabel>
-          <Input
-          placeholder={oldData && oldData.yearsOfExperience ? oldData.yearsOfExperience : 'Years of experince'}
-            type="int"
-            name="yearsOfExperience"
-            value={formData.yearsOfExperience}
-            onChange={handleChange}
-            
-          />
-        </FormControl>
-        <FormControl>
+      </Flex>
+      <Flex justifyContent={"space-between"}>
+        <FormControl w={"40%"}>
           <FormLabel>Hourly rate</FormLabel>
           <Input
-          placeholder={oldData && oldData.hourlyRate ? oldData.hourlyRate : 'Hourly rate'}
+            placeholder={profileData.hourlyRate || "Hourly rate"}
             type="int"
             name="hourlyRate"
-            value={formData.hourlyRate}
-            onChange={handleChange}
+            value={updatedData.hourlyRate}
+            onChange={(e) =>
+              setUpdatedData({
+                type: "CHANGE_HOURLYRATE",
+                payload: e.target.value,
+              })
+            }
             // required
           />
         </FormControl>
-        <FormControl>
-          <FormLabel>location</FormLabel>
-          <Input
-          placeholder={oldData ? "amman" : 'amman'}
-            type="text"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            // required
-          />
-        </FormControl>
-        <FormControl>
+        <FormControl w={"40%"}>
           <FormLabel>Inquiry price</FormLabel>
           <Input
-          placeholder={oldData && oldData.inquiryPrice ? oldData.inquiryPrice : 'inquiryPrice'}
+            placeholder={profileData.inquiryPrice || "inquiryPrice"}
             type="int"
             name="inquiryPrice"
-            value={formData.inquiryPrice}
-            onChange={handleChange}
+            value={updatedData.inquiryPrice}
+            onChange={(e) =>
+              setUpdatedData({
+                type: "CHANGE_INQUIRY",
+                payload: e.target.value,
+              })
+            }
             // required
           />
-          
         </FormControl>
-        <FormControl>
+      </Flex>
+      <Flex justifyContent={"space-between"}>
+        <FormControl w={"40%"}>
           <FormLabel>Biography</FormLabel>
           <Input
-          placeholder={oldData && oldData.description ? oldData.description : 'Biography'}
+            placeholder={profileData.description || "Biography"}
             type="text"
             name="description"
-            value={formData.description}
-            onChange={handleChange}
+            value={updatedData.description}
+            onChange={(e) =>
+              setUpdatedData({
+                type: "CHANGE_DESCRIPTION",
+                payload: e.target.value,
+              })
+            }
             // required
           />
-
         </FormControl>
-        <FormControl>
-          <FormLabel>Languages</FormLabel>
-          {/* Use the Select component for the language list */}
-          <Select
-            name="languages"
-            value={formData.languages}
-            onChange={handleChange}
-            // required
-          >
-            {/* Define the language options */}
-            <option value="Arabic">Arabic</option>
-            <option value="English">English</option>
-            <option value="Spanish">Spanish</option>
-            {/* Add more languages as needed */}
-          </Select>
+        <FormControl w={"40%"}>
+          <FormLabel>Years of experince</FormLabel>
+          <Input
+            placeholder={profileData.yearsOfExperience || "Years of experince"}
+            type="int"
+            name="yearsOfExperience"
+            value={updatedData.yearsOfExperience}
+            onChange={(e) =>
+              setUpdatedData({
+                type: "CHANGE_YearsOfExperience",
+                payload: e.target.value,
+              })
+            }
+          />
         </FormControl>
-  
-  
+      </Flex>
 
-          <div onClick={handleSubmit} >
-
-
-        <ChakraLink as={ReactRouterLink} to="/dashboard" >
-        
-        <Button type="submit" colorScheme="teal" mt={4} >
-          Update
+      <Flex w={"100%"} justifyContent={"space-around"}>
+        <Text fontSize={"xl"}>Spoken Languages</Text>
+        <Button
+          colorScheme="teal"
+          variant={`${
+            updatedData.languages?.includes("Arabic") ||
+            profileData.languages.includes("ARABIC")
+              ? "solid"
+              : "outline"
+          }`}
+          onClick={(e) =>
+            setUpdatedData({ type: "CHANGE_LANGUAGES", payload: "Arabic" })
+          }
+        >
+          Arabic
         </Button>
+        <Button
+          colorScheme="teal"
+          variant={`${
+            updatedData.languages?.includes("English") ||
+            profileData.languages.includes("English")
+              ? "solid"
+              : "outline"
+          }`}
+          onClick={(e) =>
+            setUpdatedData({ type: "CHANGE_LANGUAGES", payload: "English" })
+          }
+        >
+          English
+        </Button>
+        <Button
+          colorScheme="teal"
+          variant={`${
+            updatedData.languages?.includes("French") ||
+            profileData.languages.includes("French")
+              ? "solid"
+              : "outline"
+          }`}
+          onClick={(e) =>
+            setUpdatedData({ type: "CHANGE_LANGUAGES", payload: "French" })
+          }
+        >
+          French
+        </Button>
+      </Flex>
+      {/* <Flex
+        w={"100%"}
+        wrap={"wrap"}
+        justifyContent={"flex-start"}
+        alignItems={"flex-start"}
+        gap={"10px"}
+      >
+        {categories.map((experty) => {
+          return (
+            <Button
+              w={"150px"}
+              colorScheme={
+                updatedData.experties.includes(experty.id) ||
+                profileData.experties.includes(experty.id)
+                  ? "teal"
+                  : "teal"
+              }
+              variant={
+                updatedData.experties.includes(experty.id) ||
+                profileData.experties.includes(experty.id)
+                  ? "solid"
+                  : "outline"
+              }
+              h={"40px"}
+              key={experty.id}
+              onClick={() =>
+                setProfileData({
+                  type: "CHANGE_EXPERTIES",
+                  payload: experty.id,
+                })
+              }
+            >
+              {experty.name}
+            </Button>
+          );
+        })}
+      </Flex> */}
+      <div>
+        <ChakraLink as={ReactRouterLink} to="/dashboard">
+          <Button
+            w={"180px"}
+            onClick={() => {
+              handleUpdate();
+              setShowUpdateForm(false);
+            }}
+            colorScheme="teal"
+            mt={4}
+          >
+            Update
+          </Button>
         </ChakraLink>
-          </div>
-      </form>
-    </Box>
+      </div>
+    </Flex>
   );
 }
- export default  UpdateForm
+export default UpdateForm;
