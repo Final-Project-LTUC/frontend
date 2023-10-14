@@ -1,18 +1,14 @@
 import {
     AspectRatio,
     Box,
-    BoxProps,
+    Button,
     Container,
-    FormControl,
-    forwardRef,
     Heading,
     Input,
     Stack,
     Text
   } from "@chakra-ui/react";
   import { motion, useAnimation } from "framer-motion";
-import { useReducer } from "react";
-import formReducer, { initialState } from "../../hooks/Reducers/FormReducer";
   
   const first = {
     rest: {
@@ -109,7 +105,7 @@ import formReducer, { initialState } from "../../hooks/Reducers/FormReducer";
   });
   
   
-  export default function ImageUpload({setSelectedImg}) {
+  export default function ImageUpload({setSelectedImg,handleSubmit,currentPage}) {
     const controls = useAnimation();
     const startAnimation = () => {
       controls.start("hover");
@@ -131,7 +127,12 @@ import formReducer, { initialState } from "../../hooks/Reducers/FormReducer";
       setSelectedImg(image);
     }
     return (
-      <Container my="3">
+      <Container
+      position={`${currentPage==='profilePic'?'relative':'absolute'}`}
+      transform={`translateY(${currentPage==='profilePic'?'0':'200%'})`}
+       h={`${currentPage==='profilePic'?'calc(100vh - 80px)':'0'}`}
+      my="3">
+        <Text fontSize={'4xl'}>High Earning Handymen Have Great Profile Pictures</Text>
         <AspectRatio width="100%" ratio={1}>
           <Box
             borderColor="gray.300"
@@ -208,6 +209,15 @@ import formReducer, { initialState } from "../../hooks/Reducers/FormReducer";
             </Box>
           </Box>
         </AspectRatio>
+        <Button
+        w={"100%"}
+        height={"45px"}
+        onClick={(e) => handleSubmit(e)}
+        mt={4}
+        colorScheme="teal"
+      >
+        Finish
+      </Button>
       </Container>
     );
   }

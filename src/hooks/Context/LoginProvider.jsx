@@ -53,8 +53,6 @@ function LoginProvider(props) {
   }
   async function updateData(body,token){
     try {
-      console.log(token)
-      // validateToken(token)
       const headers = {
         Authorization: `Bearer ${token}`,
       };
@@ -75,9 +73,7 @@ function LoginProvider(props) {
   }
 
   function logout() {
-    console.log("loged out ")
-
-
+    console.log("loged out ");
     socket.emit("signOut", {userId:loginData.user.id} );
     setLoginState(false, null, {});
     

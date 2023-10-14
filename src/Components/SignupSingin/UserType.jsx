@@ -17,7 +17,7 @@ import { faHammer, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
 import {motion} from 'framer-motion'
-function UserType({submitAction,setUerType,setShowPages,showPages}) {
+function UserType({submitAction,setUerType,setPageNum,currentPage}) {
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
   
@@ -32,7 +32,6 @@ function UserType({submitAction,setUerType,setShowPages,showPages}) {
     setIsChecked1(false);
     setIsChecked2(true);
   };
-
   return (
     <Flex
     w={"100%"}
@@ -40,6 +39,8 @@ function UserType({submitAction,setUerType,setShowPages,showPages}) {
     justifyContent={'space-around'}
     alignItems={"center"}
     height={'calc(100vh - 100px)'}
+    position={`${currentPage==='userType'?'relative':'absolute'}`}
+    transform={`translateY(${currentPage==='userType'?'0':'200%'})`}
   >
     <Flex w={'100%'} h={'calc(100vh - 100px)'} justifyContent={'space-around'} alignItems={'center'}> 
    <Flex className="submitAction_card" w={'55%'} h={'85%'} alignItems={'center'} flexDirection={'column'} justifyContent={'space-around'} >
@@ -114,9 +115,9 @@ function UserType({submitAction,setUerType,setShowPages,showPages}) {
     </Flex>
       <Button
       w={"80%"} colorScheme="teal" 
-      onClick={(e)=>setShowPages({...showPages,showSecondPage:true})}
-      
-      >
+      onClick={(e)=>{
+        setPageNum(prev=>++prev);
+      }}>
         Next
       </Button>
    </Flex>

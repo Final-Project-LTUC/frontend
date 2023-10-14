@@ -11,7 +11,6 @@ export const initialState = {
   phoneNum: 0,
   yearsOfExperience: 0,
   description: "",
-  languages: [],
   isValidEmail: true,
   isValidPassword: true,
   isValidUsername: true,
@@ -29,7 +28,6 @@ export const checkAllValidation = (formData) => {
   );
 };
 export default function formReducer(state, action) {
-    console.log(state,action);
   switch (action.type) {
     case "CHANGE_EMAIL":
       return {
@@ -67,16 +65,20 @@ export default function formReducer(state, action) {
       return { ...state, yearsOfExperience: action.payload };
     case "CHANGE_LOCATION":
       return { ...state, lat: action.payload.lat, long: action.payload.long };
-    case "CHANGE_LANGUAGES": {
-      let newLanguages = state.languages;
-      if (newLanguages.includes(action.payload)) {
-        newLanguages = newLanguages.filter((e) => e !== action.payload);
-        return { ...state, languages: newLanguages };
-      } else {
-        newLanguages.push(action.payload);
-        return { ...state, languages: newLanguages };
+      case 'DECLARE_LANGUAGES':{
+        const newState={...state,languages:[]};
+        return newState;
       }
-    }
+    case "CHANGE_LANGUAGES": {
+        let newLanguages=state.languages;
+        if(newLanguages.includes(action.payload)){
+          newLanguages=newLanguages.filter(e=>e!==action.payload);
+          return {...state,languages:newLanguages}
+        }else {
+          newLanguages.push(action.payload);
+          return{...state,languages:newLanguages};
+        }
+      }
     case "CHANGE_EXPERTIES": {
       let newArray = state.experties;
       if (newArray.includes(action.payload)) {
