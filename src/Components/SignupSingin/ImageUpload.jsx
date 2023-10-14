@@ -1,18 +1,14 @@
 import {
     AspectRatio,
     Box,
-    BoxProps,
+    Button,
     Container,
-    FormControl,
-    forwardRef,
     Heading,
     Input,
     Stack,
     Text
   } from "@chakra-ui/react";
   import { motion, useAnimation } from "framer-motion";
-import { useReducer } from "react";
-import formReducer, { initialState } from "../../hooks/Reducers/FormReducer";
   
   const first = {
     rest: {
@@ -109,9 +105,8 @@ import formReducer, { initialState } from "../../hooks/Reducers/FormReducer";
   });
   
   
-  export default function ImageUpload() {
+  export default function ImageUpload({setSelectedImg,handleSubmit,currentPage}) {
     const controls = useAnimation();
-    const [formData,dispatch]=useReducer(formReducer,initialState)
     const startAnimation = () => {
       controls.start("hover");
   }
@@ -122,14 +117,22 @@ import formReducer, { initialState } from "../../hooks/Reducers/FormReducer";
     const handleDrop = (e) => {
       e.preventDefault();
       const droppedImage = e.dataTransfer.files[0];
-  
       if (droppedImage) {
-        dispatch({type:'CHANGE_image',payload:droppedImage});
+        setSelectedImg(droppedImage)
       };
 
     };
+    const handleClick=(e)=>{
+      const image = e.target.files[0];
+      setSelectedImg(image);
+    }
     return (
-      <Container my="3">
+      <Container
+      position={`${currentPage==='profilePic'?'relative':'absolute'}`}
+      transform={`translateY(${currentPage==='profilePic'?'0':'200%'})`}
+       h={`${currentPage==='profilePic'?'calc(100vh - 80px)':'0'}`}
+      my="3">
+        <Text fontSize={'4xl'}>High Earning Handymen Have Great Profile Pictures</Text>
         <AspectRatio width="100%" ratio={1}>
           <Box
             borderColor="gray.300"
@@ -199,12 +202,22 @@ import formReducer, { initialState } from "../../hooks/Reducers/FormReducer";
           accept="image/*"
           onDragEnter={startAnimation}
           onDragLeave={stopAnimation}
-          onDrop={handleDrop} 
+          onDrop={handleDrop}
+          onChange={handleClick}
           name="image"
         />
             </Box>
           </Box>
         </AspectRatio>
+        <Button
+        w={"100%"}
+        height={"45px"}
+        onClick={(e) => handleSubmit(e)}
+        mt={4}
+        colorScheme="teal"
+      >
+        Finish
+      </Button>
       </Container>
     );
   }
