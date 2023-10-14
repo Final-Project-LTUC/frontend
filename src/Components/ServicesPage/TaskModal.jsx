@@ -11,29 +11,53 @@ import {
   FormLabel,
   Input,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { LoginContext } from "../../hooks/Context/LoginProvider";
 
 function TaskModal({ data, index, token }) {
   const { loginData, socket } = useContext(LoginContext);
-  // console.log("contexxxxttttttt", loginData.user.id);
+  // console.log("tokeeeeeeeeen", token);
 
   const { onClose, isOpen, onOpen } = useDisclosure();
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
+
+  const titleRef = React.useRef(null);
+  const descriptionRef = React.useRef(null);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [isSaveClicked, setIsSaveClicked] = useState(false);
+  const toast = useToast();
+
+  useEffect(() => {
+    if (isOpen) {
+      setTitle("");
+      setDescription("");
+      titleRef.current?.focus();
+    }
+  }, [isOpen]);
 
   const handleSave = (token) => {
     setIsSaveClicked(true);
     onClose();
 
+    if (!title || !description) {
+      toast({
+        title: "Fields Required",
+        description: "Both title and description are required.",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+
     const handymanId = data[index].id;
-    // console.log(handymanId);
     const clientId = loginData.user.id;
     const requestData = {
       title,
@@ -58,9 +82,23 @@ function TaskModal({ data, index, token }) {
       })
       .then((response) => {
         console.log("Post request successful:", response.data);
+        toast({
+          title: `${loginData.user.username}`,
+          description: "Your request has been successfully sent",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
       })
       .catch((error) => {
         console.error("Error in post request:", error);
+        toast({
+          title: `Something Went Wrong`,
+          description: error.message,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
       });
   };
 
@@ -69,9 +107,14 @@ function TaskModal({ data, index, token }) {
       <Button onClick={onOpen}>Open Modal</Button>
 
       <Modal
-        initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
+        initialFocusRef={titleRef}
+        finalFocusRef={descriptionRef}
         isOpen={isOpen}
+        onClose={() => {
+          setTitle("");
+          setDescription("");
+          onClose();
+        }}
       >
         <ModalOverlay />
         <ModalContent>
@@ -85,6 +128,7 @@ function TaskModal({ data, index, token }) {
                 placeholder={"tell me what I can help you with..."}
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                required
               />
             </FormControl>
             <FormControl>
@@ -99,7 +143,12 @@ function TaskModal({ data, index, token }) {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={() => handleSave(token)}>
+            <Button
+              colorScheme="blue"
+              mr={3}
+              onClick={() => handleSave(token)}
+              isDisabled={!title || !description}
+            >
               Save
             </Button>
             <Button onClick={onClose}>Cancel</Button>

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Hero.scss";
 import video from "../assets/video.mp4";
 import logo from "../assets/logo.png";
@@ -28,8 +28,13 @@ import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useContext } from "react";
 import { LoginContext } from "../../../hooks/Context/LoginProvider";
 const Links = ["Skilify", "Home", "Services", "Catalog", "About us"];
+
 function Hero() {
-  const [isNavFixed, setIsNavFixed] = React.useState(false);
+  const { colorMode, toggleColorMode } = useColorMode();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { loginData, logout } = useContext(LoginContext);
+
+  const [isNavFixed, setIsNavFixed] = useState(false);
 
   const handleScroll = () => {
     const scrollPosition = window.scrollY;
@@ -41,7 +46,7 @@ function Hero() {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -49,20 +54,18 @@ function Hero() {
     };
   }, [isNavFixed]);
 
-  const { colorMode, toggleColorMode } = useColorMode();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { loginData, logout } = useContext(LoginContext);
-  console.log(loginData);
   const mar = 80;
+  const textColor = isNavFixed ? "black" : "white";
   return (
     <header>
       <div className={`test ${isNavFixed ? "fixed" : ""}`}>
         <div className="heroSection">
           <video className="video" src={video} loop autoPlay muted />
           <div className="container">
-            <nav style={{ marginLeft: mar }}>
-              {/* <Navbar /> */}
-
+            <nav
+              style={{ marginLeft: mar }}
+              className={isNavFixed ? "fixed" : ""}
+            >
               <Flex
                 h={16}
                 alignItems={"center"}
@@ -77,10 +80,10 @@ function Hero() {
                 />
 
                 <HStack
-                  // as={"nav"}
                   spacing={4}
                   display={{ base: "none", md: "flex" }}
                   justifyContent={"space-between"}
+                  color={textColor}
                 >
                   <div className="logo">
                     <ChakraLink as={ReactRouterLink} to="/">
@@ -162,9 +165,8 @@ function Hero() {
                       ) : null}
 
                       {loginData.loggedIn ? (
-                        <Button onClick={()=>logout()}>Logout</Button>
+                        <Button onClick={() => logout()}>Logout</Button>
                       ) : (
-                       
                         <>
                           <Button
                             as={"a"}
