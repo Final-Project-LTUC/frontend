@@ -9,7 +9,7 @@ import Blog from '../../Components/AboutUS/Blog';
 import Team from '../../Components/AboutUS/Team';
 import Vision from '../../Components/AboutUS/Vision';
 import Location from '../../Components/AboutUS/Location';
-
+import WhyChooseUs from '../../Components/AboutUS/WhyChooseUs';
 
 
 function App() {
@@ -23,6 +23,7 @@ function App() {
         <Vision/>
         <AboutUs/>
         <ContactUS/>
+        <WhyChooseUs/>
         <Testimonials/>
         {/* <Blog/> */}
         <Location/>

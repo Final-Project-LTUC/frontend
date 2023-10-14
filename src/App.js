@@ -8,7 +8,9 @@ import Navbar from "./layout/header/Navbar/Navbar";
 import Services from "./pages/services/Services";
 import Catalog from "./pages/catalog/Catalog";
 import AboutUs from './pages/aboutUs/ABOUTUS';
-import Footer from "./layout/footer/Footer";
+
+import Footer from "../src/Components/AboutUS/NavBar/Footer";
+
 import Dashboard from "./pages/dashBoard/Dashboard";
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import UpdateForm from "./pages/dashBoard/update/Update";
