@@ -13,6 +13,8 @@ import FilterSidebar from "../../../Components/ServicesPage/FilterSideBar";
 import axios from "axios"
 import Handymen from "../../../Components/ServicesPage/Handymen"; 
 import categories from "./constant"
+import cookie from 'react-cookies';
+  let token1 =cookie.load('auth'); 
  function Services() {
   const [handyData, setHandyData] = useState(null); // Initialize handyData state
   const [expertydata, setExpertyData] = useState(null); // Initialize handyData state
@@ -20,7 +22,7 @@ import categories from "./constant"
 
   async function getData (){
   try {
-    const response = await axios.get('https://backend-n1je.onrender.com/handymen');
+    const response = await axios.get('https://vara-0evs.onrender.com/handymen');
     return response.data
 
   } catch (error) {
@@ -32,7 +34,7 @@ import categories from "./constant"
 }
   async function getDataExperty (id){
   try {
-    const response = await axios.get(`https://backend-n1je.onrender.com/handymen/genre/${id}`);
+    const response = await axios.get(`https://vara-0evs.onrender.com/handymen/genre/${id}`);
     return response.data
 
   } catch (error) {
@@ -123,7 +125,7 @@ const handleLocationChange = (location) => {
     </Box>
     <Box>
 
-      <Handymen handyData ={newDatacat?newDatacat:handyData}/>
+      <Handymen handyData ={newDatacat?newDatacat:handyData} token={token1} />
     </Box>
         </Flex>
     </Box>
