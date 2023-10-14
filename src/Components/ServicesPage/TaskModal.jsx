@@ -19,7 +19,7 @@ import { LoginContext } from "../../hooks/Context/LoginProvider";
 
 function TaskModal({ data, index, token }) {
   const { loginData, socket } = useContext(LoginContext);
-  console.log("contexxxxttttttt", loginData.user.id);
+  // console.log("contexxxxttttttt", loginData.user.id);
 
   const { onClose, isOpen, onOpen } = useDisclosure();
   const initialRef = React.useRef(null);
@@ -29,26 +29,25 @@ function TaskModal({ data, index, token }) {
   const [isSaveClicked, setIsSaveClicked] = useState(false);
 
   const handleSave = (token) => {
-    console.log("Save button clicked!");
-    setIsSaveClicked(true); 
-    onClose()
+    setIsSaveClicked(true);
+    onClose();
 
-    
     const handymanId = data[index].id;
-    console.log(handymanId);
+    // console.log(handymanId);
     const clientId = loginData.user.id;
-
     const requestData = {
       title,
       description,
       clientId,
       handymanId,
+      taskStatus: "incoming",
+      dateOfReq: Date.now(),
     };
-    
-    socket.emit('pickHandyman', {
-      handyData:requestData,
+
+    socket.emit("pickHandyman", {
+      handyData: requestData,
       senderId: clientId,
-      reciverId:handymanId ,
+      reciverId: handymanId,
     });
 
     axios
@@ -58,7 +57,7 @@ function TaskModal({ data, index, token }) {
         },
       })
       .then((response) => {
-        console.log("Post request successful:yyyyyyyyyy", response);
+        console.log("Post request successful:", response.data);
       })
       .catch((error) => {
         console.error("Error in post request:", error);
@@ -95,7 +94,6 @@ function TaskModal({ data, index, token }) {
                 placeholder={"please explain the problem"}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                
               />
             </FormControl>
           </ModalBody>
