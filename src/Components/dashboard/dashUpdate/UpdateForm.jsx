@@ -16,7 +16,7 @@ async function gettingProfile(token) {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
-    const response = await axios.get('https://vara-0evs.onrender.com/dashboard', {
+    const response = await axios.get(`${process.env.REACT_APP_DATABASE_URL}/dashboard`, {
       headers: headers,
     });
 
@@ -31,12 +31,13 @@ async function gettingProfile(token) {
     return null;
   }
 }
+//fjdsklafksajfkldjsakfjsdkljfkljl
 async function updateProfile(token, input) {
   try {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
-    const response = await axios.put('https://vara-0evs.onrender.com/dashupdate', input, {
+    const response = await axios.put(`${process.env.REACT_APP_DATABASE_URL}/dashupdate`, input, {
       headers: headers,
     });
 

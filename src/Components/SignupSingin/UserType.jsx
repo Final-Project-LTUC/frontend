@@ -38,9 +38,10 @@ function UserType({submitAction,setUerType,setPageNum,currentPage}) {
     flexDirection={'column'}
     justifyContent={'space-around'}
     alignItems={"center"}
-    height={'calc(100vh - 100px)'}
+    h={`${currentPage==='userType'?'calc(100vh - 80px)':'0'}`}
     position={`${currentPage==='userType'?'relative':'absolute'}`}
-    transform={`translateY(${currentPage==='userType'?'0':'200%'})`}
+    transform={`translateX(${currentPage==='userType'?'0':'-200%'})`}
+    transition={'all .7s ease-in-out'}
   >
     <Flex w={'100%'} h={'calc(100vh - 100px)'} justifyContent={'space-around'} alignItems={'center'}> 
    <Flex className="submitAction_card" w={'55%'} h={'85%'} alignItems={'center'} flexDirection={'column'} justifyContent={'space-around'} >

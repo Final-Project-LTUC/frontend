@@ -4,7 +4,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import { handymanExperties } from "../../assets/constants";
+import  categories  from "../../pages/services/ServicesTest/constant";
 import { motion } from "framer-motion";
 function ExpertiesButtons({dispatch,currentPage,formData,setPageNum}) {
   const MotionFlex = motion(Flex);
@@ -14,8 +14,10 @@ function ExpertiesButtons({dispatch,currentPage,formData,setPageNum}) {
       flexDirection={"column"}
       alignItems={"center"}
       position={`${currentPage==='experties'?'relative':'absolute'}`}
-      transform={`translateY(${currentPage==='experties'?'0':'200%'})`}
+      transform={`translateX(${currentPage==='experties'?'0':'-200%'})`}
       h={`${currentPage==='experties'?'calc(100vh - 80px)':'0'}`}
+      transition={'all .7s ease-in-out'}
+
     >
       <MotionFlex
         position={`${currentPage === "experties" ? "relative" : "absolute"}`}
@@ -38,22 +40,22 @@ function ExpertiesButtons({dispatch,currentPage,formData,setPageNum}) {
           gap={"30px"}
           alignItems={"flex-start"}
         >
-          {handymanExperties.map((experty) => {
+          {categories.map((experty) => {
             return (
               <Button
                 w={"180px"}
                 colorScheme={
-                  formData.experties.includes(experty.name) ? "teal" : "teal"
+                  formData.experties.includes(experty.id) ? "teal" : "teal"
                 }
                 variant={
-                  formData.experties.includes(experty.name)
+                  formData.experties.includes(experty.id)
                     ? "solid"
                     : "outline"
                 }
                 h={"40px"}
-                key={experty.name}
+                key={experty.id}
                 onClick={() =>
-                  dispatch({ type: "CHANGE_EXPERTIES", payload: experty.name })
+                  dispatch({ type: "CHANGE_EXPERTIES", payload: experty.id })
                 }
               >
                 {experty.name}

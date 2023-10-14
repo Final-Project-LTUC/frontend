@@ -17,7 +17,7 @@ function Auth({ submitAction }) {
   const [pageNum, setPageNum] = useState(0);
   const [currentPage, setCurrentPage] = useState(pages[pageNum]);
   const [formData, dispatch] = useReducer(formReducer, initialState);
-  const [selectedImg, setSelectedImg] = useState(null);
+  const [selectedImg, setSelectedImg] = useState(false);
   const [token, setToken] = useState(cookie.load("auth"));
   const loginContext = useContext(LoginContext);
   const navigate = useNavigate();
@@ -85,16 +85,16 @@ function Auth({ submitAction }) {
     setToken(cookie.load("auth"));
   }, [pageNum]);
   return (
-    <Flex w={"100%"} h={"100%"} flexDirection={"column"}>
-      {currentPage === pages[0] ? (
+    <Flex w={"100%"} h={"100vh"} flexDirection={"column"}>
+   
         <UserType
           currentPage={currentPage}
-          setPageNum={setPageNum}
+          setPageNum={setPageNum} 
           submitAction={submitAction}
           setUerType={setUerType}
           setCurrentPage={setCurrentPage}
         />
-      ) : null}
+    
       {currentPage === pages[1] ? (
         <Form
           userType={userType}
@@ -128,6 +128,7 @@ function Auth({ submitAction }) {
           handleSubmit={handleSubmit}
           currentPage={currentPage}
           setSelectedImg={setSelectedImg}
+          selectedImg={selectedImg}
         />
       ) : null}
     </Flex>

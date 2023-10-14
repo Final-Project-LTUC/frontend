@@ -22,7 +22,7 @@ import cookie from 'react-cookies';
 
   async function getData (){
   try {
-    const response = await axios.get('https://vara-0evs.onrender.com/handymen');
+    const response = await axios.get(`${process.env.REACT_APP_DATABASE_URL}/handymen`);
     return response.data
 
   } catch (error) {
@@ -34,7 +34,7 @@ import cookie from 'react-cookies';
 }
   async function getDataExperty (id){
   try {
-    const response = await axios.get(`https://vara-0evs.onrender.com/handymen/genre/${id}`);
+    const response = await axios.get(`${process.env.REACT_APP_DATABASE_URL}/handymen/genre/${id}`);
     return response.data
 
   } catch (error) {
