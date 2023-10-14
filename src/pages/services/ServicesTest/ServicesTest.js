@@ -13,6 +13,8 @@ import FilterSidebar from "../../../Components/ServicesPage/FilterSideBar";
 import axios from "axios"
 import Handymen from "../../../Components/ServicesPage/Handymen"; 
 import categories from "./constant"
+import cookie from 'react-cookies';
+  let token1 =cookie.load('auth'); 
  function Services() {
   const [handyData, setHandyData] = useState(null); // Initialize handyData state
   const [expertydata, setExpertyData] = useState(null); // Initialize handyData state
@@ -123,7 +125,7 @@ const handleLocationChange = (location) => {
     </Box>
     <Box>
 
-      <Handymen handyData ={newDatacat?newDatacat:handyData}/>
+      <Handymen handyData ={newDatacat?newDatacat:handyData} token={token1} />
     </Box>
         </Flex>
     </Box>

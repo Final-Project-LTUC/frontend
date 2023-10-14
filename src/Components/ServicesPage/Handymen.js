@@ -17,17 +17,15 @@ import { StarIcon } from "@chakra-ui/icons";
 import TaskModal from "./TaskModal";
 
 
-function Handymen({ handyData }) {
+function Handymen({ handyData,token }) {
   const [loading, setLoading] = useState(true);
   const [tableData, setTableData] = useState([]);
   const [isOpenArray, setIsOpenArray] = useState([]); // Array to track open/close state for each card
-  const [isModalOpen, setIsOpenModal] = useState([]); // Array to track open/close state for each card
  
 
   useEffect(() => {
     if(handyData){
       setIsOpenArray(new Array(handyData.length).fill(false));
-      setIsOpenModal(new Array(handyData.length).fill(false));
 
 
   
@@ -85,9 +83,7 @@ function Handymen({ handyData }) {
             </CardBody>
 
             <CardFooter mt={4}>
-              <Button variant="solid" colorScheme="blue" onClick={() => handleInquireClick(index)}>
-                Require tasks
-              </Button>
+            <TaskModal  data={handyData} index={index} token ={token} />
             </CardFooter>
           </Stack>
         </Card>
@@ -99,7 +95,7 @@ function Handymen({ handyData }) {
         setLoading(false);
       }, 2000); // You can adjust the delay as needed
     }
-  }, [handyData, isOpenArray,isModalOpen]);
+  }, [handyData, isOpenArray]);
 
   const handleDetailsClick = (index) => {
     setIsOpenArray((prevIsOpenArray) => {
@@ -111,16 +107,7 @@ function Handymen({ handyData }) {
       return newIsOpenArray;
     });
   };
-  const handleInquireClick = (index) => {
-    isModalOpen((prevIsOpenArray) => {
-      const newIsOpenArray = [...prevIsOpenArray];
-      newIsOpenArray[index] = !newIsOpenArray[index];
-     
 
-
-      return newIsOpenArray;
-    });
-  };
 
   return (
     <Box>
@@ -134,7 +121,7 @@ function Handymen({ handyData }) {
         <div>{tableData}</div>
         
       )}
-      <TaskModal arr={isModalOpen} data ={handyData}  />
+      
     </Box>
   );
 }
