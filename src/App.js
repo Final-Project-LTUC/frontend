@@ -38,7 +38,7 @@ function App() {
   // Define a function to conditionally render the navbar based on the current route
   const renderNavbar = () => {
     if (location.pathname === "/dashboard" || location.pathname === "/tasks") {
-      return <DashboardNavbar />;
+      return null;
     } else if (location.pathname === "/") {
       
     } else {
