@@ -4,11 +4,12 @@ export const initialState = {
   password: "",
   userType: "",
   experties: [],
-  name: "",
+  firstName: "",
+  lastName:'',
   image: null,
   lat: 0,
   long: 0,
-  phoneNum: 0,
+  phoneNumber: 0,
   yearsOfExperience: 0,
   description: "",
   isValidEmail: true,
@@ -52,11 +53,13 @@ export default function formReducer(state, action) {
     case "CHANGE_NUMBER":
       return {
         ...state,
-        phoneNum: action.payload,
+        phoneNumber: action.payload,
         isValidPhoneNum: mobileNumberPattern.test(action.payload),
       };
-    case "CHANGE_NAME":
-      return { ...state, name: action.payload };
+    case "CHANGE_NAME":{
+      const [firstName,lastName]=action.payload.split(' ');
+      return { ...state, firstName:firstName,lastName:lastName};
+    }
     case "CHANGE_DESCRIPTION":
       return { ...state, description: action.payload };
     case "CHANGE_IMAGE":

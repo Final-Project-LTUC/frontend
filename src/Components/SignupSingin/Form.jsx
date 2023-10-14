@@ -29,7 +29,7 @@ function Form({
 }) {
   const [disableButton, setDisabledButton] = useState(true);
   const loginContext = useContext(LoginContext);
-  const toast = useToast();
+  const toast  = useToast();
   const navigate = useNavigate();
   async function handleSubmit(e) {
     e.preventDefault();
@@ -44,7 +44,6 @@ function Form({
               formData.password,
               userType
             );
-
       if (
         userType === "handymen" &&
         submitAction === "signup" &&
@@ -59,7 +58,7 @@ function Form({
           title: "Welcome To Skillify ",
           description: "We've created your account for you.",
           status: "success",
-          duration: 5000,
+          duration: 3000,
           isClosable: true,
         });
       } else if (
@@ -79,7 +78,7 @@ function Form({
           duration: 5000,
           isClosable: true,
         });
-        setTimeout(() => navigate("/"), 1500);
+        navigate('/');
       } else if (submitAction === "signin" && response.status === 200) {
         toast({
           title: `Welcome Back ${response.data.username}`,
@@ -88,7 +87,7 @@ function Form({
           duration: 5000,
           isClosable: true,
         });
-        setTimeout(() => navigate("/"), 1500);
+        navigate('/')
       } else throw new Error(response.response.data.message);
     } catch (e) {
       toast({
@@ -110,8 +109,9 @@ function Form({
       alignItems={"center"}
       justifyContent={"space-around"}
       position={`${currentPage==='form'?'relative':'absolute'}`}
-      transform={`translateY(${currentPage==='form'?'0':'200%'})`}
+      transform={`translateX(${currentPage==='form'?'0':'-200%'})`}
       h={`${currentPage==='form'?'calc(100vh - 80px)':'0'}`}
+      transition={'all .7s ease-in-out'}
     >
       <Flex
         w={"95%"}

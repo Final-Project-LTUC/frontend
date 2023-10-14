@@ -1,25 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
+import { Card, CardHeader, CardBody } from "@chakra-ui/react";
 import "./profile.css"
 import {
     Box,
     Flex,
-    Avatar,
-    HStack,
     Text,
-    IconButton,
-    Button,
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    MenuDivider,
-    useDisclosure,
     StackDivider,
     Stack,
     Heading,
-    Center,
-    Icon,
   } from "@chakra-ui/react";
 import axios from "axios";
 
@@ -31,7 +19,7 @@ function Profile({token}) {
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      const response = await axios.get('https://backend-n1je.onrender.com/dashboard', {
+      const response = await axios.get(`${`${process.env.REACT_APP_DATABASE_URL}`}/dashboard`, {
         headers: headers,
       });
   
