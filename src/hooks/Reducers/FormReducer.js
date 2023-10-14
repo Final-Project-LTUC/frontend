@@ -9,7 +9,7 @@ export const initialState = {
   image: null,
   lat: 0,
   long: 0,
-  phoneNum: 0,
+  phoneNumber: 0,
   yearsOfExperience: 0,
   description: "",
   isValidEmail: true,
@@ -53,7 +53,7 @@ export default function formReducer(state, action) {
     case "CHANGE_NUMBER":
       return {
         ...state,
-        phoneNum: action.payload,
+        phoneNumber: action.payload,
         isValidPhoneNum: mobileNumberPattern.test(action.payload),
       };
     case "CHANGE_NAME":{

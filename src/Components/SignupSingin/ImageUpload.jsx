@@ -3,6 +3,7 @@ import {
     Box,
     Button,
     Container,
+    Flex,
     Heading,
     Input,
     Stack,
@@ -97,7 +98,6 @@ import {
         backgroundSize="cover"
         backgroundRepeat="no-repeat"
         backgroundPosition="center"
-        backgroundImage={`url("https://image.shutterstock.com/image-photo/paella-traditional-classic-spanish-seafood-600w-1662253543.jpg")`}
         {...props}
         ref={ref}
       />
@@ -127,12 +127,14 @@ import {
       setSelectedImg(image);
     }
     return (
-      <Container
+      <Flex flexDirection={'column'} alignItems={'center'} gap={'30px'} justifyContent={'center'}
       position={`${currentPage==='profilePic'?'relative':'absolute'}`}
-      transform={`translateY(${currentPage==='profilePic'?'0':'200%'})`}
+      transform={`translateX(${currentPage==='profilePic'?'0':'-200%'})`}
        h={`${currentPage==='profilePic'?'calc(100vh - 80px)':'0'}`}
-      my="3">
-        <Text fontSize={'4xl'}>High Earning Handymen Have Great Profile Pictures</Text>
+       transition={'all .7s ease-in-out'}
+      >
+        <Text fontSize={'5xl'} color={'teal'}>High Earning Handymen Have Great Profile Pictures</Text>
+      <Container>
         <AspectRatio width="100%" ratio={1}>
           <Box
             borderColor="gray.300"
@@ -171,7 +173,7 @@ import {
                   <Box height="150px" width="150px" position="relative">
                     <PreviewImage
                       variants={first}
-                      backgroundImage="url('https://images.unsplash.com/photo-1601058268499-e52658b8bb88?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80')"
+                      backgroundImage={'url(https://images.unsplash.com/photo-1601058268499-e52658b8bb88?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80)'}
                     />
                     <PreviewImage
                       variants={second}
@@ -215,10 +217,12 @@ import {
         onClick={(e) => handleSubmit(e)}
         mt={4}
         colorScheme="teal"
+        disabled={setSelectedImg?false:true}
       >
         Finish
       </Button>
       </Container>
+      </Flex>
     );
   }
   

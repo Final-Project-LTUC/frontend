@@ -34,8 +34,9 @@ function MoreInfo({dispatch,currentPage,formData,setPageNum}) {
     flexDirection={"column"}
     alignItems={"center"}
     position={`${currentPage==='moreInfo'?'relative':'absolute'}`}
-    transform={`translateY(${currentPage==='moreInfo'?'0':'200%'})`}
+    transform={`translateX(${currentPage==='moreInfo'?'0':'-200%'})`}
     h={`${currentPage==='moreInfo'?'calc(100vh - 80px)':'0'}`}
+    transition={'all .7s ease-in-out'}
 
   >
     <Text fontSize="3xl">Tell People More About you </Text>
@@ -58,7 +59,7 @@ function MoreInfo({dispatch,currentPage,formData,setPageNum}) {
         <Text fontSize={"2xl"}>Tell Clients Where You At</Text>
         <Button
           onClick={() => getLocation()}
-          variant={"ghost"}
+          variant={"outline"}
           colorScheme="teal"
         >
           Click Here To Allow Locations

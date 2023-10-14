@@ -11,7 +11,7 @@ function LoginProvider(props) {
   //   console.log(token1,"tokken cookie")
   //  }
   //  )
-  const socketI = io('https://backend-n1je.onrender.com', { autoConnect: false });
+  const socketI = io('process.env.REACT_APP_DATABASE_URL', { autoConnect: false });
   const [socket,setSocket] = useState(socketI)
   const [loginData, dispatch] = useReducer(loginReducer, initialState);
   function can(capability) {
