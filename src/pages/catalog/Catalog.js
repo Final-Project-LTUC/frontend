@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Heading, SimpleGrid } from "@chakra-ui/react";
 import TaskCard from "./TaskCard"; // Import the TaskCard component
+import axios from "axios";
 
 function Catalog() {
     // Expanded static tasks data
@@ -34,7 +35,9 @@ function Catalog() {
             handymanId: "2",
         },
     ];
-
+useEffect(async()=>{
+const res=await axios.get(`url`)
+},[])
     return (
         <Box p={5}>
             <Heading mb={5} textAlign="center" fontSize="2xl">
