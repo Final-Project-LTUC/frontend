@@ -16,7 +16,7 @@ async function gettingProfile(token) {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
-    const response = await axios.get('http://localhost:5000/dashboard', {
+    const response = await axios.get('https://backend-n1je.onrender.com/dashboard', {
       headers: headers,
     });
 
@@ -36,7 +36,7 @@ async function updateProfile(token, input) {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
-    const response = await axios.put('http://localhost:5000/dashupdate', input, {
+    const response = await axios.put('https://backend-n1je.onrender.com/dashupdate', input, {
       headers: headers,
     });
 
@@ -50,7 +50,7 @@ async function updateProfile(token, input) {
     console.error('An error occurred:', error);
     return null;
   }
-}
+};
 
 
 function UpdateForm({ token }) {

@@ -1,5 +1,6 @@
 //import'./AboutUS.css';
 
+
 // import React, { useRef } from 'react';
 // import {
 //   Box,
@@ -544,6 +545,7 @@ const socialIconStyle = {
   color: '#000',
   marginRight: '10px',
   transition: 'color 0.3s', // Add transition for color change
+
 };
 
 const TeamMemberCard = ({ name, imageSrc, description, linkedin, github }) => {
@@ -576,6 +578,7 @@ const TeamMemberCard = ({ name, imageSrc, description, linkedin, github }) => {
         </a>
       </div>
     </div>
+
   );
 };
 
@@ -622,3 +625,4 @@ function App() {
 }
 
 export default App;
+
