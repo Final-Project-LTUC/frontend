@@ -121,6 +121,7 @@ function Auth({ submitAction }) {
           dispatch={dispatch}
           currentPage={currentPage}
           formData={formData}
+          userType={userType}
         />
       ) : null}
       {currentPage === pages[4] ? (

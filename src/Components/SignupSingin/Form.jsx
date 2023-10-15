@@ -45,7 +45,6 @@ function Form({
               userType
             );
       if (
-        userType === "handymen" &&
         submitAction === "signup" &&
         response.status === 200
       ) {
@@ -53,7 +52,9 @@ function Form({
         //   console.log(userId)
         //  socket.emit("signIn", { userId });
         // console.log("respnese userId",userId)
-        setPageNum((prev) => ++prev);
+        if(userType==='handymen') setPageNum((prev) => ++prev)
+        else setPageNum((prev)=>prev+2);
+        
         toast({
           title: "Welcome To Skillify ",
           description: "We've created your account for you.",
@@ -61,24 +62,6 @@ function Form({
           duration: 3000,
           isClosable: true,
         });
-      } else if (
-        submitAction === "signup" &&
-        response.status === 200 &&
-        userType === "user"
-      ) {
-        // let userId = response.data.id+response.data.username;
-        //   console.log(userId)
-        //  socket.emit("signIn", { userId });
-        // console.log("respnese userId",userId)
-
-        toast({
-          title: "Welcome To Skillify ",
-          description: "We've created your account for you.",
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-        navigate('/');
       } else if (submitAction === "signin" && response.status === 200) {
         toast({
           title: `Welcome Back ${response.data.username}`,

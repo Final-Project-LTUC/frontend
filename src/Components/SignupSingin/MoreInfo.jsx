@@ -8,7 +8,7 @@ import {
     FormLabel,
     Textarea,
   } from "@chakra-ui/react";
-function MoreInfo({dispatch,currentPage,formData,setPageNum}) {
+function MoreInfo({dispatch,currentPage,formData,setPageNum,userType}) {
     const successCallback = (position) => {
         dispatch({
           type: "CHANGE_LOCATION",
@@ -56,7 +56,7 @@ function MoreInfo({dispatch,currentPage,formData,setPageNum}) {
         alignItems={"center"}
         w={"50%"}
       >
-        <Text fontSize={"2xl"}>Tell Clients Where You At</Text>
+        <Text fontSize={"2xl"}>{userType==='handymen'?'Tell Clients Where You At':'Tell Handymen Where You At'}</Text>
         <Button
           onClick={() => getLocation()}
           variant={"outline"}
@@ -75,6 +75,7 @@ function MoreInfo({dispatch,currentPage,formData,setPageNum}) {
             type="number"
           />
         </FormControl>
+        {userType==='handymen'&&
         <FormControl>
           <FormLabel>Years of Experience</FormLabel>
           <Input
@@ -83,7 +84,7 @@ function MoreInfo({dispatch,currentPage,formData,setPageNum}) {
             }
             type="number"
           />
-        </FormControl>
+        </FormControl>}
       </Flex>
       <FormControl>
         <Textarea

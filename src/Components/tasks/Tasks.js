@@ -96,47 +96,7 @@ export default function Tasks() {
 
     return (
         <>
-            <TableContainer>
-                <Table variant="striped" colorScheme="messenger">
-                    <TableCaption>
-                        Imperial to metric conversion factors
-                    </TableCaption>
-                    <Thead>
-                        <Tr>
-                            <Th>Image</Th>
-                            <Th>Title</Th>
-                            <Th>Description</Th>
-                            <Th>isDone</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {doneTasks.map((e, index) => {
-                            return (
-                                <Tr key={index}>
-                                    <Td>
-                                        <img
-                                            alt={e.title}
-                                            src={e.imageUrl}
-                                            width={60}
-                                            height={60}
-                                            style={{ borderRadius: "10px" }}
-                                        />
-                                    </Td>
-                                    <Td>{e.title}</Td>
-                                    <Td>
-                                        {e.description.length > 200
-                                            ? e.description
-                                                  .slice(0, 200)
-                                                  .concat("...")
-                                            : e.description}
-                                    </Td>
-                                    <Td>{e.isDone ? "True" : "False"}</Td>
-                                </Tr>
-                            );
-                        })}
-                    </Tbody>
-                </Table>
-            </TableContainer>
+           
         </>
     );
 }
