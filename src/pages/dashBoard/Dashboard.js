@@ -14,7 +14,7 @@ function Dashboard() {
   const [updatedData,setUpdatedData]=useReducer(formReducer,initialState); 
   const [profileData,setProfileData]=useState({});
   const [showUpdateForm,setShowUpdateForm]=useState(false);
-  const [showTasks, setShowTasks]=useState(false);
+  const [showTasks, setShowTasks]=useState(true);
   const loginContext = useContext(LoginContext);
   async function gettingProfile() {
     try {
@@ -76,7 +76,7 @@ return(
     <DashboardNavbar setShowTasks={setShowTasks} setShowUpdateForm={setShowUpdateForm} profilePicUrl={profileData.profilePicUrl}/>
     <Profile showTasks={showTasks} setShowUpdateForm={setShowUpdateForm}  showUpdateForm={showUpdateForm} profileData={profileData}/>
     {showUpdateForm&&<UpdateForm handleUpdate={handleUpdate} updatedData={updatedData} setUpdatedData={setUpdatedData} profileData={profileData} showUpdateForm={showUpdateForm} setProfileData={setProfileData} setShowUpdateForm={setShowUpdateForm}/>}
-    {showTasks&&<Tasks/>}
+    {showTasks&&<Tasks profileData={profileData}/>}
   </Flex>
 )
 

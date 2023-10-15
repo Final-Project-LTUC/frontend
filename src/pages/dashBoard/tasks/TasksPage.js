@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Tasks from "../../../Components/tasks/Tasks";
 import {
   Button,
@@ -13,28 +13,13 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { LoginContext } from "../../../hooks/Context/LoginProvider";
 
 function TasksPage({ profileData }) {
-  console.log(profileData);
-  async function AddTask() {
-    const taskBody = {
-      handymanId: profileData.id,
-      title: "do it now ",
-      taskStatus: "incoming",
-      description: "help me please fast",
-    };
-    const headers = {
-      Authorization: `Bearer ${profileData.token}`,
-    };
-
-    const addTask = await axios.post(
-      `${process.env.REACT_APP_DATABASE_URL}/tasks`,
-      taskBody,
-      {
-        headers: headers,
-      }
-    );
-  }
+  const { loginData, socket } = useContext(LoginContext);
+  const encodedId = encodeURIComponent(profileData.id);
+  console.log("uuid decorder",encodedId)
+  console.log(profileData,"SSSSSsssssssssssss")
   const [tasks, setTasks] = useState([]);
   const getTasks = async () => {
     try {
@@ -42,9 +27,7 @@ function TasksPage({ profileData }) {
         Authorization: `Bearer ${profileData.token}`,
       };
       const response = await axios.get(
-        `${`${process.env.REACT_APP_DATABASE_URL}`}/handytasks/${
-          profileData.id
-        }`,
+        `${`${process.env.REACT_APP_DATABASE_URL}`}/handytasks/${encodedId}`,
         {
           headers: headers,
         }
@@ -52,17 +35,13 @@ function TasksPage({ profileData }) {
 
       if (response.status === 200) {
         setTasks(response.data);
-        const currentTasks = response.data.filter(
-          (e) => e.taskStatus === "incoming"
-        );
-        setTasks(currentTasks);
-        return currentTasks;
+        return response.data;
       } else {
         console.error("Failed to fetch data");
         return null;
       }
     } catch (error) {
-      console.error("An error occurred:", error);
+      console.error("An error occurred:", error); 
       return error;
     }
   };
@@ -74,12 +53,12 @@ function TasksPage({ profileData }) {
 
       const setCurrent = await axios.patch(
         `${process.env.REACT_APP_DATABASE_URL}/tasks`,
-        { ...task, taskStatus: "current" },
+        {  taskStatus: "current" },
         {
           headers: headers,
         }
       );
-      console.log(setCurrent);
+      
     } catch (error) {
       return error;
     }
@@ -125,6 +104,9 @@ function TasksPage({ profileData }) {
                       setCurrentTask(e);
                       const newTasks=tasks.filter(task=>e.id!==task.id)
                       setTasks(newTasks);
+
+                      
+
                     }}
                   >
                     Take Now
@@ -135,7 +117,6 @@ function TasksPage({ profileData }) {
           })}
         </Tbody>
       </Table>
-      <Button onClick={() => AddTask()}>Add Task</Button>
     </TableContainer>
   );
 }
