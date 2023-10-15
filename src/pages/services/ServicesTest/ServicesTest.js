@@ -15,8 +15,8 @@ import Handymen from "../../../Components/ServicesPage/Handymen";
 import categories from "./constant"
 import cookie from 'react-cookies';
   let token1 =cookie.load('auth'); 
-  console.log(token1)
- function Services() {
+  function Services() {
+   console.log("tokeeeeeeeeeeen",token1)
   const [handyData, setHandyData] = useState(null); // Initialize handyData state
   const [expertydata, setExpertyData] = useState(null); // Initialize handyData state
   const [newDatacat,setNewData] = useState(null);
