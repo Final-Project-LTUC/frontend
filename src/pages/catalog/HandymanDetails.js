@@ -23,11 +23,13 @@ function HandymanDetails() {
     const [handymanTasks, setHandymanTasks] = useState([]);
     const token = cookie.load("auth");
 
+
     useEffect(() => {
         const fetchHandymanData = async () => {
             try {
+                const encodedId = encodeURIComponent(id);
                 const response = await axios.get(
-                    `http://localhost:5000/handymen/${id}`,
+                    `http://localhost:5000/handymen/${encodedId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -35,6 +37,7 @@ function HandymanDetails() {
                     }
                 );
                 setHandyman(response.data);
+                console.log("Handyman data:", response.data);
             } catch (error) {
                 console.error(error);
             }
@@ -46,21 +49,28 @@ function HandymanDetails() {
     useEffect(() => {
         const fetchHandymanTasks = async () => {
             try {
+                const encodedId = encodeURIComponent(id);
                 const response = await axios.get(
-                    `http://localhost:5000/handytasks/${id}`
+                    `http://localhost:5000/handytasks/${encodedId}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
                 );
                 setHandymanTasks(response.data);
+                console.log("Handyman tasks:", response.data);
             } catch (error) {
                 console.error(error);
             }
         };
 
         fetchHandymanTasks();
-    }, [id]);
+    }, [id,token]);
 
     return (
         <Box p={5} shadow="md" borderWidth="1px" borderRadius="lg">
-            {handyman.name ? (
+            {Object.keys(handyman).length !== 0 ? (
                 <div>
                     <Center>
                         <Image
