@@ -1865,39 +1865,39 @@ export default function Contact() {
                   boxShadow="lg"
                 >
                   <VStack spacing={5}>
-                    <FormControl id="name" borderColor="teal.200">
+                    <FormControl id="name" borderColor="teal.600">
                       <FormLabel color="black">Your Name</FormLabel>
-                      <InputGroup borderColor="teal.200">
+                      <InputGroup borderColor="teal.600">
                         <InputLeftElement pointerEvents="none">
                           <BsPerson color="gray.800" />
                         </InputLeftElement>
                         <Input type="text" size="md" />
                       </InputGroup>
                     </FormControl>
-                    <FormControl id="email" borderColor="teal.200">
+                    <FormControl id="email" borderColor="teal.600">
                       <FormLabel color="black">Email</FormLabel>
-                      <InputGroup borderColor="teal.200">
+                      <InputGroup borderColor="teal.600">
                         <InputLeftElement pointerEvents="none">
                           <MdOutlineEmail color="gray.800" />
                         </InputLeftElement>
                         <Input type="text" size="md" />
                       </InputGroup>
                     </FormControl>
-                    <FormControl id="phone" borderColor="teal.200">
+                    <FormControl id="phone" borderColor="teal.600">
                       <FormLabel color="black">Phone Number</FormLabel>
-                      <InputGroup borderColor="teal.200">
+                      <InputGroup borderColor="teal.600">
                         <InputLeftElement pointerEvents="none">
                           <MdPhone color="gray.800" />
                         </InputLeftElement>
                         <Input type="text" size="md" />
                       </InputGroup>
                     </FormControl>
-                    <FormControl id="message" borderColor="teal.200">
+                    <FormControl id="message" borderColor="teal.600">
                       <FormLabel color="black">Message</FormLabel>
                       <Textarea
-                        borderColor="teal.200"
+                        borderColor="teal.600"
                         _hover={{
-                          borderColor: 'teal.300',
+                          borderColor: 'white',
                         }}
                         placeholder="Message"
                       />
