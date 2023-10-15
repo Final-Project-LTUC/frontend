@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Tasks from "../../../Components/tasks/Tasks";
 import {
   Button,
@@ -13,8 +13,13 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { LoginContext } from "../../../hooks/Context/LoginProvider";
 
 function TasksPage({ profileData }) {
+  const { loginData, socket } = useContext(LoginContext);
+  const encodedId = encodeURIComponent(profileData.id);
+  console.log("uuid decorder",encodedId)
+  console.log(profileData,"SSSSSsssssssssssss")
   const [tasks, setTasks] = useState([]);
   const getTasks = async () => {
     try {
@@ -22,9 +27,7 @@ function TasksPage({ profileData }) {
         Authorization: `Bearer ${profileData.token}`,
       };
       const response = await axios.get(
-        `${`${process.env.REACT_APP_DATABASE_URL}`}/handytasks/${
-          profileData.id
-        }`,
+        `${`${process.env.REACT_APP_DATABASE_URL}`}/handytasks/${encodedId}`,
         {
           headers: headers,
         }
@@ -101,6 +104,9 @@ function TasksPage({ profileData }) {
                       setCurrentTask(e);
                       const newTasks=tasks.filter(task=>e.id!==task.id)
                       setTasks(newTasks);
+
+                      
+
                     }}
                   >
                     Take Now
