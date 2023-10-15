@@ -76,7 +76,7 @@ return(
     <DashboardNavbar setShowTasks={setShowTasks} setShowUpdateForm={setShowUpdateForm} profilePicUrl={profileData.profilePicUrl}/>
     <Profile showTasks={showTasks} setShowUpdateForm={setShowUpdateForm}  showUpdateForm={showUpdateForm} profileData={profileData}/>
     {showUpdateForm&&<UpdateForm handleUpdate={handleUpdate} updatedData={updatedData} setUpdatedData={setUpdatedData} profileData={profileData} showUpdateForm={showUpdateForm} setProfileData={setProfileData} setShowUpdateForm={setShowUpdateForm}/>}
-    {showTasks&&<Tasks profileData={profileData}/>}
+    {showTasks&&<Tasks/>}
   </Flex>
 )
 
