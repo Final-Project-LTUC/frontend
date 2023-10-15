@@ -118,7 +118,7 @@ const visionPoints = [
   {
     id: 2,
     title: 'Providing Convenience',
-    text: 'Providing convenience and dependability at every interaction.',
+    text: 'Providing convenience and dependability at every interaction .',
     icon: <FaHandshake />,
   },
   {
@@ -155,13 +155,13 @@ export default function OurVision() {
       borderRadius="lg"
       boxShadow="lg"
       py={12}
-      fontFamily="cursive" // Set the fancy font family
+      fontFamily="cursive"
     >
       <Stack spacing={4} as={Container} maxW={'3xl'} textAlign={'center'}>
         <Heading
           fontSize={{ base: '2xl', md: '3xl' }}
           fontWeight="bold"
-          fontFamily="cursive" // Set the fancy font family
+          fontFamily="cursive"
           textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)"
         >
           OUR VISION AT SKILLIFY
@@ -181,7 +181,7 @@ export default function OurVision() {
             <HStack
               key={point.id}
               align={'top'}
-              bg="gray.300" // Set the card background color to teal.100
+              bg="gray.300"
               p={6}
               borderRadius="md"
               color="teal.500"
@@ -190,7 +190,7 @@ export default function OurVision() {
               _hover={{ transform: 'scale(1.02)', boxShadow: 'xl' }}
             >
               <Box fontSize="3xl">{point.icon}</Box>
-              <VStack align={'start'}>
+              <VStack align={'start'} textAlign="left"> {/* Add textAlign="left" here */}
                 <Text fontWeight={600}>{point.title}</Text>
                 <Text color={'gray.600'}>{point.text}</Text>
               </VStack>
@@ -201,6 +201,7 @@ export default function OurVision() {
     </Box>
   );
 }
+
 
 
 
