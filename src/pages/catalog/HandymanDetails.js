@@ -23,10 +23,30 @@ function HandymanDetails() {
     const [handymanTasks, setHandymanTasks] = useState([]);
     const token = cookie.load("auth");
 
-
     useEffect(() => {
+        const fetchHandymanTasks = async () => {
+            try {
+                const encodedId = encodeURIComponent(id);
+                const response = await axios.get(
+                    `http://localhost:5000/handytasks/${encodedId}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+
+                console.log({ response });
+                setHandymanTasks(response.data);
+                console.log("Handyman tasks:", response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
         const fetchHandymanData = async () => {
             try {
+                console.log(token);
                 const encodedId = encodeURIComponent(id);
                 const response = await axios.get(
                     `http://localhost:5000/handymen/${encodedId}`,
@@ -43,30 +63,11 @@ function HandymanDetails() {
             }
         };
 
-        fetchHandymanData();
+        if (token) {
+            fetchHandymanData();
+            fetchHandymanTasks();
+        }
     }, [id, token]);
-
-    useEffect(() => {
-        const fetchHandymanTasks = async () => {
-            try {
-                const encodedId = encodeURIComponent(id);
-                const response = await axios.get(
-                    `http://localhost:5000/handytasks/${encodedId}`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                );
-                setHandymanTasks(response.data);
-                console.log("Handyman tasks:", response.data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        fetchHandymanTasks();
-    }, [id,token]);
 
     return (
         <Box p={5} shadow="md" borderWidth="1px" borderRadius="lg">
