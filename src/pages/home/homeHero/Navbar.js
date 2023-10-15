@@ -56,7 +56,7 @@ function Navbar() {
   return (
     <header>
       <div className="heroSection">
-        <div className="container">
+        <div className="container"  >
           <nav
             style={{
               marginLeft: mar,
@@ -99,6 +99,7 @@ function Navbar() {
                 spacing={4}
                 display={{ base: "none", md: "flex" }}
                 justifyContent={"space-between"}
+                alignItems =  {"center"}
               >
                 <div className="logo">
                   <ChakraLink as={ReactRouterLink} to="/">
@@ -180,9 +181,9 @@ function Navbar() {
                     ) : null}
 
                     {loginData.loggedIn ? (
-                      <></>
+                      <Button onClick={()=>logout()}>Logout</Button>
                     ) : (
-                      //  <Button onClick={()=>logout()}>Logout</Button>
+                      
                       <>
                         <Button
                           as={"a"}
