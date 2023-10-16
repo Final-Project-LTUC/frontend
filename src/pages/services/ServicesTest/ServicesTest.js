@@ -12,6 +12,7 @@ import React, { useState,useEffect } from "react";
 import FilterSidebar from "../../../Components/ServicesPage/FilterSideBar";
 import axios from "axios"
 import Handymen from "../../../Components/ServicesPage/Handymen"; 
+import ServicesHero from "../../../Components/ServicesPage/ServicesHero/index"; 
 import categories from "./constant"
 import cookie from 'react-cookies';
   let token1 =cookie.load('auth'); 
@@ -110,10 +111,12 @@ const handleLocationChange = (location) => {
 
 
   return (
+      
+
+    
     <Box p={4} bgColor="white.100" width={"100%"} height={"100%"}>
 <Flex justifyContent="flex-start" flexDirection="row">
     <Box p={4} bgColor="white.100" width={"30%"} height={"220"}>
-
 
         <FilterSidebar
         selectedLocation={selectedLocation}
