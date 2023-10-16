@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import TaskCard from "./TaskCard";
 import axios from "axios";
 import { Box, Text, SimpleGrid } from "@chakra-ui/react";
+import "./Catalog.css"; // Import your CSS file here
 
 function Catalog() {
     const [tasks, setTasks] = useState([]);
@@ -28,7 +29,8 @@ function Catalog() {
     return (
         <Box p={5}>
             <Text
-                fontSize="3xl"
+                className="animate-charcter" // Apply the animation class to the Text
+                fontSize="52px"
                 fontWeight="bold"
                 textAlign="center"
                 color="teal.500"
