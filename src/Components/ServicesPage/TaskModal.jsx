@@ -68,7 +68,7 @@ function TaskModal({ data, index, token }) {
       taskStatus: "incoming",
       dateOfReq: Date.now(),
     };
-    socket.connect()
+    // socket.connect()
 
     socket.emit("pickHandyman", {
       handyData: requestData,

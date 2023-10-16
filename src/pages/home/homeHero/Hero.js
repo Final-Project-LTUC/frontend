@@ -28,6 +28,7 @@ import {
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useContext } from "react";
 import { LoginContext } from "../../../hooks/Context/LoginProvider";
+import BellComponent from "../../../Components/icons/BellComponent";
 const Links = ["Skilify", "Home", "Services", "Catalog", "About us"];
 
 function Hero() {
@@ -118,6 +119,7 @@ console.log(updateData)
                         {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
                       </Button>
                       {loginData.loggedIn ? (
+                      <>
                         <Menu>
                           <Tooltip
                             label="Visit your profile"
@@ -145,6 +147,8 @@ console.log(updateData)
                             <br />
                           </MenuList>
                         </Menu>
+                        <BellComponent/>
+                        </>
                       ) : null}
 
                       {loginData.loggedIn ? (
