@@ -33,8 +33,8 @@ const Links = ["Skilify", "Home", "Services", "Catalog", "About us"];
 function Hero() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { loginData, logout} = useContext(LoginContext);
-console.log(loginData)
+  const { loginData, logout,updateData} = useContext(LoginContext);
+console.log(updateData)
 
   const [isNavFixed, setIsNavFixed] = useState(false);
 
@@ -56,7 +56,7 @@ console.log(loginData)
     };
   }, [isNavFixed]);
 
-  const mar = 80;
+  // const mar = 80;
   const textColor = isNavFixed ? "black" : "white";
   return (
     <header>
@@ -65,7 +65,7 @@ console.log(loginData)
           <video className="video" src={video} loop autoPlay muted />
           <div className="container">
             <nav
-              style={{ marginLeft: mar }}
+              // style={{ marginLeft: mar }}
               className={isNavFixed ? "fixed" : ""}
             >
               <Flex
