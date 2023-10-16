@@ -5,6 +5,7 @@ import HomeCatalog from "./HomeCatalog";
 import HomeBlog from "./bolg/HomeBlog";
 import HowWeWork from "../home/howWeWork/HowWeWork";
 import Hero from "./homeHero/Hero";
+// import Notifications from "../../Components/notifications/Notifications";
 import { LoginContext } from "../../../src/hooks/Context/LoginProvider";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
     <div className="home-container">
       <Hero />
       <TrustUs />
+      {/* <Notifications/> */}
       <HowWeWork />
       <HomeServices />
       <HomeCatalog />
