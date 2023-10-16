@@ -1,10 +1,33 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useContext } from 'react';
 import { Box, Flex, Icon } from '@chakra-ui/react';
 import { FaBell } from 'react-icons/fa';
 import gsap from 'gsap';
 import Notifications from '../notifications/Notifications';
+import { LoginContext } from "../../hooks/Context/LoginProvider";
 
 const BellComponent = () => {
+  const { socket } = useContext(LoginContext);
+
+  const [notificationCount, setNotificationCount] = useState(0);
+  const [payload, setPayload] = useState('');
+
+  useEffect(() => {
+    const handleInquiryDate = (payload) => {
+      console.log("Notification received. Payload:", payload);
+      setPayload(payload)
+      setNotificationCount((prevCount) => {
+        console.log("Previous count:", prevCount);
+        return prevCount + 1;
+      });
+    };
+
+    socket.on("inquiryDate", handleInquiryDate);
+
+    // return () => {
+    //   socket.off("inquiryDate", handleInquiryDate);
+    // };
+  }, [socket]); 
+
   const bellRef = useRef(null);
   const circleRef = useRef(null);
   const [showNotification, setNotification] = useState(false);
@@ -30,10 +53,11 @@ const BellComponent = () => {
       repeat: 5,
       yoyo: true,
     });
-  }, []);
+  }, [showNotification]);
 
   const toggleNotification = () => {
     setNotification(!showNotification);
+    setNotificationCount(0);
   };
 
   return (
@@ -50,23 +74,23 @@ const BellComponent = () => {
             backgroundColor: 'lightgray',
           }}
           onClick={toggleNotification}
-          position="relative" // Added relative positioning
+          position="relative" 
         >
           <Flex className="container__content" direction="column" align="center">
             <Box className="bell" mb={4} ref={bellRef}>
-              <Box className="notification">nooo</Box>
+              <Box className="notification">{notificationCount}</Box>
               <Icon as={FaBell} className="bell-icon" boxSize={6} />
               <Box className="bell-icon__circle" ref={circleRef}></Box>
             </Box>
           </Flex>
           {showNotification && (
             <Box
-              position="absolute" // Position the Notifications component absolutely
-              top="100%" // Adjust the top value to your desired position
-              right={0} // Adjust the right value to your desired position
-              zIndex={1} // Ensure Notifications appear above the bell icon
+              position="absolute" 
+              top="100%" 
+              right={0} 
+              zIndex={1} 
             >
-              <Notifications />
+              <Notifications showNotification={showNotification} payload={payload} socket={socket}/>
             </Box>
           )}
         </Box>
