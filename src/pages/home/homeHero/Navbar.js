@@ -20,11 +20,12 @@ import {
   Stack,
   useColorMode,
   Center,
-  Tooltip
+  Tooltip,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useContext } from "react";
 import { LoginContext } from "../../../hooks/Context/LoginProvider";
+import BellComponent from "../../../Components/icons/BellComponent";
 const Links = ["Skilify", "Home", "Services", "Catalog", "About us"];
 
 function Navbar() {
@@ -136,55 +137,58 @@ function Navbar() {
                     {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
                   </Button>
                   {loginData.loggedIn ? (
-                     <Menu>
-                     <Tooltip
-                       label="Visit your profile"
-                       aria-label="Visit your profile"
-                       placement="top"
-                     >
-                       <ChakraLink as={ReactRouterLink} to="/dashboard">
-                         <MenuButton
-                           as={Button}
-                           rounded={"full"}
-                           variant={"link"}
-                           cursor={"pointer"}
-                           minW={0}
-                         >
-                           <Avatar
-                             size={"sm"}
-                             src={
-                               "https://avatars.dicebear.com/api/male/username.svg"
-                             }
-                           />
-                         </MenuButton>
-                       </ChakraLink>
-                     </Tooltip>
-                     <MenuList alignItems={"center"}>
-                       <br />
-                     </MenuList>
-                   </Menu>
+                    <>
+                      <Menu>
+                        <Tooltip
+                          label="Visit your profile"
+                          aria-label="Visit your profile"
+                          placement="top"
+                        >
+                          <ChakraLink as={ReactRouterLink} to="/dashboard">
+                            <MenuButton
+                              as={Button}
+                              rounded={"full"}
+                              variant={"link"}
+                              cursor={"pointer"}
+                              minW={0}
+                            >
+                              <Avatar
+                                size={"sm"}
+                                src={
+                                  "https://avatars.dicebear.com/api/male/username.svg"
+                                }
+                              />
+                            </MenuButton>
+                          </ChakraLink>
+                        </Tooltip>
+                        <MenuList alignItems={"center"}>
+                          <br />
+                        </MenuList>
+                      </Menu>
+                      <BellComponent />
+                    </>
                   ) : null}
 
                   {loginData.loggedIn ? (
                     <Button onClick={() => logout()}>Logout</Button>
                   ) : (
                     <>
-                        <Button
-                            as={"a"}
-                            display={{ base: "none", md: "inline-flex" }}
-                            fontSize={"sm"}
-                            fontWeight={700}
-                            color={"black"}
-                            bg={"gray.100"}
-                            _hover={{
-                              bg: "teal.100",
-                            }}
-                            onClick={onOpen}
-                            // variant={"link"}
-                            href={"/signin"}
-                          >
-                            Sign In
-                          </Button>
+                      <Button
+                        as={"a"}
+                        display={{ base: "none", md: "inline-flex" }}
+                        fontSize={"sm"}
+                        fontWeight={700}
+                        color={"black"}
+                        bg={"gray.100"}
+                        _hover={{
+                          bg: "teal.100",
+                        }}
+                        onClick={onOpen}
+                        // variant={"link"}
+                        href={"/signin"}
+                      >
+                        Sign In
+                      </Button>
                       <Button
                         as={"a"}
                         display={{ base: "none", md: "inline-flex" }}
