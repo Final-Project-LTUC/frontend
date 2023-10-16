@@ -10,8 +10,9 @@ import {
     Image,
     Center,
     Badge,
+    Button,
 } from "@chakra-ui/react";
-import { StarIcon } from "@chakra-ui/icons";
+import { StarIcon, PhoneIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import cookie from "react-cookies";
 
@@ -22,6 +23,7 @@ function HandymanDetails() {
     const [handyman, setHandyman] = useState({});
     const [handymanTasks, setHandymanTasks] = useState([]);
     const token = cookie.load("auth");
+    const [showMore, setShowMore] = useState({});
 
     useEffect(() => {
         const fetchHandymanTasks = async () => {
@@ -69,6 +71,13 @@ function HandymanDetails() {
         }
     }, [id, token]);
 
+    const toggleShowMore = (index) => {
+        setShowMore((prevState) => ({
+            ...prevState,
+            [index]: !prevState[index],
+        }));
+    };
+
     return (
         <Box p={5} shadow="md" borderWidth="1px" borderRadius="lg">
             {Object.keys(handyman).length !== 0 ? (
@@ -77,18 +86,19 @@ function HandymanDetails() {
                         <Image
                             borderRadius="full"
                             boxSize="150px"
-                            src={handyman.profilePic}
+                            src={handyman.profilePicUrl}
                             mb={5}
                         />
                     </Center>
                     <Heading size="lg" mb={2} textAlign="center">
-                        {handyman.name}
+                        {handyman.firstName + " " + handyman.lastName}
                     </Heading>
+                    <Text fontSize="2xl"> {handyman.username}</Text>
                     <Box textAlign="center" mb={4}>
                         <Badge colorScheme="green">Handyman</Badge>
                     </Box>
                     <Heading size="md" mb={3}>
-                        Tasks:
+                        Previous works :
                     </Heading>
                     <List spacing={2}>
                         {handymanTasks.length !== 0 ? (
@@ -100,7 +110,30 @@ function HandymanDetails() {
                                     borderWidth="1px"
                                     borderRadius="lg"
                                 >
-                                    <Text>{task.description}</Text>
+                                    <Text fontWeight="bold" fontSize="lg">
+                                        {task.title}
+                                    </Text>
+                                    <Text>
+                                        {showMore[index]
+                                            ? task.description
+                                            : task.description.slice(0, 100)}
+                                        {task.description.length > 100 &&
+                                            !showMore[index] && (
+                                                <Button
+                                                    variant="link"
+                                                    color="blue.500"
+                                                    size="sm"
+                                                    onClick={() =>
+                                                        toggleShowMore(index)
+                                                    }
+                                                    style={{
+                                                        marginLeft: "5px",
+                                                    }}
+                                                >
+                                                    Show more
+                                                </Button>
+                                            )}
+                                    </Text>
                                     <Box
                                         display="flex"
                                         alignItems="center"
@@ -112,6 +145,19 @@ function HandymanDetails() {
                                         />
                                         <Text fontSize="lg" fontWeight="bold">
                                             Rating: {task.rating}
+                                        </Text>
+                                    </Box>
+                                    <Box
+                                        display="flex"
+                                        alignItems="center"
+                                        mt={2}
+                                    >
+                                        <ListIcon
+                                            as={PhoneIcon}
+                                            color="green.400"
+                                        />
+                                        <Text fontSize="lg" fontWeight="bold">
+                                            Phone: {handyman.phoneNumber}
                                         </Text>
                                     </Box>
                                 </ListItem>
