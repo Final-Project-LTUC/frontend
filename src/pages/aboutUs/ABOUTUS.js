@@ -11,7 +11,6 @@ import Vision from '../../Components/AboutUS/Vision';
 import Location from '../../Components/AboutUS/Location';
 import WhyChooseUs from '../../Components/AboutUS/WhyChooseUs';
 
-
 function App() {
   return (
     <>
