@@ -34,7 +34,7 @@ function TaskCard({ task }) {
             position="relative"
             _hover={{ shadow: "lg" }}
         >
-            <Image src={task.imageURL} boxSize="200px" />
+            <Image src={task.imageUrl} boxSize="200px" width={"250px"} />
             <Box mt={4}>
                 <Text fontSize="lg" fontWeight="semibold">
                     {task.description}

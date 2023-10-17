@@ -23,16 +23,19 @@ import {
   Stack,
   useColorMode,
   Center,
+  Tooltip,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useContext } from "react";
 import { LoginContext } from "../../../hooks/Context/LoginProvider";
+import BellComponent from "../../../Components/icons/BellComponent";
 const Links = ["Skilify", "Home", "Services", "Catalog", "About us"];
 
 function Hero() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { loginData, logout } = useContext(LoginContext);
+  const { loginData, logout,updateData} = useContext(LoginContext);
+console.log(updateData)
 
   const [isNavFixed, setIsNavFixed] = useState(false);
 
@@ -54,7 +57,7 @@ function Hero() {
     };
   }, [isNavFixed]);
 
-  const mar = 80;
+  // const mar = 80;
   const textColor = isNavFixed ? "black" : "white";
   return (
     <header>
@@ -63,7 +66,7 @@ function Hero() {
           <video className="video" src={video} loop autoPlay muted />
           <div className="container">
             <nav
-              style={{ marginLeft: mar }}
+              // style={{ marginLeft: mar }}
               className={isNavFixed ? "fixed" : ""}
             >
               <Flex
@@ -116,52 +119,36 @@ function Hero() {
                         {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
                       </Button>
                       {loginData.loggedIn ? (
+                      <>
                         <Menu>
-                          <MenuButton
-                            as={Button}
-                            rounded={"full"}
-                            variant={"link"}
-                            cursor={"pointer"}
-                            minW={0}
+                          <Tooltip
+                            label="Visit your profile"
+                            aria-label="Visit your profile"
+                            placement="top"
                           >
-                            <Avatar
-                              size={"sm"}
-                              src={
-                                "https://avatars.dicebear.com/api/male/username.svg"
-                              }
-                            />
-                          </MenuButton>
+                            <ChakraLink as={ReactRouterLink} to="/dashboard">
+                              <MenuButton
+                                as={Button}
+                                rounded={"full"}
+                                variant={"link"}
+                                cursor={"pointer"}
+                                minW={0}
+                              >
+                                <Avatar
+                                  size={"sm"}
+                                  src={
+                                    "https://avatars.dicebear.com/api/male/username.svg"
+                                  }
+                                />
+                              </MenuButton>
+                            </ChakraLink>
+                          </Tooltip>
                           <MenuList alignItems={"center"}>
                             <br />
-                            <Center>
-                              <Avatar
-                                size={"2xl"}
-                                src={
-                                  "https://avatars.dicebear.com/api/male/username.svg"
-                                }
-                              />
-                            </Center>
-                            <br />
-                            <Center>
-                              <p>Username</p>
-                            </Center>
-                            <br />
-                            <MenuDivider />
-                            <ChakraLink as={ReactRouterLink} to="/dashboard">
-                              <MenuItem>Your Dashboard</MenuItem>
-                            </ChakraLink>
-
-                            {/* <MenuItem>Account Settings</MenuItem>
-
-                            <ChakraLink
-                              as={ReactRouterLink}
-                              onClick={() => logout()}
-                              to="/"
-                            >
-                              <MenuItem>Logout</MenuItem>
-                            </ChakraLink> */}
                           </MenuList>
                         </Menu>
+                        <BellComponent/>
+                        </>
                       ) : null}
 
                       {loginData.loggedIn ? (
@@ -170,11 +157,17 @@ function Hero() {
                         <>
                           <Button
                             as={"a"}
+                            display={{ base: "none", md: "inline-flex" }}
                             fontSize={"sm"}
-                            fontWeight={400}
-                            variant={"link"}
-                            href={"/signin"}
+                            fontWeight={700}
+                            color={"black"}
+                            bg={"gray.100"}
+                            _hover={{
+                              bg: "teal.100",
+                            }}
                             onClick={onOpen}
+                            // variant={"link"}
+                            href={"/signin"}
                           >
                             Sign In
                           </Button>

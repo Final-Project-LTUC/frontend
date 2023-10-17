@@ -648,7 +648,7 @@ export default function LargeWithNewsletter() {
           spacing={8}
         >
           {/* Add your logo to the left of the grid with a responsive size in rem units */}
-          <Image src="/assets/logo.png" alt="Your Logo" boxSize="15rem" />
+          <Image src="/assets/logo.png" alt="Your Logo" boxSize="15rem" width={"300%"} />
 
           <Stack spacing={2} align={'flex-start'}>
             <ListHeader>Company</ListHeader>

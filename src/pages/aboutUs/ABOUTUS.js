@@ -28,7 +28,7 @@ function App() {
         <WhyChooseUs/>
         <Testimonials/>
         {/* <Blog/> */}
-        <Location/>
+        {/* <Location/> */}
         {/* <Footer/> */}
       </ChakraProvider>
     </>

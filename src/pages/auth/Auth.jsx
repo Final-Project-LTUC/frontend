@@ -28,8 +28,11 @@ function Auth({ submitAction }) {
         ...formData,
         languages: formData.languages.join(","),
       };
+      
+      delete newFormData.password;
+      console.log(newFormData,"sharp shooter mistake")
       const moreInfo = await loginContext.updateData(newFormData, token);
-      const imageUpload = await uploadImage();
+      const imageUpload = await uploadImage(token); 
       toast({
         title: `All Done`,
         description: "Your Information have been added",
@@ -49,7 +52,8 @@ function Auth({ submitAction }) {
       setPageNum(0);
     }
   }
-  const uploadImage = async () => {
+  const uploadImage = async (token) => {
+    console.log(token,"token taken")
     if (selectedImg) {
       const formData = new FormData();
       formData.append("image", selectedImg);

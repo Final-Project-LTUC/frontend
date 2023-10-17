@@ -14,7 +14,7 @@ function Dashboard() {
   const [updatedData,setUpdatedData]=useReducer(formReducer,initialState); 
   const [profileData,setProfileData]=useState({});
   const [showUpdateForm,setShowUpdateForm]=useState(false);
-  const [showTasks, setShowTasks]=useState(false);
+  const [showTasks, setShowTasks]=useState(true);
   const loginContext = useContext(LoginContext);
   async function gettingProfile() {
     try {
