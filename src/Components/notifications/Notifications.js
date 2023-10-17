@@ -2,32 +2,28 @@ import React, { useContext, useEffect, useState } from "react";
 import "./notifications.css";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 
-function Notifications({ showNotification, payload,socket }) {
-  const [inquiryDatePayload, setInquiryDatePayload] = useState([]);
-  useEffect(() => {
-    if (showNotification && payload) {
-      setInquiryDatePayload((prevPayloads) => {
-        console.log(prevPayloads, "ggggggggggggggggggg");
-        if (!prevPayloads) {
-          return payload;
-        } else {
-          const updatedPayloads = [...prevPayloads, payload];
-          console.log(updatedPayloads, "hahahahahahaahah");
-          return updatedPayloads;
-        }
-      });
-    }
-  }, [payload,showNotification]);
+function Notifications({
+  
+  payload,
+  socket,
+  inquiryDatePayload,
+}) {
 
   const handleOptionClick = (option, payload) => {
     if (option === "archive") {
-      socket.emit("transaction", payload);
+      console.log('yeah i want it')
+      payload.choice = true;
+      socket.emit("continue", payload);
+
     } else if (option === "delete") {
+      payload.choice = false;
+      payload.taskStatus = 'canceled'
       socket.emit("serviceRejected", payload);
     }
   };
 
   useEffect(() => {
+
     let optionBtns = document.querySelectorAll(".js-option");
 
     for (var i = 0; i < optionBtns.length; i++) {
@@ -63,14 +59,15 @@ function Notifications({ showNotification, payload,socket }) {
         handleOptionClick("delete", payload);
       }
     };
-  }, [showNotification, payload, handleOptionClick, socket]);
+  }, [ payload]);
 
   return (
     <div className="wrapper">
       <div className="wrapper">
         <div className="notifications">
           {inquiryDatePayload.map((payload, index) => (
-            <div key={index} className="notifications__item">
+            
+            <div className="notifications__item">
               <div className="notifications__item__avatar">
                 <img
                   src={payload.avatarSrc}
@@ -80,7 +77,7 @@ function Notifications({ showNotification, payload,socket }) {
 
               <div className="notifications__item__content">
                 <span className="notifications__item__title">
-                  {payload.title}
+                New Notification
                 </span>
                 <span className="notifications__item__message">
                   appointment: {payload.schdualedAt}
@@ -102,6 +99,24 @@ function Notifications({ showNotification, payload,socket }) {
               </div>
             </div>
           ))}
+           {payload && payload.choice && payload.clientId &&(
+          <div className="notifications__item">
+            <div className="notifications__item__content">
+              <span className="notifications__item__message">
+              transaction succesful to client
+              </span>
+            </div>
+          </div>
+        )}
+          {payload && payload.choice && payload.handymanId &&(
+          <div className="notifications__item">
+            <div className="notifications__item__content">
+              <span className="notifications__item__message">
+              transaction succesful to handyman
+              </span>
+            </div>
+          </div>
+        )}
         </div>
       </div>
     </div>
