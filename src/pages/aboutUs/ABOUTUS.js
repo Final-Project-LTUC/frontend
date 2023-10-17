@@ -10,6 +10,8 @@ import Team from '../../Components/AboutUS/Team';
 import Vision from '../../Components/AboutUS/Vision';
 import Location from '../../Components/AboutUS/Location';
 import WhyChooseUs from '../../Components/AboutUS/WhyChooseUs';
+import HERO from '../../Components/ServicesPage/ServicesHero';
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
       <ChakraProvider>
       <ColorModeScript initialColorMode="light" />
         {/* <NavBar/> */}
+        {/* <HERO/> */}
         <Header />
         <Team/>
         <Vision/>
