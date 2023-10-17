@@ -9,22 +9,21 @@ import {
     Text,
     Image,
     Center,
-    Badge,
     Button,
+    AbsoluteCenter,
 } from "@chakra-ui/react";
-import { StarIcon, PhoneIcon } from "@chakra-ui/icons";
+import { StarIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import cookie from "react-cookies";
 import "./HandymanDetails.css";
+
 function HandymanDetails() {
     const { id } = useParams();
-    console.log("ID from useParams:", id);
-    const listItemHoverColor = "gray.200"; // Color for list item hover background
-    const imageScaleOnHover = 1.1; // Scale factor for image on hover
+    const listItemHoverColor = "gray.200";
+    const imageScaleOnHover = 1.1;
     const [handyman, setHandyman] = useState({});
     const [handymanTasks, setHandymanTasks] = useState([]);
     const token = cookie.load("auth");
-    const [showMore, setShowMore] = useState({});
 
     useEffect(() => {
         const fetchHandymanTasks = async () => {
@@ -38,10 +37,7 @@ function HandymanDetails() {
                         },
                     }
                 );
-
-                console.log({ response });
                 setHandymanTasks(response.data);
-                console.log("Handyman tasks:", response.data);
             } catch (error) {
                 console.error(error);
             }
@@ -49,7 +45,6 @@ function HandymanDetails() {
 
         const fetchHandymanData = async () => {
             try {
-                console.log(token);
                 const encodedId = encodeURIComponent(id);
                 const response = await axios.get(
                     `http://localhost:5000/handymen/${encodedId}`,
@@ -60,7 +55,6 @@ function HandymanDetails() {
                     }
                 );
                 setHandyman(response.data);
-                console.log("Handyman data:", response.data);
             } catch (error) {
                 console.error(error);
             }
@@ -72,37 +66,33 @@ function HandymanDetails() {
         }
     }, [id, token]);
 
-    const toggleShowMore = (index) => {
-        setShowMore((prevState) => ({
-            ...prevState,
-            [index]: !prevState[index],
-        }));
-    };
     const [hoveredItem, setHoveredItem] = useState(null);
     const [imageHovered, setImageHovered] = useState(false);
 
-    // Function to handle hovering over a list item
     const handleListItemHover = (index) => {
         setHoveredItem(index);
     };
 
-    // Function to handle mouse leaving the list item
-    const handleListItemLeave = () => {
-        setHoveredItem(null);
-    };
-
-    // Function to handle hovering over the image
     const handleImageHover = () => {
         setImageHovered(true);
     };
 
-    // Function to handle mouse leaving the image
     const handleImageLeave = () => {
         setImageHovered(false);
     };
 
+    const toggleShowMore = (index) => {
+        setHandymanTasks((tasks) =>
+            tasks.map((task, i) =>
+                i === index ? { ...task, showMore: !task.showMore } : task
+            )
+        );
+    };
+
     return (
-        <div className="container">
+        <>
+            {/* <img src="https://st2.depositphotos.com/4431055/11472/i/450/depositphotos_114721466-stock-photo-building-and-treatment-tools.jpg" /> */}
+            <div className="containerr"> </div>
             <Box p={5} shadow="md" borderWidth="1px" borderRadius="lg">
                 {Object.keys(handyman).length !== 0 ? (
                     <div>
@@ -112,7 +102,8 @@ function HandymanDetails() {
                                 boxSize="180px"
                                 src={handyman.profilePicUrl}
                                 mb={5}
-                                // Apply a hover effect to the image
+                                position={"Absolute"}
+                                marginRight={"400px"}
                                 transform={
                                     imageHovered
                                         ? `scale(${imageScaleOnHover})`
@@ -129,14 +120,30 @@ function HandymanDetails() {
                             textAlign="center"
                             style={{
                                 fontSize: "1.5rem",
-                                color: "#085449",
+                                color: "black",
                                 animation: "animate 4s ease-in-out infinite",
                             }}
                         >
                             {handyman.firstName + " " + handyman.lastName}
                         </Heading>
-
-                        <Heading className="waviy" size="lg" mb={3}>
+                        <Text fontSize="lg" fontWeight="bold" color="black">
+                            Age: {handyman.age}
+                        </Text>
+                        <Text fontSize="lg" fontWeight="bold" color="black">
+                            Years of Experience: {handyman.yearsOfExperience}
+                        </Text>
+                        <Text fontSize="lg" fontWeight="bold" color="black">
+                            Phone Number: {handyman.phoneNumber}
+                        </Text>
+                        <Text fontSize="lg" fontWeight="bold" color="black">
+                            Email: {handyman.email}
+                        </Text>
+                        <Heading
+                            className="waviy"
+                            size="lg"
+                            mb={3}
+                            paddingBottom={"5px"}
+                        >
                             <span style={{ "--i": 1 }}>P</span>
                             <span style={{ "--i": 2 }}>r</span>
                             <span style={{ "--i": 3 }}>e</span>
@@ -153,43 +160,58 @@ function HandymanDetails() {
                             <span style={{ "--i": 13 }}>k</span>
                             <span style={{ "--i": 14 }}> :</span>
                         </Heading>
-
-                        <List spacing={2}>
+                        <List
+                            spacing={2}
+                            display={"flex"}
+                            flexWrap={"wrap"}
+                            justifyContent={"center"}
+                            gap={"1%"}
+                            overflow={"hidden"}
+                        >
                             {handymanTasks.length !== 0 ? (
                                 handymanTasks.map((task, index) => (
                                     <ListItem
+                                        flexBasis={"20%"}
                                         key={index}
-                                        p={3}
+                                        p={5}
                                         shadow="md"
                                         borderWidth="1px"
+                                        mt={"var(--chakra-space-2)"}
                                         borderRadius="lg"
+                                        display={"flex"}
+                                        flexDirection={"column"} // Set to column
                                         onMouseEnter={() =>
                                             handleListItemHover(index)
                                         }
-                                        onMouseLeave={handleListItemLeave}
-                                        // Apply a background color when hovering
                                         bgColor={
                                             hoveredItem === index
                                                 ? listItemHoverColor
                                                 : "white"
                                         }
                                     >
-                                        <Text
-                                            fontWeight="bold"
-                                            fontSize="lg"
-                                            color={"#135408"}
+                                        <div
+                                            style={{
+                                                flex: 1,
+                                                display: "flex",
+                                                flexDirection: "column",
+                                            }}
                                         >
-                                            {task.title}
-                                        </Text>
-                                        <Text>
-                                            {showMore[index]
-                                                ? task.description
-                                                : task.description.slice(
-                                                      0,
-                                                      100
-                                                  )}
-                                            {task.description.length > 100 &&
-                                                !showMore[index] && (
+                                            <Text
+                                                fontWeight="bold"
+                                                fontSize="lg"
+                                                color={"#135408"}
+                                            >
+                                                {task.title}
+                                            </Text>
+                                            <Text>
+                                                {task.showMore
+                                                    ? task.description
+                                                    : task.description.slice(
+                                                          0,
+                                                          100
+                                                      )}
+                                                {task.description.length >
+                                                    100 && (
                                                     <Button
                                                         variant="link"
                                                         color="blue.500"
@@ -203,41 +225,29 @@ function HandymanDetails() {
                                                             marginLeft: "5px",
                                                         }}
                                                     >
-                                                        Show more
+                                                        {task.showMore
+                                                            ? "Show Less"
+                                                            : "Show More"}
                                                     </Button>
                                                 )}
-                                        </Text>
+                                            </Text>
+                                        </div>
                                         <Box
                                             display="flex"
                                             alignItems="center"
                                             mt={2}
+                                            justifyContent={"center"}
+                                            overflow={"hidden"}
                                         >
                                             <ListIcon
                                                 as={StarIcon}
                                                 color="yellow.400"
                                             />
-
                                             <Text
                                                 fontSize="lg"
                                                 fontWeight="bold"
                                             >
                                                 Rating: {task.rating}
-                                            </Text>
-                                        </Box>
-                                        <Box
-                                            display="flex"
-                                            alignItems="center"
-                                            mt={2}
-                                        >
-                                            <ListIcon
-                                                as={PhoneIcon}
-                                                color="green.400"
-                                            />
-                                            <Text
-                                                fontSize="lg"
-                                                fontWeight="bold"
-                                            >
-                                                Phone: {handyman.phoneNumber}
                                             </Text>
                                         </Box>
                                     </ListItem>
@@ -251,7 +261,7 @@ function HandymanDetails() {
                     <div className="no-tasks">Loading</div>
                 )}
             </Box>
-        </div>
+        </>
     );
 }
 
