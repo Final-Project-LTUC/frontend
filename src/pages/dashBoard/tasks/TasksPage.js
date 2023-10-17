@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Tasks from "../../../Components/tasks/Tasks";
 import {
   Button,
-  Flex,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Td,
@@ -14,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 
-function TasksPage({ profileData }) {
+function TasksPage({ profileData ,showTasks}) {
   const [tasks, setTasks] = useState([]);
   const getTasks = async () => {
     try {
@@ -66,7 +63,12 @@ function TasksPage({ profileData }) {
   return (
     <TableContainer
     my={'8'}
-    w={"80%"}>
+    position={`${showTasks?'relative':'absolute'}`}
+    transform={`translateX(${showTasks?'0':'-200%'})`}
+    transition={'all .7s ease-in-out'}
+    h={'100vh'}
+    width={"75%"}
+    >
       <Table variant="striped" colorScheme="teal">
         <Thead >
           <Tr >

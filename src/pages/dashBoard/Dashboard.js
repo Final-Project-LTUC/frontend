@@ -3,18 +3,21 @@ import DashboardNavbar from "../../Components/dashboard/DashboardNavbar";
 import axios from 'axios';
 import Profile from '../../Components/dashboard/Profile';
 import UpdateForm from './../../Components/dashboard/dashUpdate/UpdateForm'
-import TaskCard1 from '../../Components/dashboard/TaskCard1';
 import cookie from 'react-cookies';
 import { Flex } from '@chakra-ui/react';
 import formReducer,{initialState} from '../../hooks/Reducers/FormReducer';
 import {LoginContext} from '../../hooks/Context/LoginProvider';
 import Tasks from '../../pages/dashBoard/tasks/TasksPage'
+import jwt_decode from 'jwt-decode';
+import Loader from '../../Components/Loader/Loader';
 function Dashboard() {
   let token =cookie.load('auth');
+  const validUser = jwt_decode(token);
   const [updatedData,setUpdatedData]=useReducer(formReducer,initialState); 
   const [profileData,setProfileData]=useState({});
   const [showUpdateForm,setShowUpdateForm]=useState(false);
   const [showTasks, setShowTasks]=useState(false);
+  const [loadded,setLoadded]=useState(false);
   const loginContext = useContext(LoginContext);
   async function gettingProfile() {
     try {
@@ -57,9 +60,8 @@ function Dashboard() {
   //   }
   // }
   async function handleUpdate(){
-    console.log(updatedData);
-    const responseUpdated=await loginContext.updateData(updatedData,token);
-    console.log(responseUpdated);
+    const responseUpdated=await loginContext.updateData({...updatedData,languages:updatedData.languages.join(',')},token);
+    setProfileData(responseUpdated)
   }
   useEffect(() => {
     async function fetchData() {
@@ -68,17 +70,28 @@ function Dashboard() {
       // console.log(experties)
       setUpdatedData({type:'CHANGE_ALL',payload:data});
       setProfileData(data);
+      setLoadded(true)
     }
     fetchData();
   }, []);
 return(
   <Flex w={'100%'} minH={'100vh'} h={'100vh'}>
-    <DashboardNavbar setShowTasks={setShowTasks} setShowUpdateForm={setShowUpdateForm} profilePicUrl={profileData.profilePicUrl}/>
-    <Profile showTasks={showTasks} setShowUpdateForm={setShowUpdateForm}  showUpdateForm={showUpdateForm} profileData={profileData}/>
-    {showUpdateForm&&<UpdateForm handleUpdate={handleUpdate} updatedData={updatedData} setUpdatedData={setUpdatedData} profileData={profileData} showUpdateForm={showUpdateForm} setProfileData={setProfileData} setShowUpdateForm={setShowUpdateForm}/>}
-    {showTasks&&<Tasks profileData={profileData}/>}
-  </Flex>
+    <DashboardNavbar token={validUser} setShowTasks={setShowTasks} setShowUpdateForm={setShowUpdateForm} profilePicUrl={profileData.profilePicUrl}/>
+    {
+      loadded?
+      <>
+       <Profile token={token} showTasks={showTasks} setShowUpdateForm={setShowUpdateForm}  showUpdateForm={showUpdateForm} profileData={profileData}/>
+    {showUpdateForm&&<UpdateForm  token ={validUser}handleUpdate={handleUpdate} updatedData={updatedData} setUpdatedData={setUpdatedData} profileData={profileData} showUpdateForm={showUpdateForm} setProfileData={setProfileData} setShowUpdateForm={setShowUpdateForm}/>}
+    {showTasks&&<Tasks showTasks={showTasks} profileData={profileData}/>}
+    </>
+      :
+      <Flex alignItems={'center'} justifyContent={'center'} w={'50vw'} m={'auto'} height={'80vh'}>
+    <Loader/>
+    </Flex>
+    }
+    </Flex>
 )
+
 
 }
 export default Dashboard;
