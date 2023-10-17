@@ -1,137 +1,108 @@
-import {
-  Box,
-  Slider,
-  SliderTrack,
-  SliderFilledTrack,
-  SliderThumb,
-  VStack,
-  Select,
-  Flex,
-} from "@chakra-ui/react";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { Box, Flex } from "@chakra-ui/react"; // Imported only necessary components
 import FilterSidebar from "../../../Components/ServicesPage/FilterSideBar";
-import axios from "axios"
-import Handymen from "../../../Components/ServicesPage/Handymen"; 
-import ServicesHero from "../../../Components/ServicesPage/ServicesHero/index"; 
-import categories from "./constant"
-import cookie from 'react-cookies';
-  let token1 =cookie.load('auth'); 
-  function Services() {
-   console.log("tokeeeeeeeeeeen",token1)
-  const [handyData, setHandyData] = useState(null); // Initialize handyData state
-  const [expertydata, setExpertyData] = useState(null); // Initialize handyData state
-  const [newDatacat,setNewData] = useState(null);
+import axios from "axios";
+import Handymen from "../../../Components/ServicesPage/Handymen";
+import categories from "./constant";
+import cookie from "react-cookies";
 
-  async function getData (){
-  try {
-    const response = await axios.get(`${process.env.REACT_APP_DATABASE_URL}/handymen`);
-    return response.data
+function Services() {
+  const [handyData, setHandyData] = useState(null);
+  const [newDatacat, setNewData] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
-  } catch (error) {
-        console.error("Error fetching data:", error);
-    //     // Handle the error
-    //   }
-    // ...
+  // Load the token directly without using a global variable
+  const token1 = cookie.load("auth");
+
+  async function getData() {
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_DATABASE_URL}/handymen`);
+      setHandyData(response.data); // Set the state with fetched data
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   }
-}
-  async function getDataExperty (id){
-  try {
-    const response = await axios.get(`${process.env.REACT_APP_DATABASE_URL}/handymen/genre/${id}`);
-    return response.data
 
-  } catch (error) {
-        console.error("Error fetching data:", error);
-    //     // Handle the error
-    //   }
-    // ...
+  async function getDataExperty(id) {
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_DATABASE_URL}/handymen/genre/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   }
-}
+
+  function findMatchingIds(apiResponse, arrayOfObjects) {
+    const apiIds = apiResponse.map((item) => item.HandymanId);
+    const matchingObjects = arrayOfObjects.filter((obj) => apiIds.includes(obj.id));
+    return matchingObjects;
+  }
+
+  function findCity(location, arrayOfObjects) {
+    console.log('city and object',location,arrayOfObjects)
+ 
+      if (!location) {
+        return arrayOfObjects; // Return all data if no location is selected
+      }
+    
+      const matchingObjects = arrayOfObjects.filter((obj) => obj.city === location);
+      return matchingObjects;
+    }
 
 
-
-
-const [selectedLocation, setSelectedLocation] = useState("");
-const [selectedCategory, setSelectedCategory] = useState("");
-
-function findMatchingIds(apiResponse, arrayOfObjects) {
-  // Extract all IDs from the API response
-  const apiIds = apiResponse.map((item) => item.HandymanId);
-
-  // Find matching objects in the array of objects
-  const matchingObjects = arrayOfObjects.filter((obj) => apiIds.includes(obj.id));
-
-  return matchingObjects;
-}
-
-
-
-
-
-const handleLocationChange = (location) => {
+  const handleLocationChange = (location) => {
     setSelectedLocation(location);
   };
 
   const handleCategoryChange = (categoryName) => {
     setSelectedCategory(categoryName);
 
-    // Find the ID corresponding to the selected category name
     const selectedCategoryObject = categories.find((category) => category.name === categoryName);
-
     if (selectedCategoryObject) {
       setSelectedCategory(selectedCategoryObject.id);
     } else {
-      // Handle the case where the category is not found
-      setSelectedCategory(""); // You can set a default value or an error message as needed.
+      setSelectedCategory("");
     }
   };
 
-  console.log("usestate",selectedLocation,selectedCategory)
-  useEffect( ()=>{
-  
-      
-      async function fetchData() {
-        const data = await getData();
-        setHandyData(data);
-        const expertyID = await getDataExperty(selectedCategory);
-        console.log("handydata  ", expertyID);
-    if(expertyID){
-      const newData = await findMatchingIds(expertyID, handyData) 
-      setNewData(newData)
-    } 
-       
-       
+  useEffect(() => {
+    async function fetchData() {
+      await getData();
+      const expertyID = await getDataExperty(selectedCategory);
+      console.log(selectedLocation,'set location cosnoile')
+
+      if (expertyID && selectedLocation) {
+        const newData = findMatchingIds(expertyID, handyData);
+        const handyInCity = findCity(selectedLocation, newData);
+        setNewData(handyInCity);
+      } else if (expertyID) {
+        const newData = findMatchingIds(expertyID, handyData);
+        setNewData(newData);
+      } else if (selectedLocation) {
+        const handyInCity = findCity(selectedLocation, handyData);
+        setNewData(handyInCity);
       }
-  
-      fetchData(); // Call the fetchData function when the component mounts
-   
-  
-   },[selectedCategory]);
+    }
 
-
-
+    fetchData();
+  }, [selectedCategory,selectedLocation]);
 
   return (
-      
-
-    
     <Box p={4} bgColor="white.100" width={"100%"} height={"100%"}>
-<Flex justifyContent="flex-start" flexDirection="row">
-    <Box p={4} bgColor="white.100" width={"30%"} height={"220"}>
-
-        <FilterSidebar
-        selectedLocation={selectedLocation}
-        selectedCategory={selectedCategory}
-        onLocationChange={handleLocationChange}
-        onCategoryChange={handleCategoryChange}
-        />
-
-
-    </Box>
-    <Box>
-
-      <Handymen handyData ={newDatacat?newDatacat:handyData} token={token1} />
-    </Box>
-        </Flex>
+      <Flex justifyContent="flex-start" flexDirection="row">
+        <Box p={4} bgColor="white.100" width={"30%"} height={220}>
+          <FilterSidebar
+            selectedLocation={selectedLocation}
+            selectedCategory={selectedCategory}
+            onLocationChange={handleLocationChange}
+            onCategoryChange={handleCategoryChange}
+          />
+        </Box>
+        <Box>
+          <Handymen handyData={newDatacat ? newDatacat : handyData} token={token1} />
+        </Box>
+      </Flex>
     </Box>
   );
 }

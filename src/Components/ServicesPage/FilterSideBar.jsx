@@ -139,7 +139,7 @@ function FilterSidebar({
 }) {
   const [priceRange, setPriceRange] = useState([0, 100]);
 
-  const locations = ["Downtown", "Suburb", "Beachfront", "Countryside"];
+  const locations = ["amman", "irbid"];
   const categories = [
     "Carpentry",
     "Plumbing",
