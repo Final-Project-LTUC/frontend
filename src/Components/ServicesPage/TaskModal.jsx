@@ -106,7 +106,22 @@ function TaskModal({ data, index, token }) {
 
   return (
     <>
-      <Button onClick={onOpen}>Ask for a task</Button>
+       <Button
+        onClick={onOpen}
+        colorScheme="gray.100" // Set the color scheme to "gray"
+        variant="outline" // Use the "outline" variant
+        size="sm"
+        borderRadius="lg"
+        fontSize="sm"
+        fontWeight="bold"
+        backgroundColor="gray.200"
+        _hover={{
+          bg: "teal.400",
+          color: "White",
+        }}
+      >
+        Ask for a Task
+      </Button>
 
       <Modal
         initialFocusRef={titleRef}
@@ -119,41 +134,78 @@ function TaskModal({ data, index, token }) {
         }}
       >
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Start a task</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
+        <ModalContent
+          borderRadius="lg"
+          boxShadow="0 4px 10px rgba(0, 0, 0, 0.1)"
+          bg="white"
+          color="teal.900"
+          maxW="480px"
+        >
+          <ModalHeader
+            fontSize="3xl"
+            fontWeight="bold"
+            bg="teal.500"
+            color="white"
+            p={4}
+            textAlign="center"
+          >
+            Start a Task
+          </ModalHeader>
+          <ModalCloseButton color="teal.500" _hover={{ color: "teal.600" }} />
+          <ModalBody p={6}>
             <FormControl>
               <FormLabel>Title</FormLabel>
               <Input
-                ref={initialRef}
-                placeholder={"tell me what I can help you with..."}
+                ref={titleRef}
+                placeholder="Tell me what I can help you with..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
+                fontSize="lg"
               />
             </FormControl>
-            <FormControl>
+            <FormControl mt={4}>
               <FormLabel>Description</FormLabel>
               <Input
-                ref={initialRef}
-                placeholder={"please explain the problem"}
+                ref={descriptionRef}
+                placeholder="Please explain the problem"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                fontSize="lg"
               />
             </FormControl>
           </ModalBody>
 
-          <ModalFooter>
+          <ModalFooter justifyContent="center">
             <Button
-              colorScheme="blue"
-              mr={3}
+              colorScheme="teal"
+              fontSize="lg"
+              fontWeight="bold"
+              px="8"
+              py="4"
               onClick={() => handleSave(token)}
               isDisabled={!title || !description}
+              _hover={{
+                bg: "teal.600",
+              }}
             >
               Save
             </Button>
-            <Button onClick={onClose}>Cancel</Button>
+            <Button
+              onClick={onClose}
+              fontSize="lg"
+              fontWeight="bold"
+              px="8"
+              py="4"
+              variant="outline"
+              _hover={{
+                bg: "transparent",
+                color: "teal.600",
+              }}
+              ml={"5px"}
+            >
+              Cancel
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
