@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Flex } from "@chakra-ui/react"; // Imported only necessary components
+import { Box, Flex } from "@chakra-ui/react"; 
 import FilterSidebar from "../../../Components/ServicesPage/FilterSideBar";
 import axios from "axios";
 import Handymen from "../../../Components/ServicesPage/Handymen";
@@ -11,14 +11,15 @@ function Services() {
   const [newDatacat, setNewData] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
-
-  // Load the token directly without using a global variable
+  const [submit,setSubmit] = useState("")
+  const [inquiryPrice, setInquiryPrice] = useState(0);
+  const [hourlyRate, setHourlyRate] = useState(0);
   const token1 = cookie.load("auth");
-
+   console.log(selectedLocation,"old location ")
   async function getData() {
     try {
       const response = await axios.get(`${process.env.REACT_APP_DATABASE_URL}/handymen`);
-      setHandyData(response.data); // Set the state with fetched data
+      setHandyData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -32,7 +33,7 @@ function Services() {
       console.error("Error fetching data:", error);
     }
   }
-
+   
   function findMatchingIds(apiResponse, arrayOfObjects) {
     const apiIds = apiResponse.map((item) => item.HandymanId);
     const matchingObjects = arrayOfObjects.filter((obj) => apiIds.includes(obj.id));
@@ -43,15 +44,37 @@ function Services() {
     console.log('city and object',location,arrayOfObjects)
  
       if (!location) {
-        return arrayOfObjects; // Return all data if no location is selected
+        return arrayOfObjects; 
       }
     
       const matchingObjects = arrayOfObjects.filter((obj) => obj.city === location);
       return matchingObjects;
     }
+    function filterInquiryUnderMaxPrice(maxPrice, arrOfObjects) {
+      console.log("function")
 
+      return arrOfObjects.filter(item => item.inquiryPrice <= maxPrice);
+    }
+    function filterHourlyUnderMaxPrice(maxPrice, arrOfObjects) {
+      console.log("function")
 
+      return arrOfObjects.filter(item => item.hourlyRate <= maxPrice);
+    }
+
+      // Function to update inquiryPrice state
+  const updateInquiryPrice = (maxPrice) => {
+    setInquiryPrice(maxPrice);
+  };
+
+  // Function to update hourlyRate state
+  const updateHourlyRate = (maxPrice) => {
+    setHourlyRate(maxPrice);
+  };
+    const handleSubmit = () => {
+      setSubmit(true)
+     };
   const handleLocationChange = (location) => {
+    console.log(location,"locationssssssssssss")
     setSelectedLocation(location);
   };
 
@@ -69,25 +92,39 @@ function Services() {
   useEffect(() => {
     async function fetchData() {
       await getData();
-      const expertyID = await getDataExperty(selectedCategory);
+      
       console.log(selectedLocation,'set location cosnoile')
 
-      if (expertyID && selectedLocation) {
-        const newData = findMatchingIds(expertyID, handyData);
-        const handyInCity = findCity(selectedLocation, newData);
-        setNewData(handyInCity);
-      } else if (expertyID) {
-        const newData = findMatchingIds(expertyID, handyData);
-        setNewData(newData);
-      } else if (selectedLocation) {
-        const handyInCity = findCity(selectedLocation, handyData);
-        setNewData(handyInCity);
+        let filteredData = handyData;
+    
+        
+        if (selectedLocation) {
+          filteredData = findCity(selectedLocation, filteredData);
+          
+        }
+        
+        if (selectedCategory) {
+          const expertyID = await getDataExperty(selectedCategory);
+          filteredData = findMatchingIds(expertyID, filteredData);
+        }
+        if (inquiryPrice) {
+          filteredData = filterInquiryUnderMaxPrice(inquiryPrice, filteredData);
+        }
+    
+        if (hourlyRate) {
+          filteredData = filterHourlyUnderMaxPrice(hourlyRate, filteredData);
+        }
+    
+        setNewData(filteredData);
+        setSubmit(false);
       }
-    }
-
-    fetchData();
-  }, [selectedCategory,selectedLocation]);
-
+    
+      fetchData();
+    }, [submit, selectedLocation, selectedCategory, inquiryPrice, hourlyRate]);
+  // useEffect(() => {
+  //   console.log(newDatacat)
+  
+  // }, [selectedLocation]);
   return (
     <Box p={4} bgColor="white.100" width={"100%"} height={"100%"}>
       <Flex justifyContent="flex-start" flexDirection="row">
@@ -95,8 +132,14 @@ function Services() {
           <FilterSidebar
             selectedLocation={selectedLocation}
             selectedCategory={selectedCategory}
+            submit = {submit}
+            newInquiry = {inquiryPrice}
+            newHourlyRate = {hourlyRate}
             onLocationChange={handleLocationChange}
             onCategoryChange={handleCategoryChange}
+            onSubmit = {handleSubmit}
+            onMaxInquiryPrice ={updateInquiryPrice}
+            onMaxHourlyRate = {updateHourlyRate}
           />
         </Box>
         <Box>
