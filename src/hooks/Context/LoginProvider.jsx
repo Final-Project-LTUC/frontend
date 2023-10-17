@@ -45,6 +45,8 @@ function LoginProvider(props) {
   async function signup(body,userType){
     try{
         const response=await axios.post(`${process.env.REACT_APP_DATABASE_URL}/signup${userType}`,body);
+        
+        console.log(response,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
           login(body.username,body.password,userType);
         return response;
     }catch(error){

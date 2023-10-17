@@ -38,7 +38,7 @@ function Form({
       // const socket = io.connect('http://localhost:5000');
       const response =
         submitAction === "signup"
-          ? await loginContext.signup(formData, userType)
+          ? await loginContext.signup(formData, userType) 
           : await loginContext.login(
               formData.username,
               formData.password,

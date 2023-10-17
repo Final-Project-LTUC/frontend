@@ -19,8 +19,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { LoginContext } from "../../hooks/Context/LoginProvider";
 
 function TaskModal({ data, index, token }) {
+  
   const { loginData, socket } = useContext(LoginContext);
-  // console.log("tokeeeeeeeeen", token);
+  console.log("tokeeeeeeeeen", token);
 
   const { onClose, isOpen, onOpen } = useDisclosure();
   const initialRef = React.useRef(null);
@@ -67,6 +68,7 @@ function TaskModal({ data, index, token }) {
       taskStatus: "incoming",
       dateOfReq: Date.now(),
     };
+    // socket.connect()
 
     socket.emit("pickHandyman", {
       handyData: requestData,
@@ -104,7 +106,7 @@ function TaskModal({ data, index, token }) {
 
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
+      <Button onClick={onOpen}>Ask for a task</Button>
 
       <Modal
         initialFocusRef={titleRef}
@@ -118,7 +120,7 @@ function TaskModal({ data, index, token }) {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create your account</ModalHeader>
+          <ModalHeader>Start a task</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
@@ -160,3 +162,16 @@ function TaskModal({ data, index, token }) {
 }
 
 export default TaskModal;
+
+
+
+
+
+
+
+
+
+
+
+
+
