@@ -55,7 +55,7 @@ function Catalog() {
     }, []);
 
     return (
-        <Box p={5}>
+        <Box p={5} style={{ minHeight: '70vh' }}>
             <Heading mb={5} textAlign="center" fontSize="2xl">
                 Finished Tasks
             </Heading>
