@@ -16,7 +16,11 @@ import categories from "./constant";
 import cookie from "react-cookies";
 
 function Services() {
-  const [handyData, setHandyData] = useState(null);
+
+ 
+
+  const [handyData, setHandyData] = useState(null); // Initialize handyData state
+  const [expertydata, setExpertyData] = useState(null); // Initialize handyData state
   const [newDatacat, setNewData] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
