@@ -69,7 +69,7 @@ function FilterSidebar({
       position="sticky"
       top="0"
     >
-      <VStack spacing={4}>
+      <VStack spacing={4} style={{ marginBottom: '20px' }}>
         <Box
           width="100%"
           bgColor="gray.100"
@@ -200,17 +200,18 @@ function FilterSidebar({
           color="teal.500"
           fontSize="lg"
           fontWeight="bold" 
+          
           >
-            <Tooltip label={`$${newHourlyRate}`} placement="top">
+            <Tooltip label={`$${newHourlyRate}`} placement="top" >
               <span>${newHourlyRate}</span>
             </Tooltip>
          
           </Box>
         </Box>
-
+        
      
       </VStack> 
-        <Button colorScheme="teal" size="sm" onClick={onSubmit}>
+        <Button colorScheme="teal" size="sm" onClick={onSubmit} paddingStart={"10px"}>
           Filter
         </Button>
     </Box>
