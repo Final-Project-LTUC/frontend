@@ -17,6 +17,7 @@ import axios from "axios";
 import cookie from "react-cookies";
 import "./HandymanDetails.css";
 import { css } from "@emotion/react";
+import { MdBuild, MdPhone } from "react-icons/md";
 
 function HandymanDetails() {
     const { id } = useParams();
@@ -25,7 +26,21 @@ function HandymanDetails() {
     const [handyman, setHandyman] = useState({});
     const [handymanTasks, setHandymanTasks] = useState([]);
     const token = cookie.load("auth");
-
+    const renderRatingStars = (rating) => {
+        const stars = [];
+        for (let i = 1; i <= 5; i++) {
+            if (i <= rating) {
+                stars.push(
+                    <StarIcon key={i} color="yellow.400" fontSize="1.2rem" />
+                );
+            } else {
+                stars.push(
+                    <StarIcon key={i} color="gray.400" fontSize="1.2rem" />
+                );
+            }
+        }
+        return stars;
+    };
     useEffect(() => {
         const fetchHandymanTasks = async () => {
             try {
@@ -38,6 +53,7 @@ function HandymanDetails() {
                         },
                     }
                 );
+
                 setHandymanTasks(response.data);
             } catch (error) {
                 console.error(error);
@@ -65,6 +81,9 @@ function HandymanDetails() {
             fetchHandymanData();
             fetchHandymanTasks();
         }
+
+        // Scroll to the top when the component mounts
+        window.scrollTo(0, 0);
     }, [id, token]);
 
     const [hoveredItem, setHoveredItem] = useState(null);
@@ -114,24 +133,52 @@ function HandymanDetails() {
                                 onMouseLeave={handleImageLeave}
                             />
                         </Center>
-                        <Heading
-                            as="h2"
-                            size="lg"
-                            mb={2}
-                            textAlign="center"
+                        <div
                             style={{
-                                fontSize: "35px",
-                                color: "black",
-                                animation: "animate 4s ease-in-out infinite",
+                                display: "flex",
+                                paddingLeft: "53px",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                height: "10vh", // Ensures full viewport height
                             }}
                         >
-                            {handyman.firstName + " " + handyman.lastName}
-                        </Heading>
+                            <Heading
+                                mb={1}
+                                textAlign="center"
+                                className="waviy pulse"
+                                style={{
+                                    fontSize: "37px",
+                                    color: "black",
+                                }}
+                            >
+                                <span style={{ "--i": 1 }}>
+                                    {handyman.firstName}
+                                </span>{" "}
+                                <span style={{ "--i": 2 }}>
+                                    {handyman.lastName}
+                                </span>
+                            </Heading>
+
+                            <Button
+                                className="bounce"
+                                leftIcon={
+                                    <MdBuild
+                                        style={{
+                                            fontSize: "24px",
+                                            color: "#ebc910",
+                                        }}
+                                    />
+                                }
+                                colorScheme="#929ea433"
+                                variant="solid"
+                            ></Button>
+                        </div>
+
                         <Box
                             display={"flex"}
                             justifyContent={"space-around"}
-                            marginTop={"100px"}
-                            marginBottom={"30px"}
+                            marginTop={"65px"}
+                            marginBottom={"55px"}
                         >
                             <Text
                                 fontSize="lg"
@@ -141,8 +188,9 @@ function HandymanDetails() {
                                 background={"#929ea433"}
                                 width={"fit-content"}
                                 borderRadius={"10px"}
+                                fontFamily="mono"
                             >
-                                Email: {handyman.email}
+                                UserName: {handyman.username}
                             </Text>
                             <Text
                                 fontSize="lg"
@@ -152,20 +200,11 @@ function HandymanDetails() {
                                 background={"#929ea433"}
                                 width={"fit-content"}
                                 borderRadius={"10px"}
-                            >
-                                Phone Number: {handyman.phoneNumber}
-                            </Text>
-                            <Text
-                                fontSize="lg"
-                                fontWeight="bold"
-                                color="#319795"
-                                padding={"10px"}
-                                background={"#929ea433"}
-                                width={"fit-content"}
-                                borderRadius={"10px"}
+                                fontFamily="mono"
                             >
                                 Age: {handyman.age}
                             </Text>
+
                             <Text
                                 fontSize="lg"
                                 fontWeight="bold"
@@ -174,6 +213,7 @@ function HandymanDetails() {
                                 background={"#929ea433"}
                                 width={"fit-content"}
                                 borderRadius={"10px"}
+                                fontFamily="mono"
                             >
                                 Years of Experience:{" "}
                                 {handyman.yearsOfExperience}
@@ -187,13 +227,54 @@ function HandymanDetails() {
                                 background={"#929ea433"}
                                 width={"fit-content"}
                                 borderRadius={"10px"}
+                                fontFamily="mono"
                             >
                                 {" "}
                                 Languages :{handyman.languages}
                             </Text>
+                            <Text
+                                fontSize="lg"
+                                fontWeight="bold"
+                                color="#319795"
+                                padding={"10px"}
+                                background={"#929ea433"}
+                                width={"fit-content"}
+                                borderRadius={"10px"}
+                                fontFamily="mono"
+                            >
+                                Email: {handyman.email}
+                            </Text>
+                            <Text
+                                fontSize="lg"
+                                fontWeight="bold"
+                                color="#319795"
+                                padding={"10px"}
+                                background={"#929ea433"}
+                                display="flex" // Add this style
+                                alignItems="center" // Add this style
+                                width={"fit-content"}
+                                borderRadius={"10px"}
+                                fontFamily="mono"
+                            >
+                                <MdPhone
+                                    style={{
+                                        marginRight: "5px",
+                                        fontSize: "1.2rem",
+                                    }}
+                                />
+                                : {handyman.phoneNumber}
+                            </Text>
                         </Box>
-
-                        <Heading
+                        <Text
+                            fontSize="42px"
+                            fontWeight="bold"
+                            color="#319795"
+                            padding={"10px"}
+                            borderRadius={"10px"}
+                        >
+                            Previous Work :
+                        </Text>
+                        {/* <Heading
                             className="waviy"
                             size="lg"
                             mb={3}
@@ -214,7 +295,7 @@ function HandymanDetails() {
                             <span style={{ "--i": 12 }}>r</span>
                             <span style={{ "--i": 13 }}>k</span>
                             <span style={{ "--i": 14 }}> :</span>
-                        </Heading>
+                        </Heading> */}
                         <List
                             spacing={2}
                             display={"flex"}
@@ -294,15 +375,11 @@ function HandymanDetails() {
                                             justifyContent={"center"}
                                             overflow={"hidden"}
                                         >
-                                            <ListIcon
-                                                as={StarIcon}
-                                                color="yellow.400"
-                                            />
                                             <Text
                                                 fontSize="lg"
                                                 fontWeight="bold"
                                             >
-                                                Rating: {task.rating}
+                                                {renderRatingStars(task.rating)}
                                             </Text>
                                         </Box>
                                     </ListItem>
