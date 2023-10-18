@@ -16,9 +16,16 @@ import ServicesHero from "../../../Components/ServicesPage/ServicesHero/index";
 import categories from "./constant"
 import cookie from 'react-cookies';
 
-let token1 = cookie.load('auth');
-console.log(token1)
-  export default function Services() {
+
+// let token1 = cookie.load('auth');
+// console.log(token1)
+// function Services() {
+
+  let token1 =cookie.load('auth'); 
+  function Services() {
+   console.log("tokeeeeeeeeeeen",token1)
+
+
   const [handyData, setHandyData] = useState(null); // Initialize handyData state
   const [expertydata, setExpertyData] = useState(null); // Initialize handyData state
   const [newDatacat, setNewData] = useState(null);
@@ -115,4 +122,114 @@ console.log(token1)
       </Flex>
     </Box>
   );
+
 }
+
+export default Services;
+
+
+// import {
+//   Box,
+//   Slider,
+//   SliderTrack,
+//   SliderFilledTrack,
+//   SliderThumb,
+//   VStack,
+//   Select,
+//   Flex,
+// } from "@chakra-ui/react";
+// import React, { useState, useEffect } from "react";
+// import FilterSidebar from "../../../Components/ServicesPage/FilterSideBar";
+// import axios from "axios";
+// import Handymen from "../../../Components/ServicesPage/Handymen";
+// import ServicesHero from "../../../Components/ServicesPage/ServicesHero/index";
+// import categories from "./constant";
+// import cookie from 'react-cookies';
+
+// let token1 = cookie.load('auth');
+// console.log(token1);
+
+// function Services() {
+//   const [handyData, setHandyData] = useState(null);
+//   const [newData, setNewData] = useState(null);
+//   const [selectedLocation, setSelectedLocation] = useState("");
+//   const [selectedCategory, setSelectedCategory] = useState("");
+
+//   async function getData() {
+//     try {
+//       const response = await axios.get(`${process.env.REACT_APP_DATABASE_URL}/handymen`);
+//       return response.data;
+//     } catch (error) {
+//       console.error("Error fetching data:", error);
+//     }
+//   }
+
+//   async function getDataExperty(id) {
+//     try {
+//       const response = await axios.get(`${process.env.REACT_APP_DATABASE_URL}/handymen/genre/${id}`);
+//       return response.data;
+//     } catch (error) {
+//       console.error("Error fetching data:", error);
+//     }
+//   }
+
+//   function findMatchingIds(apiResponse, arrayOfObjects) {
+//     const apiIds = apiResponse.map((item) => item.HandymanId);
+//     const matchingObjects = arrayOfObjects.filter((obj) => apiIds.includes(obj.id));
+//     return matchingObjects;
+//   }
+
+//   const handleLocationChange = (location) => {
+//     setSelectedLocation(location);
+//   };
+
+//   const handleCategoryChange = (categoryName) => {
+//     setSelectedCategory(categoryName);
+
+//     const selectedCategoryObject = categories.find((category) => category.name === categoryName);
+
+//     if (selectedCategoryObject) {
+//       setSelectedCategory(selectedCategoryObject.id);
+//     } else {
+//       setSelectedCategory(""); // Handle the case where the category is not found
+//     }
+//   };
+
+//   useEffect(() => {
+//     async function fetchData() {
+//       const data = await getData();
+//       setHandyData(data);
+
+//       if (selectedCategory) {
+//         const expertyID = await getDataExperty(selectedCategory);
+//         if (expertyID) {
+//           const newData = await findMatchingIds(expertyID, handyData);
+//           setNewData(newData);
+//         }
+//       }
+//     }
+
+//     fetchData();
+//   }, [selectedCategory]);
+
+//   return (
+//     <Box p={4} bgColor="white.100" width={"100%"} height={"100%"}>
+//       <Flex justifyContent="flex-start" flexDirection="row">
+//         <Box p={4} bgColor="white.100" width={"30%"} height={"100vh"}>
+//           <FilterSidebar
+//             selectedLocation={selectedLocation}
+//             selectedCategory={selectedCategory}
+//             onLocationChange={handleLocationChange}
+//             onCategoryChange={handleCategoryChange}
+//           />
+//         </Box>
+//         <Box>
+//           <Handymen handyData={newData || handyData} token={token1} />
+//         </Box>
+//       </Flex>
+//     </Box>
+//   );
+// }
+
+// export default Services;
+
