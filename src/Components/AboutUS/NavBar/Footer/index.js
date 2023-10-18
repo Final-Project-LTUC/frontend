@@ -640,7 +640,7 @@ const ListHeader = ({ children }) => {
 
 export default function LargeWithNewsletter() {
   return (
-    <Box bg="teal.500" color="white">
+    <Box bg="teal.500" color="white" marginTop={"500px"}>
       <Container maxW={'6xl'} py={10}>
         
         <SimpleGrid
