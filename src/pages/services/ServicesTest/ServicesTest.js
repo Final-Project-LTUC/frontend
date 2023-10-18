@@ -1,5 +1,14 @@
+import {
+  Box,
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+  VStack,
+  Select,
+  Flex,
+} from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
-import { Box, Flex } from "@chakra-ui/react"; 
 import FilterSidebar from "../../../Components/ServicesPage/FilterSideBar";
 import axios from "axios";
 import Handymen from "../../../Components/ServicesPage/Handymen";
@@ -151,3 +160,5 @@ function Services() {
 }
 
 export default Services;
+
+

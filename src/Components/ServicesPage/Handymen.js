@@ -21,23 +21,23 @@
 //   const [loading, setLoading] = useState(true);
 //   const [tableData, setTableData] = useState([]);
 //   const [isOpenArray, setIsOpenArray] = useState([]); // Array to track open/close state for each card
- 
+
 
 //   useEffect(() => {
 //     if(handyData){
 //       setIsOpenArray(new Array(handyData.length).fill(false));
 
 
-  
+
 //     }},[handyData])
 //   useEffect(() => {
 //     if (handyData) {
-      
+
 
 //       // Simulate fetching data from the parent and API
 //       // Replace this with your actual API call or data retrieval logic
 //       const data = handyData.map((item, index) => (
-        
+
 //         <Card
 //           key={item.id}
 //           direction={{ base: "column", sm: "row" }}
@@ -101,7 +101,7 @@
 //     setIsOpenArray((prevIsOpenArray) => {
 //       const newIsOpenArray = [...prevIsOpenArray];
 //       newIsOpenArray[index] = !newIsOpenArray[index];
-     
+
 
 
 //       return newIsOpenArray;
@@ -119,9 +119,9 @@
 //         </Box>
 //       ) : (
 //         <div>{tableData}</div>
-        
+
 //       )}
-      
+
 //     </Box>
 //   );
 // }
@@ -293,6 +293,196 @@
 
 
 
+
+
+
+
+
+
+// import React, { useState, useEffect } from "react";
+// import {
+//   Spinner,
+//   Box,
+//   Text,
+//   Card,
+//   Image,
+//   Stack,
+//   CardBody,
+//   Heading,
+//   CardFooter,
+//   Button,
+//   Flex,
+//   Collapse,
+//   Center,
+//   SimpleGrid,
+//   Modal,
+//   ModalOverlay,
+//   ModalContent,
+//   ModalHeader,
+//   ModalCloseButton,
+//   ModalBody,
+//   ModalFooter,
+// } from "@chakra-ui/react";
+// import { StarIcon } from "@chakra-ui/icons";
+// import TaskModal from "./TaskModal";
+
+// function Handymen({ handyData, token }) {
+//   const [loading, setLoading] = useState(true);
+//   const [selectedHandyman, setSelectedHandyman] = useState(null);
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+
+//   useEffect(() => {
+//     if (handyData) {
+//       setTimeout(() => {
+//         setLoading(false);
+//       }, 2000);
+//     }
+//   }, [handyData]);
+
+//   const handleDetailsClick = (handyman) => {
+//     setSelectedHandyman(handyman);
+//     setIsModalOpen(true);
+//   };
+
+//   const closeModal = () => {
+//     setSelectedHandyman(null);
+//     setIsModalOpen(false);
+//   };
+
+//   return (
+//     <Box>
+//       <Text fontSize="4xl" textAlign="center" my={4} fontWeight="bold" >
+//         Choose your handyman
+//       </Text>
+//       {loading ? (
+//         <Box className="loading-animation" textAlign="center" >
+//           <Spinner size="xl" color="teal.500" />
+//           <Text fontSize="lg" fontWeight="bold" mt={4}>
+//             Loading...
+//           </Text>
+//         </Box>
+//       ) : (
+//         <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={8}>
+//           {handyData.map((item, index) => (
+//             <Box key={item.id} w="100%" mb={6} px={2}>
+//               <Card
+//                 border="1px solid #e0e0e0"
+//                 height="220px"
+//                 borderRadius="lg"
+//                 overflow="hidden"
+//                 margin="30px"
+//                 boxShadow="md"
+//                 padding={"10px"}
+//                 transition="transform 0.2s"
+//                 _hover={{ transform: "scale(1.02)" }}
+//               >
+//                 <Flex direction={{ base: "column", sm: "row" }}>
+//                   <Image
+//                     maxW={{ base: "100%", sm: "200px" }}
+//                     maxH="200px"
+//                     objectFit="cover"
+//                     src={item.profilePicUrl}
+//                     alt={"Handyman"}
+//                     width="130px"
+//                     height="200px"
+//                   />
+//                   <Stack ml={2} spacing={2}>
+//                     <CardBody>
+//                       <Heading size="md"  paddingBottom={"5px"}>{item.firstName} {item.lastName}</Heading>
+//                       <Text fontSize="md" color="gray.600"  paddingBottom={"5px"}>
+//                         {item.description}
+//                       </Text>
+//                       <Text fontSize="lg" color="teal.500" paddingBottom={"5px"}>
+//                         Inquiry Price: ${item.inquiryPrice}
+//                       </Text>
+//                       <Text fontSize="lg" color="teal.500"  paddingBottom={"7px"}>
+//                         Hourly Rate: ${item.hourlyRate}
+//                       </Text>
+//                       <Center>
+//                         <Flex alignItems="center">
+//                           <Button
+//                             size="sm"
+//                             colorScheme="teal"
+//                             onClick={() => handleDetailsClick(item)}
+//                             mr={2}
+//                           >
+//                             Details
+//                           </Button>
+//                           <TaskModal data={handyData} index={index} token={token} />
+//                         </Flex>
+//                       </Center>
+//                     </CardBody>
+//                     <CardFooter>
+//                       <Center>
+//                         <Flex alignItems="flex-start" mt={-12}>
+//                           <Box ml="auto" />
+//                           <Box ml={12}>
+//                             {Array(5)
+//                               .fill("")
+//                               .map((_, i) => (
+//                                 <StarIcon
+//                                   key={i}
+//                                   color={i < item.rating ? "yellow.500" : "gray.300"}
+//                                   boxSize={4}
+//                                 />
+//                               ))}
+//                           </Box>
+//                         </Flex>
+//                       </Center>
+//                     </CardFooter>
+
+//                   </Stack>
+//                 </Flex>
+//               </Card>
+//             </Box>
+//           ))}
+//         </SimpleGrid>
+//       )}
+
+//       <Modal isOpen={isModalOpen} onClose={closeModal}>
+//         <ModalOverlay />
+//         <ModalContent borderRadius="lg">
+//           <ModalHeader fontSize="2xl" fontWeight="bold" bg="teal.500" color="white">
+//             Handyman Details
+//           </ModalHeader>
+//           <ModalCloseButton color="white" />
+//           {selectedHandyman && (
+//             <ModalBody>
+//               <Text fontWeight="bold">Name:</Text>
+//               <Text>
+//                 {selectedHandyman.firstName} {selectedHandyman.lastName}
+//               </Text>
+//               <Text fontWeight="bold">Description:</Text>
+//               <Text>{selectedHandyman.description}</Text>
+//               <Text fontWeight="bold">Inquiry Price:</Text>
+//               <Text>${selectedHandyman.inquiryPrice}</Text>
+//               <Text fontWeight="bold">Hourly Rate:</Text>
+//               <Text>${selectedHandyman.hourlyRate}</Text>
+//               <Text fontWeight="bold">Years of Experience:</Text>
+//               <Text>{selectedHandyman.yearsOfExperience}</Text>
+//               <Text fontWeight="bold">Languages:</Text>
+//               <Text>{selectedHandyman.languages}</Text>
+//               <Text fontWeight="bold">Phone number:</Text>
+//               <Text>0{selectedHandyman.phoneNumber}</Text>
+//             </ModalBody>
+//           )}
+//           <ModalFooter>
+//             <Button colorScheme="teal" onClick={closeModal}>
+//               Close
+//             </Button>
+//           </ModalFooter>
+//         </ModalContent>
+//       </Modal>
+
+//     </Box>
+//   );
+// }
+
+// export default Handymen;
+
+
+
+
 import React, { useState, useEffect } from "react";
 import {
   Spinner,
@@ -306,147 +496,184 @@ import {
   CardFooter,
   Button,
   Flex,
-  Collapse,
   Center,
   SimpleGrid,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import TaskModal from "./TaskModal";
 
 function Handymen({ handyData, token }) {
   const [loading, setLoading] = useState(true);
-  const [tableData, setTableData] = useState([]);
-  const [isOpenArray, setIsOpenArray] = useState([]);
+  const [selectedHandyman, setSelectedHandyman] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (handyData) {
-      setIsOpenArray(new Array(handyData.length).fill(false));
-    }
-  }, [handyData]);
-
-  useEffect(() => {
-    if (handyData) {
-      const data = handyData.map((item, index) => (
-        <Box key={item.id} w="100%" mb={4} px={2}>
-          <Card
-            border="1px solid #e0e0e0"
-            borderRadius="lg"
-            overflow="hidden"
-            margin="10px"
-            boxShadow="md"
-            transition="transform 0.2s"
-            _hover={{ transform: "scale(1.02)" }}
-          >
-            <Flex direction={{ base: "column", sm: "row" }}>
-              <Image
-                maxW={{ base: "100%", sm: "200px" }}
-                maxH="200px"
-                objectFit="cover"
-                src={item.profilePicUrl}
-                alt={"Handyman"}
-              />
-              <Stack ml={8} spacing={4}>
-                <CardBody>
-                  <Heading size="md">{item.firstName} {item.lastName}</Heading>
-                  <Text fontSize="md" color="gray.600">
-                    {item.description}
-                  </Text>
-                  <Text fontSize="lg" color="teal.500">
-                    Inquiry Price: ${item.inquiryPrice}
-                  </Text>
-                  <Text fontSize="lg" color="teal.500">
-                    Hourly Rate: ${item.hourlyRate}
-                  </Text>
-                  <Center>
-                    <Flex alignItems="center">
-                      <Button
-                        size="sm"
-                        colorScheme="teal"
-                        onClick={() => handleDetailsClick(index)}
-                        mr={2}
-                      >
-                        Details
-                      </Button>
-                      <TaskModal data={handyData} index={index} token={token} />
-                    </Flex>
-                  </Center>
-                  <Collapse
-                    in={isOpenArray[index]}
-                    transition={{ exit: { delay: 0 }, enter: { duration: 0 } }}
-                  >
-                    <Box
-                      p={4}
-                      mt={4}
-                      bg="teal.500"
-                      rounded="md"
-                      shadow="md"
-                      color="white"
-                    >
-                      <Text fontSize="lg" fontWeight="bold">
-                        Years of Experience: {item.yearsOfExperience}
-                      </Text>
-                      <Text fontSize="lg">Languages: {item.languages}</Text>
-                      <Text fontSize="lg">Phone number: 0{item.phoneNumber}</Text>
-                    </Box>
-                  </Collapse>
-                </CardBody>
-                <CardFooter>
-                  <Center>
-                    <Flex alignItems="center">
-                      {Array(5)
-                        .fill("")
-                        .map((_, i) => (
-                          <StarIcon
-                            key={i}
-                            color={i < item.rating ? "yellow.500" : "gray.300"}
-                            boxSize={6}
-                            ml={4}
-                          />
-                        ))}
-                    </Flex>
-                  </Center>
-                </CardFooter>
-              </Stack>
-            </Flex>
-          </Card>
-        </Box>
-      ));
-
       setTimeout(() => {
-        setTableData(data);
         setLoading(false);
       }, 2000);
     }
-  }, [handyData, isOpenArray]);
+  }, [handyData]);
 
-  const handleDetailsClick = (index) => {
-    setIsOpenArray((prevIsOpenArray) => {
-      const newIsOpenArray = [...prevIsOpenArray];
-      newIsOpenArray[index] = !newIsOpenArray[index];
-      return newIsOpenArray;
-    });
+  const handleDetailsClick = (handyman) => {
+    setSelectedHandyman(handyman);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedHandyman(null);
+    setIsModalOpen(false);
   };
 
   return (
     <Box>
-      <Text fontSize="4xl" textAlign="center" my={4} fontWeight="bold">
-        Choose your handyman
-      </Text>
       {loading ? (
-        <Box className="loading-animation" textAlign="center" fontFamily={"cursive"}>
+        <Box
+          className="loading-animation"
+          position="fixed"
+          top="0"
+          left="0"
+          width="100%"
+          height="100%"
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          bg="rgba(255, 255, 255, 0.8)"
+        >
           <Spinner size="xl" color="teal.500" />
           <Text fontSize="lg" fontWeight="bold" mt={4}>
             Loading...
           </Text>
         </Box>
       ) : (
-        <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={4}>
-          {tableData}
-        </SimpleGrid>
+        <>
+          <Text fontSize="4xl" textAlign="center" my={4} fontWeight="bold">
+            Choose your handyman
+          </Text>
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={8}>
+            {handyData.map((item, index) => (
+              <Box key={item.id} w="100%" mb={6} px={2}>
+                <Card
+                  border="1px solid #e0e0e0"
+                  height="220px"
+                  borderRadius="lg"
+                  overflow="hidden"
+                  margin="30px"
+                  boxShadow="md"
+                  padding={"10px"}
+                  transition="transform 0.2s"
+                  _hover={{ transform: "scale(1.02)" }}
+                >
+                  <Flex direction={{ base: "column", sm: "row" }}>
+                    <Image
+                      maxW={{ base: "100%", sm: "200px" }}
+                      maxH="200px"
+                      objectFit="cover"
+                      src={item.profilePicUrl}
+                      alt={"Handyman"}
+                      width="130px"
+                      height="200px"
+                    />
+                    <Stack ml={2} spacing={2}>
+                      <CardBody>
+                        <Heading size="md" paddingBottom={"5px"}>
+                          {item.firstName} {item.lastName}
+                        </Heading>
+                        <Text fontSize="md" color="gray.600" paddingBottom={"5px"}>
+                          {item.description}
+                        </Text>
+                        <Text fontSize="lg" color="teal.500" paddingBottom={"5px"}>
+                          Inquiry Price: ${item.inquiryPrice}
+                        </Text>
+                        <Text fontSize="lg" color="teal.500" paddingBottom={"7px"}>
+                          Hourly Rate: ${item.hourlyRate}
+                        </Text>
+                        <Center>
+                          <Flex alignItems="center">
+                            <Button
+                              size="sm"
+                              colorScheme="teal"
+                              onClick={() => handleDetailsClick(item)}
+                              mr={2}
+                            >
+                              Details
+                            </Button>
+                            <TaskModal data={handyData} index={index} token={token} />
+                          </Flex>
+                        </Center>
+                      </CardBody>
+                      <CardFooter>
+                        <Center>
+                          <Flex alignItems="flex-start" mt={-12}>
+                            <Box ml="auto" />
+                            <Box ml={12}>
+                              {Array(5)
+                                .fill("")
+                                .map((_, i) => (
+                                  <StarIcon
+                                    key={i}
+                                    color={i < item.rating ? "yellow.500" : "gray.300"}
+                                    boxSize={4}
+                                  />
+                                ))}
+                            </Box>
+                          </Flex>
+                        </Center>
+                      </CardFooter>
+                    </Stack>
+                  </Flex>
+                </Card>
+              </Box>
+            ))}
+          </SimpleGrid>
+        </>
       )}
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <ModalOverlay />
+        <ModalContent borderRadius="lg">
+          <ModalHeader fontSize="2xl" fontWeight="bold" bg="teal.500" color="white">
+            Handyman Details
+          </ModalHeader>
+          <ModalCloseButton color="white" />
+          {selectedHandyman && (
+            <ModalBody>
+              <Text fontWeight="bold">Name:</Text>
+              <Text>
+                {selectedHandyman.firstName} {selectedHandyman.lastName}
+              </Text>
+              <Text fontWeight="bold">Description:</Text>
+              <Text>{selectedHandyman.description}</Text>
+              <Text fontWeight="bold">Inquiry Price:</Text>
+              <Text>${selectedHandyman.inquiryPrice}</Text>
+              <Text fontWeight="bold">Hourly Rate:</Text>
+              <Text>${selectedHandyman.hourlyRate}</Text>
+              <Text fontWeight="bold">Years of Experience:</Text>
+              <Text>{selectedHandyman.yearsOfExperience}</Text>
+              <Text fontWeight="bold">Languages:</Text>
+              <Text>{selectedHandyman.languages}</Text>
+              <Text fontWeight="bold">Phone number:</Text>
+              <Text>0{selectedHandyman.phoneNumber}</Text>
+            </ModalBody>
+          )}
+          <ModalFooter>
+            <Button colorScheme="teal" onClick={closeModal}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 }
 
 export default Handymen;
+
 
