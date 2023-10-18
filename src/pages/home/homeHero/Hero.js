@@ -32,10 +32,10 @@ import BellComponent from "../../../Components/icons/BellComponent";
 const Links = ["Skilify", "Home", "Services", "Catalog", "About us"];
 
 function Hero() {
+  const { loginData, logout } = useContext(LoginContext);
+
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { loginData, logout,updateData} = useContext(LoginContext);
-console.log(updateData)
 
   const [isNavFixed, setIsNavFixed] = useState(false);
 
@@ -119,35 +119,35 @@ console.log(updateData)
                         {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
                       </Button>
                       {loginData.loggedIn ? (
-                      <>
-                        <Menu>
-                          <Tooltip
-                            label="Visit your profile"
-                            aria-label="Visit your profile"
-                            placement="top"
-                          >
-                            <ChakraLink as={ReactRouterLink} to="/dashboard">
-                              <MenuButton
-                                as={Button}
-                                rounded={"full"}
-                                variant={"link"}
-                                cursor={"pointer"}
-                                minW={0}
-                              >
-                                <Avatar
-                                  size={"sm"}
-                                  src={
-                                    "https://avatars.dicebear.com/api/male/username.svg"
-                                  }
-                                />
-                              </MenuButton>
-                            </ChakraLink>
-                          </Tooltip>
-                          <MenuList alignItems={"center"}>
-                            <br />
-                          </MenuList>
-                        </Menu>
-                        <BellComponent/>
+                        <>
+                          <Menu>
+                            <Tooltip
+                              label="Visit your profile"
+                              aria-label="Visit your profile"
+                              placement="top"
+                            >
+                              <ChakraLink as={ReactRouterLink} to="/dashboard">
+                                <MenuButton
+                                  as={Button}
+                                  rounded={"full"}
+                                  variant={"link"}
+                                  cursor={"pointer"}
+                                  minW={0}
+                                >
+                                  <Avatar
+                                    size={"sm"}
+                                    src={
+                                      "https://avatars.dicebear.com/api/male/username.svg"
+                                    }
+                                  />
+                                </MenuButton>
+                              </ChakraLink>
+                            </Tooltip>
+                            <MenuList alignItems={"center"}>
+                              <br />
+                            </MenuList>
+                          </Menu>
+                          <BellComponent />
                         </>
                       ) : null}
 
