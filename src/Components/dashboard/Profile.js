@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, CardHeader, CardBody } from "@chakra-ui/react";
 import { Link } from '@chakra-ui/react'
 import "./profile.css"
@@ -10,6 +10,7 @@ import {
     Stack,
     Heading,
   } from "@chakra-ui/react";
+  import jwt_decode from 'jwt-decode';
 const UpdateLink=({setShowUpdateForm})=><Link colorScheme="teal" onClick={()=>setShowUpdateForm(true)} fontSize={'lg'} fontWeight={'semibold'} textAlign={'center'} display={'block'} to={'/dashUpdate'}>Update</Link>
 function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks,token}) {
   return (
@@ -107,7 +108,7 @@ function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks,token})
                 </Text>
               </Box>
               </Flex>
-              {token.role=='handyman'&&
+              {jwt_decode(token).role=='handyman'&&
               <Flex w={'100%'}>
               <Box w={'100%'}>
                 <Heading size="md" textTransform="uppercase">
@@ -144,7 +145,7 @@ function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks,token})
                 </Text>
               </Box>
                 </Flex>
-                {token.role==='handyman'&&
+                {jwt_decode(token).role==='handyman'&&
               <Box>
                 <Heading size="md" textTransform="uppercase">
                   experties

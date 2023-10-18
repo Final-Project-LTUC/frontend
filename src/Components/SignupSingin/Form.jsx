@@ -17,7 +17,6 @@ import {
 import "../../pages/auth/auth.scss";
 import { useNavigate } from "react-router-dom";
 
-// Create and export the socket connection
 
 function Form({
   submitAction,
@@ -71,8 +70,9 @@ function Form({
           isClosable: true,
         });
         navigate('/')
-      } else throw new Error(response.response.data.message);
+      } else console.log(response);
     } catch (e) {
+      console.log(e)
       toast({
         title: `Something Went Wrong`,
         description: e.message,

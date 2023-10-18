@@ -102,7 +102,7 @@ export default function formReducer(state, action) {
         return { ...state, experties: newArray };
       }
     }
-    case 'CHANGE_ALL':return{...action.payload,languages:action.payload.languages.split(',')}
+    case 'CHANGE_ALL':return{...action.payload,languages:action.payload.languages?.split(',')||[]}
     default:
       return state;
   }

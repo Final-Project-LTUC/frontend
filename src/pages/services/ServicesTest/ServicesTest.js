@@ -18,12 +18,7 @@ import cookie from 'react-cookies';
 
 let token1 = cookie.load('auth');
 console.log(token1)
-function Services() {
-=======
-  let token1 =cookie.load('auth'); 
-  function Services() {
-   console.log("tokeeeeeeeeeeen",token1)
->>>>>>> main
+  export default function Services() {
   const [handyData, setHandyData] = useState(null); // Initialize handyData state
   const [expertydata, setExpertyData] = useState(null); // Initialize handyData state
   const [newDatacat, setNewData] = useState(null);
@@ -52,10 +47,6 @@ function Services() {
       // ...
     }
   }
-
-
-
-
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
 
@@ -68,11 +59,6 @@ function Services() {
 
     return matchingObjects;
   }
-
-
-
-
-
   const handleLocationChange = (location) => {
     setSelectedLocation(location);
   };
@@ -104,22 +90,10 @@ function Services() {
         const newData = await findMatchingIds(expertyID, handyData)
         setNewData(newData)
       }
-
-
     }
-
-    fetchData(); // Call the fetchData function when the component mounts
-
-
+    fetchData(); 
   }, [selectedCategory]);
-
-
-
-
   return (
-
-
-
     <Box p={4} bgColor="white.100" width={"100%"} height={"100%"}>
         {/* <ServicesHero /> */}
       <Flex justifyContent="flex-start" flexDirection="row">
@@ -142,5 +116,3 @@ function Services() {
     </Box>
   );
 }
-
-export default Services;
