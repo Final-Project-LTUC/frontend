@@ -88,10 +88,24 @@ function HandymanDetails() {
             )
         );
     };
+    function HoverButton({ text, data }) {
+        const [showData, setShowData] = useState(false);
+
+        return (
+            <Button
+                className=".css-ez23ye"
+                onMouseEnter={() => setShowData(true)}
+                onMouseLeave={() => setShowData(false)}
+            >
+                <span className={showData ? "show-data" : "show-text"}>
+                    {showData ? data : text}
+                </span>
+            </Button>
+        );
+    }
 
     return (
         <>
-            {/* <img src="https://st2.depositphotos.com/4431055/11472/i/450/depositphotos_114721466-stock-photo-building-and-treatment-tools.jpg" /> */}
             <div className="containerr"> </div>
             <Box p={5} shadow="md" borderWidth="1px" borderRadius="lg">
                 {Object.keys(handyman).length !== 0 ? (
@@ -119,25 +133,34 @@ function HandymanDetails() {
                             mb={2}
                             textAlign="center"
                             style={{
-                                fontSize: "1.5rem",
+                                fontSize: "30px",
                                 color: "black",
                                 animation: "animate 4s ease-in-out infinite",
                             }}
                         >
                             {handyman.firstName + " " + handyman.lastName}
                         </Heading>
-                        <Text fontSize="lg" fontWeight="bold" color="black">
-                            Age: {handyman.age}
-                        </Text>
-                        <Text fontSize="lg" fontWeight="bold" color="black">
-                            Years of Experience: {handyman.yearsOfExperience}
-                        </Text>
-                        <Text fontSize="lg" fontWeight="bold" color="black">
-                            Phone Number: {handyman.phoneNumber}
-                        </Text>
-                        <Text fontSize="lg" fontWeight="bold" color="black">
-                            Email: {handyman.email}
-                        </Text>
+                        <div className="button-container">
+                            <div className="hover-button-container">
+                                <HoverButton
+                                    text="Email"
+                                    data={handyman.email}
+                                />
+                                <HoverButton
+                                    text="Phone Number"
+                                    data={handyman.phoneNumber}
+                                />
+                                <HoverButton
+                                    text="Languages"
+                                    data={handyman.languages}
+                                />
+                                <HoverButton text="Age" data={handyman.age} />
+                                <HoverButton
+                                    text="Years of Experience"
+                                    data={handyman.yearsOfExperience}
+                                />
+                            </div>
+                        </div>
                         <Heading
                             className="waviy"
                             size="lg"
