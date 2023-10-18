@@ -32,13 +32,12 @@ function LoginProvider(props) {
              socket.connect()
               // validateToken(response.data.token);
               setLoginState(true, response.data.token, response.data);
-              console.log("valid user", response.data.token)
               let userId = response.data.id;
-              console.log(userId)
               socket.emit("signIn", { userId });
-              
+            
               return response;
     } catch (error) {
+      console.log(error)
           return error;
     }
   }
@@ -46,7 +45,6 @@ function LoginProvider(props) {
     try{
         const response=await axios.post(`${process.env.REACT_APP_DATABASE_URL}/signup${userType}`,body);
         
-        console.log(response,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
           login(body.username,body.password,userType);
         return response;
     }catch(error){

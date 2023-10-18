@@ -65,7 +65,7 @@ function Notifications({
     <div className="wrapper">
       <div className="wrapper">
         <div className="notifications">
-          {inquiryDatePayload.map((payload, index) => (
+          
             
             <div className="notifications__item">
               <div className="notifications__item__avatar">
@@ -98,7 +98,7 @@ function Notifications({
                 </div>
               </div>
             </div>
-          ))}
+        
            {payload && payload.choice && payload.clientId &&(
           <div className="notifications__item">
             <div className="notifications__item__content">

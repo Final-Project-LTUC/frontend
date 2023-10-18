@@ -12,7 +12,7 @@ const BellComponent = () => {
   const [payload, setPayload] = useState("");
 
   const [showNotification, setNotification] = useState(false);
-  const [inquiryDatePayload, setInquiryDatePayload] = useState([]);
+  // const [inquiryDatePayload, setInquiryDatePayload] = useState([]);
 
   // useEffect(() => {
   //   if ( payload) {
@@ -29,7 +29,7 @@ const BellComponent = () => {
 
   // useEffect(() => {
     const handleInquiryDate = (payload) => {
-      setInquiryDatePayload([...inquiryDatePayload,payload])
+      
 
       console.log("Notification:", payload);
       setPayload(payload);
@@ -41,16 +41,7 @@ const BellComponent = () => {
 
     const handleTransaction = (payload) => {
       console.log("handleTransaction", payload);
-      setInquiryDatePayload((prevPayloads) => {
-        console.log(payload, "first if statement");
-        if (!prevPayloads) {
-          return payload;
-        } else {
-          const updatedPayloads = [...prevPayloads, payload];
-          // console.log(updatedPayloads, "hahahahahahaahah");
-          return updatedPayloads;
-        }
-      });
+      
       setPayload(payload);
       setNotificationCount((prevCount) => {
         console.log("Previous count:", prevCount);
@@ -131,7 +122,7 @@ const BellComponent = () => {
                 showNotification={showNotification}
                 payload={payload}
                 socket={socket}
-                inquiryDatePayload={inquiryDatePayload}
+                
               />
             </Box>
           )}

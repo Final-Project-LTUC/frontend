@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Card, CardHeader, CardBody } from "@chakra-ui/react";
 import { Link } from '@chakra-ui/react'
 import "./profile.css"
@@ -10,28 +10,31 @@ import {
     Stack,
     Heading,
   } from "@chakra-ui/react";
-import axios from "axios";
+  import jwt_decode from 'jwt-decode';
 const UpdateLink=({setShowUpdateForm})=><Link colorScheme="teal" onClick={()=>setShowUpdateForm(true)} fontSize={'lg'} fontWeight={'semibold'} textAlign={'center'} display={'block'} to={'/dashUpdate'}>Update</Link>
-function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks}) {
+function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks,token}) {
   return (
     <Card 
     position={`${showUpdateForm||showTasks?'absolute':'relative'}`}
     transform={`translateX(${showUpdateForm||showTasks?'-200%':'0'})`}
-    className="profileanime" width={"75%"} >
+    className="profileanime"
+    mt={'28'}
+    h={`'100%'`}
+    width={"75%"} >
         <Flex w={'100%'}>
       <CardHeader>
         <Heading size="xl">Your Profile</Heading>
       </CardHeader>
         </Flex>
-      <CardBody w={'100%'}>
+      <CardBody h={'100vh'} w={'100%'}>
         <Flex w={'100%'}>
           <Box style= {{ textAlign: 'left', borderRadius: '4%' }}
-            flex="fill"
-            bg="dark.900" 
+           h={'100vh'}
+           bg="dark.900" 
             p="4" 
             w={'100%'}
           >
-            <Stack  divider={<StackDivider />} spacing="4">
+            <Stack   divider={<StackDivider />} spacing="5">
               <Flex  w={'100%'}>
                 <Box  w={'100%'}>
                 <Heading size="md" textTransform="uppercase">
@@ -81,8 +84,9 @@ function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks}) {
                 <Heading size="md" textTransform="uppercase">
                 languages
                 </Heading>
+                
                 <Text pt="2" fontSize="md">
-                  {profileData.languages?profileData.languages:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
+                  {profileData.languages?profileData.languages.slice(1):<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
                 </Text>
               </Box>
               </Flex>
@@ -100,10 +104,11 @@ function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks}) {
                  Rating
                 </Heading>
                 <Text pt="2" fontSize="md">
-                {profileData.rating?profileData.rating:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
+                {profileData.rating?profileData.rating:'0'}
                 </Text>
               </Box>
               </Flex>
+              {jwt_decode(token).role=='handyman'&&
               <Flex w={'100%'}>
               <Box w={'100%'}>
                 <Heading size="md" textTransform="uppercase">
@@ -121,7 +126,7 @@ function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks}) {
                 {profileData.inquiryPrice?profileData.inquiryPrice+' JOD ':<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
                 </Text>
               </Box>
-              </Flex>
+              </Flex>}
               <Flex w={'100%'}>
               <Box w={'100%'}>
                 <Heading size="md" textTransform="uppercase">
@@ -140,6 +145,7 @@ function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks}) {
                 </Text>
               </Box>
                 </Flex>
+                {jwt_decode(token).role==='handyman'&&
               <Box>
                 <Heading size="md" textTransform="uppercase">
                   experties
@@ -147,7 +153,7 @@ function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks}) {
                 <Text pt="2" fontSize="md">
                   experties from the back end can be updated
                 </Text>
-              </Box>
+              </Box>}
             </Stack>
           </Box>
           {/* Right side */}

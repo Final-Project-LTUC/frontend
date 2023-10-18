@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import {
   Box,
   Flex,
-  Avatar,
   HStack,
   IconButton,
   Button,
@@ -16,6 +15,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
+import BellComponent from "../icons/BellComponent";
 
 const Links = ["Skilify", "Home", "Dashboard"];
 
@@ -37,6 +37,7 @@ export default function Simple({
   profilePicUrl,
   setShowUpdateForm,
   setShowTasks,
+  token
 }) {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -79,6 +80,7 @@ export default function Simple({
             h={"80%"}
             gap={"5%"}
           >
+            <BellComponent/>
             <Image src={profilePicUrl} w={"48"} borderRadius={"10px"} />
             <Link
               style={{ fontSize: "1.3em" }}
@@ -97,11 +99,12 @@ export default function Simple({
             >
               Profile
             </Link>
+            {token.role==='handyman'&&
             <Link style={{ fontSize: "1.3em" }}>
               Earnings
-            </Link>
+            </Link>}
             <Link
-              style={{ fontSize: "1.3em" }}
+              style={{ fontSize: "1.3em" }} 
               onClick={() => {
                 setShowTasks(false)
                 setShowUpdateForm(true)}}
