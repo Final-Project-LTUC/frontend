@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./notifications.css";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
+import { LoginContext } from "../../hooks/Context/LoginProvider";
 
 function Notifications({
   
@@ -8,8 +9,11 @@ function Notifications({
   socket,
   inquiryDatePayload,
 }) {
-
+  const { loginData } = useContext(LoginContext);
+  
+console.log("loginData",loginData)
   const handleOptionClick = (option, payload) => {
+    console.log("paylodaaaaaaaaaaaaaa",payload)
     if (option === "archive") {
       console.log('yeah i want it')
       payload.choice = true;
@@ -17,7 +21,7 @@ function Notifications({
 
     } else if (option === "delete") {
       payload.choice = false;
-      payload.taskStatus = 'canceled'
+      payload.taskStatus = 'cancelled'
       socket.emit("serviceRejected", payload);
     }
   };
@@ -62,65 +66,72 @@ function Notifications({
   }, [ payload]);
 
   return (
+  <div className="wrapper">
     <div className="wrapper">
-      <div className="wrapper">
-        <div className="notifications">
+      <div className="notifications">
+        {payload.taskStatus==="current" ? (
+          <div className="notifications__item">
+            <div className="notifications__item__avatar">
+              <img src={payload.avatarSrc} alt={`Avatar of ${payload.title}`} />
+            </div>
+            <div className="notifications__item__content">
+              <span className="notifications__item__title">New Notification</span>
+              <span className="notifications__item__message">
+                appointment: {payload.schdualedAt}
+              </span>
+            </div>
+            <div>
+              <div className="notifications__item__option archive js-option">
+                <i className="fas fa-folder">
+                  {" "}
+                  <CheckIcon />
+                </i>
+              </div>
+              <div className="notifications__item__option delete js-option">
+                <i className="fas fa-trash">
+                  <CloseIcon />
+                </i>
+              </div>
+            </div>
+          </div>
+        ) : null}
+        {
+          (
+          <>
           
-            
-            <div className="notifications__item">
-              <div className="notifications__item__avatar">
-                <img
-                  src={payload.avatarSrc}
-                  alt={`Avatar of ${payload.title}`}
-                />
-              </div>
-
-              <div className="notifications__item__content">
-                <span className="notifications__item__title">
-                New Notification
-                </span>
-                <span className="notifications__item__message">
-                  appointment: {payload.schdualedAt}
-                </span>
-              </div>
-
-              <div>
-                <div className="notifications__item__option archive js-option">
-                  <i className="fas fa-folder">
-                    {" "}
-                    <CheckIcon />
-                  </i>
-                </div>
-                <div className="notifications__item__option delete js-option">
-                  <i className="fas fa-trash">
-                    <CloseIcon />
-                  </i>
+            {payload && payload.choice && payload.clientId===loginData.user.id && (
+              <div className="notifications__item">
+                <div className="notifications__item__content">
+                  <span className="notifications__item__message">
+                    You have agreed to the service {loginData.user.username} and paid {payload.inquiryPrice}
+                  </span>
                 </div>
               </div>
-            </div>
-        
-           {payload && payload.choice && payload.clientId &&(
-          <div className="notifications__item">
-            <div className="notifications__item__content">
-              <span className="notifications__item__message">
-              transaction succesful to client
-              </span>
-            </div>
-          </div>
-        )}
-          {payload && payload.choice && payload.handymanId &&(
-          <div className="notifications__item">
-            <div className="notifications__item__content">
-              <span className="notifications__item__message">
-              transaction succesful to handyman
-              </span>
-            </div>
-          </div>
-        )}
-        </div>
+            )}
+            {payload && payload.choice && payload.handymanId===loginData.user.id && (
+              <div className="notifications__item">
+                <div className="notifications__item__content">
+                  <span className="notifications__item__message">
+                  Client {payload.clientName} has agreed and paid {payload.inquiryPrice} Jod
+                  </span>
+                </div>
+              </div>
+            )}
+            {payload && !payload.choice && payload.handymanId===loginData.user.id && (
+              <div className="notifications__item">
+                <div className="notifications__item__content">
+                  <span className="notifications__item__message">
+                  Client {payload.clientName} has canceled the service
+                  </span>
+                </div>
+              </div>
+            )}
+          </>
+        )
+        }
       </div>
     </div>
-  );
-}
-
+  </div>
+);
+            }
 export default Notifications;

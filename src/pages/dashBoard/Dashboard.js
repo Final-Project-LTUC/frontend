@@ -11,6 +11,7 @@ import Tasks from '../../pages/dashBoard/tasks/TasksPage'
 import jwt_decode from 'jwt-decode';
 import Loader from '../../Components/Loader/Loader';
 import Earnings from './earnings/Earnings';
+import BellComponent from '../../Components/icons/BellComponent';
 function Dashboard() {
   let token =cookie.load('auth');
   const validUser = jwt_decode(token);
@@ -112,7 +113,9 @@ function Dashboard() {
   }, []);
 return(
   <Flex w={'100%'} minH={'100vh'} h={'100vh'}>
+
     <DashboardNavbar token={validUser} setShowTasks={setShowTasks} setShowUpdateForm={setShowUpdateForm} profilePicUrl={profileData.profilePicUrl}/>
+   
     {
       loadded?
       <>
@@ -125,6 +128,7 @@ return(
     <Loader/>
     </Flex>
     }
+    <BellComponent style={{ position: 'absolute', top:500, right: 500 ,bg:"black"}} />
     {/* <Earnings tasks={tasks}/> */}
     </Flex>
 )
