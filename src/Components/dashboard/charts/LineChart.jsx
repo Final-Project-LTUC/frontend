@@ -1,43 +1,46 @@
 import React from 'react'
 import { Line } from 'react-chartjs-2';
+import {Flex} from '@chakra-ui/react';
 import {
     Chart as ChartJs,
     LineElement,
     PointElement,
     LinearScale,
     Tooltip,
-    Leged,
+    Legend,
+    CategoryScale,
 } from 'chart.js'
-ChartJs.register(
-    LineElement,
-    PointElement,
-    LinearScale,
-    Tooltip,
-    Leged,
-
-);
-function LineChart() {
-    const data={
-        label:['Mon','Tue','Wed'],
-        datasets:[
-            {
-                label:'Weekdays',
-                data:[30,33,66],
-                borderColor:'teal',
-                tension:0.4,
-            }
-        ]
-    };
-    const options={
-        
-    }
+ 
+function LineChart({chartData}) {
+    ChartJs.register(
+        LineElement,
+        PointElement,
+        LinearScale,
+        Tooltip,
+        Legend,
+        CategoryScale
+    );
   return (
-    <Line
-    data={data}
-    options={options}
+    <Flex
+    w={'30%'}
+    h={'40vh'}
     >
-
+    <Line
+    data={chartData}
+    options={{
+        plugins: {
+            title: {
+                display: true,
+                text: "Total Earnings"
+          },
+          legend: {
+            display: true
+          }
+        }
+    }}
+    >
     </Line>
+        </Flex>
   )
 }
 

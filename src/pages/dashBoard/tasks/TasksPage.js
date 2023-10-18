@@ -19,19 +19,19 @@ import {
   Th,
   Thead,
   Tr,
+  Flex
 } from "@chakra-ui/react";
 import axios from "axios";
 import { LoginContext } from "../../../hooks/Context/LoginProvider";
 import "./table.scss";
 
-function TasksPage({ profileData }) {
+function TasksPage({profileData,getTasks,setTasks,tasks }) {
   const initialRef = React.useRef(null);
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [schdualedAt, setSchdualedAt] = useState("");
   const [currTask, setCurrTask] = useState("");
   const [filter, setFilter] = useState("all");
-  const [tasks, setTasks] = useState([]);
   const { loginData, socket } = useContext(LoginContext);
   const [payload, setPayload] = useState("");
 
@@ -44,7 +44,6 @@ function TasksPage({ profileData }) {
     setSchdualedAt("");
   };
 
-  const encodedId = encodeURIComponent(profileData.id);
 
   useEffect(() => {
     getTasks();
@@ -57,37 +56,7 @@ function TasksPage({ profileData }) {
     setTasks(uTasks);
   });
 
-  const getTasks = async () => {
-    try {
-      const headers = {
-        Authorization: `Bearer ${profileData.token}`,
-      };
-
-      let response;
-
-      if (Number.isInteger(Number(profileData.id))) {
-        response = await axios.get(
-          `${process.env.REACT_APP_DATABASE_URL}/clienttasks/${profileData.id}`,
-          {
-            headers: headers,
-          }
-        );
-      } else {
-        response = await axios.get(
-          `${process.env.REACT_APP_DATABASE_URL}/handytasks/${encodedId}`,
-          {
-            headers: headers,
-          }
-        );
-      }
-
-      if (response.status === 200) {
-        setTasks(response.data);
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
+  
 
   async function handleSave (schdualedAt){
 
