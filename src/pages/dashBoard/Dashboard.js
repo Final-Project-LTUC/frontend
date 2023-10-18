@@ -10,6 +10,7 @@ import {LoginContext} from '../../hooks/Context/LoginProvider';
 import Tasks from '../../pages/dashBoard/tasks/TasksPage'
 import jwt_decode from 'jwt-decode';
 import Loader from '../../Components/Loader/Loader';
+import Earnings from './earnings/Earnings';
 function Dashboard() {
   let token =cookie.load('auth');
   const validUser = jwt_decode(token);
@@ -77,7 +78,7 @@ function Dashboard() {
 return(
   <Flex w={'100%'} minH={'100vh'} h={'100vh'}>
     <DashboardNavbar token={validUser} setShowTasks={setShowTasks} setShowUpdateForm={setShowUpdateForm} profilePicUrl={profileData.profilePicUrl}/>
-    {
+    {/* {
       loadded?
       <>
        <Profile token={token} showTasks={showTasks} setShowUpdateForm={setShowUpdateForm}  showUpdateForm={showUpdateForm} profileData={profileData}/>
@@ -88,7 +89,8 @@ return(
       <Flex alignItems={'center'} justifyContent={'center'} w={'50vw'} m={'auto'} height={'80vh'}>
     <Loader/>
     </Flex>
-    }
+    } */}
+    <Earnings/>
     </Flex>
 )
 
