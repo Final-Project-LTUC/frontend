@@ -629,7 +629,7 @@ import {
   Image,
 } from '@chakra-ui/react';
 import { BiMailSend } from 'react-icons/bi';
-
+import { Link } from 'react-router-dom';
 const ListHeader = ({ children }) => {
   return (
     <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
@@ -652,20 +652,20 @@ export default function LargeWithNewsletter() {
 
           <Stack spacing={2} align={'flex-start'}>
             <ListHeader>Company</ListHeader>
-            <Box as="a" href={'#'}>
-              About us
+            <Box as="a" href={'/'}>
+              Home
             </Box>
-            <Box as="a" href={'#'}>
-              Blog
+            <Box as="a" href={'/services'}>
+              Services
             </Box>
-            <Box as="a" href={'#'}>
+            <Box as="a" href={'/contact'}>
               Contact us
             </Box>
-            <Box as="a" href={'#'}>
-              Pricing
+            <Box as="a" href={'/catalog'}>
+              Cataloug
             </Box>
-            <Box as="a" href={'#'}>
-              Testimonials
+            <Box as="a" href={'/about'}>
+              About
             </Box>
           </Stack>
           <Stack align={'flex-start'}>
@@ -711,7 +711,7 @@ export default function LargeWithNewsletter() {
         </SimpleGrid>
       </Container>
 
-      {/* Teal-colored footer with copyright text */}
+     
       <center>
         <Box bg="#D6E4E5" p={4} color="teal">
           <Text fontSize={'sm'}>© 2023 Skillify. All rights reserved</Text>

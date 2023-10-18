@@ -8,6 +8,7 @@ import Navbar from "../src/pages/home/homeHero/Navbar";
 import Services from "./pages/services/Services";
 import Catalog from "./pages/catalog/Catalog";
 import AboutUs from "./pages/aboutUs/ABOUTUS";
+import ContactUS from './Components/AboutUS/ContactUS';
 
 import Footer from "../src/Components/AboutUS/NavBar/Footer";
 
@@ -47,6 +48,7 @@ function App() {
           {/* <Route path="/services" element={<Services />} /> */}
           <Route path="/services" element={<ServicesTest hue="220" />} />
           <Route path="/catalog" element={<Catalog />} />
+          <Route path="/contact" element={<ContactUS/>} />
           <Route path="/handyman/:id" element={<HandymanDetails />} />{" "}
           <Route path="/about" element={<AboutUs />} />
           <Route path="/update" element={<UpdateForm />} />
