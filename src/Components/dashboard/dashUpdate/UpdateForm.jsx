@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import { Link as ReactRouterLink } from "react-router-dom";
 import {
@@ -9,7 +8,7 @@ import {
   Flex,
   Text,
 } from "@chakra-ui/react";
-import categories from "../../../pages/services/ServicesTest/constant";
+import "../profile.css"
 
 function UpdateForm({
   profileData,
@@ -18,17 +17,23 @@ function UpdateForm({
   handleUpdate,
   updatedData,
   setUpdatedData,
-}) {
+  token
+}) 
+
+{
+ 
   return (
     <Flex
       position={`${showUpdateForm ? "relative" : "absolute"}`}
       transform={`translateX(${showUpdateForm ? "0" : "-200%"})`}
       transition={'all .7s ease-in-out'}
       p={4}
-      w={"75%"}
-      h={"100vh"}
+      h={'100vh'}
+      width={"75%"}
       flexDirection={"column"}
       justifyContent={"space-between"}
+      className="profileanime"
+      bg="#fefefe"
     >
       <Flex justifyContent={"space-between"} w={"100%"}>
         <FormControl w={"40%"}>
@@ -94,6 +99,8 @@ function UpdateForm({
           />
         </FormControl>
       </Flex>
+      {console.log(profileData)}
+      {token.role==='handyman'&&
       <Flex justifyContent={"space-between"}>
         <FormControl w={"40%"}>
           <FormLabel>Hourly rate</FormLabel>
@@ -127,7 +134,7 @@ function UpdateForm({
             // required
           />
         </FormControl>
-      </Flex>
+      </Flex>}
       <Flex justifyContent={"space-between"}>
         <FormControl w={"40%"}>
           <FormLabel>Biography</FormLabel>
@@ -136,6 +143,7 @@ function UpdateForm({
             type="text"
             name="description"
             value={updatedData.description}
+            w={'100%'}
             onChange={(e) =>
               setUpdatedData({
                 type: "CHANGE_DESCRIPTION",
@@ -145,6 +153,7 @@ function UpdateForm({
             // required
           />
         </FormControl>
+        {token.role==='handyman'&&
         <FormControl w={"40%"}>
           <FormLabel>Years of experince</FormLabel>
           <Input
@@ -159,7 +168,7 @@ function UpdateForm({
               })
             }
           />
-        </FormControl>
+        </FormControl>}
       </Flex>
 
       <Flex w={"100%"} justifyContent={"space-around"}>
@@ -167,8 +176,7 @@ function UpdateForm({
         <Button
           colorScheme="teal"
           variant={`${
-            updatedData.languages?.includes("Arabic") ||
-            profileData.languages.includes("ARABIC")
+            updatedData.languages.includes("Arabic")
               ? "solid"
               : "outline"
           }`}
@@ -181,8 +189,7 @@ function UpdateForm({
         <Button
           colorScheme="teal"
           variant={`${
-            updatedData.languages?.includes("English") ||
-            profileData.languages.includes("English")
+            updatedData.languages.includes("English")
               ? "solid"
               : "outline"
           }`}
@@ -195,8 +202,7 @@ function UpdateForm({
         <Button
           colorScheme="teal"
           variant={`${
-            updatedData.languages?.includes("French") ||
-            profileData.languages.includes("French")
+            updatedData.languages.includes("French")
               ? "solid"
               : "outline"
           }`}

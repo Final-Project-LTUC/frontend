@@ -82,6 +82,7 @@ export default function formReducer(state, action) {
       case 'CHANGE_LASTNAME':return {...state,lastName:action.payload};
     case "CHANGE_LANGUAGES": {
         let newLanguages=state.languages;
+        console.log(state)
         if(newLanguages?.includes(action.payload)){
           newLanguages=newLanguages.filter(e=>e!==action.payload);
           return {...state,languages:newLanguages}
@@ -101,7 +102,7 @@ export default function formReducer(state, action) {
         return { ...state, experties: newArray };
       }
     }
-    case 'CHANGE_ALL':return{...action.payload}
+    case 'CHANGE_ALL':return{...action.payload,languages:action.payload.languages?.split(',')||[]}
     default:
       return state;
   }

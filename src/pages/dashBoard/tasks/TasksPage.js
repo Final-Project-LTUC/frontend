@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
   Button,
-  Flex,
   FormControl,
   FormLabel,
   Input,
@@ -20,22 +19,25 @@ import {
   Th,
   Thead,
   Tr,
+  Flex
 } from "@chakra-ui/react";
 import axios from "axios";
 import { LoginContext } from "../../../hooks/Context/LoginProvider";
 import "./table.scss";
+import { useNavigate } from "react-router-dom";
+import CurrentTask from "../../../Components/dashboard/currentTask/CurrentTask";
 
-function TasksPage({ profileData }) {
+function TasksPage({profileData,getTasks,setTasks,tasks }) {
   const initialRef = React.useRef(null);
+  const navigate = useNavigate();
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [schdualedAt, setSchdualedAt] = useState("");
   const [currTask, setCurrTask] = useState("");
   const [filter, setFilter] = useState("all");
-  const [tasks, setTasks] = useState([]);
   const { loginData, socket } = useContext(LoginContext);
   const [payload, setPayload] = useState("");
-
+  const [toggleTask,toggleCurrentTask] = useState(false)
   const handleModalOpen = () => {
     setModalOpen(true);
   };
@@ -43,13 +45,17 @@ function TasksPage({ profileData }) {
   const handleModalClose = () => {
     setModalOpen(false);
     setSchdualedAt("");
+    
   };
-
-  const encodedId = encodeURIComponent(profileData.id);
+  function currentTask () {
+  toggleCurrentTask(true)
+  setFilter("current")
+    
+  }
 
   useEffect(() => {
     getTasks();
-  }, []);
+  }, [filter]);
 
   socket.on("client-recived", (payload) => {
     setPayload(payload);
@@ -58,59 +64,29 @@ function TasksPage({ profileData }) {
     setTasks(uTasks);
   });
 
-  const getTasks = async () => {
-    try {
-      const headers = {
-        Authorization: `Bearer ${profileData.token}`,
-      };
-
-      let response;
-
-      if (Number.isInteger(Number(profileData.id))) {
-        response = await axios.get(
-          `${process.env.REACT_APP_DATABASE_URL}/clienttasks/${profileData.id}`,
-          {
-            headers: headers,
-          }
-        );
-      } else {
-        response = await axios.get(
-          `${process.env.REACT_APP_DATABASE_URL}/handytasks/${encodedId}`,
-          {
-            headers: headers,
-          }
-        );
-      }
-
-      if (response.status === 200) {
-        setTasks(response.data);
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
+  function setFilterToAll () {
+    setFilter("all")
+    toggleCurrentTask(false)
+  }
 
   async function handleSave (schdualedAt){
 
     const schadul = JSON.parse(schdualedAt)
-    console.log("set current schdualedAt:::::::::::::::::: ",schadul)
+    console.log("set current schdualedAt:::::::::::::::::: ",currTask)
   
      if(currTask)  {
            console.log("set current schdualedAt:::::::::::::::::: ",schadul)
       try {
-      const headers = {
-        Authorization: `Bearer ${profileData.token}`,
-      };
+   
   
       const setCurrent = await axios.patch(
        ` ${process.env.REACT_APP_DATABASE_URL}/taskshandy/${currTask.id}`,
   
         { taskStatus: "current" , schdualedAt: schadul},
-        {
-          headers: headers,
-        }
+      
       );
       if (setCurrent.status === 200) {
+        toggleCurrentTask(true)
        handleModalClose()
       //  payload.schdualedAt=schadul
       //  const temp = payload.reciverId;
@@ -118,13 +94,15 @@ function TasksPage({ profileData }) {
       //  payload.senderId = temp;
        console.log(setCurrent.data.task,"data changed here")
        socket.emit("schedualeAndpayment",setCurrent.data.task)
+
   
         return setCurrent.data;
       } } catch (error) {
         return error;
       }
   
-  
+      navigate('/')
+
   }}
 
   const setCurrentTask = async (data) => {
@@ -139,14 +117,14 @@ function TasksPage({ profileData }) {
           <Button
             colorScheme="teal"
             variant={filter === "all" ? "solid" : "outline"}
-            onClick={() => setFilter("all")}
+            onClick={ setFilterToAll }
           >
             All
           </Button>
           <Button
             colorScheme="teal"
             variant={filter === "current" ? "solid" : "outline"}
-            onClick={() => setFilter("current")}
+            onClick={() => currentTask()}
           >
             Current
           </Button>
@@ -172,7 +150,10 @@ function TasksPage({ profileData }) {
             Cancelled
           </Button>
         </Flex>
-        <TableContainer
+        {toggleTask? <>
+        
+        
+         <TableContainer
           className="custom-table-container"
           my={"8"}
           w={"100%"}
@@ -258,6 +239,11 @@ function TasksPage({ profileData }) {
     </Tbody>
   </Table>
         </TableContainer>
+          <CurrentTask task={currTask}/>
+             </>
+          : null}
+     
+       
 
       </Table>
 
