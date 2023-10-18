@@ -16,6 +16,7 @@ import { StarIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import cookie from "react-cookies";
 import "./HandymanDetails.css";
+import { css } from "@emotion/react";
 
 function HandymanDetails() {
     const { id } = useParams();
@@ -88,24 +89,10 @@ function HandymanDetails() {
             )
         );
     };
-    function HoverButton({ text, data }) {
-        const [showData, setShowData] = useState(false);
-
-        return (
-            <Button
-                className=".css-ez23ye"
-                onMouseEnter={() => setShowData(true)}
-                onMouseLeave={() => setShowData(false)}
-            >
-                <span className={showData ? "show-data" : "show-text"}>
-                    {showData ? data : text}
-                </span>
-            </Button>
-        );
-    }
 
     return (
         <>
+            {/* <img src="https://st2.depositphotos.com/4431055/11472/i/450/depositphotos_114721466-stock-photo-building-and-treatment-tools.jpg" /> */}
             <div className="containerr"> </div>
             <Box p={5} shadow="md" borderWidth="1px" borderRadius="lg">
                 {Object.keys(handyman).length !== 0 ? (
@@ -133,34 +120,79 @@ function HandymanDetails() {
                             mb={2}
                             textAlign="center"
                             style={{
-                                fontSize: "30px",
+                                fontSize: "35px",
                                 color: "black",
                                 animation: "animate 4s ease-in-out infinite",
                             }}
                         >
                             {handyman.firstName + " " + handyman.lastName}
                         </Heading>
-                        <div className="button-container">
-                            <div className="hover-button-container">
-                                <HoverButton
-                                    text="Email"
-                                    data={handyman.email}
-                                />
-                                <HoverButton
-                                    text="Phone Number"
-                                    data={handyman.phoneNumber}
-                                />
-                                <HoverButton
-                                    text="Languages"
-                                    data={handyman.languages}
-                                />
-                                <HoverButton text="Age" data={handyman.age} />
-                                <HoverButton
-                                    text="Years of Experience"
-                                    data={handyman.yearsOfExperience}
-                                />
-                            </div>
-                        </div>
+                        <Box
+                            display={"flex"}
+                            justifyContent={"space-around"}
+                            marginTop={"100px"}
+                            marginBottom={"30px"}
+                        >
+                            <Text
+                                fontSize="lg"
+                                fontWeight="bold"
+                                color="#319795"
+                                padding={"10px"}
+                                background={"#929ea433"}
+                                width={"fit-content"}
+                                borderRadius={"10px"}
+                            >
+                                Email: {handyman.email}
+                            </Text>
+                            <Text
+                                fontSize="lg"
+                                fontWeight="bold"
+                                color="#319795"
+                                padding={"10px"}
+                                background={"#929ea433"}
+                                width={"fit-content"}
+                                borderRadius={"10px"}
+                            >
+                                Phone Number: {handyman.phoneNumber}
+                            </Text>
+                            <Text
+                                fontSize="lg"
+                                fontWeight="bold"
+                                color="#319795"
+                                padding={"10px"}
+                                background={"#929ea433"}
+                                width={"fit-content"}
+                                borderRadius={"10px"}
+                            >
+                                Age: {handyman.age}
+                            </Text>
+                            <Text
+                                fontSize="lg"
+                                fontWeight="bold"
+                                color="#319795"
+                                padding={"10px"}
+                                background={"#929ea433"}
+                                width={"fit-content"}
+                                borderRadius={"10px"}
+                            >
+                                Years of Experience:{" "}
+                                {handyman.yearsOfExperience}
+                            </Text>
+
+                            <Text
+                                fontSize="lg"
+                                fontWeight="bold"
+                                color="#319795"
+                                padding={"10px"}
+                                background={"#929ea433"}
+                                width={"fit-content"}
+                                borderRadius={"10px"}
+                            >
+                                {" "}
+                                Languages :{handyman.languages}
+                            </Text>
+                        </Box>
+
                         <Heading
                             className="waviy"
                             size="lg"
