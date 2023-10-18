@@ -646,9 +646,28 @@ export default function LargeWithNewsletter() {
         <SimpleGrid
           templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 2fr' }}
           spacing={8}
+          alignItems="flex-start"
         >
           {/* Add your logo to the left of the grid with a responsive size in rem units */}
-          <Image src="/assets/logo.png" alt="Your Logo" boxSize="15rem" width={"300%"} />
+          <Box
+            position="relative"
+            width="355px" // Set the width to your desired size
+            height="150px" // Set the height to match the width
+            overflow="hidden"
+          >
+            <Image
+              src="/assets/logo.png"
+              alt="Your Logo"
+              width="100%"
+              height="100%"
+              objectFit="-moz-initial"
+              borderRadius="full"
+              position="absolute"
+              top="-22px"
+              left="-30px"
+            />
+            
+          </Box>
 
           <Stack spacing={2} align={'flex-start'}>
             <ListHeader>Company</ListHeader>
