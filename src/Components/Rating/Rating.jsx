@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import './rating.scss'
 import { Box } from '@chakra-ui/react'
 function Rating({setRating}) {
-    
-  return (
+    return (
     <Box bg={'#181820'} h={'20%'}>
    <div class="feedback">
     <label class="angry">
@@ -75,6 +74,5 @@ function Rating({setRating}) {
 </svg>
     </Box>
   )
-}
-
+};
 export default Rating
