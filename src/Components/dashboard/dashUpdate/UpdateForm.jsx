@@ -11,21 +11,21 @@ import {
 
 function UpdateForm({
   profileData,
-  showUpdateForm,
   setShowUpdateForm,
   handleUpdate,
   updatedData,
   setUpdatedData,
   token,
-  setShowNum
+  setShowNum,
+  showPage
 }) 
 
 {
  
   return (
     <Flex
-      position={`${setShowNum==='updateData' ? "relative" : "absolute"}`}
-      transform={`translateX(${setShowNum==='updateData' ? "0" : "-200%"})`}
+      position={`${showPage==='updateData' ? "relative" : "absolute"}`}
+      transform={`translateX(${showPage==='updateData' ? "0" : "200%"})`}
       transition={'all .7s ease-in-out'}
       p={4}
       width={"75%"}
