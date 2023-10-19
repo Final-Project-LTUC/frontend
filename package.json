@@ -20,6 +20,8 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.1",
     "chart.js": "^4.4.0",
+    "date-fns": "^2.30.0",
+    "dayzed": "^3.2.3",
     "framer-motion": "^10.16.4",
     "gsap": "^3.12.2",
     "jwt-decode": "^3.1.2",
