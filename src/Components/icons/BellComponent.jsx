@@ -7,62 +7,46 @@ import { LoginContext } from "../../hooks/Context/LoginProvider";
 
 const BellComponent = () => {
   const { socket } = useContext(LoginContext);
-
   const [notificationCount, setNotificationCount] = useState(0);
   const [payload, setPayload] = useState();
-
   const [showNotification, setNotification] = useState(false);
-  // const [inquiryDatePayload, setInquiryDatePayload] = useState([]);
-
-  // useEffect(() => {
-  //   if ( payload) {
-  //     setInquiryDatePayload((prevPayloads) => {
-  //       if (!prevPayloads) {
-  //         return payload;
-  //       } else {
-  //         const updatedPayloads = [...prevPayloads, payload];
-  //         return updatedPayloads;
-  //       }
-  //     });
-  //   }
-  // }, [payload]);
-
-  // useEffect(() => {
 
   const handleInquiryDate = (payload) => {
-    console.log("Notification:", payload);
     setPayload(payload);
     setNotificationCount((prevCount) => {
-      console.log("Previous count:", prevCount);
       return prevCount + 1;
     });
-
     return socket.off("inquiryDate", handleInquiryDate);
   };
 
   const handleTransaction = (payload) => {
-    console.log("handleTransaction", payload);
-
     setPayload(payload);
     setNotificationCount((prevCount) => {
-      console.log("Previous count:", prevCount);
       return prevCount + 1;
     });
     return socket.off("transaction", handleTransaction);
   };
   const handleReject = (payload) => {
-    console.log("serviceRejected", payload);
-
     setPayload(payload);
     setNotificationCount((prevCount) => {
-      console.log("Previous count:", prevCount);
       return prevCount + 1;
     });
     return socket.off("serviceRejected", handleReject);
   };
 
+  const handleArrived = (payload) => {
+    console.log("arriveddddddddddddddddddd", payload);
+    setPayload(payload);
+    setNotificationCount((prevCount) => {
+      console.log("Previous count:", prevCount);
+      return prevCount + 1;
+    });
+    return socket.off("arrived", handleReject);
+  };
+
   socket.on("inquiryDate", handleInquiryDate);
   socket.on("transaction", handleTransaction);
+  socket.on("arrived", handleArrived);
   socket.on("serviceRejected", handleReject);
   // return () => {
 
