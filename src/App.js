@@ -22,6 +22,7 @@ import Tasks from "./pages/dashBoard/tasks/TasksPage";
 import Auth from "./pages/auth/Auth";
 import LoginProvider from "./hooks/Context/LoginProvider";
 import ServicesTest from "./pages/services/ServicesTest/ServicesTest";
+import Rating from "./Components/Rating/Rating";
 
 // Create and export the socket connection
 
@@ -54,6 +55,7 @@ function App() {
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/signup" element={<Auth submitAction="signup" />} />
           <Route path="/signin" element={<Auth submitAction="signin" />} />
+          <Route path="/rating" element={<Rating/>}/>
         </Routes>
       </LoginProvider>
       <Footer />
