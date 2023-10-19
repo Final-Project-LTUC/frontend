@@ -205,13 +205,13 @@ function Hero() {
           </div>
 
           <div class="heroText">
-            <h1>You can do it!</h1>
+            <h1 >You can do it!</h1>
             <p>
               {" "}
               Your Home's Trusted Handyman. From quick fixes to complete
               transformations, our skilled team is ready to elevate your space.
             </p>
-            <ChakraLink as={ReactRouterLink} to="/services">
+            <ChakraLink as={ReactRouterLink} to="/services" >
               <button class="joinNow"> Services </button>
             </ChakraLink>
             <ChakraLink as={ReactRouterLink} to="/about">
