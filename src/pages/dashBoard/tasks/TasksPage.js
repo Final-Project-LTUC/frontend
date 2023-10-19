@@ -26,6 +26,7 @@ import { LoginContext } from "../../../hooks/Context/LoginProvider";
 import "./table.scss";
 import { useNavigate } from "react-router-dom";
 import CurrentTask from "../../../Components/dashboard/currentTask/CurrentTask";
+import Calander from "../../../Components/Calander";
 
 function TasksPage({ profileData, getTasks, setTasks, tasks }) {
   const { loginData, socket } = useContext(LoginContext);
@@ -40,6 +41,7 @@ function TasksPage({ profileData, getTasks, setTasks, tasks }) {
   const [payload, setPayload] = useState("");
   const [toggleTask, toggleCurrentTask] = useState(false);
   socket.on("transaction", inquiryDateFun);
+console.log(schdualedAt , 'schdualedAtttttttttttttttttttttt')
 
   function inquiryDateFun(payload) {
     let data = tasks.filter((item) => {
@@ -396,17 +398,18 @@ function TasksPage({ profileData, getTasks, setTasks, tasks }) {
             <ModalHeader>Take the task</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <FormControl>
-                <FormLabel>Schdualed At</FormLabel>
-                <Input
+              {/* <FormControl>
+                <FormLabel>Schdualed At</FormLabel> */}
+                <Calander setSchdualedAt = {setSchdualedAt}/>
+                {/* <Input
                   ref={initialRef}
                   placeholder="Tell me what I can help you with..."
                   value={schdualedAt}
                   onChange={(e) => setSchdualedAt(e.target.value)}
                   required
-                />
-              </FormControl>
-            </ModalBody>
+                /> */}
+               {/* </FormControl> */}
+            </ModalBody> 
             <ModalFooter>
               <Button colorScheme="teal" mr={3} onClick={handleModalClose}>
                 Close

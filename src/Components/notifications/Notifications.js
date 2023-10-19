@@ -2,9 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import "./notifications.css";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { LoginContext } from "../../hooks/Context/LoginProvider";
+import Rating from "../Rating/Rating";
 
 function Notifications({ payload, socket, inquiryDatePayload }) {
   const { loginData } = useContext(LoginContext);
+  const [rating,setRating]=useState(0);
 
   console.log("loginData", loginData);
   const handleOptionClick = (option, payload) => {
@@ -202,8 +204,7 @@ function Notifications({ payload, socket, inquiryDatePayload }) {
                   <div className="notifications__item">
                     <div className="notifications__item__content">
                       <span className="notifications__item__message">
-                        Client {payload.clientName} has agreed and paid{" "}
-                        {payload.details.price} Jod
+                        You agreed and paid {payload.details.price} Jod
                       </span>
                     </div>
                   </div>
@@ -227,6 +228,17 @@ function Notifications({ payload, socket, inquiryDatePayload }) {
                     <div className="notifications__item__content">
                       <span className="notifications__item__message">
                         You agreed and paid {payload.hourlyPayment} Jod.
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+              {payload &&
+               (
+                  <div className="notifications__item">
+                    <div className="notifications__item__content">
+                      <span className="notifications__item__message">
+                       <Rating setRating={setRating} rating={rating} />
                       </span>
                     </div>
                   </div>
