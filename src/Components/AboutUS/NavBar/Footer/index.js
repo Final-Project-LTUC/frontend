@@ -641,7 +641,7 @@ const ListHeader = ({ children }) => {
 export default function LargeWithNewsletter() {
   return (
     <Box bg="teal.500" color="white" >
-      <Container maxW={'6xl'} py={10}>
+      <Container maxW={'6xl'} py={10} >
         
         <SimpleGrid
           templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 2fr' }}

@@ -73,7 +73,7 @@ function Handymen({ handyData, token }) {
           <Text fontSize="4xl" textAlign="center" my={4} fontWeight="bold">
             Choose your handyman
           </Text>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={8} height={"100vh"}>
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={8} height={"100vh"} overflowY="scroll">
             {handyData.map((item, index) => (
               <Box key={item.id} w="100%" mb={6} px={2}>
                 <Card
