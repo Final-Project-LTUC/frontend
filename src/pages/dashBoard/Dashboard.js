@@ -12,7 +12,8 @@ import jwt_decode from "jwt-decode";
 import Loader from "../../Components/Loader/Loader";
 import Earnings from "./earnings/Earnings";
 import BellComponent from "../../Components/icons/BellComponent";
-const pages = ["profile", "udpateData", "tasks", "earnings"];
+import Calander from "../../Components/Calander";
+const pages = ["profile", "updateData", "tasks", "earnings"];
 function Dashboard() {
   let token = cookie.load("auth");
   const validUser = jwt_decode(token);
@@ -117,16 +118,17 @@ function Dashboard() {
     }
     fetchData();
     getTasks();
-  }, []);
+    setShowPage(pages[showNum]);
+  }, [showNum]);
   return (
     <Flex w={"100%"} minH={"100vh"} h={"100vh"} mb={"28"}>
+      {console.log(showPage)}
       <DashboardNavbar
         token={validUser}
         setShowNum={setShowNum}
         profilePicUrl={profileData.profilePicUrl}
-        
-      />
 
+      />
       {loadded ? (
         <Flex w={"75%"} ml={"4"} mt={"28"}>
           <Profile
@@ -143,6 +145,7 @@ function Dashboard() {
               setShowNum={setShowNum}
               setUpdatedData={setUpdatedData}
               profileData={profileData}
+              showPage={showPage}
               setProfileData={setProfileData}
             />
           )}
@@ -167,10 +170,12 @@ function Dashboard() {
           <Loader />
         </Flex>
       )}
-      <BellComponent
+      {/* <BellComponent
         style={{ position: "absolute", top: 500, right: 500, bg: "black" }}
-      />
+      /> */}
       {/* <Earnings tasks={tasks}/> */}
+      {/* <Calander/> */}
+     
     </Flex>
   );
 }

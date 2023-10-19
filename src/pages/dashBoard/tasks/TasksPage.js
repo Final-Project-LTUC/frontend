@@ -151,8 +151,6 @@ function TasksPage({profileData,getTasks,setTasks,tasks }) {
           </Button>
         </Flex>
         {toggleTask? <>
-        
-        
          <TableContainer
           className="custom-table-container"
           my={"8"}
@@ -160,9 +158,6 @@ function TasksPage({profileData,getTasks,setTasks,tasks }) {
           overflowY={"auto"}
           maxH={"80vh"}
         >
-
-
-
 <Table variant="simple">
     <Thead>
       <Tr>
