@@ -8,7 +8,6 @@ import {
   Flex,
   Text,
 } from "@chakra-ui/react";
-import "../profile.css"
 
 function UpdateForm({
   profileData,
@@ -17,22 +16,21 @@ function UpdateForm({
   handleUpdate,
   updatedData,
   setUpdatedData,
-  token
+  token,
+  setShowNum
 }) 
 
 {
  
   return (
     <Flex
-      position={`${showUpdateForm ? "relative" : "absolute"}`}
-      transform={`translateX(${showUpdateForm ? "0" : "-200%"})`}
+      position={`${setShowNum==='updateData' ? "relative" : "absolute"}`}
+      transform={`translateX(${setShowNum==='updateData' ? "0" : "-200%"})`}
       transition={'all .7s ease-in-out'}
       p={4}
-      h={'100vh'}
       width={"75%"}
       flexDirection={"column"}
       justifyContent={"space-between"}
-      className="profileanime"
       bg="#fefefe"
     >
       <Flex justifyContent={"space-between"} w={"100%"}>
