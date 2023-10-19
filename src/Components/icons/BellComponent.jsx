@@ -35,7 +35,6 @@ const BellComponent = () => {
   };
 
   const handleArrived = (payload) => {
-    console.log("arriveddddddddddddddddddd", payload);
     setPayload(payload);
     setNotificationCount((prevCount) => {
       console.log("Previous count:", prevCount);
@@ -44,9 +43,31 @@ const BellComponent = () => {
     return socket.off("arrived", handleReject);
   };
 
+  const handleDetails = (payload) => {
+    setPayload(payload);
+    setNotificationCount((prevCount) => {
+      console.log("Previous count:", prevCount);
+      return prevCount + 1;
+    });
+    return socket.off("details", handleDetails);
+  };
+
+  const handleLastPayment = (payload) => {
+    console.log('lastPaymentttttttttttttttt', payload)
+    setPayload(payload);
+    setNotificationCount((prevCount) => {
+      console.log("Previous count:", prevCount);
+      return prevCount + 1;
+    });
+    return socket.off("lastPayment", handleLastPayment);
+  };
+
   socket.on("inquiryDate", handleInquiryDate);
   socket.on("transaction", handleTransaction);
   socket.on("arrived", handleArrived);
+  socket.on("details", handleDetails);
+  socket.on("lastPayment", handleLastPayment);
+
   socket.on("serviceRejected", handleReject);
   // return () => {
 

@@ -17,6 +17,14 @@ function Notifications({ payload, socket, inquiryDatePayload }) {
       payload.choice = false;
       payload.taskStatus = "cancelled";
       socket.emit("serviceRejected", payload);
+    } else if (option === "yesProductCost") {
+      socket.emit("continue", payload);
+    } else if (option === "NoProductCost") {
+      payload.choice = false;
+      payload.taskStatus = "cancelled";
+      socket.emit("serviceRejected", payload);
+    } else if (option === "lastYes") {
+      socket.emit("continue", payload);
     }
   };
 
@@ -54,6 +62,15 @@ function Notifications({ payload, socket, inquiryDatePayload }) {
       } else if (clickBtn.classList.contains("delete")) {
         notificationCard.classList.add("delete");
         handleOptionClick("delete", payload);
+      } else if (clickBtn.classList.contains("yesProductCost")) {
+        notificationCard.classList.add("yesProductCost");
+        handleOptionClick("yesProductCost", payload);
+      } else if (clickBtn.classList.contains("NoProductCost")) {
+        notificationCard.classList.add("NoProductCost");
+        handleOptionClick("NoProductCost", payload);
+      } else if (clickBtn.classList.contains("lastYes")) {
+        notificationCard.classList.add("lastYes");
+        handleOptionClick("lastYes", payload);
       }
     };
   }, [payload]);
@@ -120,6 +137,20 @@ function Notifications({ payload, socket, inquiryDatePayload }) {
                   </div>
                 )}
               {payload &&
+                payload.choice &&
+                payload.details &&
+                payload.handymanId === loginData.user.id && (
+                  <div className="notifications__item">
+                    <div className="notifications__item__content">
+                      <span className="notifications__item__message">
+                        Client {payload.clientName} has agreed and paid{" "}
+                        {payload.details.price} Jod. You can start working
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+              {payload &&
                 !payload.choice &&
                 payload.handymanId === loginData.user.id && (
                   <div className="notifications__item">
@@ -130,11 +161,72 @@ function Notifications({ payload, socket, inquiryDatePayload }) {
                     </div>
                   </div>
                 )}
-              {payload && payload.onTime && payload.clientId === loginData.user.id && (
+              {payload &&
+                payload.onTime &&
+                payload.clientId === loginData.user.id && (
                   <div className="notifications__item">
                     <div className="notifications__item__content">
                       <span className="notifications__item__message">
                         The handyman has arrived
+                      </span>
+                    </div>
+                  </div>
+                )}
+              {payload.details && payload.clientId === loginData.user.id && (
+                <div className="notifications__item">
+                  <div className="notifications__item__content">
+                    <span className="notifications__item__message">
+                      Product Cost {payload.details.price} would you continue
+                      the process?
+                    </span>
+                    <div>
+                      <div className="notifications__item__option archive js-option">
+                        <i className="fas fa-folder">
+                          {" "}
+                          <CheckIcon />
+                        </i>
+                      </div>
+                      <div className="notifications__item__option delete js-option">
+                        <i className="fas fa-trash">
+                          <CloseIcon />
+                        </i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {payload &&
+                payload.choice &&
+                payload.details &&
+                payload.clientId === loginData.user.id && (
+                  <div className="notifications__item">
+                    <div className="notifications__item__content">
+                      <span className="notifications__item__message">
+                        Client {payload.clientName} has agreed and paid{" "}
+                        {payload.details.price} Jod
+                      </span>
+                    </div>
+                  </div>
+                )}
+              {payload &&
+                payload.hourlyPayment &&
+                payload.handymanId === loginData.user.id && (
+                  <div className="notifications__item">
+                    <div className="notifications__item__content">
+                      <span className="notifications__item__message">
+                        Client {payload.clientName} has agreed and paid{" "}
+                        {payload.hourlyPayment} Jod. Good job.
+                      </span>
+                    </div>
+                  </div>
+                )}
+              {payload &&
+                payload.hourlyPayment &&
+                payload.clientId === loginData.user.id && (
+                  <div className="notifications__item">
+                    <div className="notifications__item__content">
+                      <span className="notifications__item__message">
+                        You agreed and paid {payload.hourlyPayment} Jod.
                       </span>
                     </div>
                   </div>

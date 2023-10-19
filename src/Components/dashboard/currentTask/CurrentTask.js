@@ -44,14 +44,19 @@ function CurrentTask({
     }
   }
 
+  
   paymentStatuses = true;
-
+  
   function formatKey(key) {
     return key.replace(/([A-Z])/g, " $1").toUpperCase();
   }
-
+  
   function arrivedOnTime() {
     socket.emit("arrived", task);
+  }
+  
+  function doneWorking(){
+    socket.emit('ontimeorless', task )
   }
 
   useEffect(() => {
@@ -110,6 +115,17 @@ function CurrentTask({
               Arrived
             </Button>
             <DetailsModale  socket = {socket} task = {task}/>
+            <Button
+              className="task-button"
+              bg="#007bff"
+              color="#fff"
+              border="2px"
+              borderColor="#007bff"
+              onClick={()=> doneWorking()}
+            >
+             Done
+            </Button>
+          
             <Button
               className="task-button"
               bg="#007bff"
