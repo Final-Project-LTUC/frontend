@@ -272,7 +272,7 @@ function HandymanDetails() {
                             padding={"10px"}
                             borderRadius={"10px"}
                         >
-                            Previous Work :
+                            Previous Work
                         </Text>
                         {/* <Heading
                             className="waviy"
