@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import {
   Box,
   Flex,
-  Avatar,
   HStack,
   IconButton,
   Button,
@@ -37,6 +36,8 @@ export default function Simple({
   profilePicUrl,
   setShowUpdateForm,
   setShowTasks,
+  token,
+  setShowNum
 }) {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -90,30 +91,26 @@ export default function Simple({
             </Link>
             <Link
               style={{ fontSize: "1.3em" }}
-              onClick={() => {
-                setShowUpdateForm(false);
-                setShowTasks(false);
-              }}
+              onClick={()=>setShowNum(0) }
             >
               Profile
             </Link>
-            <Link style={{ fontSize: "1.3em" }}>
-              Earnings
-            </Link>
             <Link
-              style={{ fontSize: "1.3em" }}
-              onClick={() => {
-                setShowTasks(false)
-                setShowUpdateForm(true)}}
+              style={{ fontSize: "1.3em" }} 
+              onClick={()=>setShowNum(1)}
             >
               Update data
             </Link>
-            <Link style={{ fontSize: "1.3em" }} onClick={()=>{
-                setShowTasks(true);
-                setShowUpdateForm(false);
-            }}>
+            <Link style={{ fontSize: "1.3em" }} 
+           onClick={()=>setShowNum(2)}>
               Tasks
             </Link>
+            {token.role==='handyman'&&
+            <Link
+            onClick={()=>setShowNum(3)}
+            style={{ fontSize: "1.3em" }}>
+              Earnings
+            </Link>}
             <Button w={"32"} onClick={toggleColorMode}>
               {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
             </Button>

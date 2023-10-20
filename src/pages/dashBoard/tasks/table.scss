@@ -1,0 +1,16 @@
+.custom-table-container {
+    position: relative;
+  }
+  
+//   .custom-table-container table thead {
+//     position: sticky;
+//     top: 0;
+//     background-color: #f0f0f0; /* Header background color */
+//     width: 200%;
+// }
+
+.custom-thead {
+    display: flex;
+    justify-content: space-between;
+    width: 200%;
+  }

@@ -11,7 +11,7 @@ function Catalog() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    "http://localhost:5000/tasks/all"
+                    `${process.env.REACT_APP_DATABASE_URL}/tasks/all`
                 );
                 console.log(response.data);
                 setTasks(response.data);

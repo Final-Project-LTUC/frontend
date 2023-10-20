@@ -1,142 +1,430 @@
-import React, { useEffect, useState } from "react";
-import Tasks from "../../../Components/tasks/Tasks";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Button,
-  Flex,
+  FormControl,
+  FormLabel,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Td,
+  Text,
   Th,
   Thead,
   Tr,
+  Flex,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { LoginContext } from "../../../hooks/Context/LoginProvider";
+import "./table.scss";
+import { useNavigate } from "react-router-dom";
+import CurrentTask from "../../../Components/dashboard/currentTask/CurrentTask";
+import Calander from "../../../Components/Calander";
 
-function TasksPage({ profileData }) {
-  console.log(profileData);
-  async function AddTask() {
-    const taskBody = {
-      handymanId: profileData.id,
-      title: "do it now ",
-      taskStatus: "incoming",
-      description: "help me please fast",
-    };
-    const headers = {
-      Authorization: `Bearer ${profileData.token}`,
-    };
+function TasksPage({ profileData, getTasks, setTasks, tasks }) {
+  const { loginData, socket } = useContext(LoginContext);
 
-    const addTask = await axios.post(
-      `${process.env.REACT_APP_DATABASE_URL}/tasks`,
-      taskBody,
-      {
-        headers: headers,
+  const initialRef = React.useRef(null);
+  const navigate = useNavigate();
+
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [schdualedAt, setSchdualedAt] = useState("");
+  const [currTask, setCurrTask] = useState("");
+  const [filter, setFilter] = useState("all");
+  const [payload, setPayload] = useState("");
+  const [toggleTask, toggleCurrentTask] = useState(false);
+  socket.on("transaction", inquiryDateFun);
+console.log(schdualedAt , 'schdualedAtttttttttttttttttttttt')
+
+  function inquiryDateFun(payload) {
+    let data = tasks.filter((item) => {
+      if (item.id === payload.id) {
+       return item
       }
-    );
+      return null;
+    });
+    setCurrTask(data[0]);
   }
-  const [tasks, setTasks] = useState([]);
-  const getTasks = async () => {
-    try {
-      const headers = {
-        Authorization: `Bearer ${profileData.token}`,
-      };
-      const response = await axios.get(
-        `${`${process.env.REACT_APP_DATABASE_URL}`}/handytasks/${
-          profileData.id
-        }`,
-        {
-          headers: headers,
-        }
-      );
 
-      if (response.status === 200) {
-        setTasks(response.data);
-        const currentTasks = response.data.filter(
-          (e) => e.taskStatus === "incoming"
-        );
-        setTasks(currentTasks);
-        return currentTasks;
-      } else {
-        console.error("Failed to fetch data");
-        return null;
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
-      return error;
-    }
+  const handleModalOpen = () => {
+    setModalOpen(true);
   };
-  const setCurrentTask = async (task) => {
-    try {
-      const headers = {
-        Authorization: `Bearer ${profileData.token}`,
-      };
 
-      const setCurrent = await axios.patch(
-        `${process.env.REACT_APP_DATABASE_URL}/tasks`,
-        { ...task, taskStatus: "current" },
-        {
-          headers: headers,
-        }
-      );
-      console.log(setCurrent);
-    } catch (error) {
-      return error;
-    }
+  const handleModalClose = () => {
+    setModalOpen(false);
+    setSchdualedAt("");
   };
+  function currentTask() {
+    toggleCurrentTask(true);
+    setFilter("current");
+  }
+
   useEffect(() => {
     getTasks();
-  }, []);
+  }, [filter,currTask]);
+
+  socket.on("client-recived", (payload) => {
+    setPayload(payload);
+    payload.handyData.schdualedAt = schdualedAt;
+    const uTasks = [...tasks, payload.handyData];
+    setTasks(uTasks);
+  });
+
+  function setFilterToAll() {
+    setFilter("all");
+    toggleCurrentTask(false);
+  }
+
+  function setFilterToDone() {
+    setFilter("done");
+    toggleCurrentTask(false);
+  }
+  function setFilterToCancelled() {
+    setFilter("cancelled");
+    toggleCurrentTask(false);
+  }
+  function setFilterToIncoming() {
+    setFilter("incoming");
+    toggleCurrentTask(false);
+  }
+
+  async function handleSave(schdualedAt) {
+    const schadul = JSON.parse(schdualedAt);
+
+    if (currTask) {
+      try {
+        const setCurrent = await axios.patch(
+          ` ${process.env.REACT_APP_DATABASE_URL}/taskshandy/${currTask.id}`,
+
+          { schdualedAt: schadul }
+        );
+        if (setCurrent.status === 200) {
+          toggleCurrentTask(true);
+          handleModalClose();
+          //  payload.schdualedAt=schadul
+          //  const temp = payload.reciverId;
+          //  payload.reciverId = payload.senderId;
+          //  payload.senderId = temp;
+          socket.emit("schedualeAndpayment", setCurrent.data.task);
+
+          return setCurrent.data;
+        }
+      } catch (error) {
+        return error;
+      }
+
+      navigate("/");
+    }
+  }
+
+  const setCurrentTask = async (data) => {
+    setCurrTask(data);
+  };
+
   return (
-    <TableContainer
-    my={'8'}
-    w={"80%"}>
-      <Table variant="striped" colorScheme="teal">
-        <Thead >
-          <Tr >
-            <Th fontSize={'2xl'}>Image</Th>
-            <Th fontSize={'2xl'}>Title</Th>
-            <Th fontSize={'2xl'}>Description</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {tasks.map((e, index) => {
-            return (
-              <Tr key={index}>
-                <Td>
-                  <img
-                    alt={e.title}
-                    src={e.imageUrl}
-                    width={60}
-                    height={60}
-                    style={{ borderRadius: "10px" }}
-                  />
-                </Td>
-                <Td>{e.title}</Td>
-                <Td>
-                  {e.description?.length > 200
-                    ? e?.description.slice(0, 200).concat("...")
-                    : e?.description}
-                </Td>
-                <Td>
-                  <Button
-                  colorScheme="teal"
-                    onClick={() => {
-                      setCurrentTask(e);
-                      const newTasks=tasks.filter(task=>e.id!==task.id)
-                      setTasks(newTasks);
-                    }}
-                  >
-                    Take Now
-                  </Button>
-                </Td>
-              </Tr>
-            );
-          })}
-        </Tbody>
+    <>
+      <Table className="custom-table">
+        <Flex mb={8} justifyContent={"space-around"} padding={10}>
+          <Button
+            colorScheme="teal"
+            variant={filter === "all" ? "solid" : "outline"}
+            onClick={setFilterToAll}
+          >
+            All
+          </Button>
+          <Button
+            colorScheme="teal"
+            variant={filter === "current" ? "solid" : "outline"}
+            onClick={() => currentTask()}
+          >
+            Current
+          </Button>
+          <Button
+            colorScheme="teal"
+            variant={filter === "done" ? "solid" : "outline"}
+            onClick={setFilterToDone}
+          >
+            Done
+          </Button>
+          <Button
+            colorScheme="teal"
+            variant={filter === "incoming" ? "solid" : "outline"}
+            onClick={setFilterToIncoming}
+          >
+            Incoming
+          </Button>
+          <Button
+            colorScheme="teal"
+            variant={filter === "cancelled" ? "solid" : "outline"}
+            onClick={setFilterToCancelled}
+          >
+            Cancelled
+          </Button>
+        </Flex>
+        {toggleTask ? (
+          <>
+            <TableContainer
+              className="custom-table-container"
+              my={"8"}
+              w={"100%"}
+              overflowY={"auto"}
+              maxH={"80vh"}
+            >
+              <Table variant="simple">
+                <Thead>
+                  <Tr>
+                    <Th>Image</Th>
+                    <Th>Title</Th>
+                    <Th>Description</Th>
+                    <Th>Created At</Th>
+                    <Th>Phone Number</Th>
+                    <Th>City</Th>
+                    <Th>Action</Th>
+                  </Tr>
+                </Thead>
+                <Tbody className="custom-tbody">
+                  {tasks.length > 0 ? (
+                    tasks
+                      .filter((task) => {
+                        if (filter === "all") {
+                          return true;
+                        }
+                        return task.taskStatus === filter;
+                      })
+                      .map((task, index) => (
+                        <Tr key={index}>
+                          <Td>
+                            <img
+                              alt={task.title}
+                              src={task.imageUrl}
+                              width={60}
+                              height={60}
+                              style={{ borderRadius: "10px" }}
+                            />
+                          </Td>
+                          <Td>{task.title}</Td>
+                          <Td>
+                            {task.description
+                              ? task.description.length > 200
+                                ? task.description.slice(0, 200).concat("...")
+                                : task.description
+                              : "-"}
+                          </Td>
+                          <Td>{task.createdAt}</Td>
+                          <Td>{task.phoneNumber || "-"}</Td>
+                          <Td>{task.city || "-"}</Td>
+                          <Td>
+                            {Number.isInteger(Number(profileData.id)) ? (
+                              <Button
+                                colorScheme="teal"
+                                onClick={() => {
+                                  setCurrentTask(task);
+                                  handleModalOpen();
+                                }}
+                              >
+                                preview
+                              </Button>
+                            ) : (
+                              <Button
+                                colorScheme="teal"
+                                onClick={() => {
+                                  setCurrentTask(task);
+                                  handleModalOpen();
+                                }}
+                              >
+                                Take Now
+                              </Button>
+                            )}
+                          </Td>
+                        </Tr>
+                      ))
+                  ) : (
+                    <Tr>
+                      <Td colSpan={7} className="no-data">
+                        No tasks available.
+                      </Td>
+                    </Tr>
+                  )}
+                </Tbody>
+              </Table>
+            </TableContainer>
+            <CurrentTask task={currTask} filter = {filter} tasks = {tasks} setCurrTask ={setCurrTask} onCurrentTask = {currentTask}/>
+          </>
+        ) : (
+          <>
+            <TableContainer
+              className="custom-table-container"
+              my={"8"}
+              w={"100%"}
+              overflowY={"auto"}
+              maxH={"80vh"}
+            >
+              <Table variant="simple">
+                <Thead>
+                  <Tr>
+                    <Th>Image</Th>
+                    <Th>Title</Th>
+                    <Th>Description</Th>
+                    <Th>Created At</Th>
+                    <Th>Phone Number</Th>
+                    <Th>City</Th>
+                    <Th>Action</Th>
+                  </Tr>
+                </Thead>
+                <Tbody className="custom-tbody">
+                  {tasks.length > 0 ? (
+                    tasks
+                      .filter((task) => {
+                        if (filter === "all") {
+                          return true;
+                        }
+                        return task.taskStatus === filter;
+                      })
+                      .map((task, index) => (
+                        <Tr key={index}>
+                          <Td>
+                            <img
+                              alt={task.title}
+                              src={task.imageUrl}
+                              width={60}
+                              height={60}
+                              style={{ borderRadius: "10px" }}
+                            />
+                          </Td>
+                          <Td>{task.title}</Td>
+                          <Td>
+                            {task.description
+                              ? task.description.length > 200
+                                ? task.description.slice(0, 200).concat("...")
+                                : task.description
+                              : "-"}
+                          </Td>
+                          <Td>{task.createdAt}</Td>
+                          <Td>{task.phoneNumber || "-"}</Td>
+                          <Td>{task.city || "-"}</Td>
+                          <Td>
+                            {Number.isInteger(Number(profileData.id)) ? (
+                              <Button
+                                colorScheme="teal"
+                                onClick={() => {
+                                  setCurrentTask(task);
+                                  handleModalOpen();
+                                }}
+                              >
+                                preview
+                              </Button>
+                            ) : (
+                              <Button
+                                colorScheme="teal"
+                                onClick={() => {
+                                  setCurrentTask(task);
+                                  handleModalOpen();
+                                }}
+                              >
+                                Take Now
+                              </Button>
+                            )}
+                          </Td>
+                        </Tr>
+                      ))
+                  ) : (
+                    <Tr>
+                      <Td colSpan={7} className="no-data">
+                        No tasks available.
+                      </Td>
+                    </Tr>
+                  )}
+                </Tbody>
+              </Table>
+            </TableContainer>
+          </>
+        )}
       </Table>
-      <Button onClick={() => AddTask()}>Add Task</Button>
-    </TableContainer>
+
+      {Number.isInteger(Number(profileData.id)) ? (
+        <Modal isOpen={isModalOpen} onClose={handleModalClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Preview the task</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <FormControl>
+                <FormLabel>Title</FormLabel>
+                <Text>{currTask.title}</Text>
+              </FormControl>
+              <FormControl>
+                <FormLabel>Description</FormLabel>
+                <Text>{currTask.description}</Text>
+              </FormControl>
+              <FormControl>
+                <FormLabel>Date of Request</FormLabel>
+                <Text>{currTask.dateOfReq}</Text>
+              </FormControl>
+              <FormControl>
+                <FormLabel>Interval</FormLabel>
+                <Text>{currTask.interval}</Text>
+              </FormControl>
+              <FormControl>
+                <FormLabel>Task Status</FormLabel>
+                <Text>{currTask.taskStatus}</Text>
+              </FormControl>
+              <FormControl>
+                <FormLabel>Created At</FormLabel>
+                <Text>{currTask.createdAt}</Text>
+              </FormControl>
+              <FormControl>
+                <FormLabel>Updated At</FormLabel>
+                <Text>{currTask.updatedAt}</Text>
+              </FormControl>
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme="teal" mr={3} onClick={handleModalClose}>
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      ) : (
+        <Modal isOpen={isModalOpen} onClose={handleModalClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Take the task</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              {/* <FormControl>
+                <FormLabel>Schdualed At</FormLabel> */}
+                <Calander setSchdualedAt = {setSchdualedAt}/>
+                {/* <Input
+                  ref={initialRef}
+                  placeholder="Tell me what I can help you with..."
+                  value={schdualedAt}
+                  onChange={(e) => setSchdualedAt(e.target.value)}
+                  required
+                /> */}
+               {/* </FormControl> */}
+            </ModalBody> 
+            <ModalFooter>
+              <Button colorScheme="teal" mr={3} onClick={handleModalClose}>
+                Close
+              </Button>
+              <Button
+                colorScheme="teal"
+                onClick={() => handleSave(schdualedAt)}
+              >
+                Save
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      )}
+    </>
   );
 }
 
