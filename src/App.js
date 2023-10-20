@@ -22,12 +22,16 @@ import Tasks from "./pages/dashBoard/tasks/TasksPage";
 import Auth from "./pages/auth/Auth";
 import LoginProvider from "./hooks/Context/LoginProvider";
 import ServicesTest from "./pages/services/ServicesTest/ServicesTest";
+
+import ForgotPassword from "./Components/SignupSingin/ForgotPassword"; //
+
 import Rating from "./Components/Rating/Rating";
 import ThanksPage from "./pages/thanksPage/ThanksPage";
 
 // Create and export the socket connection
 
 function App() {
+
   const location = useLocation();
 
   // Define a function to conditionally render the navbar based on the current route
@@ -58,11 +62,16 @@ function App() {
           <Route path="/signin" element={<Auth submitAction="signin" />} />
           <Route path="/rating" element={<Rating />} />
           <Route path="/thanksPage" element={<ThanksPage />} />
+                <Route
+                        path="/ForgotPassword"
+                        element={<ForgotPassword />}
+                    />
         </Routes>
       </LoginProvider>
       <Footer />
     </div>
   );
+
 }
 
 export default App;

@@ -197,6 +197,16 @@ function Form({
                             least one symbol @!
                         </FormErrorMessage>
                     </FormControl>
+                    {submitAction === "signin" && (
+                        <Link
+                            to="/ForgotPassword"
+                            className="forgot-password-link"
+                            style={{ color: "blue" }}
+                        >
+                            Forgot Password ?
+                        </Link>
+                    )}
+
                     <Button
                         w="100%"
                         mt="1em"
@@ -208,10 +218,8 @@ function Form({
                     </Button>
                     {submitAction === "signin" && (
                         <Flex justify="center" mt="1em">
-                            Don't have an account?
+                            Don't have an account?{" "}
                             <Link to="/signup" className="signup-link">
-                                {" "}
-                                {/* Use Link from react-router-dom */}
                                 Register
                             </Link>
                         </Flex>
