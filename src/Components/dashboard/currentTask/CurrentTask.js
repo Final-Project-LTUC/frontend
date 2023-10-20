@@ -25,6 +25,7 @@ function CurrentTask({
 }) {
   const paymentLabels = ["Payment 1", "Payment 2", "Payment 3"];
   const [taskKeys, settaskKeys] = useState([]);
+  const [stage,setStage] = useState(0)
 
   const { loginData, socket } = useContext(LoginContext);
 
@@ -43,7 +44,7 @@ function CurrentTask({
       }
     }
   }
-
+  
   
   paymentStatuses = true;
   
@@ -53,10 +54,13 @@ function CurrentTask({
   
   function arrivedOnTime() {
     socket.emit("arrived", task);
+    
   }
   
   function doneWorking(){
     socket.emit('ontimeorless', task )
+    
+
   }
 
   useEffect(() => {
@@ -73,7 +77,6 @@ function CurrentTask({
 
   return (
     <>
-      <PaymentStepper />
       <Center>
         <Box className="current-task-card">
           <Text fontSize="lg" fontWeight="bold" mb={4}>
@@ -103,8 +106,9 @@ function CurrentTask({
             Current Task
           </Text>
           <div className="button-container">
+            <PaymentStepper indexs={stage} setIndex={setStage} arrivedOnTime={arrivedOnTime} doneWorking={doneWorking} socket = {socket} task = {task} />
             {/* Buttons */}
-            <Button
+            {/* <Button
               className="task-button"
               bg="#007bff"
               color="#fff"
@@ -134,7 +138,7 @@ function CurrentTask({
               borderColor="#007bff"
             >
               Review of client
-            </Button>
+            </Button> */}
           </div>
         </Flex>
         <div className="payment-status">
