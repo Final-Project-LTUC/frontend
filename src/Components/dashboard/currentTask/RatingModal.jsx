@@ -17,7 +17,7 @@ import React, { useEffect, useState ,useContext} from "react";
 import { LoginContext } from "../../../hooks/Context/LoginProvider";
 import Rating from "../../Rating/Rating";
 import { useNavigate } from "react-router-dom";
-function RatingModal({task,socket}) {
+function RatingModal({task,socket,rateClose}) {
   const { loginData } = useContext(LoginContext);
   const navigate = useNavigate();
   const [rating, setRating] = useState(0);
@@ -32,7 +32,8 @@ function RatingModal({task,socket}) {
         payload.hReview = rating
         socket.emit('reviewOfHandyman', payload )
         onClose()  
-        navigate("/thanksPage");
+        navigate("/thanksPage"); 
+        rateClose(false)
 
       } else {
         let payload = task
@@ -40,7 +41,7 @@ function RatingModal({task,socket}) {
         socket.emit('reviewOfclient', payload )
         onClose() 
         navigate("/thanksPage");
- 
+         
       }
       
   
@@ -83,7 +84,8 @@ function RatingModal({task,socket}) {
             <Button colorScheme='blue' mr={3} onClick={()=> handymantWillRate()}>
               Save
             </Button>
-            <Button onClick={onClose}>Cancel</Button>
+
+            <Button onClick={onClose }>Cancel</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

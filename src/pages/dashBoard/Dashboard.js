@@ -147,6 +147,7 @@ function Dashboard() {
               profileData={profileData}
               showPage={showPage}
               setProfileData={setProfileData}
+              
             />
           )}
           {showPage === "tasks" && (

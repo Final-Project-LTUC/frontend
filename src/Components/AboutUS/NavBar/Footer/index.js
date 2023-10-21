@@ -630,6 +630,7 @@ import {
 } from '@chakra-ui/react';
 import { BiMailSend } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
+import "./footer.css"
 const ListHeader = ({ children }) => {
   return (
     <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
@@ -640,7 +641,7 @@ const ListHeader = ({ children }) => {
 
 export default function LargeWithNewsletter() {
   return (
-    <Box bg="teal.500" color="white" >
+    <Box bg="teal.500" color="white" className='footer' >
       <Container maxW={'6xl'} py={10} >
         
         <SimpleGrid

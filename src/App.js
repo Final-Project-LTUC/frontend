@@ -45,36 +45,35 @@ function App() {
     };
 
 
-  return (
-    <div className="App">
-      <LoginProvider>
-        {renderNavbar()}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          {/* <Route path="/services" element={<Services />} /> */}
-          <Route path="/services" element={<ServicesTest hue="220" />} />
-          <Route path="/catalog" element={<Catalog />} />
-          <Route path="/contact" element={<ContactUS/>} />
-          <Route path="/handyman/:id" element={<HandymanDetails />} />{" "}
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/update" element={<UpdateForm />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/tasks" element={<Tasks />} />
-          <Route path="/signup" element={<Auth submitAction="signup" />} />
-          <Route path="/signin" element={<Auth submitAction="signin" />} />
-        </Routes>
-      </LoginProvider>
-      <Footer />
-    </div>
-  );
+//   return (
+//     <div className="App">
+//       <LoginProvider>
+//         {renderNavbar()}
+//         <Routes>
+//           <Route path="/" element={<Home />} />
+//           {/* <Route path="/services" element={<Services />} /> */}
+//           <Route path="/services" element={<ServicesTest hue="220" />} />
+//           <Route path="/catalog" element={<Catalog />} />
+//           <Route path="/contact" element={<ContactUS/>} />
+//           <Route path="/handyman/:id" element={<HandymanDetails />} />{" "}
+//           <Route path="/about" element={<AboutUs />} />
+//           <Route path="/update" element={<UpdateForm />} />
+//           <Route path="/dashboard" element={<Dashboard />} />
+//           <Route path="/tasks" element={<Tasks />} />
+//           <Route path="/signup" element={<Auth submitAction="signup" />} />
+//           <Route path="/signin" element={<Auth submitAction="signin" />} />
+//         </Routes>
+//       </LoginProvider>
+//       <Footer />
+//     </div>
+//   );
 
-    // Define a function to conditionally render the footer based on the current route
+
     const renderFooter = () => {
-        // Exclude the Catalog route from rendering the footer
         if (location.pathname === "/catalog") {
             return null;
         } else {
-            return <Footer />;
+            return ;
         }
     };
 
@@ -110,7 +109,7 @@ function App() {
                     />
                 </Routes>
             </LoginProvider>
-            {renderFooter()}
+            <Footer />
         </div>
     );
 

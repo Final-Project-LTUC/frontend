@@ -45,7 +45,10 @@ function CurrentTask({
     }
   }
   
-  
+  socket.on("details",donePayload)
+  function donePayload (payload){
+    setCurrTask(payload)
+  }
   paymentStatuses = true;
   
   function formatKey(key) {
@@ -58,6 +61,7 @@ function CurrentTask({
   }
   
   function doneWorking(){
+    
     socket.emit('ontimeorless', task )
     
 

@@ -134,10 +134,10 @@ console.log(schdualedAt , 'schdualedAtttttttttttttttttttttt')
         <Flex mb={8} justifyContent={"space-around"} padding={10}>
           <Button
             colorScheme="teal"
-            variant={filter === "all" ? "solid" : "outline"}
-            onClick={setFilterToAll}
+            variant={filter === "incoming" ? "solid" : "outline"}
+            onClick={setFilterToIncoming}
           >
-            All
+            Incoming
           </Button>
           <Button
             colorScheme="teal"
@@ -155,18 +155,18 @@ console.log(schdualedAt , 'schdualedAtttttttttttttttttttttt')
           </Button>
           <Button
             colorScheme="teal"
-            variant={filter === "incoming" ? "solid" : "outline"}
-            onClick={setFilterToIncoming}
-          >
-            Incoming
-          </Button>
-          <Button
-            colorScheme="teal"
             variant={filter === "cancelled" ? "solid" : "outline"}
             onClick={setFilterToCancelled}
           >
             Cancelled
           </Button>
+          {/* <Button
+            colorScheme="teal"
+            variant={filter === "all" ? "solid" : "outline"}
+            onClick={setFilterToAll}
+          >
+            All
+          </Button> */}
         </Flex>
         {toggleTask ? (
           <>
@@ -221,7 +221,7 @@ console.log(schdualedAt , 'schdualedAtttttttttttttttttttttt')
                           <Td>{task.phoneNumber || "-"}</Td>
                           <Td>{task.city || "-"}</Td>
                           <Td>
-                            {Number.isInteger(Number(profileData.id)) ? (
+                            {Number.isInteger(Number(profileData.id))|| filter === "done"|| filter==="cancelled"  ? (
                               <Button
                                 colorScheme="teal"
                                 onClick={() => {
@@ -310,7 +310,7 @@ console.log(schdualedAt , 'schdualedAtttttttttttttttttttttt')
                           <Td>{task.phoneNumber || "-"}</Td>
                           <Td>{task.city || "-"}</Td>
                           <Td>
-                            {Number.isInteger(Number(profileData.id)) ? (
+                          {Number.isInteger(Number(profileData.id))|| filter === "done"|| filter==="cancelled"  ? (
                               <Button
                                 colorScheme="teal"
                                 onClick={() => {
@@ -348,7 +348,7 @@ console.log(schdualedAt , 'schdualedAtttttttttttttttttttttt')
         )}
       </Table>
 
-      {Number.isInteger(Number(profileData.id)) ? (
+      {Number.isInteger(Number(profileData.id)) || filter === "done"|| filter==="cancelled" ? (
         <Modal isOpen={isModalOpen} onClose={handleModalClose}>
           <ModalOverlay />
           <ModalContent>

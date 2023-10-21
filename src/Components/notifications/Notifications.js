@@ -3,16 +3,17 @@ import "./notifications.css";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { LoginContext } from "../../hooks/Context/LoginProvider";
 import Rating from "../Rating/Rating";
+import RatingModal from "../dashboard/currentTask/RatingModal";
 
-function Notifications({ payload, socket, inquiryDatePayload }) {
+function Notifications({ payload, socket, setOpenReview }) {
   const { loginData } = useContext(LoginContext);
   const [rating, setRating] = useState(0);
 
-  const timestamp = payload.schdualedAt; // Replace this with your timestamp
+  const timestamp = payload.schdualedAt; // we should make the timestamp a set state so the data stays
   const date = new Date(timestamp);
 
   const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Adding 1 because getMonth is zero-based
+  const month = (date.getMonth() + 1).toString().padStart(2, "0"); 
   const day = date.getDate().toString().padStart(2, "0");
   const hours = date.getHours().toString().padStart(2, "0");
 
@@ -246,15 +247,7 @@ function Notifications({ payload, socket, inquiryDatePayload }) {
                   </div>
                 )}
 
-              {payload && (
-                <div className="notifications__item">
-                  <div className="notifications__item__content">
-                    <span className="notifications__item__message">
-                      <Rating setRating={setRating} rating={rating} />
-                    </span>
-                  </div>
-                </div>
-              )}
+           
             </>
           }
         </div>
