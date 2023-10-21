@@ -2,8 +2,8 @@ import React from "react";
 import { NavLink, Link as ReactRouterLink } from "react-router-dom";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import logo from "../assets/logo.png";
-import "./Hero.scss";
-
+// import "./Hero.scss";
+import './navbar.scss'
 import {
   Box,
   Flex,
@@ -56,10 +56,9 @@ function Navbar() {
   const mar = 80;
 
   return (
-    <header>
-      {/* <div className="heroSection" > */}
-      <div className="container">
-        <nav
+    <header className="nav2">
+      <div className="container" >
+        <nav className={`navbar ${isNavFixed ? 'fixed' : ''}`}
           style={{
             position: isNavFixed ? "fixed" : "relative",
             top: 0,
@@ -69,7 +68,7 @@ function Navbar() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            background: isNavFixed ? "gray.50" : "transparent",
+            background: isNavFixed ? "transparent" : "transparent",
             boxShadow: isNavFixed ? "0 15px 15px rgba(0, 0, 0, 0.3)" : "none",
             borderBottom: isNavFixed
               ? "1px solid rgba(255, 255, 255, 0.1)"
@@ -212,8 +211,7 @@ function Navbar() {
           </Flex>
         </nav>
       </div>
-      {/* </div> */}
-    </header>
+     </header> 
   );
 }
 
