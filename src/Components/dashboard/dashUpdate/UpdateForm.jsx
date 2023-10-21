@@ -256,18 +256,13 @@ function UpdateForm({
           );
         })}
       </Flex> */}
-
-
-
-
-
       <div>
         <ChakraLink as={ReactRouterLink} to="/dashboard">
           <Button
             w={"180px"}
             onClick={() => {
               handleUpdate();
-              setShowUpdateForm(false);
+              setShowNum(0)
             }}
             colorScheme="teal"
             mt={4}

@@ -9,6 +9,7 @@ import {
     Text,
     FormLabel,
     Textarea,
+    Select,
 } from "@chakra-ui/react";
 function MoreInfo({ dispatch, currentPage, formData, setPageNum, userType }) {
     const successCallback = (position) => {
@@ -61,7 +62,7 @@ function MoreInfo({ dispatch, currentPage, formData, setPageNum, userType }) {
                 h={"60%"}
                 wrap={"wrap"}
                 nt={"flex-start"}
-                gap={"30px"}
+                gap={"5px"}
                 alignItems={"flex-start"}
                 justifyContent={"center"}
             >
@@ -108,6 +109,13 @@ function MoreInfo({ dispatch, currentPage, formData, setPageNum, userType }) {
                             })
                         }
                     />
+                </FormControl>
+                <FormControl>
+                 <Select onChange={(e)=>dispatch({type:'CHANGE_CITY',payload:e.target.value})} placeholder="Your City">
+                    <option value={'Amman'}>Amman</option>
+                    <option value={'Al Zarqa'}>Al Zarqa</option>
+                    <option value={'Irbid'}>Irbid</option>
+                 </Select>
                 </FormControl>
                 {formData.languages && (
                     <Flex w={"100%"} justifyContent={"space-around"}>
