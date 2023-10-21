@@ -52,8 +52,10 @@ export default function SplitScreen() {
               rounded={'full'}
               bg={'teal'}
               color={'white'}
+              marginLeft= {"15vh"}
               _hover={{
                 bg: 'yellow.600',
+               
               }}
               onClick={scrollToTeamMembers}>
               Meet the Team

@@ -424,7 +424,7 @@ function HandymanDetails() {
                                                         fontWeight="bold"
                                                     >
                                                         {renderRatingStars(
-                                                            task.rating
+                                                            task.reviewOfHandyman
                                                         )}
                                                     </Text>
                                                 </Box>

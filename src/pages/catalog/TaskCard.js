@@ -61,7 +61,7 @@ function TaskCard({ task }) {
                         </Text>
                     </Box>
                     <Flex mt={5} alignItems="center">
-                        {renderRatingStars(task.rating)}
+                        {renderRatingStars(task.reviewOfHandyman)}
                     </Flex>
                     <Badge
                         colorScheme="teal"
