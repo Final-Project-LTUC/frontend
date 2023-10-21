@@ -71,6 +71,7 @@ body {
   letter-spacing: 2px;
   font-family: 'atvice', sans-serif;
   font-size: 17px;
+  color: black;
 }
 
 .notifications__item__message {
