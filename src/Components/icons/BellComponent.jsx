@@ -7,11 +7,11 @@ import { LoginContext } from "../../hooks/Context/LoginProvider";
 import RatingModal from "../dashboard/currentTask/RatingModal";
 
 const BellComponent = () => {
-  const { socket } = useContext(LoginContext);
+  const { socket, loginData } = useContext(LoginContext);
   const [notificationCount, setNotificationCount] = useState(0);
   const [payload, setPayload] = useState();
   const [showNotification, setNotification] = useState(false);
-  const [openReview,setOpenReview] = useState(false)
+  const [openReview, setOpenReview] = useState(false);
   const handleInquiryDate = (payload) => {
     setPayload(payload);
     setNotificationCount((prevCount) => {
@@ -54,9 +54,9 @@ const BellComponent = () => {
   };
 
   const handleLastPayment = (payload) => {
-    console.log('lastPaymentttttttttttttttt', payload)
+    console.log("lastPaymentttttttttttttttt", payload);
     setPayload(payload);
-    setOpenReview(true)
+    setOpenReview(true);
     setNotificationCount((prevCount) => {
       console.log("Previous count:", prevCount);
       return 1;
@@ -109,11 +109,11 @@ const BellComponent = () => {
 
   return (
     <>
-      <Flex direction="column">
+      <Flex direction="column" justifyContent={"space-between"}>
         <Box
           className="container"
-          height={10}
-          width={10}
+          height={50}
+          width={15}
           p={4}
           borderRadius="md"
           cursor="pointer"
@@ -134,21 +134,28 @@ const BellComponent = () => {
               <Box className="bell-icon__circle" ref={circleRef}></Box>
             </Box>
           </Flex>
-          {showNotification && (
-            <Box position="absolute" top="100%" right={0} zIndex={1}>
-              <Notifications
-                showNotification={showNotification}
-                payload={payload}
-                socket={socket}
-                setOpenReview={setOpenReview}
-              />
-            </Box>
-          )}
+          <Box className="notification-cards-container" position="relative">
+            {showNotification && (
+              <Box position="absolute" top="100%" right={0} zIndex={1}>
+                <Notifications
+                  showNotification={showNotification}
+                  payload={payload}
+                  socket={socket}
+                  setOpenReview={setOpenReview}
+                />
+              </Box>
+            )}
+          </Box>
         </Box>
-        {openReview===true&&
-        <RatingModal task={payload}  socket={socket} rateClose={setOpenReview}/>
-        }
-        
+        {openReview === true &&
+          Number.isInteger(Number(loginData.user.id)) &&(
+            <RatingModal
+
+              task={payload}
+              socket={socket}
+              rateClose={setOpenReview}
+            />
+           )} 
       </Flex>
     </>
   );

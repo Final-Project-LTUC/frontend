@@ -93,7 +93,8 @@ function Notifications({ payload, socket, setOpenReview }) {
   return (
     <div className="wrapper">
       <div className="wrapper">
-        <div className="notifications">
+      <div className="notifications"  style={{  zIndex: 2 }}>
+
           {payload.taskStatus === "current" ? (
             <div className="notifications__item">
               <div className="notifications__item__avatar">

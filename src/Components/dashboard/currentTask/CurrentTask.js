@@ -15,6 +15,7 @@ import { LoginContext } from "../../../hooks/Context/LoginProvider";
 import axios from "axios";
 import DetailsModale from "./DetailsModale";
 
+
 function CurrentTask({
   onCurrentTask,
   paymentStatuses,
@@ -23,6 +24,18 @@ function CurrentTask({
   tasks,
   setCurrTask,
 }) {
+
+  const timestamp = task.schdualedAt; // we should make the timestamp a set state so the data stays
+  const date = new Date(timestamp);
+
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0"); 
+  const day = date.getDate().toString().padStart(2, "0");
+  const hours = date.getHours().toString().padStart(2, "0");
+
+  const formattedDate = `${year}/${month}/${day} ${hours}:00`;
+  console.log(formattedDate);
+
   const paymentLabels = ["Payment 1", "Payment 2", "Payment 3"];
   const [taskKeys, settaskKeys] = useState([]);
   const [stage,setStage] = useState(0)
@@ -91,8 +104,10 @@ function CurrentTask({
             <GridItem colSpan={1}>
               <Box className="task-content">
                 <VStack spacing={2}>
-                  <Text className="task-title">{task.taskStatus}</Text>
-                  <Text>{task.schdualedAt}</Text>
+                  <Text className="task-title">Task Status: {task.taskStatus}</Text>
+                  <Text>Client Name: {task.clientName}</Text>
+                  <Text>Schdualed At: {formattedDate}</Text>
+
                 </VStack>
               </Box>
             </GridItem>
@@ -106,9 +121,6 @@ function CurrentTask({
           </Box>
         </Flex>
         <Flex direction="column" alignItems="center" mt={4}>
-          <Text fontSize="lg" fontWeight="bold" mb={4}>
-            Current Task
-          </Text>
           <div className="button-container">
             <PaymentStepper indexs={stage} setIndex={setStage} arrivedOnTime={arrivedOnTime} doneWorking={doneWorking} socket = {socket} task = {task} />
             {/* Buttons */}

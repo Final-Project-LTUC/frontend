@@ -27,6 +27,7 @@ import ServicesTest from "./pages/services/ServicesTest/ServicesTest";
 import ForgotPassword from "./Components/SignupSingin/ForgotPassword";
 import Rating from "./Components/Rating/Rating";
 import ThanksPage from "./pages/thanksPage/ThanksPage";
+import BellComponent from "./Components/icons/BellComponent";
 
 function App() {
     const location = useLocation();
@@ -81,6 +82,7 @@ function App() {
         <div className="App">
             <LoginProvider>
                 {renderNavbar()}
+                {/* <BellComponent/> */}
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route

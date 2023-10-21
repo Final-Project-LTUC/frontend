@@ -12,90 +12,109 @@ import {
   Stepper,
   useSteps,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import DetailsModale from "../DetailsModale";
 import { faBuildingCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import RatingModal from "../RatingModal";
 const steps = [
-  { title: "First", description: "Contact Info" },
-  { title: "Second", description: "Date & Time" },
-  { title: "Third", description: "Select Rooms" },
+  { title: "First", description: "Payment1" },
+  { title: "Second", description: "Payment2" },
+  { title: "Third", description: "Payment3" },
 ];
-function PaymentStepper({ indexs, arrivedOnTime, doneWorking, task, socket,setIndex }) {
 
-  let { activeStep,setActiveStep} = useSteps({
-    index: 0, 
+
+
+function PaymentStepper({
+  indexs,
+  arrivedOnTime,
+  doneWorking,
+  task,
+  socket,
+  setIndex,
+}) {
+  const [arrivedClicked, setArrivedClicked] = useState(false);
+  const [arrivedClicked2, setArrivedClicked2] = useState(false);
+
+  let { activeStep, setActiveStep } = useSteps({
+    index: 0,
     count: steps.length,
   });
 
   useEffect(() => {
     if (indexs > 0) {
-    
       setActiveStep(indexs);
     }
-  }, [indexs]);
+  }, [indexs,arrivedClicked,arrivedClicked2]);
 
   return (
     <>
-    <Stepper size="lg" colorScheme="yellow" index={activeStep}>
-      {steps.map((step, index) => (
-        <Step key={index}>
-          <StepIndicator>
-            <StepStatus complete={`✅`} incomplete={`😅`} active={`📍`} />
-          </StepIndicator>
-          <>
-            <Box flexShrink="0">
-              <StepTitle>{step.title}</StepTitle>
-              <StepDescription>{step.description}</StepDescription>
-           </Box>
-          </>
+      <Stepper size="lg" colorScheme="teal" index={activeStep }>
+        {steps.map((step, index) => (
+          <Step key={index}>
+            <StepIndicator>
+                <lottie-player
+                  src="https://lottie.host/b750c125-577b-4df4-814f-c96a2657ff5f/VOW4uOU8h8.json"
+                  background="transparent"
+                  speed="1"
+                  objectFit="cover"
+                  maxW={{ base: "100%", sm: "300px" }}
+                  loop
+                  autoPlay
+                />           
+            </StepIndicator>
 
-          <StepSeparator />
 
-
-
-          {index === 0 && (
-            <Button
-              className="task-button"
-              bg="#007bff"
-              color="#fff"
-              border="2px"
-              borderColor="#007bff"
-              onClick={() => {
-                arrivedOnTime();
-                setIndex(1);
-              }}
-            >
-              Arrived
-            </Button>
-          )}
-    
-          {index === 1 && (
             <>
-              <DetailsModale socket={socket} task={task} />
-    
+              <Box flexShrink="0">
+                <StepTitle>{step.title}</StepTitle>
+                <StepDescription>{step.description}</StepDescription>
+              </Box>
+            </>
+
+            <StepSeparator />
+
+            {index === 0 && (
               <Button
                 className="task-button"
-                bg="#007bff"
+                bg="teal"
                 color="#fff"
                 border="2px"
-                borderColor="#007bff"
+                borderColor="teal"
                 onClick={() => {
-                  doneWorking();
-                  setIndex(2);
+                  arrivedOnTime();
+                  setIndex(1);
+                  setArrivedClicked(true);
+
                 }}
               >
-                Done
+                Arrived
               </Button>
-            </>
-          )}
-          {index===2 &&
-         <RatingModal task={task}  socket={socket}/>
-        
-          }
-        </Step>
-      ))}
-    </Stepper>
+            )}
+
+            {index === 1 && arrivedClicked && (
+              <>
+                <DetailsModale socket={socket} task={task} />
+
+                <Button
+                  className="task-button"
+                  bg="teal"
+                  color="#fff"
+                  border="2px"
+                  borderColor="teal"
+                  onClick={() => {
+                    doneWorking();
+                    setArrivedClicked2(true)
+                    setIndex(2);
+                  }}
+                >
+                  Done
+                </Button>
+              </>
+            )}
+            {index === 2 && arrivedClicked2&& <RatingModal task={task} socket={socket} />}
+          </Step>
+        ))}
+      </Stepper>
     </>
   );
 }
