@@ -8,11 +8,11 @@ function Notifications({ payload, socket, inquiryDatePayload }) {
   const { loginData } = useContext(LoginContext);
   const [rating, setRating] = useState(0);
 
-  const timestamp = payload.schdualedAt; // Replace this with your timestamp
+  const timestamp = payload.schdualedAt; // we should make the timestamp a set state so the data stays
   const date = new Date(timestamp);
 
   const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Adding 1 because getMonth is zero-based
+  const month = (date.getMonth() + 1).toString().padStart(2, "0"); 
   const day = date.getDate().toString().padStart(2, "0");
   const hours = date.getHours().toString().padStart(2, "0");
 
