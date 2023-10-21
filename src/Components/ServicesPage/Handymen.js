@@ -23,6 +23,7 @@ import {
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import TaskModal from "./TaskModal";
+import Loader from "../Loader/Loader";
 
 function Handymen({ handyData, token }) {
   const [loading, setLoading] = useState(true);
@@ -63,17 +64,14 @@ function Handymen({ handyData, token }) {
           justifyContent="center"
           bg="rgba(255, 255, 255, 0.8)"
         >
-          <Spinner size="xl" color="teal.500" />
-          <Text fontSize="lg" fontWeight="bold" mt={4}>
-            Loading...
-          </Text>
+          <Loader />
         </Box>
       ) : (
         <>
           <Text fontSize="4xl" textAlign="center" my={4} fontWeight="bold">
             Choose your handyman
           </Text>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={8}>
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={8} height={"100vh"} overflowY="scroll">
             {handyData.map((item, index) => (
               <Box key={item.id} w="100%" mb={6} px={2}>
                 <Card

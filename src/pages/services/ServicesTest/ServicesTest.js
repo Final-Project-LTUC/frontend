@@ -139,8 +139,8 @@ function Services() {
   
   // }, [selectedLocation]);
   return (
-    <Box p={4} bgColor="white.100" width={"100%"} height={"100%"}>
-      <Flex justifyContent="flex-start" flexDirection="row">
+    <Box p={4} bgColor="white.100" width={"100%"} minHeight={"100vh"} >
+      <Flex justifyContent="flex-start" flexDirection="row" >
         <Box p={4} bgColor="white.100" width={"30%"} height={220}>
           <FilterSidebar
             selectedLocation={selectedLocation}

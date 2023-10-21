@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import './rating.scss'
 import { Box } from '@chakra-ui/react'
-function Rating() {
-    const [rating,setRating]=useState(0);
-    console.log(rating)
-    return (
+function Rating({setRating}) {
+    
+  return (
     <Box bg={'#181820'} h={'20%'}>
    <div class="feedback">
     <label class="angry">
@@ -22,7 +21,7 @@ function Rating() {
         </div>
     </label>
     <label class="sad">
-        <input type="radio" onClick={()=>setRating(2)} value="2" name="feedback" />
+        <input type="radio" onClick={()=>setRating(1)} value="2" name="feedback" />
         <div>
             <svg class="eye left">
                 <use href="#eye"/>
@@ -36,11 +35,11 @@ function Rating() {
         </div>
     </label>
     <label class="ok">
-        <input type="radio" onClick={()=>setRating(3)} value="3" name="feedback" />
+        <input type="radio" onClick={()=>setRating(1)} value="3" name="feedback" />
         <div></div>
     </label>
     <label class="good">
-        <input type="radio" value="4" onClick={()=>setRating(4)} name="feedback" checked />
+        <input type="radio" value="4" onClick={()=>setRating(1)} name="feedback" checked />
         <div>
             <svg class="eye left">
                 <use href="#eye"/>
@@ -54,7 +53,7 @@ function Rating() {
         </div>
     </label>
     <label class="happy">
-        <input type="radio" onClick={()=>setRating(5)} value="5" name="feedback" />
+        <input type="radio" onClick={()=>setRating(1)} value="5" name="feedback" />
         <div>
             <svg class="eye left">
                 <use href="#eye"/>
@@ -76,5 +75,6 @@ function Rating() {
 </svg>
     </Box>
   )
-};
+}
+
 export default Rating

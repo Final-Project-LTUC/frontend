@@ -160,4 +160,4 @@ export const handymanExperties = [
   },
 
 ]
-export const hours=[ '6 Am', '7 AM', '8 AM', '9 AM' , '10 AM', '11 AM', '12 PM' , '13 PM','14 PM','15 PM','16 PM','17 PM','18 PM','19 PM','20 PM','21 PM','22PM','23 PM'] 
+export const hours=[ '6 Am', '7 AM', '8 AM', '9 AM' , '10 AM', '11 AM', '12 PM' , '13 PM','14 PM','15 PM','16 PM','17 PM','18 PM','19 PM','20 PM','21 PM','22PM','23 PM']

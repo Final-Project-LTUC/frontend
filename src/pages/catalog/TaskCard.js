@@ -51,7 +51,12 @@ function TaskCard({ task }) {
                     paddingBottom={"40px"}
                 >
                     <Box>
-                        <Text fontSize="20px" fontWeight="bold" mt={1}>
+                        <Text
+                            fontSize="20px"
+                            fontWeight="bold"
+                            mt={1}
+                            fontFamily="heading"
+                        >
                             {task.title}
                         </Text>
                     </Box>

@@ -4,13 +4,14 @@ import { FaBell } from "react-icons/fa";
 import gsap from "gsap";
 import Notifications from "../notifications/Notifications";
 import { LoginContext } from "../../hooks/Context/LoginProvider";
+import RatingModal from "../dashboard/currentTask/RatingModal";
 
 const BellComponent = () => {
   const { socket } = useContext(LoginContext);
   const [notificationCount, setNotificationCount] = useState(0);
   const [payload, setPayload] = useState();
   const [showNotification, setNotification] = useState(false);
-
+  const [openReview,setOpenReview] = useState(false)
   const handleInquiryDate = (payload) => {
     setPayload(payload);
     setNotificationCount((prevCount) => {
@@ -55,6 +56,7 @@ const BellComponent = () => {
   const handleLastPayment = (payload) => {
     console.log('lastPaymentttttttttttttttt', payload)
     setPayload(payload);
+    setOpenReview(true)
     setNotificationCount((prevCount) => {
       console.log("Previous count:", prevCount);
       return prevCount + 1;
@@ -138,10 +140,15 @@ const BellComponent = () => {
                 showNotification={showNotification}
                 payload={payload}
                 socket={socket}
+                setOpenReview={setOpenReview}
               />
             </Box>
           )}
         </Box>
+        {openReview===true&&
+        <RatingModal task={payload}  socket={socket} rateClose={setOpenReview}/>
+        }
+        
       </Flex>
     </>
   );

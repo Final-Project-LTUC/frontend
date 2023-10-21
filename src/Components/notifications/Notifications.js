@@ -3,10 +3,22 @@ import "./notifications.css";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { LoginContext } from "../../hooks/Context/LoginProvider";
 import Rating from "../Rating/Rating";
+import RatingModal from "../dashboard/currentTask/RatingModal";
 
-function Notifications({ payload, socket, inquiryDatePayload }) {
+function Notifications({ payload, socket, setOpenReview }) {
   const { loginData } = useContext(LoginContext);
-  const [rating,setRating]=useState(0);
+  const [rating, setRating] = useState(0);
+
+  const timestamp = payload.schdualedAt; // we should make the timestamp a set state so the data stays
+  const date = new Date(timestamp);
+
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0"); 
+  const day = date.getDate().toString().padStart(2, "0");
+  const hours = date.getHours().toString().padStart(2, "0");
+
+  const formattedDate = `${year}/${month}/${day} ${hours}:00`;
+  console.log(formattedDate);
 
   console.log("loginData", loginData);
   const handleOptionClick = (option, payload) => {
@@ -20,6 +32,7 @@ function Notifications({ payload, socket, inquiryDatePayload }) {
       payload.taskStatus = "cancelled";
       socket.emit("serviceRejected", payload);
     } else if (option === "yesProductCost") {
+      payload.choice = true;
       socket.emit("continue", payload);
     } else if (option === "NoProductCost") {
       payload.choice = false;
@@ -94,7 +107,7 @@ function Notifications({ payload, socket, inquiryDatePayload }) {
                   New Notification
                 </span>
                 <span className="notifications__item__message">
-                  appointment: {payload.schdualedAt}
+                  appointment: {formattedDate}
                 </span>
               </div>
               <div>
@@ -209,6 +222,7 @@ function Notifications({ payload, socket, inquiryDatePayload }) {
                     </div>
                   </div>
                 )}
+
               {payload &&
                 payload.hourlyPayment &&
                 payload.handymanId === loginData.user.id && (
@@ -233,16 +247,7 @@ function Notifications({ payload, socket, inquiryDatePayload }) {
                   </div>
                 )}
 
-              {payload &&
-               (
-                  <div className="notifications__item">
-                    <div className="notifications__item__content">
-                      <span className="notifications__item__message">
-                       <Rating setRating={setRating} rating={rating} />
-                      </span>
-                    </div>
-                  </div>
-                )}
+           
             </>
           }
         </div>

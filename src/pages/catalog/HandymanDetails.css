@@ -5,14 +5,48 @@
     position: relative;
     display: inline-block;
     font-size: 40px;
-    color: #319795;
-    animation: flip 4s infinite;
-    animation-delay: calc(0.2s * var(--i));
+    color: rgb(46, 57, 57);
+    animation: pulse 5s infinite;
+    font-family: mono;
+    animation-delay: 1.2s;
 }
-@keyframes flip {
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        color: black; /* Start with the original color */
+    }
+    50% {
+        transform: scale(1.1);
+        color: #319795; /* Change to the desired color (gold) */
+    }
+    100% {
+        transform: scale(1);
+        color: black; /* Return to the original color */
+    }
+}
+
+.bounce {
+    animation: bounce 4.2s infinite;
+    animation-delay: 1.2s; /* Delay the animation start by 2 seconds */
+}
+
+@keyframes bounce {
     0%,
-    80% {
-        transform: rotateY(360deg);
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(
+            -80px
+        ); /* Adjust the height for the desired bounce effect */
+    }
+    60% {
+        transform: translateY(
+            -13px
+        ); /* Adjust the height for the desired bounce effect */
     }
 }
 

@@ -629,7 +629,8 @@ import {
   Image,
 } from '@chakra-ui/react';
 import { BiMailSend } from 'react-icons/bi';
-
+import { Link } from 'react-router-dom';
+import "./footer.css"
 const ListHeader = ({ children }) => {
   return (
     <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
@@ -640,32 +641,51 @@ const ListHeader = ({ children }) => {
 
 export default function LargeWithNewsletter() {
   return (
-    <Box bg="teal.500" color="white">
-      <Container maxW={'6xl'} py={10}>
+    <Box bg="teal.500" color="white" className='footer' >
+      <Container maxW={'6xl'} py={10} >
         
         <SimpleGrid
           templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 2fr' }}
           spacing={8}
+          alignItems="flex-start"
         >
           {/* Add your logo to the left of the grid with a responsive size in rem units */}
-          <Image src="/assets/logo.png" alt="Your Logo" boxSize="15rem" width={"300%"} />
+          <Box
+            position="relative"
+            width="355px" // Set the width to your desired size
+            height="150px" // Set the height to match the width
+            overflow="hidden"
+          >
+            <Image
+              src="/assets/logo.png"
+              alt="Your Logo"
+              width="100%"
+              height="100%"
+              objectFit="-moz-initial"
+              borderRadius="full"
+              position="absolute"
+              top="-22px"
+              left="-30px"
+            />
+            
+          </Box>
 
           <Stack spacing={2} align={'flex-start'}>
             <ListHeader>Company</ListHeader>
-            <Box as="a" href={'#'}>
-              About us
+            <Box as="a" href={'/'}>
+              Home
             </Box>
-            <Box as="a" href={'#'}>
-              Blog
+            <Box as="a" href={'/services'}>
+              Services
             </Box>
-            <Box as="a" href={'#'}>
+            <Box as="a" href={'/contact'}>
               Contact us
             </Box>
-            <Box as="a" href={'#'}>
-              Pricing
+            <Box as="a" href={'/catalog'}>
+              Cataloug
             </Box>
-            <Box as="a" href={'#'}>
-              Testimonials
+            <Box as="a" href={'/about'}>
+              About
             </Box>
           </Stack>
           <Stack align={'flex-start'}>
@@ -711,7 +731,7 @@ export default function LargeWithNewsletter() {
         </SimpleGrid>
       </Container>
 
-      {/* Teal-colored footer with copyright text */}
+     
       <center>
         <Box bg="#D6E4E5" p={4} color="teal">
           <Text fontSize={'sm'}>© 2023 Skillify. All rights reserved</Text>
