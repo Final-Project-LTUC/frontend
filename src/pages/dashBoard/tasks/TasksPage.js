@@ -41,12 +41,12 @@ function TasksPage({ profileData, getTasks, setTasks, tasks }) {
   const [payload, setPayload] = useState("");
   const [toggleTask, toggleCurrentTask] = useState(false);
   socket.on("transaction", inquiryDateFun);
-console.log(schdualedAt , 'schdualedAtttttttttttttttttttttt')
+  console.log(schdualedAt, "schdualedAtttttttttttttttttttttt");
 
   function inquiryDateFun(payload) {
     let data = tasks.filter((item) => {
       if (item.id === payload.id) {
-       return item
+        return item;
       }
       return null;
     });
@@ -68,7 +68,7 @@ console.log(schdualedAt , 'schdualedAtttttttttttttttttttttt')
 
   useEffect(() => {
     getTasks();
-  }, [filter,currTask]);
+  }, [filter, currTask]);
 
   socket.on("client-recived", (payload) => {
     setPayload(payload);
@@ -87,7 +87,7 @@ console.log(schdualedAt , 'schdualedAtttttttttttttttttttttt')
     toggleCurrentTask(false);
   }
   function setFilterToCancelled() {
-    setFilter("cancelled");
+    setFilter("canceled");
     toggleCurrentTask(false);
   }
   function setFilterToIncoming() {
@@ -155,7 +155,7 @@ console.log(schdualedAt , 'schdualedAtttttttttttttttttttttt')
           </Button>
           <Button
             colorScheme="teal"
-            variant={filter === "cancelled" ? "solid" : "outline"}
+            variant={filter === "canceled" ? "solid" : "outline"}
             onClick={setFilterToCancelled}
           >
             Cancelled
@@ -221,7 +221,9 @@ console.log(schdualedAt , 'schdualedAtttttttttttttttttttttt')
                           <Td>{task.phoneNumber || "-"}</Td>
                           <Td>{task.city || "-"}</Td>
                           <Td>
-                            {Number.isInteger(Number(profileData.id))|| filter === "done"|| filter==="cancelled"  ? (
+                            {Number.isInteger(Number(profileData.id)) ||
+                            filter === "done" ||
+                            filter === "canceled" ? (
                               <Button
                                 colorScheme="teal"
                                 onClick={() => {
@@ -255,7 +257,15 @@ console.log(schdualedAt , 'schdualedAtttttttttttttttttttttt')
                 </Tbody>
               </Table>
             </TableContainer>
-            <CurrentTask task={currTask} filter = {filter} tasks = {tasks} setCurrTask ={setCurrTask} onCurrentTask = {currentTask}/>
+            { filter === "current" &&
+              <CurrentTask
+                task={currTask}
+                filter={filter}
+                tasks={tasks}
+                setCurrTask={setCurrTask}
+                onCurrentTask={currentTask}
+              />
+            }
           </>
         ) : (
           <>
@@ -310,7 +320,9 @@ console.log(schdualedAt , 'schdualedAtttttttttttttttttttttt')
                           <Td>{task.phoneNumber || "-"}</Td>
                           <Td>{task.city || "-"}</Td>
                           <Td>
-                          {Number.isInteger(Number(profileData.id))|| filter === "done"|| filter==="cancelled"  ? (
+                            {Number.isInteger(Number(profileData.id)) ||
+                            filter === "done" ||
+                            filter === "canceled" ? (
                               <Button
                                 colorScheme="teal"
                                 onClick={() => {
@@ -348,7 +360,9 @@ console.log(schdualedAt , 'schdualedAtttttttttttttttttttttt')
         )}
       </Table>
 
-      {Number.isInteger(Number(profileData.id)) || filter === "done"|| filter==="cancelled" ? (
+      {Number.isInteger(Number(profileData.id)) ||
+      filter === "done" ||
+      filter === "canceled" ? (
         <Modal isOpen={isModalOpen} onClose={handleModalClose}>
           <ModalOverlay />
           <ModalContent>
@@ -400,16 +414,16 @@ console.log(schdualedAt , 'schdualedAtttttttttttttttttttttt')
             <ModalBody>
               {/* <FormControl>
                 <FormLabel>Schdualed At</FormLabel> */}
-                <Calander setSchdualedAt = {setSchdualedAt}/>
-                {/* <Input
+              <Calander setSchdualedAt={setSchdualedAt} />
+              {/* <Input
                   ref={initialRef}
                   placeholder="Tell me what I can help you with..."
                   value={schdualedAt}
                   onChange={(e) => setSchdualedAt(e.target.value)}
                   required
                 /> */}
-               {/* </FormControl> */}
-            </ModalBody> 
+              {/* </FormControl> */}
+            </ModalBody>
             <ModalFooter>
               <Button colorScheme="teal" mr={3} onClick={handleModalClose}>
                 Close
