@@ -14,12 +14,12 @@ export default function Home() {
   })
 
   return (
-    <div className="home-container">
+    <div className="home-container" >
       <Hero />
       <TrustUs />
       <HowWeWork />
       <HomeServices />
-      <HomeCatalog />
+      <HomeCatalog  />
       {/* <HomeBlog /> */}
     </div>
   );

@@ -48,7 +48,7 @@ function HomeCatalog() {
                     <Loader />
                 </div>
             ) : (
-                <div>
+                <div style={{ marginBottom: '28px' }}>
                     <SimpleGrid
                         columns={3}
                         spacing={8}
@@ -67,11 +67,12 @@ function HomeCatalog() {
                                 rounded={"full"}
                                 color={"white"}
                                 marginTop={"28px"}
+                                marginBot={"28px"}
                                 _hover={{ bg: "teal.400" }}
                             >
                                 SEE MORE
                             </Button>
-                        </ChakraLink>
+                        </  ChakraLink >
                     )}
                     {limitedTasks.length === 0 && (
                         <Text fontSize="xl" textAlign="center">
@@ -80,7 +81,7 @@ function HomeCatalog() {
                     )}
                 </div>
             )}
-        </div>
+        </div  >
     );
 }
 

@@ -171,9 +171,9 @@ function Dashboard() {
           <Loader />
         </Flex>
       )}
-      {/* <BellComponent
-        style={{ position: "absolute", top: 500, right: 500, bg: "black" }}
-      /> */}
+      <BellComponent
+        style={{ position: "absolute", top: 1200, right: 500, bg: "black" }}
+      />
       {/* <Earnings tasks={tasks}/> */}
       {/* <Calander/> */}
      
