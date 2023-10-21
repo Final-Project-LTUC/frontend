@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Card, CardHeader, CardBody } from "@chakra-ui/react";
 import { Link } from '@chakra-ui/react'
-import "./profile.css"
 import {
     Box,
     Flex,
@@ -10,35 +9,37 @@ import {
     Stack,
     Heading,
   } from "@chakra-ui/react";
-import axios from "axios";
-const UpdateLink=({setShowUpdateForm})=><Link colorScheme="teal" onClick={()=>setShowUpdateForm(true)} fontSize={'lg'} fontWeight={'semibold'} textAlign={'center'} display={'block'} to={'/dashUpdate'}>Update</Link>
-function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks}) {
+  import jwt_decode from 'jwt-decode';
+const UpdateLink=({setShowNum})=><Link colorScheme="teal" onClick={()=>setShowNum(prev=>prev++)} fontSize={'lg'} fontWeight={'semibold'} textAlign={'center'} display={'block'} to={'/dashUpdate'}>Update</Link>
+function Profile({profileData,token,showPage,setShowNum}) {
   return (
     <Card 
-    position={`${showUpdateForm||showTasks?'absolute':'relative'}`}
-    transform={`translateX(${showUpdateForm||showTasks?'-200%':'0'})`}
-    className="profileanime" width={"75%"} >
+    position={`${showPage!=='profile'?'absolute':'relative'}`}
+    transform={`translateX(${showPage!=='profile'?'200%':'0'})`}
+    transition={'all .7s ease-in-out'}
+    h={`'100vh'`}
+    width={"75%"} >
         <Flex w={'100%'}>
       <CardHeader>
         <Heading size="xl">Your Profile</Heading>
       </CardHeader>
         </Flex>
-      <CardBody w={'100%'}>
+      <CardBody h={'100vh'} w={'100%'}>
         <Flex w={'100%'}>
           <Box style= {{ textAlign: 'left', borderRadius: '4%' }}
-            flex="fill"
-            bg="dark.900" 
+           h={'100vh'}
+           bg="dark.900" 
             p="4" 
             w={'100%'}
           >
-            <Stack  divider={<StackDivider />} spacing="4">
+            <Stack   divider={<StackDivider />} spacing="5">
               <Flex  w={'100%'}>
                 <Box  w={'100%'}>
                 <Heading size="md" textTransform="uppercase">
                   userName
                 </Heading>
                 <Text pt="2" fontSize='md'>
-                  {profileData.username?profileData.username:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
+                  {profileData.username?profileData.username:<UpdateLink setShowNum={setShowNum}/>}
                 </Text>
                 </Box>
                 <Box w={'100%'}>
@@ -46,7 +47,7 @@ function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks}) {
                 email
                 </Heading>
                 <Text pt="2" fontSize="md">
-                  {profileData.email?profileData.email:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
+                  {profileData.email?profileData.email:<UpdateLink setShowNum={setShowNum}/>}
                 </Text>
               </Box>
               </Flex>
@@ -56,7 +57,7 @@ function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks}) {
                   first Name
                 </Heading>
                 <Text pt="2" fontSize="md">
-                  {profileData.firstName?profileData.firstName:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
+                  {profileData.firstName?profileData.firstName:<UpdateLink setShowNum={setShowNum}/>}
                 </Text>
                 </Box>
                 <Box w={'100%'}>
@@ -64,7 +65,7 @@ function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks}) {
                   Last Name
                 </Heading>
                 <Text pt="2" fontSize="md">
-                  {profileData.lastName?profileData.lastName:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
+                  {profileData.lastName?profileData.lastName:<UpdateLink setShowNum={setShowNum}/>}
                 </Text>
                 </Box>
               </Flex>
@@ -74,15 +75,16 @@ function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks}) {
                   age
                 </Heading>
                 <Text pt="2" fontSize="md">
-                  {profileData.age?profileData.age:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
+                  {profileData.age?profileData.age:<UpdateLink setShowNum={setShowNum}/>}
                 </Text>
                 </Box>
                 <Box w={'100%'}>
                 <Heading size="md" textTransform="uppercase">
                 languages
                 </Heading>
+                
                 <Text pt="2" fontSize="md">
-                  {profileData.languages?profileData.languages:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
+                  {profileData.languages?profileData.languages:<UpdateLink setShowNum={setShowNum}/>}
                 </Text>
               </Box>
               </Flex>
@@ -92,7 +94,7 @@ function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks}) {
                 phone Number
                 </Heading>
                 <Text pt="2" fontSize="md">
-                  00962 {profileData.phoneNumber?profileData.phoneNumber:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
+                  00962 {profileData.phoneNumber?profileData.phoneNumber:<UpdateLink setShowNum={setShowNum}/>}
                 </Text>
                 </Box>
                 <Box w={'100%'}>
@@ -100,17 +102,18 @@ function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks}) {
                  Rating
                 </Heading>
                 <Text pt="2" fontSize="md">
-                {profileData.rating?profileData.rating:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
+                {profileData.rating?profileData.rating:'0'}
                 </Text>
               </Box>
               </Flex>
+              {jwt_decode(token).role=='handyman'&&
               <Flex w={'100%'}>
               <Box w={'100%'}>
                 <Heading size="md" textTransform="uppercase">
                   Hourly rate
                 </Heading>
                 <Text pt="2" fontSize="md">
-                {profileData.hourlyRate?profileData.hourlyRate+' JOD':<UpdateLink setShowUpdateForm={setShowUpdateForm}/>} 
+                {profileData.hourlyRate?profileData.hourlyRate+' JOD':<UpdateLink setShowNum={setShowNum}/>} 
                 </Text>
                 </Box>
                 <Box w={'100%'}>
@@ -118,17 +121,17 @@ function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks}) {
                  inquiry Price
                 </Heading>
                 <Text pt="2" fontSize="md">
-                {profileData.inquiryPrice?profileData.inquiryPrice+' JOD ':<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
+                {profileData.inquiryPrice?profileData.inquiryPrice+' JOD ':<UpdateLink setShowNum={setShowNum}/>}
                 </Text>
               </Box>
-              </Flex>
+              </Flex>}
               <Flex w={'100%'}>
               <Box w={'100%'}>
                 <Heading size="md" textTransform="uppercase">
                  Biography
                 </Heading>
                 <Text pt="2" fontSize="md">
-                {profileData.description?profileData.description:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
+                {profileData.description?profileData.description:<UpdateLink setShowNum={setShowNum}/>}
                 </Text>
               </Box>
               <Box w={'100%'}>
@@ -136,10 +139,11 @@ function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks}) {
                 created At
                 </Heading>
                 <Text pt="2" fontSize="md">
-                  {profileData.createdAt?profileData.createdAt:<UpdateLink setShowUpdateForm={setShowUpdateForm}/>}
+                  {profileData.createdAt?profileData.createdAt:<UpdateLink setShowNum={setShowNum}/>}
                 </Text>
               </Box>
                 </Flex>
+                {jwt_decode(token).role==='handyman'&&
               <Box>
                 <Heading size="md" textTransform="uppercase">
                   experties
@@ -147,7 +151,7 @@ function Profile({profileData,showUpdateForm,setShowUpdateForm,showTasks}) {
                 <Text pt="2" fontSize="md">
                   experties from the back end can be updated
                 </Text>
-              </Box>
+              </Box>}
             </Stack>
           </Box>
           {/* Right side */}

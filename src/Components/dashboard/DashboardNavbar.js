@@ -20,6 +20,9 @@ import { useState } from "react";
 import {
   Box,
   Flex,
+
+  HStack,
+
   IconButton,
   Button,
   useColorMode,
@@ -37,7 +40,15 @@ const SidebarItems = [
   { label: "Tasks", icon: <FaTasks size={20}/>, path: "/tasks" },
 ];
 
-export default function Sidebar() {
+
+export default function Sidebar({
+  profilePicUrl,
+  setShowUpdateForm,
+  setShowTasks,
+  token,
+  setShowNum
+}) {
+
   const { colorMode, toggleColorMode } = useColorMode();
   const [isDashboardSidebarOpen, setDashboardSidebarOpen] = useState(false);
 
@@ -79,6 +90,7 @@ export default function Sidebar() {
           {SidebarItems.map((item, index) => (
             <Button
               as={ReactRouterLink}
+
               to={item.path}
               w="100%"
               variant="ghost"
@@ -93,6 +105,36 @@ export default function Sidebar() {
             >
               
               {isDashboardSidebarOpen ? item.label : null}
+
+              to="/"
+            >
+              Home
+            </Link>
+            <Link
+              style={{ fontSize: "1.3em" }}
+              onClick={()=>setShowNum(0) }
+            >
+              Profile
+            </Link>
+            <Link
+              style={{ fontSize: "1.3em" }} 
+              onClick={()=>setShowNum(1)}
+            >
+              Update data
+            </Link>
+            <Link style={{ fontSize: "1.3em" }} 
+           onClick={()=>setShowNum(2)}>
+              Tasks
+            </Link>
+            {token.role==='handyman'&&
+            <Link
+            onClick={()=>setShowNum(3)}
+            style={{ fontSize: "1.3em" }}>
+              Earnings
+            </Link>}
+            <Button w={"32"} onClick={toggleColorMode}>
+              {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+
             </Button>
           ))}
         </Flex>

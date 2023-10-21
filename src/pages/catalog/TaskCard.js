@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Image, Text, Badge } from "@chakra-ui/react";
+import { Box, Image, Text, Badge, Flex, Grid } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { StarIcon } from "@chakra-ui/icons";
 
@@ -24,42 +24,62 @@ function TaskCard({ task }) {
     };
 
     return (
-        <Box
-            borderWidth="1px"
-            borderRadius="lg"
-            overflow="hidden"
-            p={4}
-            boxShadow="md"
-            maxW="sm"
-            position="relative"
-            _hover={{ shadow: "lg" }}
-        >
-            <Image src={task.imageUrl} boxSize="200px" width={"250px"} />
-            <Box mt={4}>
-                <Text fontSize="lg" fontWeight="semibold">
-                    {task.description}
-                </Text>
-                <Box mt={2} display="flex" alignItems="center">
-                    <Text>Rating: </Text>
-
-                    {renderRatingStars(task.rating)}
-                </Box>
-            </Box>
-            <Badge
-                colorScheme="teal"
-                borderRadius="full"
-                px="2"
-                position="absolute"
-                top="1rem"
-                right="1rem"
-                cursor="pointer"
-                onClick={() => {
-                    navigate(`/handyman/${task.handymanId}`);
-                }}
+        <Grid templateRows="350px" templateColumns="20fr" gap={4}>
+            <Box
+                borderWidth="1px"
+                borderRadius="15px"
+                overflow="hidden"
+                p={0}
+                boxShadow="md"
+                maxWidth="90%"
+                position="relative"
+                _hover={{ shadow: "lg" }}
             >
-                Handyman Works
-            </Badge>
-        </Box>
+                <Image
+                    src={task.imageUrl}
+                    width="100%"
+                    objectFit="cover"
+                    h="52%"
+                />
+                <Flex
+                    p={6}
+                    direction="column"
+                    justifyContent="space-between"
+                    bg="white"
+                    alignItems="center"
+                    h="30%"
+                    paddingBottom={"40px"}
+                >
+                    <Box>
+                        <Text
+                            fontSize="20px"
+                            fontWeight="bold"
+                            mt={1}
+                            fontFamily="heading"
+                        >
+                            {task.title}
+                        </Text>
+                    </Box>
+                    <Flex mt={5} alignItems="center">
+                        {renderRatingStars(task.rating)}
+                    </Flex>
+                    <Badge
+                        colorScheme="teal"
+                        borderRadius="10px"
+                        px="7"
+                        padding={"10px"}
+                        cursor="pointer"
+                        mt={4}
+                        _hover={{ backgroundColor: "teal.600", color: "white" }}
+                        onClick={() => {
+                            navigate(`/handyman/${task.handymanId}`);
+                        }}
+                    >
+                        Handyman Works
+                    </Badge>
+                </Flex>
+            </Box>
+        </Grid>
     );
 }
 

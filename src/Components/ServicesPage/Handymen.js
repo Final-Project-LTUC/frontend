@@ -23,6 +23,7 @@ import {
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import TaskModal from "./TaskModal";
+import Loader from "../Loader/Loader";
 
 function Handymen({ handyData, token }) {
   const [loading, setLoading] = useState(true);
@@ -63,10 +64,7 @@ function Handymen({ handyData, token }) {
           justifyContent="center"
           bg="rgba(255, 255, 255, 0.8)"
         >
-          <Spinner size="xl" color="teal.500" />
-          <Text fontSize="lg" fontWeight="bold" mt={4}>
-            Loading...
-          </Text>
+          <Loader />
         </Box>
       ) : (
         <>

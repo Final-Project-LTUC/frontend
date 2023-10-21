@@ -7,63 +7,71 @@ import { LoginContext } from "../../hooks/Context/LoginProvider";
 
 const BellComponent = () => {
   const { socket } = useContext(LoginContext);
-
   const [notificationCount, setNotificationCount] = useState(0);
-  const [payload, setPayload] = useState("");
-
+  const [payload, setPayload] = useState();
   const [showNotification, setNotification] = useState(false);
-  const [inquiryDatePayload, setInquiryDatePayload] = useState([]);
 
-  // useEffect(() => {
-  //   if ( payload) {
-  //     setInquiryDatePayload((prevPayloads) => {
-  //       if (!prevPayloads) {
-  //         return payload;
-  //       } else {
-  //         const updatedPayloads = [...prevPayloads, payload];
-  //         return updatedPayloads;
-  //       }
-  //     });
-  //   }
-  // }, [payload]);
+  const handleInquiryDate = (payload) => {
+    setPayload(payload);
+    setNotificationCount((prevCount) => {
+      return prevCount + 1;
+    });
+    return socket.off("inquiryDate", handleInquiryDate);
+  };
 
-  // useEffect(() => {
-    const handleInquiryDate = (payload) => {
-      setInquiryDatePayload([...inquiryDatePayload,payload])
+  const handleTransaction = (payload) => {
+    setPayload(payload);
+    setNotificationCount((prevCount) => {
+      return prevCount + 1;
+    });
+    return socket.off("transaction", handleTransaction);
+  };
+  const handleReject = (payload) => {
+    setPayload(payload);
+    setNotificationCount((prevCount) => {
+      return prevCount + 1;
+    });
+    return socket.off("serviceRejected", handleReject);
+  };
 
-      console.log("Notification:", payload);
-      setPayload(payload);
-      setNotificationCount((prevCount) => {
-        console.log("Previous count:", prevCount);
-        return prevCount + 1;
-      });
-    };
+  const handleArrived = (payload) => {
+    setPayload(payload);
+    setNotificationCount((prevCount) => {
+      console.log("Previous count:", prevCount);
+      return prevCount + 1;
+    });
+    return socket.off("arrived", handleReject);
+  };
 
-    const handleTransaction = (payload) => {
-      console.log("handleTransaction", payload);
-      setInquiryDatePayload((prevPayloads) => {
-        console.log(payload, "first if statement");
-        if (!prevPayloads) {
-          return payload;
-        } else {
-          const updatedPayloads = [...prevPayloads, payload];
-          // console.log(updatedPayloads, "hahahahahahaahah");
-          return updatedPayloads;
-        }
-      });
-      setPayload(payload);
-      setNotificationCount((prevCount) => {
-        console.log("Previous count:", prevCount);
-        return prevCount + 1;
-      });
-    };
+  const handleDetails = (payload) => {
+    setPayload(payload);
+    setNotificationCount((prevCount) => {
+      console.log("Previous count:", prevCount);
+      return prevCount + 1;
+    });
+    return socket.off("details", handleDetails);
+  };
 
-    socket.on("inquiryDate", handleInquiryDate);
-    socket.on("transaction", handleTransaction);
+  const handleLastPayment = (payload) => {
+    console.log('lastPaymentttttttttttttttt', payload)
+    setPayload(payload);
+    setNotificationCount((prevCount) => {
+      console.log("Previous count:", prevCount);
+      return prevCount + 1;
+    });
+    return socket.off("lastPayment", handleLastPayment);
+  };
 
-    // return () => {
-    //   socket.off("inquiryDate", handleInquiryDate);
-    // };
+  socket.on("inquiryDate", handleInquiryDate);
+  socket.on("transaction", handleTransaction);
+  socket.on("arrived", handleArrived);
+  socket.on("details", handleDetails);
+  socket.on("lastPayment", handleLastPayment);
+
+  socket.on("serviceRejected", handleReject);
+  // return () => {
+
+  // };
   // }, [socket]);
 
   const bellRef = useRef(null);
@@ -99,7 +107,6 @@ const BellComponent = () => {
 
   return (
     <>
-
       <Flex direction="column">
         <Box
           className="container"
@@ -131,7 +138,6 @@ const BellComponent = () => {
                 showNotification={showNotification}
                 payload={payload}
                 socket={socket}
-                inquiryDatePayload={inquiryDatePayload}
               />
             </Box>
           )}
