@@ -16,12 +16,13 @@ function HowWeWork() {
         color="black"
         position="relative"
         marginLeft={8}
+       
       >
-        <div className="floating-card1">
+        <div className="floating-card1" >
           <a href="/services" className="data-card">
             <h3>01</h3>
             <h4>Inquire</h4>
-            <p>Aenean lacinia bibendum nulla sed consectetur.</p>
+            <p>Contact us with your project details.</p>
           </a>
         </div>
 
@@ -29,7 +30,7 @@ function HowWeWork() {
           <a href="/services" className="data-card">
             <h3>02</h3>
             <h4>Estimate</h4>
-            <p>Aenean lacinia bibendum nulla sed consectetur.</p>
+            <p>We'll provide you with a project cost estimate.</p>
           </a>
         </div>
 
@@ -37,25 +38,25 @@ function HowWeWork() {
           <a href="/services" className="data-card">
             <h3>03</h3>
             <h4>Execute</h4>
-            <p>Etiam porta sem malesuada.</p>
+            <p>Our team will start working on your project.</p>
           </a>
         </div>
 
         <br />
 
-        <div className="content">
+        <div className="content" > 
           <Heading> How We Work </Heading>
           <br />
           <br />
-          <Text maxWidth={"400px"}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore
-            <br />
-            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore
-            eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt
+          <Text maxWidth={"400px"} >
+          Our process is designed to make your project a success. <br/>
+          We start by listening to your needs and goals.<br/>
+           Then, our team  provides you with a detailed project<br/> estimate,
+            ensuring transparency and accuracy.<br/>
+
+          Once the project kicks off, <br/>
+          our experts work diligently to bring your vision to life. <br/>
+          We are committed to delivering high-quality results within<br/> your budget and timeline. 
           </Text>
           <br />
           <ChakraLink as={ReactRouterLink} to="/services">
@@ -64,6 +65,7 @@ function HowWeWork() {
               rounded={"full"}
               color={"white"}
               _hover={{ bg: "teal.400" }}
+              
             >
               View Services
             </Button>
