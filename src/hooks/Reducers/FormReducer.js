@@ -12,6 +12,7 @@ export const initialState = {
     image: null,
     lat: 0,
     long: 0,
+    city:'',
     phoneNumber: 0,
     yearsOfExperience: 0,
     description: "",
@@ -62,6 +63,9 @@ export default function formReducer(state, action) {
         case "CHANGE_NAME": {
             const [firstName, lastName] = action.payload.split(" ");
             return { ...state, firstName: firstName, lastName: lastName };
+        }
+        case "CHANGE_CITY": {
+            return { ...state,city:action.payload};
         }
         case "CHANGE_DESCRIPTION":
             return { ...state, description: action.payload };

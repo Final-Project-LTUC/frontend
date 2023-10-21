@@ -15,7 +15,7 @@ const BellComponent = () => {
   const handleInquiryDate = (payload) => {
     setPayload(payload);
     setNotificationCount((prevCount) => {
-      return prevCount + 1;
+      return 1;
     });
     return socket.off("inquiryDate", handleInquiryDate);
   };
@@ -23,14 +23,14 @@ const BellComponent = () => {
   const handleTransaction = (payload) => {
     setPayload(payload);
     setNotificationCount((prevCount) => {
-      return prevCount + 1;
+      return 1;
     });
     return socket.off("transaction", handleTransaction);
   };
   const handleReject = (payload) => {
     setPayload(payload);
     setNotificationCount((prevCount) => {
-      return prevCount + 1;
+      return 1;
     });
     return socket.off("serviceRejected", handleReject);
   };
@@ -39,7 +39,7 @@ const BellComponent = () => {
     setPayload(payload);
     setNotificationCount((prevCount) => {
       console.log("Previous count:", prevCount);
-      return prevCount + 1;
+      return 1;
     });
     return socket.off("arrived", handleReject);
   };
@@ -48,7 +48,7 @@ const BellComponent = () => {
     setPayload(payload);
     setNotificationCount((prevCount) => {
       console.log("Previous count:", prevCount);
-      return prevCount + 1;
+      return 1;
     });
     return socket.off("details", handleDetails);
   };
@@ -59,7 +59,7 @@ const BellComponent = () => {
     setOpenReview(true);
     setNotificationCount((prevCount) => {
       console.log("Previous count:", prevCount);
-      return prevCount + 1;
+      return 1;
     });
     return socket.off("lastPayment", handleLastPayment);
   };

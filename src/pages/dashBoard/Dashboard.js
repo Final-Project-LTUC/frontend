@@ -121,7 +121,7 @@ function Dashboard() {
     setShowPage(pages[showNum]);
   }, [showNum]);
   return (
-    <Flex w={"100%"} minH={"100vh"} h={"100vh"} mb={"28"}>
+    <Flex w={"100%"} minH={"100vh"} h={"100vh"}>
       {console.log(showPage)}
       <DashboardNavbar
         token={validUser}
@@ -130,7 +130,7 @@ function Dashboard() {
 
       />
       {loadded ? (
-        <Flex w={"75%"} ml={"4"} mt={"28"}>
+        <Flex w={"80%"} ml={"4"} mt={12}>
           <Profile
             token={token}
             showPage={showPage}
@@ -159,7 +159,6 @@ function Dashboard() {
               profileData={profileData}
             />
           )}
-          <BellComponent/>
         </Flex>
       ) : (
         <Flex

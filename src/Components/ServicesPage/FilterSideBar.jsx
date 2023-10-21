@@ -27,7 +27,7 @@ function FilterSidebar({
   const [priceRange, setPriceRange] = useState([0, 100]);
   // const [inuriryprice, setInquirericeRange] = useState([0, 100]);
   // console.log('priceRange',priceRange)
-  const locations = ["amman", "irbid"];
+  const locations = ["Amman", "Irbid"];
   const categories = [
     "Carpentry",
     "Plumbing",

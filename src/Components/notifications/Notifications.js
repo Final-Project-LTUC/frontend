@@ -189,27 +189,36 @@ function Notifications({ payload, socket, setOpenReview }) {
                   </div>
                 )}
               {payload.details && payload.clientId === loginData.user.id && (
-                <div className="notifications__item">
-                  <div className="notifications__item__content">
-                    <span className="notifications__item__message">
-                      Product Cost {payload.details.price} would you continue
+             <div className="notifications__item">
+             <div className="notifications__item__avatar">
+               <img
+                 src={payload.avatarSrc}
+                 alt={`Avatar of ${payload.title}`}
+               />
+             </div>
+             <div className="notifications__item__content">
+               <span className="notifications__item__title">
+                 New Notification
+               </span>
+               <span className="notifications__item__message">
+               Product Cost {payload.details.price} would you continue
                       the process?
-                    </span>
-                    <div>
-                      <div className="notifications__item__option archive js-option">
-                        <i className="fas fa-folder">
-                          {" "}
-                          <CheckIcon />
-                        </i>
-                      </div>
-                      <div className="notifications__item__option delete js-option">
-                        <i className="fas fa-trash">
-                          <CloseIcon />
-                        </i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+               </span>
+             </div>
+             <div>
+               <div className="notifications__item__option archive js-option">
+                 <i className="fas fa-folder">
+                   {" "}
+                   <CheckIcon />
+                 </i>
+               </div>
+               <div className="notifications__item__option delete js-option">
+                 <i className="fas fa-trash">
+                   <CloseIcon />
+                 </i>
+               </div>
+             </div>
+           </div>
               )}
               {payload &&
                 payload.choice &&
