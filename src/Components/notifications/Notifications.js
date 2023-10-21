@@ -29,14 +29,14 @@ function Notifications({ payload, socket, setOpenReview }) {
       socket.emit("continue", payload);
     } else if (option === "delete") {
       payload.choice = false;
-      payload.taskStatus = "cancelled";
+      payload.taskStatus = "canceled";
       socket.emit("serviceRejected", payload);
     } else if (option === "yesProductCost") {
       payload.choice = true;
       socket.emit("continue", payload);
     } else if (option === "NoProductCost") {
       payload.choice = false;
-      payload.taskStatus = "cancelled";
+      payload.taskStatus = "canceled";
       socket.emit("serviceRejected", payload);
     } else if (option === "lastYes") {
       socket.emit("continue", payload);
