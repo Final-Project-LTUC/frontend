@@ -125,6 +125,7 @@ function Form({
                             </FormErrorMessage>
                         </FormControl>
                     )}
+
                     <FormControl
                         isRequired={true}
                         isInvalid={!formData.isValidUsername}
@@ -142,9 +143,12 @@ function Form({
                             type="text"
                         />
                         <FormErrorMessage>
-                            This Username Is Invalid
+                            {formData.isValidUsername
+                                ? "This Username is Valid"
+                                : "Username is invalid. \n  It should be between 3 and 20 characters and can only contain letters, digits, underscores, and hyphens."}
                         </FormErrorMessage>
                     </FormControl>
+
                     {submitAction === "signup" && (
                         <FormControl mb="1em">
                             <FormLabel>Full Name</FormLabel>

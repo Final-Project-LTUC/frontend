@@ -99,7 +99,7 @@ function ExpertiesButtons({ dispatch, currentPage, formData, setPageNum }) {
             </MotionFlex>
             <Button
                 borderRadius={"28px"}
-                w={"13%"}
+                w={"14%"}
                 onClick={() => setPageNum((prev) => ++prev)}
                 colorScheme="teal"
             >
