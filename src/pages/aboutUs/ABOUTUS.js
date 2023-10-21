@@ -11,6 +11,7 @@ import Vision from '../../Components/AboutUS/Vision';
 import Location from '../../Components/AboutUS/Location';
 import WhyChooseUs from '../../Components/AboutUS/WhyChooseUs';
 import HERO from '../../Components/ServicesPage/ServicesHero';
+import NewCards from '../../Components/AboutUS/newCards/NewCards';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Team/>
         <Vision/>
         <AboutUs/>
+        {/* <NewCards/> */}
         <ContactUS/>
         <WhyChooseUs/>
         <Testimonials/>

@@ -291,7 +291,7 @@ function Hero() {
     <header>
       <div className={`test ${isNavFixed ? "fixed" : ""}`}>
         <div className="heroSection">
-          {/* <video className="video" src={video} loop autoPlay muted /> */}
+          <video className="video" src={video} loop autoPlay muted />
           <div className="container">
             <nav className={isNavFixed ? "fixed" : ""}>
               <Flex

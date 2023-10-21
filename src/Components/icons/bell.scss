@@ -1,19 +1,17 @@
-// // html {
-// //     margin: 0;
-// //     padding: 0;
-// //     background: #F0F2F7;
-// //   }
+
   
-//   .container {
-//     width: 50%;
-//     min-height:100vh;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-    
-//     &__content {
+  .container {
+    position: absolute;
+    width: 50%;
+    min-height:100vh;
+    display: flex;
+    justify-items: space-between;
+    flex-direction: column;
+    align-items: center;
+  }
+    // &__content {
       
-//     }
+    // }
 //   }
   
 //   .bell-icon {
