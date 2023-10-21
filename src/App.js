@@ -23,55 +23,71 @@ import Auth from "./pages/auth/Auth";
 import LoginProvider from "./hooks/Context/LoginProvider";
 import ServicesTest from "./pages/services/ServicesTest/ServicesTest";
 
-import ForgotPassword from "./Components/SignupSingin/ForgotPassword"; //
-
+import ForgotPassword from "./Components/SignupSingin/ForgotPassword";
 import Rating from "./Components/Rating/Rating";
 import ThanksPage from "./pages/thanksPage/ThanksPage";
 
-// Create and export the socket connection
-
 function App() {
+    const location = useLocation();
 
-  const location = useLocation();
+    // Define a function to conditionally render the navbar based on the current route
+    const renderNavbar = () => {
+        if (
+            location.pathname === "/dashboard" ||
+            location.pathname === "/tasks"
+        ) {
+            return null;
+        } else if (location.pathname === "/") {
+        } else {
+            return <Navbar />;
+        }
+    };
 
-  // Define a function to conditionally render the navbar based on the current route
-  const renderNavbar = () => {
-    if (location.pathname === "/dashboard" || location.pathname === "/tasks") {
-      return null;
-    } else if (location.pathname === "/") {
-    } else {
-      return <Navbar />;
-    }
-  };
+    // Define a function to conditionally render the footer based on the current route
+    const renderFooter = () => {
+        // Exclude the Catalog route from rendering the footer
+        if (location.pathname === "/catalog") {
+            return null;
+        } else {
+            return <Footer />;
+        }
+    };
 
-  return (
-    <div className="App">
-      <LoginProvider>
-        {renderNavbar()}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          {/* <Route path="/services" element={<Services />} /> */}
-          <Route path="/services" element={<ServicesTest hue="220" />} />
-          <Route path="/catalog" element={<Catalog />} />
-          <Route path="/handyman/:id" element={<HandymanDetails />} />{" "}
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/update" element={<UpdateForm />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/tasks" element={<Tasks />} />
-          <Route path="/signup" element={<Auth submitAction="signup" />} />
-          <Route path="/signin" element={<Auth submitAction="signin" />} />
-          <Route path="/rating" element={<Rating />} />
-          <Route path="/thanksPage" element={<ThanksPage />} />
-                <Route
+    return (
+        <div className="App">
+            <LoginProvider>
+                {renderNavbar()}
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route
+                        path="/services"
+                        element={<ServicesTest hue="220" />}
+                    />
+                    <Route path="/catalog" element={<Catalog />} />
+                    <Route path="/handyman/:id" element={<HandymanDetails />} />
+                    <Route path="/about" element={<AboutUs />} />
+                    <Route path="/update" element={<UpdateForm />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/tasks" element={<Tasks />} />
+                    <Route
+                        path="/signup"
+                        element={<Auth submitAction="signup" />}
+                    />
+                    <Route
+                        path="/signin"
+                        element={<Auth submitAction="signin" />}
+                    />
+                    <Route path="/rating" element={<Rating />} />
+                    <Route path="/thanksPage" element={<ThanksPage />} />
+                    <Route
                         path="/ForgotPassword"
                         element={<ForgotPassword />}
                     />
-        </Routes>
-      </LoginProvider>
-      <Footer />
-    </div>
-  );
-
+                </Routes>
+            </LoginProvider>
+            {renderFooter()}
+        </div>
+    );
 }
 
 export default App;
