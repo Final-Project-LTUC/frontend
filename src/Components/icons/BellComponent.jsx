@@ -140,6 +140,7 @@ const BellComponent = () => {
                 showNotification={showNotification}
                 payload={payload}
                 socket={socket}
+                setOpenReview={setOpenReview}
               />
             </Box>
           )}

@@ -34,8 +34,9 @@ function Catalog() {
     const doneTasks = tasks.filter((task) => task.taskStatus === "done");
 
     return (
+         <div className="PageContainer">
 
-        <Box p={5} className="PageContainer">
+        <Box p={5} >
             <Text
                 className="animate-charcter" // Apply the animation class to the Text
                 fontSize="52px"
@@ -76,9 +77,10 @@ function Catalog() {
                     )}
                 </SimpleGrid>
             )}
-            <LargeWithNewsletter />
+            {/* <LargeWithNewsletter /> */}
 
         </Box>
+        </div>
     );
 }
 

@@ -3,8 +3,9 @@ import "./notifications.css";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { LoginContext } from "../../hooks/Context/LoginProvider";
 import Rating from "../Rating/Rating";
+import RatingModal from "../dashboard/currentTask/RatingModal";
 
-function Notifications({ payload, socket, inquiryDatePayload }) {
+function Notifications({ payload, socket, setOpenReview }) {
   const { loginData } = useContext(LoginContext);
   const [rating, setRating] = useState(0);
 
@@ -246,15 +247,7 @@ function Notifications({ payload, socket, inquiryDatePayload }) {
                   </div>
                 )}
 
-              {payload && (
-                <div className="notifications__item">
-                  <div className="notifications__item__content">
-                    <span className="notifications__item__message">
-                      <Rating setRating={setRating} rating={rating} />
-                    </span>
-                  </div>
-                </div>
-              )}
+           
             </>
           }
         </div>
