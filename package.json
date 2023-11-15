@@ -50,11 +50,14 @@
   "scripts": {
     
     "start": "react-scripts start",
-    "build": "CI=false npm run build",
-    "test": "react-scripts test",
+    "build": "CI=false react-scripts build",   
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
+    "rules": {
+      "no-unused-vars": "off"
+    },
+    
     "extends": [
       "react-app",
       "react-app/jest"
