@@ -3,7 +3,7 @@ import {
   Button,
   FormControl,
   FormLabel,
-  Input,
+
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -29,9 +29,8 @@ import CurrentTask from "../../../Components/dashboard/currentTask/CurrentTask";
 import Calander from "../../../Components/Calander";
 
 function TasksPage({ profileData, getTasks, setTasks, tasks }) {
-  const { loginData, socket } = useContext(LoginContext);
+  const { socket } = useContext(LoginContext);
 
-  const initialRef = React.useRef(null);
   const navigate = useNavigate();
 
   const [isModalOpen, setModalOpen] = useState(false);
@@ -76,11 +75,6 @@ function TasksPage({ profileData, getTasks, setTasks, tasks }) {
     const uTasks = [...tasks, payload.handyData];
     setTasks(uTasks);
   });
-
-  function setFilterToAll() {
-    setFilter("all");
-    toggleCurrentTask(false);
-  }
 
   function setFilterToDone() {
     setFilter("done");
@@ -160,13 +154,7 @@ function TasksPage({ profileData, getTasks, setTasks, tasks }) {
           >
             Cancelled
           </Button>
-          {/* <Button
-            colorScheme="teal"
-            variant={filter === "all" ? "solid" : "outline"}
-            onClick={setFilterToAll}
-          >
-            All
-          </Button> */}
+      
         </Flex>
         {toggleTask ? (
           <>

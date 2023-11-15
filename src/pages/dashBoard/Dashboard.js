@@ -4,15 +4,13 @@ import axios from "axios";
 import Profile from "../../Components/dashboard/Profile";
 import UpdateForm from "./../../Components/dashboard/dashUpdate/UpdateForm";
 import cookie from "react-cookies";
-import { Flex, Box } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import formReducer, { initialState } from "../../hooks/Reducers/FormReducer";
 import { LoginContext } from "../../hooks/Context/LoginProvider";
 import Tasks from "../../pages/dashBoard/tasks/TasksPage";
 import jwt_decode from "jwt-decode";
 import Loader from "../../Components/Loader/Loader";
-import Earnings from "./earnings/Earnings";
 import BellComponent from "../../Components/icons/BellComponent";
-import Calander from "../../Components/Calander";
 const pages = ["profile", "updateData", "tasks", "earnings"];
 function Dashboard() {
   let token = cookie.load("auth");
