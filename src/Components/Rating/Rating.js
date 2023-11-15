@@ -1,65 +1,64 @@
-import React, { useState } from 'react'
+
 import './rating.scss'
 import { Box } from '@chakra-ui/react'
 function Rating({rating,setRating}) {
-    // const [rating,setRating]=useState(0);
     console.log(rating)
     return (
     <Box bg={'#181820'} h={'20%'}>
-   <div class="feedback">
-    <label class="angry">
+   <div className="feedback">
+    <label className="angry">
         <input type="radio" onClick={()=>setRating(1)} value="1" name="feedback" />
         <div>
-            <svg class="eye left">
+            <svg className="eye left">
                 <use href="#eye"/>
             </svg>
-            <svg class="eye right">
+            <svg className="eye right">
                 <use href="#eye"/>
             </svg>
-            <svg class="mouth">
+            <svg className="mouth">
                 <use href="#mouth"/>
             </svg>
         </div>
     </label>
-    <label class="sad">
+    <label className="sad">
         <input type="radio" onClick={()=>setRating(2)} value="2" name="feedback" />
         <div>
-            <svg class="eye left">
+            <svg className="eye left">
                 <use href="#eye"/>
             </svg>
-            <svg class="eye right">
+            <svg className="eye right">
                 <use href="#eye"/>
             </svg>
-            <svg class="mouth">
+            <svg className="mouth">
                 <use href="#mouth"/>
             </svg>
         </div>
     </label>
-    <label class="ok">
+    <label className="ok">
         <input type="radio" onClick={()=>setRating(3)} value="3" name="feedback" />
         <div></div>
     </label>
-    <label class="good">
+    <label className="good">
         <input type="radio" value="4" onClick={()=>setRating(4)} name="feedback" checked />
         <div>
-            <svg class="eye left">
+            <svg className="eye left">
                 <use href="#eye"/>
             </svg>
-            <svg class="eye right">
+            <svg className="eye right">
                 <use href="#eye"/>
             </svg>
-            <svg class="mouth">
+            <svg className="mouth">
                 <use href="#mouth"/>
             </svg>
         </div>
     </label>
-    <label class="happy">
+    <label className="happy">
         <input type="radio" onClick={()=>setRating(5)} value="5" name="feedback" />
         <div>
-            <svg class="eye left">
+            <svg className="eye left">
                 <use href="#eye"/>
             </svg>
-            <svg class="eye right/">
+            <svg className="eye right/">
                 <use href="#eye"/>
             </svg>
         </div>
