@@ -1,11 +1,11 @@
 import React from "react";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { NavLink, Link as ReactRouterLink } from "react-router-dom";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import logo from "../assets/logo.png";
-
+// import "./Hero.scss";
 import './navbar.scss'
 import {
-
+  Box,
   Flex,
   Avatar,
   HStack,
@@ -14,17 +14,19 @@ import {
   Menu,
   MenuButton,
   MenuList,
- 
+  MenuItem,
+  MenuDivider,
   useDisclosure,
   Stack,
   useColorMode,
-
+  Center,
   Tooltip,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useContext } from "react";
 import { LoginContext } from "../../../hooks/Context/LoginProvider";
 import BellComponent from "../../../Components/icons/BellComponent";
+const Links = ["Skilify", "Home", "Services", "Catalog", "About us"];
 
 function Navbar() {
   const [isNavFixed, setIsNavFixed] = React.useState(false);
@@ -51,6 +53,7 @@ function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { loginData, logout } = useContext(LoginContext);
   console.log(loginData);
+  const mar = 80;
 
   return (
     <header className="nav2">
