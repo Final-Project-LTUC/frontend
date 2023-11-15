@@ -1,5 +1,5 @@
 import {Heading, Flex, Box, Text, Button } from '@chakra-ui/react'
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {handymanExperties} from '../../assets/constants'
 import './services.scss';
 import {imageStyle, serviceCard,descriptionStyle,solidButtonStyle, ghostButtonSyle} from './styles';
@@ -19,7 +19,6 @@ transition={{
   duration:.8,
   damping:20
 }}      
-//update now can you seeeeeeeeeeeeeeeeeeeeeeeeeeeeee lieth
 >
   <Box sx={imageStyle} flexDirection={'column'} backgroundImage={`url(${imgUrl})`}></Box>
   <Flex sx={descriptionStyle}>
@@ -36,7 +35,6 @@ transition={{
 function Services() {
    useEffect(()=>{
     try {
-      // const response=await axios.get('')
     } catch (e) {
       
     }

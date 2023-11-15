@@ -17,7 +17,6 @@ function HomeCatalog() {
                 const response = await axios.get(
                     `${process.env.REACT_APP_DATABASE_URL}/tasks/all`
                 );
-                console.log(response.data);
                 setTasks(response.data);
             } catch (error) {
                 console.error(error);
@@ -67,7 +66,7 @@ function HomeCatalog() {
                                 rounded={"full"}
                                 color={"white"}
                                 marginTop={"28px"}
-                                marginBot={"28px"}
+                               
                                 _hover={{ bg: "teal.400" }}
                             >
                                 SEE MORE

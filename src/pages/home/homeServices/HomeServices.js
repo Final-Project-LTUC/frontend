@@ -54,7 +54,7 @@ function HomeServices() {
           <section className="hero-section1">
             <div className="card-grid1">
               {displayedServices.map((service, index) => (
-                <a className="card1" href="#" key={index}>
+                <a className="card1" href="<#" key={index}>
                   <div
                     className="card__background1"
                     style={{ backgroundImage: `url(${service.imgUrl})` }}
