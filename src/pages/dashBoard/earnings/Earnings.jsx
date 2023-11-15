@@ -1,6 +1,5 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState} from 'react'
 import LineChart from '../../../Components/dashboard/charts/LineChart'
-import axios from 'axios'
 function Earnings({tasks}) {
     const [chartData, setChartData] = useState({
         labels: tasks.map((task) => task.schdualedAt), 

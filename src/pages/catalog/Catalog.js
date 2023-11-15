@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import TaskCard from "./TaskCard";
 import axios from "axios";
-import { Box, Text, SimpleGrid, Spinner } from "@chakra-ui/react";
+import { Box, Text, SimpleGrid } from "@chakra-ui/react";
 import "./Catalog.css"; // Import your CSS file here
 import Loader from "../../Components/Loader/Loader";
-import LargeWithNewsletter from "../../Components/AboutUS/NavBar/Footer/index"; // Replace 'path/to' with the actual path to LargeWithNewsletter.js
 
 function Catalog() {
     const [tasks, setTasks] = useState([]);

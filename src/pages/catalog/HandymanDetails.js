@@ -5,18 +5,15 @@ import {
   Heading,
   List,
   ListItem,
-  ListIcon,
   Text,
   Image,
   Center,
   Button,
-  AbsoluteCenter,
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import cookie from "react-cookies";
 import "./HandymanDetails.css";
-import { css } from "@emotion/react";
 import { MdBuild, MdPhone, MdEmail } from "react-icons/md";
 import Loader from "../../Components/Loader/Loader";
 function HandymanDetails() {
